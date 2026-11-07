@@ -4,7 +4,8 @@ using UnityEngine;
 // clockwork steps. All timing runs on lane time (GameManager.GetWorldSpeed).
 // Before the slam it warns: the dial hand sweeps once round during the wait,
 // the lamps blink amber, and the head pulls up and judders; while slamming the
-// lamps glow red. The impact throws dust and sparks. Art from
+// lamps glow red. The impact throws dust and sparks and flashes the brass
+// strike plate under the head. Art from
 // tools/make_plunger.py; the level builder (LevelMap.Lane.Crusher) wires it up.
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlungerMotion : MonoBehaviour
@@ -60,6 +61,10 @@ public class PlungerMotion : MonoBehaviour
     [SerializeField] private float rodTop;
     [Tooltip("Plain white sprite the dust and sparks are drawn with.")]
     [SerializeField] private Sprite dustSprite;
+    [Tooltip("Lit strike plate under the head, shown for a moment on impact.")]
+    [SerializeField] private SpriteRenderer strikeFlash;
+    [Tooltip("Lane seconds the strike plate stays lit after the impact.")]
+    [SerializeField, Min(0f)] private float flashTime = 0.08f;
 
     [SerializeField]
     [Tooltip("Which lane is the object in")]
@@ -226,6 +231,8 @@ public class PlungerMotion : MonoBehaviour
             lamp.sprite = s;
             lamp.enabled = s != null;
         }
+
+        if (strikeFlash != null) strikeFlash.enabled = phase == Phase.Bouncing && phaseTime < flashTime;
 
         if (hand != null && handSprites != null && handSprites.Length > 0)
         {
