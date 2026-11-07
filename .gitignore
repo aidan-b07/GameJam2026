@@ -122,6 +122,9 @@ InitTestScene*.unity*
 *.private.meta
 *.private.[0-9]*
 
+# Logs UnityYAMLMerge (the scene merge tool) writes next to merged files
+.plastic4/
+
 # Editor folders
 .vscode/
 .idea/

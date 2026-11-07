@@ -23,6 +23,8 @@ public static class LevelMap
     const string GroundSheet = "ground_32px";
     const string PropsSheet = "props_32px";
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
+    // Layer the player's ground check looks for (PlayerMovement.groundLayer).
+    const string GroundLayer = "Ground";
 
     static readonly Color TickColor = new Color(1f, 0.55f, 0.15f);
     static readonly Color TockColor = new Color(0.15f, 0.8f, 0.75f);
@@ -135,6 +137,32 @@ public static class LevelMap
 
         public void Spawn(int x) => Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
 
+        // Drawbridge over the pit between x0 and x1 (ground ends at x0 and starts
+        // again at x1). The leaf is as long as the pit is wide and hangs down the
+        // near wall from a hinge at the pit's left edge. BridgeMovement swings it
+        // 270 degrees counterclockwise: it passes flat across the pit at 90 degrees
+        // without stopping and lands flat on the ground to the left. Players must
+        // stop lane time while it spans the pit to cross.
+        public GameObject Drawbridge(int x0, int x1)
+        {
+            int length = x1 - x0;
+            var go = Marker("Drawbridge", x0, -length, 1, length, Wood);
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            go.AddComponent<BoxCollider2D>();
+
+            // Hinge at the centre of the leaf's top tile, at ground level.
+            var bridge = new SerializedObject(go.AddComponent<BridgeMovement>());
+            bridge.FindProperty("hingeAnchor").vector2Value = new Vector2(0f, 0.5f - 0.5f / length);
+            bridge.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
         public void Checkpoint(int x)
         {
             Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
@@ -186,6 +214,7 @@ public static class LevelMap
             groundCol.compositeOperation = Collider2D.CompositeOperation.Merge;
             ground.gameObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             ground.gameObject.AddComponent<CompositeCollider2D>();
+            SetGroundLayer(ground.gameObject);
 
             var platforms = CreateTilemap("Platforms", 0);
             foreach (var p in ledges)
@@ -196,6 +225,7 @@ public static class LevelMap
             var platCol = platforms.gameObject.AddComponent<TilemapCollider2D>();
             platCol.usedByEffector = true;
             platforms.gameObject.AddComponent<PlatformEffector2D>();
+            SetGroundLayer(platforms.gameObject);
 
             var decor = CreateTilemap("Decor", -5);
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
@@ -238,6 +268,12 @@ public static class LevelMap
                 else col = 1 + h % 6;
             }
             return Tile(GroundSheet, row, col);
+        }
+
+        static void SetGroundLayer(GameObject go)
+        {
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
         }
 
         Tilemap CreateTilemap(string id, int order)

@@ -55,8 +55,8 @@ public static class Level1Builder
 
         // 2. Tutorial B: slow drawbridge over a pit (needs Tick on the treadmill).
         l.Checkpoint(40);
-        l.Marker("Drawbridge", 49, 0, 1, 7, Wood);   // raised, hinged at its base
-        l.Busy(49, 57);
+        l.Drawbridge(50, 57);                     // swings past the pit; stop time to cross
+        l.Busy(48, 57);                           // no props at the pit edges
 
         // 3. Frozen gears: gears fall from the top; freeze them and climb the wall.
         l.Marker("FallingGears", 66, 9, 10, 1, Gear);
