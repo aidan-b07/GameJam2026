@@ -12,7 +12,7 @@ using UnityEngine.Tilemaps;
 // one-way ledges, decor props, backgrounds, split-screen cameras, and
 // colour-coded placeholder objects for everything that will get logic later.
 //
-// Units: 1 tile = 1 world unit (16px tiles at 16 PPU). Ground surface is y = 0,
+// Units: 1 tile = 1 world unit (32px tiles at 32 PPU). Ground surface is y = 0,
 // so players stand at y = 0. Tick's lane sits at world y = 0, Tock's at y = -40.
 public static class LevelMap
 {
@@ -20,8 +20,8 @@ public static class LevelMap
     public const float CameraY = 3.5f;        // camera centre above the lane's ground
     public const float CameraSize = 5.625f;   // half of the 11.25-unit background height
 
-    const string GroundSheet = "ground_16px";
-    const string PropsSheet = "props_16px";
+    const string GroundSheet = "ground_32px";
+    const string PropsSheet = "props_32px";
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
 
     static readonly Color TickColor = new Color(1f, 0.55f, 0.15f);
@@ -200,8 +200,8 @@ public static class LevelMap
             var decor = CreateTilemap("Decor", -5);
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
 
-            CreateBackground("Background_Far", "Assets/Art/Backgrounds/bg_far_180h.png", -20, 0.85f);
-            CreateBackground("Background_Mid", "Assets/Art/Backgrounds/bg_mid_180h.png", -10, 1f);
+            CreateBackground("Background_Far", "Assets/Art/Backgrounds/bg_far_360h.png", -20, 0.85f);
+            CreateBackground("Background_Mid", "Assets/Art/Backgrounds/bg_mid_360h.png", -10, 1f);
         }
 
         // Lamp posts, crates, barrels and leaf piles on free stretches of ground.
