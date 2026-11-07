@@ -43,7 +43,7 @@ public static class LevelMap
     static IEnumerable<(int r, int c)> StrikeCells =>
         from r in Enumerable.Range(0, 2) from c in Enumerable.Range(0, 3) select (r, c);
     // Twin checkpoint lamp, Victorian design from
-    // tools/make_checkpoint_victorian.py --no-clock (saved under the twin names):
+    // tools/make_checkpoint_victorian.py --no-clock --vivid (saved under the twin names):
     // a post (one 64x96 frame) and a lantern overlay sheet per player (19 frames
     // of 64x96), all with a bottom-centre pivot. CheckpointLamp plays the overlays.
     const string CheckpointDir = "Assets/Art/Obstacles/Checkpoint/";
