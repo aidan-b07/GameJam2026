@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-// Plays the player's sprite frames (idle, run, jump and death) on the Visual
-// child and keeps the wind-up key on the body's back, turning. The state comes
-// from the Rigidbody2D and PlayerMovement each frame. Frames and key attach
-// pixels are from tools/make_player.py and make_death.py
-// (Assets/Art/Characters, KeyAttach.md).
+// Plays the player's sprite frames (idle, run, jump, death and respawn) on the
+// Visual child and keeps the wind-up key on the body's back, turning. The state
+// comes from the Rigidbody2D and PlayerMovement each frame. Frames and key
+// attach pixels are from tools/make_player.py, make_death.py and
+// make_respawn.py (Assets/Art/Characters, KeyAttach.md).
 //
 // Lane time isn't wired up yet, so the key turns at a fixed default rate
 // (keyFps x KeyRate, KeyRate = 1). Later the lane's clock should set KeyRate.
@@ -29,6 +29,8 @@ public class PlayerSprites : MonoBehaviour
         public Frame jump;
         [Tooltip("Key is baked into these frames, so the separate key is hidden.")]
         public Sprite[] death;
+        [Tooltip("Key is baked in here too. Plays once, then back to the normal states.")]
+        public Sprite[] respawn;
     }
 
     [SerializeField] private Character character;
@@ -44,6 +46,7 @@ public class PlayerSprites : MonoBehaviour
     [SerializeField] private float idleFps = 4f;
     [SerializeField] private float runFps = 12f;
     [SerializeField] private float deathFps = 12f;
+    [SerializeField] private float respawnFps = 12f;
     [Tooltip("Default key turning speed until lane time drives KeyRate.")]
     [SerializeField] private float keyFps = 10f;
     [Tooltip("Horizontal speed above which the run cycle plays.")]
@@ -52,6 +55,11 @@ public class PlayerSprites : MonoBehaviour
     // Multiplier on keyFps; 1 until the lane clock sets it (0 stops the key).
     public float KeyRate { get; set; } = 1f;
     public bool IsDead { get; private set; }
+    public bool IsRespawning { get; private set; }
+
+    // Seconds the one-shot animations take.
+    public float DeathDuration => Active.death.Length / deathFps;
+    public float RespawnDuration => (Active.respawn?.Length ?? 0) / respawnFps;
 
     private const int Cell = 32;
     private const float Ppu = 32f;
@@ -84,6 +92,21 @@ public class PlayerSprites : MonoBehaviour
             body.sprite = death[Mathf.Min((int)(stateTime * deathFps), death.Length - 1)];
             key.enabled = false;
             return;
+        }
+
+        if (IsRespawning)
+        {
+            Sprite[] respawn = Active.respawn;
+            int i = (int)(stateTime * respawnFps);
+            if (respawn != null && i < respawn.Length)
+            {
+                body.sprite = respawn[i];
+                key.enabled = false;
+                return;
+            }
+            IsRespawning = false;
+            current = null;
+            stateTime = 0f;
         }
 
         Frame[] next;
@@ -125,11 +148,22 @@ public class PlayerSprites : MonoBehaviour
         stateTime = 0f;
     }
 
+    // Instantly back to the normal states.
     [ContextMenu("Revive")]
     public void Revive()
     {
         IsDead = false;
+        IsRespawning = false;
         current = null;
+        stateTime = 0f;
+    }
+
+    // Plays the respawn animation once, then the normal states.
+    [ContextMenu("Play Respawn")]
+    public void PlayRespawn()
+    {
+        IsDead = false;
+        IsRespawning = true;
         stateTime = 0f;
     }
 

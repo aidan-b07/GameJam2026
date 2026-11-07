@@ -16,7 +16,6 @@ public static class Level1Builder
     {
         l.Floor((-8, Length + 8));
         l.Spawn(3);
-        l.Checkpoint(1);
 
         // 1. Tutorial A: crusher. Tock must STOP to freeze it.
         l.Crusher(22);
@@ -48,7 +47,6 @@ public static class Level1Builder
     {
         l.Floor((-8, 49), (57, 159), (169, Length + 8));
         l.Spawn(3);
-        l.Checkpoint(1);
 
         // 1. Tutorial A: rest pad. "Tock: STOP".
         l.RestPad(19);

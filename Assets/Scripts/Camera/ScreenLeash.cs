@@ -33,7 +33,7 @@ public class ScreenLeash : MonoBehaviour
         float width = Mathf.Max(rig.elasticWidth, 0.01f);
         foreach (var rb in bodies)
         {
-            if (rb == null || !rb.gameObject.activeInHierarchy) continue;
+            if (rb == null || !rb.gameObject.activeInHierarchy || !rb.simulated) continue;
             float px = rb.position.x;
             // Overshoot past the soft edge: positive is outwards, dir is which way out is.
             float over = px - rig.SoftRight, dir = 1f;
