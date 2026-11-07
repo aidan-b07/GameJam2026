@@ -1,7 +1,7 @@
 using UnityEngine;
 
-// Twin checkpoint lamp (tools/make_checkpoint_twin.py): a post with a lantern
-// per player, Tick's (orange) on the left and Tock's (teal) on the right. Both
+// Twin checkpoint lamp (Victorian design, tools/make_checkpoint_victorian.py
+// --no-clock --vivid): a cast-iron post with a lantern per player, Tick's (orange) on the left and Tock's (teal) on the right. Both
 // lanes' lamps of a checkpoint show the same state, read from GameFlow:
 // - a lantern lights dim once its player has reached their lane's checkpoint
 //   of this index (ignite, then the dim loop);
