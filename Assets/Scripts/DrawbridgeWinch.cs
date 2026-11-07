@@ -14,7 +14,7 @@ using UnityEngine;
 // puffs steam; when the leaf goes over the top the pawl lifts and the brake
 // band glows and throws sparks until the first bounce. The lamp on the head
 // blinks amber while winching, glows red while the leaf falls and green while
-// it spans the pit (the moment to stop time and cross). Every bounce kicks
+// it spans the pit, even while winching (the moment to stop time and cross). Every bounce kicks
 // up dust where the leaf hits.
 //
 // The object sits on the hinge point; the parts are its children, placed by
@@ -202,12 +202,13 @@ public class DrawbridgeWinch : MonoBehaviour
 
     private void UpdateLamp(float angle)
     {
-        bool spanning = Mathf.Abs(Mathf.DeltaAngle(angle, 90f)) < greenWindow && !bridge.Winching && !bridge.FreeFalling;
+        // Green wins over amber: the winch carries the leaf across the pit without stopping.
+        bool spanning = Mathf.Abs(Mathf.DeltaAngle(angle, 90f)) < greenWindow;
         bool blink = Mathf.Repeat(laneTime * 4f, 2f) < 1f;
         Color light = Color.clear;
         if (bridge.FreeFalling) { lamp.sprite = lampRed; light = RedLight; }
-        else if (bridge.Winching) { lamp.sprite = blink ? lampAmber : lampDim; if (blink) light = AmberLight; }
         else if (spanning) { lamp.sprite = lampGreen; light = GreenLight; }
+        else if (bridge.Winching) { lamp.sprite = blink ? lampAmber : lampDim; if (blink) light = AmberLight; }
         else lamp.sprite = lampOff;
         glow.enabled = light.a > 0f;
         glow.color = light;
