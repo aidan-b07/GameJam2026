@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player")]
     [Tooltip("0 uses the first controller plugged in, 1 uses the second.")]
     [SerializeField] private int playerIndex = 0;
-    [Tooltip("If this player's controller isn't connected, use the keyboard instead. P1: A/D + Space. P2: Arrows + Right Ctrl.")]
+    [Tooltip("If this player's controller isn't connected, use the keyboard instead. P1: A/D + W. P2: Left/Right + Up arrow.")]
     [SerializeField] private bool keyboardFallback = true;
     [SerializeField] private float stickDeadzone = 0.2f;
 
@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
             KeyControl left = isP1 ? kb.aKey : kb.leftArrowKey;
             KeyControl right = isP1 ? kb.dKey : kb.rightArrowKey;
-            KeyControl jump = isP1 ? kb.spaceKey : kb.rightCtrlKey;
+            KeyControl jump = isP1 ? kb.wKey : kb.upArrowKey;
 
             if (left.isPressed) horizontalInput -= 1f;
             if (right.isPressed) horizontalInput += 1f;
