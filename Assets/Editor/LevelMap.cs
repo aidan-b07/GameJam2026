@@ -90,7 +90,7 @@ public static class LevelMap
         b.AddParallax(b.Sky.skyAnchor);
         t.Sky.Apply();
         b.Sky.Apply();
-        CreateDivider();
+        CreateDivider(t.Sky.skyAnchor, b.Sky.skyAnchor);
         var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
         var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
         CreateGameFlow(players, rig);
@@ -539,7 +539,7 @@ public static class LevelMap
 
     // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is
     // one art pixel (each lane is 360 px tall); the rift is centred on the seam.
-    static void CreateDivider()
+    static void CreateDivider(Transform tickCamera, Transform tockCamera)
     {
         var go = new GameObject("LaneDivider", typeof(Canvas), typeof(CanvasScaler));
         go.layer = LayerMask.NameToLayer("UI");
@@ -554,6 +554,8 @@ public static class LevelMap
 
         var divider = go.AddComponent<LaneDivider>();
         divider.rift = DividerLayer(go.transform, "Rift");
+        divider.topCamera = tickCamera;
+        divider.bottomCamera = tockCamera;
     }
 
     // The rift texture is drawn at runtime by LaneDivider.
