@@ -35,6 +35,11 @@ public static class LevelMap
     // hand overlays (12 hand sprites, 00 = 12 o'clock), tiled rod, brass ring.
     const string PlungerDir = "Assets/Art/Obstacles/Plunger/";
     static string PlungerPng(string id) => $"{PlungerDir}plunger_{id}_32px.png";
+    // Flagstones under each plunger head (3x2 tiles), from tools/make_strike.py:
+    // strike_r<row>c<col>, row 0 on top. They replace those ground tiles.
+    const string StrikeDir = "Assets/Art/Obstacles/Strike/";
+    static IEnumerable<(int r, int c)> StrikeCells =>
+        from r in Enumerable.Range(0, 2) from c in Enumerable.Range(0, 3) select (r, c);
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
@@ -82,6 +87,8 @@ public static class LevelMap
             PrepareSprite(PlungerPng(id), false, new Vector2(0.5f, 0.5f));
         PrepareSprite(PlungerPng("rod"), true, new Vector2(0.5f, 0f));
         PrepareSprite(PlungerPng("gland"), false, new Vector2(0.5f, 1f));
+        foreach (var (r, c) in StrikeCells)
+            PrepareSprite($"{StrikeDir}strike_r{r}c{c}_32px.png", false, new Vector2(0.5f, 0.5f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -122,6 +129,7 @@ public static class LevelMap
         readonly HashSet<Vector2Int> solid = new HashSet<Vector2Int>();
         readonly HashSet<Vector2Int> ledges = new HashSet<Vector2Int>();
         readonly HashSet<Vector2Int> recess = new HashSet<Vector2Int>();
+        readonly Dictionary<Vector2Int, (int r, int c)> strike = new Dictionary<Vector2Int, (int r, int c)>();
         readonly List<SpriteRenderer> tinted = new List<SpriteRenderer>();
         readonly Dictionary<Vector2Int, (int r, int c)> props = new Dictionary<Vector2Int, (int, int)>();
         readonly Dictionary<int, int> surface = new Dictionary<int, int>();
@@ -322,6 +330,8 @@ public static class LevelMap
             Prop(x - 2, 8, 1, 1);
             Prop(x + 4, 8, 1, 1);
             Busy(x - 3, x + 5);
+            // Flagstones where the head lands, so players can see the danger zone.
+            foreach (var (r, c) in StrikeCells) strike[new Vector2Int(x + c, Surface(x + c) - 1 - r)] = (r, c);
 
             counts["Crusher"] = counts.TryGetValue("Crusher", out var n) ? n + 1 : 1;
             var go = new GameObject($"Crusher_{counts["Crusher"]}");
@@ -407,7 +417,8 @@ public static class LevelMap
             Decorate();
 
             var ground = CreateTilemap("Ground", 0);
-            foreach (var p in solid) ground.SetTile((Vector3Int)p, GroundTile(p));
+            foreach (var p in solid)
+                ground.SetTile((Vector3Int)p, strike.TryGetValue(p, out var sc) ? StrikeTile(sc.r, sc.c) : GroundTile(p));
             var groundCol = ground.gameObject.AddComponent<TilemapCollider2D>();
             groundCol.compositeOperation = Collider2D.CompositeOperation.Merge;
             ground.gameObject.AddComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
@@ -653,6 +664,20 @@ public static class LevelMap
     }
 
     static string ObstaclePng(string name) => $"Assets/Art/Obstacles/{name}_32px.png";
+
+    // Strike stone Tile next to its sprite, made on first use. Sprite collider
+    // like the ground tiles, so the surface stays solid at the same height.
+    static Tile StrikeTile(int r, int c)
+    {
+        string path = $"{StrikeDir}strike_r{r}c{c}.asset";
+        var t = AssetDatabase.LoadAssetAtPath<Tile>(path);
+        if (t != null) return t;
+        t = ScriptableObject.CreateInstance<Tile>();
+        t.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{StrikeDir}strike_r{r}c{c}_32px.png");
+        t.colliderType = UnityEngine.Tilemaps.Tile.ColliderType.Sprite;
+        AssetDatabase.CreateAsset(t, path);
+        return t;
+    }
 
     // Tile asset next to its sprite, made on first use; no collider.
     static Tile ObstacleTile(string name)
