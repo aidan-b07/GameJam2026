@@ -91,7 +91,31 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0f)
             TryStepUp(Mathf.Sign(horizontalInput), Mathf.Abs(horizontalInput) * moveSpeed * Time.fixedDeltaTime);
 
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
+        float vx = horizontalInput * moveSpeed;
+
+        // In the air, pushing into a wall pins the player there by friction.
+        // Stop pushing so they fall.
+        if (vx != 0f && !IsGrounded() && TouchingWall(Mathf.Sign(vx)))
+            vx = 0f;
+
+        rb.linearVelocity = new Vector2(vx, rb.linearVelocity.y);
+    }
+
+    private bool TouchingWall(float dir)
+    {
+        if (body == null)
+            return false;
+
+        int count = body.Cast(new Vector2(dir, 0f), groundFilter, castHits, 0.05f);
+        for (int i = 0; i < count; i++)
+        {
+            // One-way platforms are open at the sides.
+            if (castHits[i].collider.usedByEffector)
+                continue;
+            if (Mathf.Abs(castHits[i].normal.x) > 0.5f)
+                return true;
+        }
+        return false;
     }
 
     private void ReadInput()
