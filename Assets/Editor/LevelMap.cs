@@ -317,12 +317,4 @@ public static class LevelMap
         var others = scenes.Where(s => !s.path.Contains("/Level"));
         EditorBuildSettings.scenes = levels.Concat(others).ToArray();
     }
-
-    [MenuItem("Tick & Tock/Build All Level Maps")]
-    public static void BuildAll()
-    {
-        Level1Builder.Build();
-        Level2Builder.Build();
-        Level3Builder.Build();
-    }
 }
