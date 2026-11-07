@@ -190,7 +190,8 @@ public class BridgeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        phaseTime += Time.fixedDeltaTime * GameManager.INSTANCE.GetWorldSpeed(lane);
+        var manager = GameManager.INSTANCE;
+        phaseTime += Time.fixedDeltaTime * (manager != null ? manager.GetWorldSpeed(lane) : 1f);
         AdvancePhase();
 
         float target = AngleForPhase();
