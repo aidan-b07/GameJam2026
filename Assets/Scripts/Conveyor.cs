@@ -6,8 +6,10 @@ using UnityEngine;
 // 8 frames, the belt moves 1 px per frame, so the frame is the belt's travel
 // in pixels mod 8). LevelMap.Lane.Conveyor builds it over normal ground tiles,
 // which keep the collider.
-// Runs after PlayerMovement, which sets the player's horizontal velocity from
-// input every step, and before ScreenLeash (100): the belt adds its own speed.
+// Riders are moved by position, not velocity: friction would eat part of an
+// added velocity, and the 1-2 px steps between ground tiles stop a player who
+// is not pressing a direction (PlayerMovement only steps up on input). Runs
+// after PlayerMovement and before ScreenLeash (100).
 [DefaultExecutionOrder(50)]
 public class Conveyor : MonoBehaviour
 {
@@ -35,7 +37,7 @@ public class Conveyor : MonoBehaviour
 
     private void Start()
     {
-        players = FindObjectsByType<PlayerMovement>(FindObjectsSortMode.None);
+        players = FindObjectsByType<PlayerMovement>();
     }
 
     private float LaneSpeed => GameManager.INSTANCE != null ? GameManager.INSTANCE.GetWorldSpeed(lane) : 1f;
@@ -51,7 +53,7 @@ public class Conveyor : MonoBehaviour
             var col = p.GetComponent<Collider2D>();
             if (rb == null || col == null || !rb.simulated) continue;
             if (OnBelt(col.bounds, rb.linearVelocity.y))
-                rb.linearVelocity += new Vector2(v, 0f);
+                rb.position += new Vector2(v * Time.fixedDeltaTime, 0f);
         }
     }
 
