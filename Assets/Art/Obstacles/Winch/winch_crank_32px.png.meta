@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 85a1bcd19d94d40408ed532498eeff9f
+guid: 2f33c9b5dcb164ae88c15a6fd2b46e87
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7655347034577906530
-    second: winch_piston_rod_32px_0
+      213: -7738952778148880706
+    second: winch_crank_32px_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,9 +48,9 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0, y: 0.5}
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: winch_piston_rod_32px_0
+      name: winch_crank_32px_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 8
-        height: 3
+        x: 1
+        y: 1
+        width: 26
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 26b2b5471914d3a60800000000000000
-      internalID: 7655347034577906530
+      spriteID: ebed9e47377b99490800000000000000
+      internalID: -7738952778148880706
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      winch_piston_rod_32px_0: 7655347034577906530
+      winch_crank_32px_0: -7738952778148880706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

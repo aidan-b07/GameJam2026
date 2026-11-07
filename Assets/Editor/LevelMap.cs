@@ -32,24 +32,16 @@ public static class LevelMap
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
     // Drawbridge leaf from tools/make_drawbridge.py: 1x7 tiles, hinge at the top.
     const string DrawbridgeSprite = "Assets/Art/Obstacles/drawbridge_32px.png";
-    // Winch tower beside the drawbridge from tools/make_winch.py: the still parts
-    // in one sprite, the moving ones (turned and moved by DrawbridgeWinch) each
-    // in their own, with the pivots below.
+    // Geared hinge winch of the drawbridge from tools/make_winch.py: the still
+    // parts in one sprite (stand), the hinge gear and crank turned by
+    // DrawbridgeWinch, and the lamp states, with the pivots below.
     const string WinchDir = "Assets/Art/Obstacles/Winch/";
     static string WinchPng(string id) => $"{WinchDir}winch_{id}_32px.png";
-    static readonly (string id, Vector2 pivot, bool tiled)[] WinchParts =
+    static readonly (string id, Vector2 pivot)[] WinchParts =
     {
-        ("tower", Vector2.zero, false), ("bracket", Vector2.zero, false),
-        ("sheave", Vector2.one * 0.5f, false), ("drum_gear", Vector2.one * 0.5f, false),
-        ("drum", Vector2.one * 0.5f, false), ("pinion", Vector2.one * 0.5f, false),
-        ("flywheel", Vector2.one * 0.5f, false), ("gauge_needle", Vector2.one * 0.5f, false),
-        ("brake_glow", Vector2.one * 0.5f, false), ("crosshead", Vector2.one * 0.5f, false),
-        ("pawl", new Vector2(4f / 20f, 0.5f), false), ("crank_rod", new Vector2(2f / 31f, 0.5f), false),
-        ("counterweight", new Vector2(0f, 1f), false),
-        ("piston_rod", new Vector2(0f, 0.5f), true), ("chain", new Vector2(0f, 0.5f), true),
-        ("lamp_off", Vector2.one * 0.5f, false), ("lamp_amber", Vector2.one * 0.5f, false),
-        ("lamp_dim", Vector2.one * 0.5f, false), ("lamp_red", Vector2.one * 0.5f, false),
-        ("lamp_green", Vector2.one * 0.5f, false), ("glow", Vector2.one * 0.5f, false),
+        ("stand", Vector2.zero), ("hinge_gear", Vector2.one * 0.5f), ("crank", Vector2.one * 0.5f),
+        ("lamp_off", Vector2.one * 0.5f), ("lamp_amber", Vector2.one * 0.5f), ("lamp_dim", Vector2.one * 0.5f),
+        ("lamp_red", Vector2.one * 0.5f), ("lamp_green", Vector2.one * 0.5f), ("glow", Vector2.one * 0.5f),
     };
     // Plunger crusher art from tools/make_plunger.py: 3x2 head with lamp and dial
     // hand overlays (12 hand sprites, 00 = 12 o'clock), tiled rod, brass ring.
@@ -132,7 +124,7 @@ public static class LevelMap
         PrepareWhiteSprite();
         PrepareSprite(DrawbridgeSprite, true, new Vector2(0.5f, 0.5f));
         PrepareSprite(ObstaclePng(RecessBack), false, RecessPivot);
-        foreach (var (id, pivot, tiled) in WinchParts) PrepareSprite(WinchPng(id), tiled, pivot);
+        foreach (var (id, pivot) in WinchParts) PrepareSprite(WinchPng(id), false, pivot);
         PrepareSprite(ObstaclePng(RecessBackLeft), false, RecessLeftPivot);
         PrepareSprite(ObstaclePng(RecessBackRight), false, RecessPivot);
         foreach (var id in new[] { "head", "lamp_amber", "lamp_red" }.Concat(PlungerHands))
@@ -349,14 +341,14 @@ public static class LevelMap
             bridge.ApplyModifiedPropertiesWithoutUndo();
 
             Winch(go.GetComponent<BridgeMovement>(), new Vector2(x0 + 0.5f, -0.5f));
-            Busy(x1, x1 + 6);   // the tower and engine stand on the far side of the pit
             return go;
         }
 
-        // Winch tower contraption for a drawbridge whose hinge is at `hinge`
-        // (lane coordinates): a mast on the far side of the pit with a chain to
-        // the leaf's tip, a steam winch at its foot and a bracket for the hinge.
-        // Offsets are in tiles from the hinge, as printed by tools/make_winch.py.
+        // Geared hinge for a drawbridge whose hinge is at `hinge` (lane
+        // coordinates): a big gear on the hinge driving a crank wheel on the
+        // pit's lip, the hinge bracket and a lamp post. Offsets are in tiles from
+        // the hinge, as printed by tools/make_winch.py. The leaf is order 5; the
+        // lamp and the sparks sort below it so the leaf passes in front.
         void Winch(BridgeMovement bridge, Vector2 hinge)
         {
             var root = new GameObject($"{bridge.name}_Winch");
@@ -374,63 +366,25 @@ public static class LevelMap
                 if (tint) tinted.Add(sr);
                 return sr;
             }
-            SpriteRenderer Chain(string partName, int order, Vector2 at, float angle)
-            {
-                var sr = Part(partName, "chain", order, at);
-                sr.drawMode = SpriteDrawMode.Tiled;
-                sr.size = new Vector2(1f, 3f / 32f);
-                sr.transform.localRotation = Quaternion.Euler(0f, 0f, angle);
-                return sr;
-            }
 
-            var tower = Part("Tower", "tower", -4, new Vector2(6.25f, 0.25f));
-            Part("Bracket", "bracket", 4, new Vector2(-1f, -0.9375f));
-            var weightChain = Chain("WeightChain", -3, new Vector2(7.609375f, 7.5625f), -90f);
-            var weight = Part("Counterweight", "counterweight", -3, new Vector2(7.3125f, 6.625f));
-            var downChain = Chain("DownChain", -3, new Vector2(7.953125f, 8f), -90f);
-            var drumGear = Part("DrumGear", "drum_gear", -3, new Vector2(7.65625f, 1.4375f));
-            var drum = Part("Drum", "drum", -2, new Vector2(7.65625f, 1.4375f));
-            var sheave = Part("Sheave", "sheave", -2, new Vector2(7.5625f, 8f));
-            var pinion = Part("Pinion", "pinion", -2, new Vector2(8.25f, 1.78125f));
-            var flywheel = Part("Flywheel", "flywheel", -2, new Vector2(9.125f, 1.8125f));
-            var piston = Part("PistonRod", "piston_rod", -2, new Vector2(10f, 2.03125f));
-            piston.drawMode = SpriteDrawMode.Tiled;
-            piston.size = new Vector2(0.25f, 3f / 32f);
-            var rod = Part("CrankRod", "crank_rod", -1, new Vector2(9.4f, 1.8125f));
-            var crosshead = Part("Crosshead", "crosshead", -1, new Vector2(9.9f, 2.03125f));
-            var pawl = Part("Pawl", "pawl", -1, new Vector2(7f, 1.9375f));
-            var brake = Part("BrakeGlow", "brake_glow", -1, new Vector2(7.65625f, 1f), false);
-            brake.enabled = false;
-            var needle = Part("GaugeNeedle", "gauge_needle", -1, new Vector2(11.75f, 2.25f));
-            var bridgeChain = Chain("BridgeChain", 6, Vector2.zero, 0f);
-            var glow = Part("LampGlow", "glow", 6, new Vector2(6.515625f, 7.296875f), false);
+            var stand = Part("Stand", "stand", 1, new Vector2(-1.5f, -1f));
+            var gear = Part("HingeGear", "hinge_gear", 2, Vector2.zero);
+            var crank = Part("Crank", "crank", 3, new Vector2(-0.5f, 0.84375f));
+            var glow = Part("LampGlow", "glow", 3, new Vector2(-1.234375f, 1.484375f), false);
             glow.enabled = false;
-            var lamp = Part("Lamp", "lamp_off", 7, new Vector2(6.515625f, 7.296875f), false);
+            var lamp = Part("Lamp", "lamp_off", 4, new Vector2(-1.234375f, 1.484375f), false);
 
             var winch = new SerializedObject(root.AddComponent<DrawbridgeWinch>());
             void Set(string field, UnityEngine.Object value) => winch.FindProperty(field).objectReferenceValue = value;
             Set("bridge", bridge);
-            Set("sheave", sheave.transform);
-            Set("bridgeChain", bridgeChain);
-            Set("downChain", downChain);
-            Set("weightChain", weightChain);
-            Set("drumGear", drumGear.transform);
-            Set("drum", drum.transform);
-            Set("pinion", pinion.transform);
-            Set("flywheel", flywheel.transform);
-            Set("crankRod", rod.transform);
-            Set("crosshead", crosshead.transform);
-            Set("pistonRod", piston);
-            Set("pawl", pawl.transform);
-            Set("brakeGlow", brake);
-            Set("counterweight", weight.transform);
-            Set("gaugeNeedle", needle.transform);
+            Set("hingeGear", gear.transform);
+            Set("crank", crank.transform);
             Set("lamp", lamp);
             Set("glow", glow);
             foreach (var state in new[] { "Off", "Amber", "Dim", "Red", "Green" })
                 Set("lamp" + state, AssetDatabase.LoadAssetAtPath<Sprite>(WinchPng("lamp_" + state.ToLowerInvariant())));
             Set("moteSprite", AssetDatabase.LoadAssetAtPath<Sprite>(WhiteSprite));
-            Set("tintSource", tower);
+            Set("tintSource", stand);
             winch.ApplyModifiedPropertiesWithoutUndo();
         }
 

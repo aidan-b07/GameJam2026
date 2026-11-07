@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 34e99a58468ec47839ec55e15e4a9f74
+guid: 73ae1b6b342684f74bb45e914114b04a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4780098840983710736
-    second: winch_bracket_32px_0
+      213: 3186414141733346766
+    second: winch_hinge_gear_32px_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0, y: 0}
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: winch_bracket_32px_0
+      name: winch_hinge_gear_32px_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 4
-        width: 37
-        height: 41
+        x: 0
+        y: 0
+        width: 54
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f3d8ef1e6da9adb0800000000000000
-      internalID: -4780098840983710736
+      spriteID: ecd1c4197ca683c20800000000000000
+      internalID: 3186414141733346766
       vertices: []
       indices: 
       edges: []
@@ -150,7 +150,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      winch_bracket_32px_0: -4780098840983710736
+      winch_hinge_gear_32px_0: 3186414141733346766
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
