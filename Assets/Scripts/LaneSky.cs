@@ -5,19 +5,23 @@ using UnityEngine.Tilemaps;
 // crossfade between day, dusk and night, the sun and moon move along an arc
 // above the lane camera, and the lane's tilemaps are tinted to match.
 // Purely visual and a pure function of Hour; runs in edit mode too.
-// Later: drive Hour from the lane's time variable.
+// In play mode Hour follows the lane's clock (GameManager.GetLaneHour).
 [ExecuteAlways]
 public class LaneSky : MonoBehaviour
 {
     public enum Look { Day, Dusk, Night }
 
     [Range(0f, 24f)] public float hour = 10f;
+    [Tooltip("Lane whose clock sets the hour in play mode (0 Tick, 1 Tock); -1 keeps hour as set.")]
+    public int lane = -1;
 
     [System.Serializable]
     public class Layer
     {
         public SpriteRenderer day, dusk, night;
         public int sortingOrder;
+        [Tooltip("Live hands for the tower clocks painted in this layer.")]
+        public TowerClocks clocks;
     }
 
     public Layer[] layers;
@@ -48,7 +52,12 @@ public class LaneSky : MonoBehaviour
     }
 
     void OnValidate() => Apply();
-    void LateUpdate() => Apply();
+    void LateUpdate()
+    {
+        if (Application.isPlaying && lane >= 0 && GameManager.INSTANCE != null)
+            hour = GameManager.INSTANCE.GetLaneHour(lane);
+        Apply();
+    }
 
     // Which two looks are on screen at this hour, and how far from one to the other.
     public static (Look from, Look to, float t) Blend(float h)
@@ -81,6 +90,7 @@ public class LaneSky : MonoBehaviour
                     sr.sortingOrder = layer.sortingOrder + (isTo ? 1 : 0);
                     sr.color = new Color(1f, 1f, 1f, isTo ? t : 1f);
                 }
+                if (layer.clocks != null) layer.clocks.Show(hour, from, to, t);
             }
         }
 

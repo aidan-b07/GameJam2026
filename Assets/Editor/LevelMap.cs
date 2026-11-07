@@ -56,6 +56,22 @@ public static class LevelMap
     const string TickPrefab = "Assets/Prefabs/Player.prefab";
     const string TockPrefab = "Assets/Prefabs/Player_Tock.prefab";
     // Parallax depth of the background layers: 0 moves with the ground, 1 with the camera.
+    // Clock faces in each background picture (centre in pixels from its
+    // bottom-left pixel, radius) and the colour of their painted hands in the
+    // day, dusk and night pictures; printed by tools/make_clockfaces.py.
+    static readonly Dictionary<string, TowerClocks.Face[]> ClockFaces = new Dictionary<string, TowerClocks.Face[]>
+    {
+        ["bg_far_360h"] = new[] { Face(105f, 132f, 6.5f), Face(412.5f, 131.5f, 18f), Face(560f, 132f, 6.5f) },
+        ["bg_mid_360h"] = new[] { Face(449f, 179.5f, 16.5f) },
+    };
+    static readonly Dictionary<string, (Color day, Color dusk, Color night)> ClockHands = new Dictionary<string, (Color, Color, Color)>
+    {
+        ["bg_far_360h"] = (Rgb(134, 169, 208), Rgb(158, 96, 158), Rgb(78, 66, 122)),
+        ["bg_mid_360h"] = (Rgb(126, 68, 72), Rgb(115, 54, 90), Rgb(110, 75, 75)),
+    };
+    static TowerClocks.Face Face(float x, float y, float r) => new TowerClocks.Face { centre = new Vector2(x, y), radius = r };
+    static Color Rgb(int r, int g, int b) => new Color32((byte)r, (byte)g, (byte)b, 255);
+
     const float FarDepth = 0.85f;
     const float MidDepth = 0.6f;
 
@@ -112,7 +128,8 @@ public static class LevelMap
         var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
         var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
         CreateGameFlow(players, rig);
-        new GameObject("GameManager").AddComponent<GameManager>();
+        var manager = new GameObject("GameManager").AddComponent<GameManager>();
+        manager.startHours = new[] { tickHour, tockHour };
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);
@@ -475,15 +492,30 @@ public static class LevelMap
             Sky.sun = SkyBody(go.transform, "Sun");
             Sky.moon = SkyBody(go.transform, "Moon");
             Sky.hour = startHour;
+            Sky.lane = LaneIndex;
         }
 
-        LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order, float depth) => new LaneSky.Layer
+        LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order, float depth)
         {
-            day = CreateBackground(parent, $"Background_{id}_Day", $"Assets/Art/Backgrounds/{file}_day.png", order, depth),
-            dusk = CreateBackground(parent, $"Background_{id}_Dusk", $"Assets/Art/Backgrounds/{file}.png", order, depth),
-            night = CreateBackground(parent, $"Background_{id}_Night", $"Assets/Art/Backgrounds/{file}_night.png", order, depth),
-            sortingOrder = order,
-        };
+            var layer = new LaneSky.Layer
+            {
+                day = CreateBackground(parent, $"Background_{id}_Day", $"Assets/Art/Backgrounds/{file}_day.png", order, depth),
+                dusk = CreateBackground(parent, $"Background_{id}_Dusk", $"Assets/Art/Backgrounds/{file}.png", order, depth),
+                night = CreateBackground(parent, $"Background_{id}_Night", $"Assets/Art/Backgrounds/{file}_night.png", order, depth),
+                sortingOrder = order,
+            };
+            // Live hands over the painted clock faces, above both blended looks.
+            // Child of the day copy, so it scrolls with that layer's parallax.
+            var go = new GameObject($"TowerClocks_{id}");
+            go.transform.SetParent(layer.day.transform, false);
+            go.AddComponent<SpriteRenderer>().sortingOrder = order + 2;
+            var clocks = go.AddComponent<TowerClocks>();
+            clocks.background = layer.day;
+            clocks.faces = ClockFaces[file];
+            (clocks.dayHands, clocks.duskHands, clocks.nightHands) = ClockHands[file];
+            layer.clocks = clocks;
+            return layer;
+        }
 
         // Between the far (-20) and mid (-10) layers, so buildings pass in front.
         static SpriteRenderer SkyBody(Transform parent, string id)
