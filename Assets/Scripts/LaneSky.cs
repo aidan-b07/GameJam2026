@@ -30,7 +30,7 @@ public class LaneSky : MonoBehaviour
 
     public Color dayTint = Color.white;
     public Color duskTint = new Color(1f, 0.82f, 0.82f);
-    public Color nightTint = new Color(0.68f, 0.6f, 0.84f);
+    public Color nightTint = new Color(0.72f, 0.72f, 0.9f);
 
     // (hour, look): the sky holds a look between equal neighbours and blends otherwise.
     static readonly (float h, Look look)[] Keys =
