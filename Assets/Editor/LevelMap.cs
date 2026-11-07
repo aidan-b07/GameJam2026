@@ -31,6 +31,14 @@ public static class LevelMap
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
     // Drawbridge leaf from tools/make_drawbridge.py: 1x7 tiles, hinge at the top.
     const string DrawbridgeSprite = "Assets/Art/Obstacles/drawbridge_32px.png";
+    // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
+    const string RecessBack = "recess_back";
+    const string RecessBackLeft = "recess_back_left";
+    const string RecessBackRight = "recess_back_right";
+    // The wall tiles are 32x38 (6 rows hang behind the slot floor); the left one
+    // is 2 px wider on the left. Pivots put the top 32x32 on the cell.
+    static readonly Vector2 RecessPivot = new Vector2(0.5f, 1f - 16f / 38f);
+    static readonly Vector2 RecessLeftPivot = new Vector2(18f / 34f, 1f - 16f / 38f);
     // Layer the player's ground check looks for (PlayerMovement.groundLayer).
     const string GroundLayer = "Ground";
 
@@ -55,7 +63,10 @@ public static class LevelMap
         float tickHour = TickStartHour, float tockHour = TockStartHour)
     {
         PrepareWhiteSprite();
-        PrepareDrawbridgeSprite();
+        PrepareSprite(DrawbridgeSprite, true, new Vector2(0.5f, 0.5f));
+        PrepareSprite(ObstaclePng(RecessBack), false, RecessPivot);
+        PrepareSprite(ObstaclePng(RecessBackLeft), false, RecessLeftPivot);
+        PrepareSprite(ObstaclePng(RecessBackRight), false, RecessPivot);
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -89,6 +100,8 @@ public static class LevelMap
         readonly Transform markers;
         readonly HashSet<Vector2Int> solid = new HashSet<Vector2Int>();
         readonly HashSet<Vector2Int> ledges = new HashSet<Vector2Int>();
+        readonly HashSet<Vector2Int> recess = new HashSet<Vector2Int>();
+        readonly List<SpriteRenderer> tinted = new List<SpriteRenderer>();
         readonly Dictionary<Vector2Int, (int r, int c)> props = new Dictionary<Vector2Int, (int, int)>();
         readonly Dictionary<int, int> surface = new Dictionary<int, int>();
         readonly List<(int x0, int x1)> busy = new List<(int, int)>();
@@ -185,13 +198,31 @@ public static class LevelMap
                 sr.drawMode = SpriteDrawMode.Sliced;
                 sr.size = Vector2.one;
                 go.transform.localScale = new Vector3(1f, length, 1f);   // the draw mode change rescales it
+                tinted.Add(sr);
             }
+
+            // Slot in the ground where the leaf lands (flat, pointing left from the
+            // hinge), so it lies flush with the floor instead of sinking into it.
+            Recess(x0 - length + 1, x0 - 1);
 
             // Hinge at the centre of the leaf's top tile, at ground level.
             var bridge = new SerializedObject(go.AddComponent<BridgeMovement>());
             bridge.FindProperty("hingeAnchor").vector2Value = new Vector2(0f, 0.5f - 0.5f / length);
             bridge.ApplyModifiedPropertiesWithoutUndo();
             return go;
+        }
+
+        // One-tile-deep slot cut into the ground surface over x0..x1. Its floor and
+        // lip are normal ground tiles; its back is a darkened wall without collider.
+        public void Recess(int x0, int x1)
+        {
+            for (int x = x0; x <= x1; x++)
+            {
+                var p = new Vector2Int(x, Surface(x) - 1);
+                solid.Remove(p);
+                recess.Add(p);
+            }
+            Busy(x0 - 1, x1 + 1);
         }
 
         public void Checkpoint(int x)
@@ -261,7 +292,16 @@ public static class LevelMap
             var decor = CreateTilemap("Decor", -5);
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
 
-            CreateSky(ground, platforms, decor);
+            var back = CreateTilemap("Recess", -1);
+            foreach (var p in recess)
+            {
+                string wall = !recess.Contains(p + Vector2Int.left) ? RecessBackLeft
+                    : !recess.Contains(p + Vector2Int.right) ? RecessBackRight : RecessBack;
+                back.SetTile((Vector3Int)p, ObstacleTile(wall));
+            }
+
+            CreateSky(ground, platforms, decor, back);
+            Sky.sprites = tinted.ToArray();
         }
 
         // Day, dusk and night copies of each background layer (the unsuffixed PNG is dusk),
@@ -327,7 +367,8 @@ public static class LevelMap
             else
             {
                 int h = Hash(p.x, p.y) % 100;
-                if (row == 0) col = h < 12 ? 2 + h % 3 : new[] { 1, 5, 6 }[h % 3];   // 2-4 have ivy
+                bool slotFloor = recess.Contains(p + Vector2Int.up);   // no ivy under the drawbridge
+                if (row == 0) col = h < 12 && !slotFloor ? 2 + h % 3 : new[] { 1, 5, 6 }[h % 3];   // 2-4 have ivy
                 else col = 1 + h % 6;
             }
             return Tile(GroundSheet, row, col);
@@ -445,24 +486,40 @@ public static class LevelMap
         ti.SaveAndReimport();
     }
 
-    // Single sprite, centre pivot (the leaf object sits at the leaf's centre;
-    // BridgeMovement.hingeAnchor puts the hinge on the pin at pixel (16, 16)),
-    // full-rect mesh so the renderer can draw it sliced.
-    static void PrepareDrawbridgeSprite()
+    static string ObstaclePng(string name) => $"Assets/Art/Obstacles/{name}_32px.png";
+
+    // Tile asset next to its sprite, made on first use; no collider.
+    static Tile ObstacleTile(string name)
     {
-        if (!(AssetImporter.GetAtPath(DrawbridgeSprite) is TextureImporter ti)) return;
+        string path = $"Assets/Art/Obstacles/{name}.asset";
+        var t = AssetDatabase.LoadAssetAtPath<Tile>(path);
+        if (t != null) return t;
+        t = ScriptableObject.CreateInstance<Tile>();
+        t.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ObstaclePng(name));
+        t.colliderType = UnityEngine.Tilemaps.Tile.ColliderType.None;
+        AssetDatabase.CreateAsset(t, path);
+        return t;
+    }
+
+    // Single sprite, 32 PPU, point filter. The drawbridge leaf has a centre
+    // pivot (the object sits at the leaf's centre; BridgeMovement.hingeAnchor
+    // puts the hinge on the pin at pixel (16, 16)) and needs a full-rect mesh
+    // to be drawn sliced.
+    static void PrepareSprite(string path, bool fullRect, Vector2 pivot)
+    {
+        if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
         var settings = new TextureImporterSettings();
         ti.ReadTextureSettings(settings);
-        var pivot = new Vector2(0.5f, 0.5f);
-        if (ti.spriteImportMode == SpriteImportMode.Single && ti.spritePixelsPerUnit == 32
-            && settings.spriteMeshType == SpriteMeshType.FullRect && ti.spritePivot == pivot) return;
+        var mesh = fullRect ? SpriteMeshType.FullRect : SpriteMeshType.Tight;
+        if (ti.textureType == TextureImporterType.Sprite && ti.spriteImportMode == SpriteImportMode.Single
+            && ti.spritePixelsPerUnit == 32 && settings.spriteMeshType == mesh && ti.spritePivot == pivot) return;
         settings.textureType = TextureImporterType.Sprite;
         settings.spriteMode = (int)SpriteImportMode.Single;
         settings.spritePixelsPerUnit = 32;
         settings.filterMode = FilterMode.Point;
         settings.mipmapEnabled = false;
-        settings.spriteMeshType = SpriteMeshType.FullRect;
-        settings.spriteAlignment = (int)SpriteAlignment.Center;
+        settings.spriteMeshType = mesh;
+        settings.spriteAlignment = (int)SpriteAlignment.Custom;
         settings.spritePivot = pivot;
         ti.SetTextureSettings(settings);   // replaces all of them, so set them on settings first
         ti.textureCompression = TextureImporterCompression.Uncompressed;
