@@ -11,6 +11,8 @@ using UnityEngine.Tilemaps;
 // calls. Build() writes a fresh scene: autotiled ground with colliders,
 // one-way ledges, decor props, backgrounds, split-screen cameras, and
 // colour-coded placeholder objects for everything that will get logic later.
+// Each lane gets a LaneSky with day, dusk and night backgrounds, sun and moon;
+// Tick's lane starts at 10:00 (day) and Tock's at 02:00 (night).
 //
 // Units: 1 tile = 1 world unit (32px tiles at 32 PPU). Ground surface is y = 0,
 // so players stand at y = 0. Tick's lane sits at world y = 0, Tock's at y = -40.
@@ -19,6 +21,8 @@ public static class LevelMap
     public const float TockLaneY = -40f;
     public const float CameraY = 3.5f;        // camera centre above the lane's ground
     public const float CameraSize = 5.625f;   // half of the 11.25-unit background height
+    public const float TickStartHour = 10f;
+    public const float TockStartHour = 2f;
 
     const string GroundSheet = "ground_32px";
     const string PropsSheet = "props_32px";
@@ -41,22 +45,25 @@ public static class LevelMap
     public static readonly Color Guard = new Color(0.35f, 0.4f, 0.6f);
     public static readonly Color Conveyor = new Color(0.45f, 0.45f, 0.5f);
 
-    public static void Build(string scenePath, int length, Action<Lane> tick, Action<Lane> tock)
+    public static void Build(string scenePath, int length, Action<Lane> tick, Action<Lane> tock,
+        float tickHour = TickStartHour, float tockHour = TockStartHour)
     {
         PrepareWhiteSprite();
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
-        var t = new Lane("Tick", 0f, TickColor, length);
+        var t = new Lane("Tick", 0f, TickColor, length, tickHour);
         tick(t);
         t.Finish();
 
-        var b = new Lane("Tock", TockLaneY, TockColor, length);
+        var b = new Lane("Tock", TockLaneY, TockColor, length, tockHour);
         tock(b);
         b.Finish();
 
-        CreateCamera("Camera_Tick", 0f, new Rect(0f, 0.5f, 1f, 0.5f), true);
-        CreateCamera("Camera_Tock", TockLaneY, new Rect(0f, 0f, 1f, 0.5f), false);
+        t.Sky.skyAnchor = CreateCamera("Camera_Tick", 0f, new Rect(0f, 0.5f, 1f, 0.5f), true);
+        b.Sky.skyAnchor = CreateCamera("Camera_Tock", TockLaneY, new Rect(0f, 0f, 1f, 0.5f), false);
+        t.Sky.Apply();
+        b.Sky.Apply();
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);
@@ -66,6 +73,8 @@ public static class LevelMap
     public class Lane
     {
         public readonly int Length;
+        public LaneSky Sky { get; private set; }
+        readonly float startHour;
         readonly string name;
         readonly Color color;
         readonly GameObject root;
@@ -77,11 +86,12 @@ public static class LevelMap
         readonly List<(int x0, int x1)> busy = new List<(int, int)>();
         readonly Dictionary<string, int> counts = new Dictionary<string, int>();
 
-        public Lane(string name, float y, Color color, int length)
+        public Lane(string name, float y, Color color, int length, float startHour)
         {
             this.name = name;
             this.color = color;
             Length = length;
+            this.startHour = startHour;
             root = new GameObject($"Lane_{name}", typeof(Grid));
             root.transform.position = new Vector3(0f, y, 0f);
             markers = new GameObject("Placeholders").transform;
@@ -200,8 +210,40 @@ public static class LevelMap
             var decor = CreateTilemap("Decor", -5);
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
 
-            CreateBackground("Background_Far", "Assets/Art/Backgrounds/bg_far_360h.png", -20, 0.85f);
-            CreateBackground("Background_Mid", "Assets/Art/Backgrounds/bg_mid_360h.png", -10, 1f);
+            CreateSky(ground, platforms, decor);
+        }
+
+        // Day, dusk and night copies of each background layer (the unsuffixed PNG is dusk),
+        // plus sun and moon; LaneSky shows the right mix for its hour.
+        void CreateSky(params Tilemap[] tilemaps)
+        {
+            var go = new GameObject("Sky");
+            go.transform.SetParent(root.transform, false);
+            Sky = go.AddComponent<LaneSky>();
+            Sky.layers = new[] { SkyLayer(go.transform, "Far", "bg_far_360h", -20), SkyLayer(go.transform, "Mid", "bg_mid_360h", -10) };
+            Sky.tilemaps = tilemaps;
+            Sky.sun = SkyBody(go.transform, "Sun");
+            Sky.moon = SkyBody(go.transform, "Moon");
+            Sky.hour = startHour;
+        }
+
+        LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order) => new LaneSky.Layer
+        {
+            day = CreateBackground(parent, $"Background_{id}_Day", $"Assets/Art/Backgrounds/{file}_day.png", order),
+            dusk = CreateBackground(parent, $"Background_{id}_Dusk", $"Assets/Art/Backgrounds/{file}.png", order),
+            night = CreateBackground(parent, $"Background_{id}_Night", $"Assets/Art/Backgrounds/{file}_night.png", order),
+            sortingOrder = order,
+        };
+
+        // Between the far (-20) and mid (-10) layers, so buildings pass in front.
+        static SpriteRenderer SkyBody(Transform parent, string id)
+        {
+            var go = new GameObject(id);
+            go.transform.SetParent(parent, false);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Art/Sky/{id.ToLowerInvariant()}.png");
+            sr.sortingOrder = -15;
+            return sr;
         }
 
         // Lamp posts, crates, barrels and leaf piles on free stretches of ground.
@@ -248,10 +290,10 @@ public static class LevelMap
             return go.GetComponent<Tilemap>();
         }
 
-        void CreateBackground(string id, string path, int order, float tint)
+        SpriteRenderer CreateBackground(Transform parent, string id, string path, int order)
         {
             var go = new GameObject(id);
-            go.transform.SetParent(root.transform, false);
+            go.transform.SetParent(parent, false);
             var sr = go.AddComponent<SpriteRenderer>();
             sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
             sr.drawMode = SpriteDrawMode.Tiled;
@@ -259,10 +301,10 @@ public static class LevelMap
             float width = Length + 60;
             sr.size = new Vector2(width, size.y);
             sr.sortingOrder = order;
-            sr.color = new Color(tint, tint, tint, 1f);
             // Top edge just above the view; the bottom hides behind the ground.
             float bottom = CameraY + CameraSize + 0.25f - size.y;
             go.transform.localPosition = new Vector3(width / 2f - 30f, bottom + size.y / 2f, 0f);
+            return sr;
         }
     }
 
@@ -282,7 +324,7 @@ public static class LevelMap
         return t;
     }
 
-    static void CreateCamera(string id, float laneY, Rect viewport, bool listener)
+    static Transform CreateCamera(string id, float laneY, Rect viewport, bool listener)
     {
         var go = new GameObject(id);
         go.tag = listener ? "MainCamera" : "Untagged";
@@ -294,6 +336,7 @@ public static class LevelMap
         cam.clearFlags = CameraClearFlags.SolidColor;
         cam.backgroundColor = new Color(0.1f, 0.06f, 0.15f);
         if (listener) go.AddComponent<AudioListener>();
+        return go.transform;
     }
 
     static void PrepareWhiteSprite()
