@@ -181,10 +181,10 @@ public static class LevelMap
         {
             var go = Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
             go.GetComponent<SpriteRenderer>().enabled = false;
-            spawn = new Vector3(go.transform.position.x, root.transform.position.y + Surface(x) + 0.5f, 0f);
+            spawn = new Vector3(go.transform.position.x, root.transform.position.y + Surface(x), 0f);
         }
 
-        // The player for this lane, standing on the spawn point (null without one).
+        // The player for this lane, its collider standing on the spawn point (null without one).
         public Transform PlacePlayer(string prefabPath)
         {
             var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
@@ -194,7 +194,9 @@ public static class LevelMap
                 return null;
             }
             var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
-            go.transform.position = spawn.Value;
+            var box = prefab.GetComponent<BoxCollider2D>();
+            float feet = box != null ? box.offset.y - box.size.y / 2f : -0.5f;
+            go.transform.position = spawn.Value - new Vector3(0f, feet, 0f);
             return go.transform;
         }
 
