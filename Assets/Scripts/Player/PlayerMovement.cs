@@ -98,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
             // A on Xbox, Cross on PlayStation
             jumpPressed = pad.buttonSouth.wasPressedThisFrame;
             jumpReleased = pad.buttonSouth.wasReleasedThisFrame;
-            if(jumpPressed) Debug.Log("Jumped");
         }
         else if (keyboardFallback && Keyboard.current != null)
         {
