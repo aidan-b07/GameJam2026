@@ -34,6 +34,11 @@ public static class LevelMap
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
     const string RecessBackLeft = "recess_back_left";
+    const string RecessBackRight = "recess_back_right";
+    // The wall tiles are 32x38 (6 rows hang behind the slot floor); the left one
+    // is 2 px wider on the left. Pivots put the top 32x32 on the cell.
+    static readonly Vector2 RecessPivot = new Vector2(0.5f, 1f - 16f / 38f);
+    static readonly Vector2 RecessLeftPivot = new Vector2(18f / 34f, 1f - 16f / 38f);
     // Layer the player's ground check looks for (PlayerMovement.groundLayer).
     const string GroundLayer = "Ground";
 
@@ -58,9 +63,10 @@ public static class LevelMap
         float tickHour = TickStartHour, float tockHour = TockStartHour)
     {
         PrepareWhiteSprite();
-        PrepareSprite(DrawbridgeSprite, true);
-        PrepareSprite(ObstaclePng(RecessBack), false);
-        PrepareSprite(ObstaclePng(RecessBackLeft), false);
+        PrepareSprite(DrawbridgeSprite, true, new Vector2(0.5f, 0.5f));
+        PrepareSprite(ObstaclePng(RecessBack), false, RecessPivot);
+        PrepareSprite(ObstaclePng(RecessBackLeft), false, RecessLeftPivot);
+        PrepareSprite(ObstaclePng(RecessBackRight), false, RecessPivot);
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -287,11 +293,12 @@ public static class LevelMap
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
 
             var back = CreateTilemap("Recess", -1);
-            // Down by the floor tiles' transparent top rows (up to 6 px), so no
-            // background shows between the wall and the slot floor.
-            back.transform.localPosition = new Vector3(0f, -6f / 32f, 0f);
             foreach (var p in recess)
-                back.SetTile((Vector3Int)p, ObstacleTile(recess.Contains(p + Vector2Int.left) ? RecessBack : RecessBackLeft));
+            {
+                string wall = !recess.Contains(p + Vector2Int.left) ? RecessBackLeft
+                    : !recess.Contains(p + Vector2Int.right) ? RecessBackRight : RecessBack;
+                back.SetTile((Vector3Int)p, ObstacleTile(wall));
+            }
 
             CreateSky(ground, platforms, decor, back);
             Sky.sprites = tinted.ToArray();
@@ -494,16 +501,16 @@ public static class LevelMap
         return t;
     }
 
-    // Single sprite, 32 PPU, point filter, centre pivot. The drawbridge leaf
-    // sits at the leaf's centre (BridgeMovement.hingeAnchor puts the hinge on
-    // the pin at pixel (16, 16)) and needs a full-rect mesh to be drawn sliced.
-    static void PrepareSprite(string path, bool fullRect)
+    // Single sprite, 32 PPU, point filter. The drawbridge leaf has a centre
+    // pivot (the object sits at the leaf's centre; BridgeMovement.hingeAnchor
+    // puts the hinge on the pin at pixel (16, 16)) and needs a full-rect mesh
+    // to be drawn sliced.
+    static void PrepareSprite(string path, bool fullRect, Vector2 pivot)
     {
         if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
         var settings = new TextureImporterSettings();
         ti.ReadTextureSettings(settings);
         var mesh = fullRect ? SpriteMeshType.FullRect : SpriteMeshType.Tight;
-        var pivot = new Vector2(0.5f, 0.5f);
         if (ti.textureType == TextureImporterType.Sprite && ti.spriteImportMode == SpriteImportMode.Single
             && ti.spritePixelsPerUnit == 32 && settings.spriteMeshType == mesh && ti.spritePivot == pivot) return;
         settings.textureType = TextureImporterType.Sprite;
@@ -512,7 +519,7 @@ public static class LevelMap
         settings.filterMode = FilterMode.Point;
         settings.mipmapEnabled = false;
         settings.spriteMeshType = mesh;
-        settings.spriteAlignment = (int)SpriteAlignment.Center;
+        settings.spriteAlignment = (int)SpriteAlignment.Custom;
         settings.spritePivot = pivot;
         ti.SetTextureSettings(settings);   // replaces all of them, so set them on settings first
         ti.textureCompression = TextureImporterCompression.Uncompressed;
