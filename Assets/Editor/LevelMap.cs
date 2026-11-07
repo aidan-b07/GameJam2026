@@ -44,11 +44,12 @@ public static class LevelMap
         from r in Enumerable.Range(0, 2) from c in Enumerable.Range(0, 3) select (r, c);
     // Twin checkpoint lamp, Victorian design from
     // tools/make_checkpoint_victorian.py --no-clock --vivid (saved under the twin names):
-    // a post (one 64x96 frame) and a lantern overlay sheet per player (19 frames
-    // of 64x96), all with a bottom-centre pivot. CheckpointLamp plays the overlays.
+    // a post (one frame) and a lantern overlay sheet per player (19 frames), all
+    // 96x128 with a bottom-centre pivot: the 64x96 lamp plus room above and
+    // beside it for the light to fade out. CheckpointLamp plays the overlays.
     const string CheckpointDir = "Assets/Art/Obstacles/Checkpoint/";
     static string CheckpointPng(string id) => $"{CheckpointDir}checkpoint_twin_{id}_64px.png";
-    const int LampFrameWidth = 64;
+    const int LampFrameWidth = 96;
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
