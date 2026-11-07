@@ -22,6 +22,8 @@ public class LaneSky : MonoBehaviour
 
     public Layer[] layers;
     public Tilemap[] tilemaps;
+    [Tooltip("Sprites tinted like the tilemaps (obstacles drawn with sprites).")]
+    public SpriteRenderer[] sprites;
     public SpriteRenderer sun, moon;
     [Tooltip("Sun and moon are placed relative to this (the lane camera).")]
     public Transform skyAnchor;
@@ -86,6 +88,9 @@ public class LaneSky : MonoBehaviour
         if (tilemaps != null)
             foreach (var tm in tilemaps)
                 if (tm != null) tm.color = tint;
+        if (sprites != null)
+            foreach (var sr in sprites)
+                if (sr != null) sr.color = tint;
 
         // Sun is up 06:00-18:00, moon 18:00-06:00; each crosses its arc in 12 hours.
         Place(sun, (hour - 6f) / 12f);
