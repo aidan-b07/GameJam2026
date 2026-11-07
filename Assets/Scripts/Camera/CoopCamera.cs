@@ -9,7 +9,10 @@ using UnityEngine;
 // rises once the player is more than riseAbove above that rest centre, keeping
 // them there. A normal jump stays below that line, so the lane holds still;
 // being flung high (the drawbridge) lifts the view, and it settles back down
-// when the player comes down again.
+// when the player comes down again. The follow is smoothed, but the player is
+// never allowed out of frame: however fast they fly or fall, the view keeps
+// their whole sprite inside it (headroom above, footroom below). Only below
+// the resting view (falling into a pit) does the camera not follow.
 //
 // Classic platformer follow: the camera stays put while the players' midpoint
 // moves inside a dead zone, then glides after it, centred a little ahead
@@ -40,8 +43,10 @@ public class CoopCamera : MonoBehaviour
     [Header("Vertical follow")]
     [Tooltip("The camera rises once its player is this far (units) above the camera's resting centre. A full jump from the ground or a one-tile ledge stays below it.")]
     public float riseAbove = 1.75f;
-    [Tooltip("Highest the camera may rise above its resting height (units).")]
-    public float maxRise = 12f;
+    [Tooltip("Distance (units) from the player's position to the top of their sprite plus a margin; the view's top edge never comes closer.")]
+    public float headroom = 1.5f;
+    [Tooltip("Distance (units) from the player's position to their feet plus a margin; the view's bottom edge never comes closer while the camera is raised.")]
+    public float footroom = 1f;
     [Tooltip("Time (s) the camera takes to catch up vertically.")]
     public float smoothTimeY = 0.15f;
     public float maxSpeedY = 60f;
@@ -175,16 +180,30 @@ public class CoopCamera : MonoBehaviour
     }
 
     // Each lane camera rises after its own player once they are riseAbove over
-    // its resting centre, and sinks back to rest when they come down.
+    // its resting centre, and sinks back to rest when they come down. The
+    // smoothed rise is then clamped so the player stays in frame.
     void FollowY()
     {
         for (int i = 0; i < rise.Length; i++)
         {
-            float target = 0f;
             var p = players != null && i < players.Length ? players[i] : null;
-            if (p != null && p.gameObject.activeInHierarchy)
-                target = Mathf.Clamp(p.position.y - restY[i] - riseAbove, 0f, maxRise);
+            if (p == null || !p.gameObject.activeInHierarchy)
+            {
+                rise[i] = Mathf.SmoothDamp(rise[i], 0f, ref riseVelocity[i], smoothTimeY, maxSpeedY, Time.deltaTime);
+                continue;
+            }
+            float y = p.position.y - restY[i];
+            float target = Mathf.Max(0f, y - riseAbove);
             rise[i] = Mathf.SmoothDamp(rise[i], target, ref riseVelocity[i], smoothTimeY, maxSpeedY, Time.deltaTime);
+
+            float half = cameras[i] != null ? cameras[i].orthographicSize : 5.625f;
+            float lo = y + headroom - half, hi = y - footroom + half;
+            float clamped = Mathf.Max(0f, lo <= hi ? Mathf.Clamp(rise[i], lo, hi) : (lo + hi) / 2f);
+            if (clamped != rise[i])
+            {
+                rise[i] = clamped;
+                riseVelocity[i] = 0f;
+            }
         }
     }
 
