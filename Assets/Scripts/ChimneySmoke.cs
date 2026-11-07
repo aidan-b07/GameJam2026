@@ -7,7 +7,9 @@ using UnityEngine;
 // They run on lane time, so a stopped lane holds its smoke still. Drawn at
 // fps into a transparent texture as wide as the background picture and tiled
 // the same way (every repeat of the picture smokes), covering only the rows
-// the smoke reaches. Sits on a child of the layer's background, like
+// the smoke reaches. The texture has `resolution` texels per art pixel: each
+// puff keeps its art-pixel cells, but they sit at the puff's sub-pixel
+// position, so the smoke glides instead of stepping a whole pixel at a time. Sits on a child of the layer's background, like
 // TowerClocks, so it scrolls with its parallax; LaneSky.Apply passes the look.
 [ExecuteAlways]
 [RequireComponent(typeof(SpriteRenderer))]
@@ -36,8 +38,12 @@ public class ChimneySmoke : MonoBehaviour
     public Chimney[] chimneys;
     [Tooltip("Lane whose clock runs the smoke in play mode (0 Tick, 1 Tock).")]
     public int lane = -1;
+    [Tooltip("How fast the smoke plays relative to lane time (rise, drift, puffs and fading alike).")]
+    [Range(0.1f, 2f)] public float tempo = 0.55f;
     [Tooltip("Redraws per second (real time).")]
-    public float fps = 12f;
+    public float fps = 30f;
+    [Tooltip("Texels per art pixel; higher moves the smoke in finer steps.")]
+    [Range(1, 4)] public int resolution = 2;
     [Tooltip("Rows of the picture above the highest mouth the smoke may reach.")]
     public int rise = 72;
     [Tooltip("Lane seconds simulated before the first frame, so the smoke is already up.")]
@@ -60,7 +66,7 @@ public class ChimneySmoke : MonoBehaviour
     SpriteRenderer sr;
     Texture2D tex;
     Color32[] pixels;
-    int width, rowLo;
+    int width, rowLo, res;
     Palette pal;
     bool dirty = true;
 
@@ -74,12 +80,13 @@ public class ChimneySmoke : MonoBehaviour
         if (tex != null || background == null || background.sprite == null || chimneys == null || chimneys.Length == 0) return;
         var src = background.sprite;
         var rect = src.rect;
+        res = Mathf.Max(1, resolution);
         width = (int)rect.width;
         float lo = float.MaxValue, hi = float.MinValue;
         foreach (var c in chimneys) { lo = Mathf.Min(lo, c.mouth.y); hi = Mathf.Max(hi, c.mouth.y); }
         rowLo = Mathf.Max(0, Mathf.FloorToInt(lo) - 2);
         int rowHi = Mathf.Min((int)rect.height, Mathf.CeilToInt(hi) + rise);
-        tex = new Texture2D(width, rowHi - rowLo, TextureFormat.RGBA32, false)
+        tex = new Texture2D(width * res, (rowHi - rowLo) * res, TextureFormat.RGBA32, false)
         {
             filterMode = FilterMode.Point,
             wrapMode = TextureWrapMode.Clamp,
@@ -87,12 +94,12 @@ public class ChimneySmoke : MonoBehaviour
         };
         pixels = new Color32[tex.width * tex.height];
         // Same pivot as the picture, so the band lines up with the rows it covers.
-        var pivot = new Vector2(src.pivot.x / width, (src.pivot.y - rowLo) / tex.height);
-        var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), pivot, src.pixelsPerUnit, 0, SpriteMeshType.FullRect);
+        var pivot = new Vector2(src.pivot.x / width, (src.pivot.y - rowLo) * res / tex.height);
+        var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), pivot, src.pixelsPerUnit * res, 0, SpriteMeshType.FullRect);
         sprite.hideFlags = HideFlags.HideAndDontSave;
         sr.sprite = sprite;
         sr.drawMode = SpriteDrawMode.Tiled;
-        sr.size = new Vector2(background.size.x, tex.height / src.pixelsPerUnit);
+        sr.size = new Vector2(background.size.x, tex.height / (src.pixelsPerUnit * res));
 
         rng = new System.Random(seed);
         puffs.Clear();
@@ -143,7 +150,7 @@ public class ChimneySmoke : MonoBehaviour
             float now = GameManager.INSTANCE.GetLaneTime(lane);
             if (laneTime >= 0f)
             {
-                float dt = Mathf.Clamp(now - laneTime, 0f, 1f);
+                float dt = Mathf.Clamp(now - laneTime, 0f, 1f) * tempo;
                 while (dt > 0f)
                 {
                     float s = Mathf.Min(Step, dt);
@@ -207,10 +214,17 @@ public class ChimneySmoke : MonoBehaviour
         {
             float k = f.age / f.life, r = f.r;
             float fade = k < 0.45f ? 0f : Mathf.Pow((k - 0.45f) / 0.55f, 1.2f);
-            int ri = Mathf.CeilToInt(r) + 1, cx = Mathf.RoundToInt(f.x), cy = Mathf.RoundToInt(f.y);
-            for (int yy = -ri; yy <= ri; yy++)
-                for (int xx = -ri; xx <= ri; xx++)
+            // Texels covering the puff; each is coloured by the art-pixel cell of
+            // the puff it falls in, measured from the puff's exact centre.
+            int tw = width * res, th = tex.height;
+            int X0 = Mathf.FloorToInt((f.x - r - 1f) * res), X1 = Mathf.CeilToInt((f.x + r + 1f) * res);
+            int Y0 = Mathf.Max(0, Mathf.FloorToInt((f.y - r - 1f - rowLo) * res)), Y1 = Mathf.Min(th - 1, Mathf.CeilToInt((f.y + r + 1f - rowLo) * res));
+            for (int Y = Y0; Y <= Y1; Y++)
+            {
+                int yy = Mathf.FloorToInt((Y + 0.5f) / res + rowLo - f.y + 0.5f);
+                for (int X = X0; X <= X1; X++)
                 {
+                    int xx = Mathf.FloorToInt((X + 0.5f) / res - f.x + 0.5f);
                     float jag = (Hash(xx >> 1, yy >> 1, f.id) - 0.5f) * 0.8f;
                     if (xx * xx + yy * yy * 1.05f > (r + jag) * (r + jag)) continue;
                     // Thins from the edge in as it ages.
@@ -221,10 +235,9 @@ public class ChimneySmoke : MonoBehaviour
                     else if (!Inside(xx - 1.5f, yy + 1.5f, r)) col = hi;    // upper-left rim (y up)
                     else if (!Inside(xx + 1.2f, yy - 1.8f, r)) col = sh;    // lower-right rim
                     else col = body;
-                    int px = ((cx + xx) % width + width) % width, py = cy + yy - rowLo;
-                    if (py < 0 || py >= tex.height) continue;
-                    pixels[py * width + px] = col;
+                    pixels[Y * tw + ((X % tw) + tw) % tw] = col;
                 }
+            }
         }
         tex.SetPixels32(pixels);
         tex.Apply(false);

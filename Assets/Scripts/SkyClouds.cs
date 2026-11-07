@@ -42,6 +42,8 @@ public class SkyClouds : MonoBehaviour
     public float bandTop = 9.3f, bandBottom = 5.15f;
     public int seed = 1;
     public float pixelsPerUnit = 32f;
+    [Tooltip("Snap positions to whole art pixels. Off: the clouds glide, since they move only a few pixels a second.")]
+    public bool snapToPixels = false;
     [Tooltip("Lane seconds shown outside play mode.")]
     public float previewTime = 0f;
 
@@ -182,7 +184,7 @@ public class SkyClouds : MonoBehaviour
             // move of d moves the cloud by d * depth.
             float span = 2f * (halfView + c.width) + 2f;
             float rel = Mathf.Repeat(c.x0 + c.speed * t - camX * (1f - c.layer.depth), span) - span / 2f - c.width / 2f;
-            if (pixelsPerUnit > 0f) rel = Mathf.Round(rel * pixelsPerUnit) / pixelsPerUnit;
+            if (snapToPixels && pixelsPerUnit > 0f) rel = Mathf.Round(rel * pixelsPerUnit) / pixelsPerUnit;
             c.sr.transform.position = new Vector3(camX + rel, transform.position.y + lift + c.y, 0f);
         }
     }
