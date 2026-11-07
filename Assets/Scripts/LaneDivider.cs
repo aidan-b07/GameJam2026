@@ -30,8 +30,8 @@ public class LaneDivider : MonoBehaviour
     [Tooltip("Camera of the bottom lane (Tock); the bottom edge scrolls with it.")]
     public Transform bottomCamera;
 
-    [Tooltip("Half height of the rift in art pixels with no speed difference (7: the old static crack, 3-11 px each side).")]
-    public float minHalfHeight = 7f;
+    [Tooltip("Half height of the rift in art pixels with no speed difference (the old static crack was 7, 3-11 px each side).")]
+    public float minHalfHeight = 9f;
     [Tooltip("Half height the rift approaches at a large speed difference.")]
     public float maxHalfHeight = 28f;
     [Tooltip("Speed difference (world speed units) that reaches about 63% of the way to the max.")]
@@ -43,7 +43,7 @@ public class LaneDivider : MonoBehaviour
     [Tooltip("Seconds for the edge teeth to morph into a new shape.")]
     public float morphTime = 5f;
     [Tooltip("Speed difference used outside play mode (and when there is no GameManager), for previewing.")]
-    [Range(0f, 5f)] public float previewGap = 2f;
+    [Range(0f, 5f)] public float previewGap = 0f;
 
     public const int TextureHeight = 256;   // room for the max height plus drifting chunks
     const float PixelsPerUnit = 32f;         // art pixels per world unit (32 PPU, 1 canvas unit = 1 px)
