@@ -35,8 +35,9 @@ public static class LevelMap
     // hand overlays (12 hand sprites, 00 = 12 o'clock), tiled rod, brass ring.
     const string PlungerDir = "Assets/Art/Obstacles/Plunger/";
     static string PlungerPng(string id) => $"{PlungerDir}plunger_{id}_32px.png";
-    // Flagstones under each plunger head (3x2 tiles), from tools/make_strike.py:
-    // strike_r<row>c<col>, row 0 on top. They replace those ground tiles.
+    // Basalt block with a brass strike plate under each plunger head (3x2 tiles),
+    // from tools/make_strike.py: strike_r<row>c<col>, row 0 on top. They replace
+    // those ground tiles. strike_flash is the lit plate (96x9, top-left pivot).
     const string StrikeDir = "Assets/Art/Obstacles/Strike/";
     static IEnumerable<(int r, int c)> StrikeCells =>
         from r in Enumerable.Range(0, 2) from c in Enumerable.Range(0, 3) select (r, c);
@@ -89,6 +90,7 @@ public static class LevelMap
         PrepareSprite(PlungerPng("gland"), false, new Vector2(0.5f, 1f));
         foreach (var (r, c) in StrikeCells)
             PrepareSprite($"{StrikeDir}strike_r{r}c{c}_32px.png", false, new Vector2(0.5f, 0.5f));
+        PrepareSprite($"{StrikeDir}strike_flash_32px.png", false, new Vector2(0f, 1f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -330,7 +332,7 @@ public static class LevelMap
             Prop(x - 2, 8, 1, 1);
             Prop(x + 4, 8, 1, 1);
             Busy(x - 3, x + 5);
-            // Flagstones where the head lands, so players can see the danger zone.
+            // Strike block where the head lands, so players can see the danger zone.
             foreach (var (r, c) in StrikeCells) strike[new Vector2Int(x + c, Surface(x + c) - 1 - r)] = (r, c);
 
             counts["Crusher"] = counts.TryGetValue("Crusher", out var n) ? n + 1 : 1;
@@ -364,6 +366,11 @@ public static class LevelMap
             rod.drawMode = SpriteDrawMode.Tiled;
             rod.size = new Vector2(14f / 32f, 1f);
             Part("Gland", markers, "gland", 6, new Vector3(x + 1.5f, 8f, 0f)).name = $"Crusher_{counts["Crusher"]}_Gland";
+            // Lit plate over the strike block's pixel rows 3-11 (below the transparent top rows).
+            var flash = Part($"Crusher_{counts["Crusher"]}_StrikeFlash", markers, "head", 1,
+                new Vector3(x, Surface(x) - 3f / 32f, 0f));
+            flash.sprite = AssetDatabase.LoadAssetAtPath<Sprite>($"{StrikeDir}strike_flash_32px.png");
+            flash.enabled = false;
 
             var motion = new SerializedObject(go.AddComponent<PlungerMotion>());
             // Down to the ground, plus the 3 transparent top rows of the ground
@@ -383,6 +390,7 @@ public static class LevelMap
             motion.FindProperty("rod").objectReferenceValue = rod;
             // Up to just inside the brass ring under the housing (ring spans y 7.75..8).
             motion.FindProperty("rodTop").floatValue = root.transform.position.y + 8f - 2f / 32f;
+            motion.FindProperty("strikeFlash").objectReferenceValue = flash;
             motion.FindProperty("dustSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(WhiteSprite);
             motion.FindProperty("lane").intValue = LaneIndex;
             motion.ApplyModifiedPropertiesWithoutUndo();
