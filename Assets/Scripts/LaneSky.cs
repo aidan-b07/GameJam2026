@@ -22,6 +22,8 @@ public class LaneSky : MonoBehaviour
         public int sortingOrder;
         [Tooltip("Live hands for the tower clocks painted in this layer.")]
         public TowerClocks clocks;
+        [Tooltip("Smoke from the chimneys painted in this layer.")]
+        public ChimneySmoke smoke;
     }
 
     public Layer[] layers;
@@ -29,6 +31,8 @@ public class LaneSky : MonoBehaviour
     [Tooltip("Sprites tinted like the tilemaps (obstacles drawn with sprites).")]
     public SpriteRenderer[] sprites;
     public SpriteRenderer sun, moon;
+    [Tooltip("Drifting clouds, coloured for the look.")]
+    public SkyClouds clouds;
     [Tooltip("Sun and moon are placed relative to this (the lane camera).")]
     public Transform skyAnchor;
     [Tooltip("Arc half-width, horizon height and peak height, relative to the anchor.")]
@@ -91,8 +95,10 @@ public class LaneSky : MonoBehaviour
                     sr.color = new Color(1f, 1f, 1f, isTo ? t : 1f);
                 }
                 if (layer.clocks != null) layer.clocks.Show(hour, from, to, t);
+                if (layer.smoke != null) layer.smoke.Show(from, to, t);
             }
         }
+        if (clouds != null) clouds.Show(from, to, t);
 
         var tint = Color.Lerp(Tint(from), Tint(to), t);
         if (tilemaps != null)
