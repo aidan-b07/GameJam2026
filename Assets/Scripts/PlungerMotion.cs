@@ -94,6 +94,11 @@ public class PlungerMotion : MonoBehaviour
     private float phaseTime;
     private float laneTime;
 
+    // Sounds (Sfx): what the last frame played, to catch the changes.
+    private Phase soundPhase = Phase.RaisedPause;
+    private bool soundAmber;
+    private int soundRatchet = -1;
+
     private struct Mote { public SpriteRenderer sr; public float side, speed, rise, size, life; }
     private Mote[] motes;
     private SpriteRenderer head;
@@ -140,6 +145,28 @@ public class PlungerMotion : MonoBehaviour
         UpdateTells();
         UpdateRod();
         UpdateMotes();
+        UpdateSounds();
+    }
+
+    // Warning beep per amber blink, impact on landing, a click per ratchet step.
+    private void UpdateSounds()
+    {
+        Vector3 at = transform.position;
+        if (soundPhase == Phase.Slamming && phase != Phase.Slamming)
+            Sfx.Play("plunger_slam", at, 1f, lane: lane);
+
+        bool amber = phase == Phase.RaisedPause && raisedPause - phaseTime < blinkTime
+            && Mathf.FloorToInt((raisedPause - phaseTime) * blinkRate) % 2 == 1;
+        if (amber && !soundAmber) Sfx.Play("plunger_warn", at, 0.5f, lane: lane);
+
+        int step = phase == Phase.Returning
+            ? Mathf.Min(ratchetSteps - 1, Mathf.FloorToInt(Mathf.Clamp01(phaseTime / returnDuration) * ratchetSteps))
+            : -1;
+        if (step >= 0 && step != soundRatchet) Sfx.Play("ratchet_click", at, 0.6f, lane: lane);
+
+        soundPhase = phase;
+        soundAmber = amber;
+        soundRatchet = step;
     }
 
     private void AdvancePhase()

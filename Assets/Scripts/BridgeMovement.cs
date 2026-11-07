@@ -99,6 +99,10 @@ public class BridgeMovement : MonoBehaviour
     private float phaseTime;
     private float currentAngle;     // unwrapped target angle of the last step
 
+    // Sounds (Sfx): winch loop while the winch lifts, a slam when it lands open.
+    private SfxLoop winchSound;
+    private bool landedSound;
+
     private readonly List<ContactPoint2D> contacts = new List<ContactPoint2D>();
     private readonly HashSet<Rigidbody2D> carried = new HashSet<Rigidbody2D>();
     
@@ -160,6 +164,28 @@ public class BridgeMovement : MonoBehaviour
 
         colliders = GetComponents<Collider2D>();
         SetSolid(restAngle);
+    }
+
+    private void Start()
+    {
+        winchSound = Sfx.Loop("winch_loop");
+    }
+
+    private void OnDestroy()
+    {
+        Sfx.Release(winchSound);
+    }
+
+    private void Update()
+    {
+        float lift = LiftAngle, drop = Mathf.Abs(SwingDelta) - lift;
+        bool winching = (phase == Phase.Opening && phaseTime < LiftTime(lift))
+                     || (phase == Phase.Closing && phaseTime < LiftTime(drop));
+        winchSound?.Set(winching, pivot, 0.7f);
+
+        bool landed = phase == Phase.Opening && phaseTime >= LiftTime(lift) + FallTime(drop);
+        if (landed && !landedSound) Sfx.Play("bridge_slam", pivot + Vector2.left * 3f, 1f, lane: lane);
+        landedSound = landed;
     }
 
     private void FixedUpdate()
