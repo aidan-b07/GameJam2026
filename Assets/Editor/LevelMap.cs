@@ -64,6 +64,11 @@ public static class LevelMap
     // Time gate (portcullis) and lane lift from tools/make_gate_lift.py.
     const string GateLiftDir = "Assets/Art/Obstacles/GateLift/";
     static string GateLiftPng(string id) => $"{GateLiftDir}{id}_32px.png";
+    // Flush conveyor belt from tools/make_conveyor.py: left, mid and right
+    // sheets of 8 frames of 32x32, bottom-left pivot (the frame is one cell).
+    const string ConveyorDir = "Assets/Art/Obstacles/Conveyor/";
+    static string ConveyorPng(string id) => $"{ConveyorDir}conveyor_flush_{id}_32px.png";
+    static readonly string[] ConveyorParts = { "left", "mid", "right" };
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
@@ -146,6 +151,7 @@ public static class LevelMap
         PrepareSprite(GateLiftPng("lift_platform"), false, new Vector2(0.5f, 1f));
         PrepareSprite(GateLiftPng("lift_chain"), true, new Vector2(0.5f, 0f));
         PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
+        foreach (var id in ConveyorParts) PrepareStrip(ConveyorPng(id), 32, Vector2.zero);
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -613,6 +619,45 @@ public static class LevelMap
             gate.FindProperty("direction").vector2Value = Vector2.right;
             gate.FindProperty("lamp").objectReferenceValue = lamp;
             gate.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
+        // Flush conveyor belt over the ground's top row from x0 to x1 (at least
+        // 2 tiles), carrying players at `speed` units per lane second (negative
+        // runs left). The ground tiles stay under it for the collider; the belt
+        // sprites cover them. Conveyor runs it on lane time.
+        public GameObject Conveyor(int x0, int x1, float speed)
+        {
+            int y = Surface(x0);
+            Busy(x0, x1);
+            counts["Conveyor"] = counts.TryGetValue("Conveyor", out var n) ? n + 1 : 1;
+            var go = new GameObject($"Conveyor_{counts["Conveyor"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x0, y - 1, 0f);
+            var frames = ConveyorParts.Select(id => StripFrames(ConveyorPng(id))).ToArray();
+            var cells = new SpriteRenderer[x1 - x0 + 1];
+            for (int i = 0; i < cells.Length; i++)
+            {
+                var cell = new GameObject($"Belt_{i}");
+                cell.transform.SetParent(go.transform, false);
+                cell.transform.localPosition = new Vector3(i, 0f, 0f);
+                var sr = cell.AddComponent<SpriteRenderer>();
+                sr.sprite = frames[i == 0 ? 0 : i == cells.Length - 1 ? 2 : 1][0];
+                sr.sortingOrder = 1;   // over the ground tiles
+                tinted.Add(sr);
+                cells[i] = sr;
+            }
+            var belt = go.AddComponent<global::Conveyor>();
+            belt.lane = LaneIndex;
+            belt.speed = speed;
+            belt.left = x0;
+            belt.width = x1 - x0 + 1;
+            // The ground collider's top is 1 px below the cell top.
+            belt.top = root.transform.position.y + y - 1f / 32f;
+            belt.cells = cells;
+            belt.leftFrames = frames[0];
+            belt.midFrames = frames[1];
+            belt.rightFrames = frames[2];
             return go;
         }
 
