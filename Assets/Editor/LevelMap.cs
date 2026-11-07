@@ -287,6 +287,9 @@ public static class LevelMap
             foreach (var kv in props) decor.SetTile((Vector3Int)kv.Key, Tile(PropsSheet, kv.Value.r, kv.Value.c));
 
             var back = CreateTilemap("Recess", -1);
+            // Down by the floor tiles' transparent top rows (up to 6 px), so no
+            // background shows between the wall and the slot floor.
+            back.transform.localPosition = new Vector3(0f, -6f / 32f, 0f);
             foreach (var p in recess)
                 back.SetTile((Vector3Int)p, ObstacleTile(recess.Contains(p + Vector2Int.left) ? RecessBack : RecessBackLeft));
 
