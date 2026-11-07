@@ -29,6 +29,8 @@ public static class LevelMap
     const string GroundSheet = "ground_32px";
     const string PropsSheet = "props_32px";
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
+    // Drawbridge leaf from tools/make_drawbridge.py: 1x7 tiles, hinge at the top.
+    const string DrawbridgeSprite = "Assets/Art/Obstacles/drawbridge_32px.png";
     // Layer the player's ground check looks for (PlayerMovement.groundLayer).
     const string GroundLayer = "Ground";
 
@@ -53,6 +55,7 @@ public static class LevelMap
         float tickHour = TickStartHour, float tockHour = TockStartHour)
     {
         PrepareWhiteSprite();
+        PrepareDrawbridgeSprite();
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -167,7 +170,22 @@ public static class LevelMap
             rb.bodyType = RigidbodyType2D.Kinematic;
             rb.gravityScale = 0f;
             rb.interpolation = RigidbodyInterpolation2D.Interpolate;
-            go.AddComponent<BoxCollider2D>();
+            go.AddComponent<BoxCollider2D>().size = Vector2.one;
+
+            // The leaf art. The object keeps its (1, length) scale, which
+            // BridgeMovement's hinge maths relies on, so the sprite is drawn
+            // 1x1 in local units (sliced, no borders) and the scale stretches
+            // it to the leaf: exactly 32 px per tile for a 7-tile pit.
+            var sr = go.GetComponent<SpriteRenderer>();
+            var art = AssetDatabase.LoadAssetAtPath<Sprite>(DrawbridgeSprite);
+            if (art != null)
+            {
+                sr.sprite = art;
+                sr.color = Color.white;
+                sr.drawMode = SpriteDrawMode.Sliced;
+                sr.size = Vector2.one;
+                go.transform.localScale = new Vector3(1f, length, 1f);   // the draw mode change rescales it
+            }
 
             // Hinge at the centre of the leaf's top tile, at ground level.
             var bridge = new SerializedObject(go.AddComponent<BridgeMovement>());
@@ -423,6 +441,30 @@ public static class LevelMap
         ti.spriteImportMode = SpriteImportMode.Single;
         ti.spritePixelsPerUnit = 16;
         ti.filterMode = FilterMode.Point;
+        ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.SaveAndReimport();
+    }
+
+    // Single sprite, centre pivot (the leaf object sits at the leaf's centre;
+    // BridgeMovement.hingeAnchor puts the hinge on the pin at pixel (16, 16)),
+    // full-rect mesh so the renderer can draw it sliced.
+    static void PrepareDrawbridgeSprite()
+    {
+        if (!(AssetImporter.GetAtPath(DrawbridgeSprite) is TextureImporter ti)) return;
+        var settings = new TextureImporterSettings();
+        ti.ReadTextureSettings(settings);
+        var pivot = new Vector2(0.5f, 0.5f);
+        if (ti.spriteImportMode == SpriteImportMode.Single && ti.spritePixelsPerUnit == 32
+            && settings.spriteMeshType == SpriteMeshType.FullRect && ti.spritePivot == pivot) return;
+        settings.textureType = TextureImporterType.Sprite;
+        settings.spriteMode = (int)SpriteImportMode.Single;
+        settings.spritePixelsPerUnit = 32;
+        settings.filterMode = FilterMode.Point;
+        settings.mipmapEnabled = false;
+        settings.spriteMeshType = SpriteMeshType.FullRect;
+        settings.spriteAlignment = (int)SpriteAlignment.Center;
+        settings.spritePivot = pivot;
+        ti.SetTextureSettings(settings);   // replaces all of them, so set them on settings first
         ti.textureCompression = TextureImporterCompression.Uncompressed;
         ti.SaveAndReimport();
     }
