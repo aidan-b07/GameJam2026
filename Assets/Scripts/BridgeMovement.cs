@@ -1,29 +1,40 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 // Heavy drawbridge that swings about a hinge on a loop:
-// pause at rest, swing open, bounce on landing, pause, swing back, sway, repeat.
+// pause hanging, winch it over the top, it drops open and bounces on the
+// ground, pause, winch it back over the top, it drops into the pit and
+// rattles against the pit wall, repeat.
 //
-// Each swing moves like a real drawbridge: a slow winch lifts the leaf up to
-// standing straight up (topAngle), it teeters there, then gravity takes it
-// and it falls the rest of the way, faster and faster, onto the ground
-// (bounce) or back to hanging (sway).
+// Each swing moves like a real drawbridge on a winch chain: the winch eases
+// in and then lifts at a steady speed (liftTimePer90) up to standing straight
+// up (topAngle), and carries the leaf over the top without slowing. There the
+// chain runs free and gravity takes over: the leaf is a rod on a hinge
+// (angular acceleration -K sin(angle from hanging)), so it speeds up all the
+// way down. It bounces off the ground when it lands open (groundRestitution)
+// and off the pit wall when it drops back (wallRestitution) until a bounce is
+// slower than settleSpeed. K is worked out so the drop from standing up to
+// flat open takes fallTime. Everything runs on lane time
+// (GameManager.GetWorldSpeed(lane)) in small fixed substeps, so the motion
+// is the same at any lane speed.
 //
 // The leaf is a kinematic Rigidbody2D moved with MoveRotation and MovePosition
 // in FixedUpdate, so it rotates exactly about the hinge point. Players cross by
-// stopping lane time (SpeedMultiplier = 0) while it spans the pit (solidAngle).
-// By default it is solid all the way round: it shoves players out of its way,
-// and one caught between it and the ground is crushed (CrushDetector on the
-// player). A smaller solidWindow makes it solid only near solidAngle and
-// scenery elsewhere. Players standing on the deck are carried along it while
-// it moves (PlayerMovement overwrites its horizontal velocity every step, so
-// friction alone would not carry them).
+// stopping lane time while it spans the pit (solidAngle). By default it is
+// solid all the way round: it shoves players out of its way, and one caught
+// between it and the ground is crushed (CrushDetector on the player). A
+// smaller solidWindow makes it solid only near solidAngle and scenery
+// elsewhere. Players standing on the deck are carried along it while it moves
+// (PlayerMovement overwrites its horizontal velocity every step, so friction
+// alone would not carry them).
 //
-// Angles are the body's world Z rotation in degrees. With the placeholder
-// (long axis = local Y, hinge at the top end) a rotation of 0 hangs straight
-// down; turning counterclockwise by 270 degrees passes through pointing right
-// and pointing up and lands flat pointing left.
+// Angles are the body's world Z rotation in degrees. With the leaf art (long
+// axis = local Y, hinge at the top end) a rotation of 0 hangs straight down;
+// turning counterclockwise by 270 degrees passes through pointing right and
+// pointing up and lands flat pointing left. Gravity assumes restAngle hangs
+// straight down. DrawbridgeWinch reads Angle, Winching and FreeFalling to
+// drive the winch tower, and listens to Impact.
 [RequireComponent(typeof(Rigidbody2D))]
 public class BridgeMovement : MonoBehaviour
 {
@@ -48,26 +59,27 @@ public class BridgeMovement : MonoBehaviour
     [SerializeField] private float topAngle = 180f;
 
     [Header("Timing (seconds of lane time)")]
-    [Tooltip("Winch time per 90 degrees of lifting (slow and even).")]
+    [Tooltip("Winch time per 90 degrees of lifting, at full winch speed.")]
     [SerializeField, Min(0.05f)] private float liftTimePer90 = 1.4f;
-    [Tooltip("Time to fall 90 degrees from standing up. Longer falls take " +
-             "longer by the square root of the angle, like a falling weight.")]
-    [SerializeField, Min(0.05f)] private float fallTimePer90 = 0.7f;
+    [Tooltip("Time the winch takes to get up to full speed.")]
+    [SerializeField, Min(0f)] private float winchRamp = 0.5f;
+    [Tooltip("Time the leaf takes to drop from standing up to flat open. Sets gravity.")]
+    [SerializeField, Min(0.1f)] private float fallTime = 0.75f;
     [Tooltip("Wait at rest (hanging) before opening, also used once at start.")]
     [SerializeField, Min(0f)] private float restPause = 2f;
     [Tooltip("Wait while open (flat) before closing.")]
     [SerializeField, Min(0f)] private float openPause = 2f;
 
-    [Header("Feel")]
-    [Tooltip("How long the landing bounce and the hanging sway last.")]
-    [SerializeField, Min(0f)] private float settleDuration = 0.8f;
-    [Tooltip("Number of bounces (landing) or half swings (hanging) while settling.")]
-    [SerializeField, Min(0.5f)] private float settleBounces = 2f;
-    [Tooltip("Height of the first rebound off the ground when it lands open, in degrees.")]
-    [SerializeField, Min(0f)] private float landBounceAngle = 3f;
-    [Tooltip("Overshoot of the first sway when it drops back to hanging, in degrees.")]
-    [SerializeField, Min(0f)] private float hangSwayAngle = 5f;
-    
+    [Header("Bounces")]
+    [Tooltip("Share of its speed the leaf keeps when it bounces off the ground (open).")]
+    [SerializeField, Range(0f, 0.9f)] private float groundRestitution = 0.3f;
+    [Tooltip("Share of its speed the leaf keeps when it bounces off the pit wall (closed).")]
+    [SerializeField, Range(0f, 0.9f)] private float wallRestitution = 0.35f;
+    [Tooltip("Air and hinge friction, per second.")]
+    [SerializeField, Min(0f)] private float damping = 0.12f;
+    [Tooltip("A bounce slower than this (degrees per second) ends the swing.")]
+    [SerializeField, Min(0f)] private float settleSpeed = 20f;
+
     [Header("Collision and riders")]
     [Tooltip("Rotation where the leaf spans the pit, flat. 90 for a leaf hanging " +
              "from the pit's left edge.")]
@@ -87,9 +99,8 @@ public class BridgeMovement : MonoBehaviour
     
     private enum Phase { RestPause, Opening, OpenPause, Closing }
 
-    // Faster than this the leaf moves too far per physics step to push or carry
-    // players reliably.
-    private const float MaxSpeedMultiplier = 4f;
+    // Physics substep in lane seconds.
+    private const float Substep = 1f / 240f;
 
     private Rigidbody2D rb;
     private Collider2D[] colliders;
@@ -99,13 +110,30 @@ public class BridgeMovement : MonoBehaviour
     private float phaseTime;
     private float currentAngle;     // unwrapped target angle of the last step
 
-    // Sounds (Sfx): winch loop while the winch lifts, a slam when it lands open.
+    // Swing state, in degrees along the opening direction from rest (0 = hanging,
+    // |SwingDelta| = open) and degrees per second.
+    private float progress, speed, winchTime;
+    private bool winching, freeFalling;
+    private float gravity;          // K in degrees per second squared
+
+    // Sounds (Sfx): winch loop while the winch lifts, a clank when the pawl
+    // lets go at the top, a slam for every bounce.
     private SfxLoop winchSound;
-    private bool landedSound;
+    private bool clankDue;
+    private readonly List<(float speed, bool open)> impacts = new List<(float, bool)>();
 
     private readonly List<ContactPoint2D> contacts = new List<ContactPoint2D>();
     private readonly HashSet<Rigidbody2D> carried = new HashSet<Rigidbody2D>();
-    
+
+    // Current rotation (degrees), the world hinge point and the lane it runs in.
+    public float Angle => currentAngle;
+    public Vector2 Pivot => pivot;
+    public int Lane => lane;
+    // The winch is lifting the leaf / the leaf is dropping freely before its first bounce.
+    public bool Winching => winching;
+    public bool FreeFalling => freeFalling;
+    // The leaf hit the ground (open = true) or the pit wall, at this speed in degrees per second.
+    public event Action<float, bool> Impact;
 
     // Signed opening rotation, for example +270 for counterclockwise from 0 to 270.
     private float SwingDelta
@@ -134,13 +162,7 @@ public class BridgeMovement : MonoBehaviour
         }
     }
 
-    private float LiftTime(float degrees) => liftTimePer90 * degrees / 90f;
-    private float FallTime(float degrees) => fallTimePer90 * Mathf.Sqrt(degrees / 90f);
-
-    // Opening: winch rest -> top, fall top -> open. Closing: winch open -> top,
-    // fall top -> rest.
-    private float OpeningSwingTime => LiftTime(LiftAngle) + FallTime(Mathf.Abs(SwingDelta) - LiftAngle);
-    private float ClosingSwingTime => LiftTime(Mathf.Abs(SwingDelta) - LiftAngle) + FallTime(LiftAngle);
+    private float WinchSpeed => 90f / liftTimePer90;
 
     private void Awake()
     {
@@ -164,6 +186,7 @@ public class BridgeMovement : MonoBehaviour
 
         colliders = GetComponents<Collider2D>();
         SetSolid(restAngle);
+        gravity = TuneGravity();
     }
 
     private void Start()
@@ -178,23 +201,26 @@ public class BridgeMovement : MonoBehaviour
 
     private void Update()
     {
-        float lift = LiftAngle, drop = Mathf.Abs(SwingDelta) - lift;
-        bool winching = (phase == Phase.Opening && phaseTime < LiftTime(lift))
-                     || (phase == Phase.Closing && phaseTime < LiftTime(drop));
         winchSound?.Set(winching, pivot, 0.7f);
-
-        bool landed = phase == Phase.Opening && phaseTime >= LiftTime(lift) + FallTime(drop);
-        if (landed && !landedSound) Sfx.Play("bridge_slam", pivot + Vector2.left * 3f, 1f, lane: lane);
-        landedSound = landed;
+        if (clankDue) Sfx.Play("ratchet_click", pivot, 1f, lane: lane);
+        clankDue = false;
+        foreach (var (hitSpeed, open) in impacts)
+        {
+            float volume = Mathf.Clamp01(hitSpeed / 300f);
+            if (volume > 0.05f)
+                Sfx.Play("bridge_slam", open ? pivot + Vector2.left * 3f : pivot, volume, lane: lane);
+        }
+        impacts.Clear();
     }
 
     private void FixedUpdate()
     {
         var manager = GameManager.INSTANCE;
-        phaseTime += Time.fixedDeltaTime * (manager != null ? manager.GetWorldSpeed(lane) : 1f);
-        AdvancePhase();
+        float laneDelta = Time.fixedDeltaTime * (manager != null ? manager.GetWorldSpeed(lane) : 1f);
+        int steps = Mathf.CeilToInt(laneDelta / Substep - 0.001f);
+        for (int i = 0; i < steps; i++) Step(laneDelta / steps);
 
-        float target = AngleForPhase();
+        float target = restAngle + Mathf.Sign(SwingDelta) * progress;
         float step = target - currentAngle;
         if (Mathf.Approximately(step, 0f)) return;
 
@@ -209,94 +235,113 @@ public class BridgeMovement : MonoBehaviour
         rb.MoveRotation(bodyTarget);
     }
 
-    private void AdvancePhase()
+    // One substep of h lane seconds.
+    private void Step(float h)
     {
-        // Loop in case a large time step skips a whole short phase.
-        for (int guard = 0; guard < 4; guard++)
-        {
-            float length = PhaseLength(phase);
-            if (phaseTime < length) return;
-            phaseTime -= length;
-            phase = (Phase)(((int)phase + 1) % 4);
-        }
-    }
-
-    private float PhaseLength(Phase p)
-    {
-        switch (p)
-        {
-            case Phase.RestPause: return restPause;
-            case Phase.OpenPause: return openPause;
-            case Phase.Opening: return OpeningSwingTime + settleDuration;
-            default: return ClosingSwingTime + settleDuration;
-        }
-    }
-
-    private float AngleForPhase()
-    {
-        float delta = SwingDelta;
-        float sign = Mathf.Sign(delta);
-        float lift = LiftAngle;                 // rest -> top, unsigned
-        float drop = Mathf.Abs(delta) - lift;   // top -> open, unsigned
-        float top = restAngle + sign * lift;
+        float delta = Mathf.Abs(SwingDelta), lift = LiftAngle;
         switch (phase)
         {
-            case Phase.Opening:
-            {
-                float winch = LiftTime(lift), fall = FallTime(drop);
-                if (phaseTime < winch)
-                    return restAngle + sign * lift * Winch(phaseTime / winch);
-                if (phaseTime < winch + fall)
-                    return top + sign * drop * Fall((phaseTime - winch) / fall);
-                // Landed on the ground: rebound back against the opening direction.
-                return restAngle + delta - sign * landBounceAngle * Settle(true, winch + fall);
-            }
-
-            case Phase.Closing:
-            {
-                float winch = LiftTime(drop), fall = FallTime(lift);
-                if (phaseTime < winch)
-                    return restAngle + delta - sign * drop * Winch(phaseTime / winch);
-                if (phaseTime < winch + fall)
-                    return top - sign * lift * Fall((phaseTime - winch) / fall);
-                // Dropped back to hanging: overshoot in the closing direction, then sway.
-                return restAngle - sign * hangSwayAngle * Settle(false, winch + fall);
-            }
-
+            case Phase.RestPause:
             case Phase.OpenPause:
-                return restAngle + delta;
+                phaseTime += h;
+                if (phaseTime < (phase == Phase.RestPause ? restPause : openPause)) return;
+                phase = phase == Phase.RestPause ? Phase.Opening : Phase.Closing;
+                winching = true;
+                winchTime = 0f;
+                return;
+
+            case Phase.Opening:
+                if (winching)
+                {
+                    // Lift from rest up to the top, then let go at winch speed.
+                    progress += WinchStep(h);
+                    if (progress >= lift) LetGo(lift, speed);
+                    else return;
+                }
+                if (Swing(h, delta, groundRestitution, true))
+                {
+                    phase = Phase.OpenPause;
+                    phaseTime = 0f;
+                }
+                return;
 
             default:
-                return restAngle;
+                if (winching)
+                {
+                    progress -= WinchStep(h);
+                    if (progress <= lift) LetGo(lift, -speed);
+                    else return;
+                }
+                if (Swing(h, 0f, wallRestitution, false))
+                {
+                    phase = Phase.RestPause;
+                    phaseTime = 0f;
+                }
+                return;
         }
     }
 
-    // Winch progress 0..1: eases out of the pose and slows to a stop at the top,
-    // where the leaf teeters before it falls.
-    private static float Winch(float u)
+    // Winch travel (degrees) for one substep; eases up to full speed.
+    private float WinchStep(float h)
     {
-        u = Mathf.Clamp01(u);
-        return u * u * (3f - 2f * u);
+        winchTime += h;
+        float u = winchRamp > 0f ? Mathf.Clamp01(winchTime / winchRamp) : 1f;
+        speed = WinchSpeed * u * u * (3f - 2f * u);
+        return speed * h;
     }
 
-    // Fall progress 0..1: starts at rest and keeps accelerating (constant
-    // acceleration), so the leaf arrives at full speed.
-    private static float Fall(float u)
+    private void LetGo(float at, float velocity)
     {
-        u = Mathf.Clamp01(u);
-        return u * u;
+        progress = at;
+        speed = velocity;
+        winching = false;
+        freeFalling = true;
+        clankDue = true;
     }
 
-    // Damped settle in units of the first peak, 0 at both ends.
-    // bounce = true: rebounds that stay on one side (hitting the ground).
-    // bounce = false: a sway to both sides (hanging pendulum).
-    private float Settle(bool bounce, float swingTime)
+    // Free swing under gravity against a stop at `limit` (the ground beyond the
+    // swing, or the pit wall at rest). Returns true once it has come to rest.
+    private bool Swing(float h, float limit, float restitution, bool open)
     {
-        if (settleDuration <= 0f) return 0f;
-        float tau = Mathf.Clamp01((phaseTime - swingTime) / settleDuration);
-        float envelope = (1f - tau) * (1f - tau);
-        float wave = Mathf.Sin(Mathf.PI * settleBounces * tau);
-        return envelope * (bounce ? Mathf.Abs(wave) : wave);
+        speed += (-gravity * Mathf.Sin(progress * Mathf.Deg2Rad) - damping * speed) * h;
+        progress += speed * h;
+        bool past = open ? progress >= limit : progress <= limit;
+        if (!past) return false;
+
+        progress = limit;
+        float hit = Mathf.Abs(speed);
+        freeFalling = false;
+        if (hit < settleSpeed)
+        {
+            speed = 0f;
+            return true;
+        }
+        impacts.Add((hit, open));
+        Impact?.Invoke(hit, open);
+        speed = -restitution * speed;
+        return false;
+    }
+
+    // Gravity (degrees per second squared) that drops the leaf from the top to
+    // open in fallTime, starting at winch speed.
+    private float TuneGravity()
+    {
+        float lift = LiftAngle, delta = Mathf.Abs(SwingDelta);
+        if (delta - lift < 1f) return 0f;
+        float lo = 1f, hi = 1e6f;
+        for (int i = 0; i < 40; i++)
+        {
+            float k = Mathf.Sqrt(lo * hi);
+            float p = lift, v = WinchSpeed, t = 0f;
+            while (p < delta && t < 10f)
+            {
+                v += -k * Mathf.Sin(p * Mathf.Deg2Rad) * Substep;
+                p += v * Substep;
+                t += Substep;
+            }
+            if (t > fallTime) lo = k; else hi = k;
+        }
+        return Mathf.Sqrt(lo * hi);
     }
 
     // Solid within solidWindow of spanning the pit; elsewhere the leaf is scenery.
