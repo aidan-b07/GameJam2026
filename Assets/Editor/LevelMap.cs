@@ -637,6 +637,7 @@ public static class LevelMap
         var flow = new GameObject("GameFlow").AddComponent<GameFlow>();
         flow.players = players;
         flow.cameraRig = rig;
+        flow.laneGroundY = new[] { 0f, TockLaneY };
     }
 
     // Shared side-scrolling camera: both lane cameras follow the players together,
