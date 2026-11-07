@@ -538,7 +538,7 @@ public static class LevelMap
     }
 
     // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is
-    // one art pixel (each lane is 360 px tall); the crack is centred on the seam.
+    // one art pixel (each lane is 360 px tall); the rift is centred on the seam.
     static void CreateDivider()
     {
         var go = new GameObject("LaneDivider", typeof(Canvas), typeof(CanvasScaler));
@@ -553,11 +553,11 @@ public static class LevelMap
         scaler.matchWidthOrHeight = 1f;
 
         var divider = go.AddComponent<LaneDivider>();
-        divider.crack = DividerLayer(go.transform, "Crack", "Assets/Art/UI/divider_crack.png");
-        divider.sparkles = DividerLayer(go.transform, "Sparkles", "Assets/Art/UI/divider_sparkles.png");
+        divider.rift = DividerLayer(go.transform, "Rift");
     }
 
-    static RawImage DividerLayer(Transform parent, string id, string path)
+    // The rift texture is drawn at runtime by LaneDivider.
+    static RawImage DividerLayer(Transform parent, string id)
     {
         var go = new GameObject(id, typeof(RectTransform), typeof(RawImage));
         go.transform.SetParent(parent, false);
@@ -566,10 +566,9 @@ public static class LevelMap
         rt.anchorMin = new Vector2(0f, 0.5f);
         rt.anchorMax = new Vector2(1f, 0.5f);
         rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.sizeDelta = new Vector2(0f, 48f);   // texture height
+        rt.sizeDelta = new Vector2(0f, LaneDivider.TextureHeight);
         rt.anchoredPosition = Vector2.zero;
         var image = go.GetComponent<RawImage>();
-        image.texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
         image.raycastTarget = false;
         return image;
     }
