@@ -12,11 +12,11 @@ using UnityEngine.Serialization;
 //
 // The leaf is a kinematic Rigidbody2D moved with MoveRotation and MovePosition
 // in FixedUpdate, so it rotates exactly about the hinge point. It is only solid
-// near the open pose (solidWindow); the rest of the swing passes through the
-// ground beside the pit (drawn behind it), so there it is scenery and does not
-// shove or carry players. Players standing on the open deck are carried along
-// the deck while it moves (PlayerMovement overwrites its horizontal velocity
-// every step, so friction alone would not carry them).
+// near solidAngle, where it spans the pit; players cross by stopping lane time
+// (SpeedMultiplier = 0) at that moment. Elsewhere it is scenery and does not
+// shove or carry players. Players standing on the deck are carried along it
+// while it moves (PlayerMovement overwrites its horizontal velocity every step,
+// so friction alone would not carry them).
 //
 // Angles are the body's world Z rotation in degrees. With the placeholder
 // (long axis = local Y, hinge at the top end) a rotation of 0 hangs straight
@@ -73,8 +73,11 @@ public class BridgeMovement : MonoBehaviour
     [SerializeField, Range(0f, MaxSpeedMultiplier)] private float speedMultiplier = 1f;
 
     [Header("Collision and riders")]
-    [Tooltip("The leaf is solid only within this many degrees of the open pose. " +
-             "Elsewhere it sweeps through the ground beside the pit and players pass through it.")]
+    [Tooltip("Rotation where the leaf spans the pit, flat. 90 for a leaf hanging " +
+             "from the pit's left edge.")]
+    [SerializeField] private float solidAngle = 90f;
+    [Tooltip("The leaf is solid only within this many degrees of solidAngle; " +
+             "elsewhere players pass through it.")]
     [SerializeField, Range(0f, 90f)] private float solidWindow = 25f;
     [Tooltip("Carry bodies standing on the leaf while it moves.")]
     [SerializeField] private bool carryRiders = true;
@@ -274,10 +277,10 @@ public class BridgeMovement : MonoBehaviour
         return envelope * (bounce ? Mathf.Abs(wave) : wave);
     }
 
-    // Solid only near the open pose; elsewhere the leaf is scenery.
+    // Solid only while it spans the pit; elsewhere the leaf is scenery.
     private void SetSolid(float angle)
     {
-        bool solid = Mathf.Abs(Mathf.DeltaAngle(angle, restAngle + SwingDelta)) <= solidWindow;
+        bool solid = Mathf.Abs(Mathf.DeltaAngle(angle, solidAngle)) <= solidWindow;
         foreach (Collider2D c in colliders)
             if (c.enabled != solid) c.enabled = solid;
     }
