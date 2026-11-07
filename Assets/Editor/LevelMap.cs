@@ -94,6 +94,7 @@ public static class LevelMap
         var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
         var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
         CreateGameFlow(players, rig);
+        new GameObject("GameManager").AddComponent<GameManager>();
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);

@@ -99,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
             vx = 0f;
 
         rb.linearVelocity = new Vector2(vx, rb.linearVelocity.y);
+        UpdateWorldSpeedModifiers();
     }
 
     private bool TouchingWall(float dir)
@@ -214,6 +215,15 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = scale;
     }
 
+    private void UpdateWorldSpeedModifiers()
+    {
+        if (GameManager.INSTANCE == null)
+            return;
+
+        float amount = Mathf.Clamp01(Mathf.Abs(rb.linearVelocity.magnitude) / moveSpeed);
+        GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, amount);
+    }
+    
     private void OnDrawGizmosSelected()
     {
         if (groundCheck == null)
