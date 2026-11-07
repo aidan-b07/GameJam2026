@@ -1,9 +1,9 @@
 using UnityEngine;
 
 // Respawn point for one lane. Checkpoints come in pairs, one per lane with the
-// same index (0 is the spawn point). When either player reaches a checkpoint,
-// GameFlow makes that index current, and after a death both players come back
-// at their own lane's checkpoint of that index.
+// same index (0 is the spawn point). Once both players have reached their own
+// lane's checkpoint of an index, GameFlow makes that index current, and after a
+// death both players come back at their own lane's checkpoint of that index.
 //
 // The trigger collider (if any) is the reach line; the spawn point has none.
 public class Checkpoint : MonoBehaviour

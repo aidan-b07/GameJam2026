@@ -10,8 +10,8 @@ using UnityEngine;
 // 2. the camera eases back to the current checkpoint pair;
 // 3. both play the respawn animation there, then get control back.
 //
-// The current checkpoint is the highest index either player has reached; the
-// spawn points are checkpoint 0.
+// The current checkpoint is the highest index both players have reached, each
+// in their own lane; the spawn points are checkpoint 0.
 public class GameFlow : MonoBehaviour
 {
     public static GameFlow Instance { get; private set; }
@@ -38,6 +38,9 @@ public class GameFlow : MonoBehaviour
 
     public int CurrentCheckpoint { get; private set; }
     public bool Respawning { get; private set; }
+
+    // Highest checkpoint index each lane's player has reached.
+    private int[] reached;
 
     private class Player
     {
@@ -71,6 +74,7 @@ public class GameFlow : MonoBehaviour
             }
             list.Add(p);
         }
+        reached = new int[list.Count];
     }
 
     private void OnDestroy()
@@ -94,9 +98,16 @@ public class GameFlow : MonoBehaviour
 
     public void Reach(Checkpoint c)
     {
-        if (!Respawning && c.index > CurrentCheckpoint)
+        if (Respawning || c.lane < 0 || c.lane >= reached.Length) return;
+        reached[c.lane] = Mathf.Max(reached[c.lane], c.index);
+
+        // Lanes without a player do not hold the checkpoint back.
+        int both = int.MaxValue;
+        for (int lane = 0; lane < list.Count; lane++)
+            if (list[lane].rb != null) both = Mathf.Min(both, reached[lane]);
+        if (both != int.MaxValue && both > CurrentCheckpoint)
         {
-            CurrentCheckpoint = c.index;
+            CurrentCheckpoint = both;
             Sfx.PlayCentred("checkpoint", 0.8f);
         }
     }
