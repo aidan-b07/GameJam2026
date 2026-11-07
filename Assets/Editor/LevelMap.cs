@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -41,6 +42,12 @@ public static class LevelMap
     const string StrikeDir = "Assets/Art/Obstacles/Strike/";
     static IEnumerable<(int r, int c)> StrikeCells =>
         from r in Enumerable.Range(0, 2) from c in Enumerable.Range(0, 3) select (r, c);
+    // Twin checkpoint lamp from tools/make_checkpoint_twin.py: a post (one 64x96
+    // frame) and a lantern overlay sheet per player (19 frames of 64x96), all
+    // with a bottom-centre pivot. CheckpointLamp plays the overlays.
+    const string CheckpointDir = "Assets/Art/Obstacles/Checkpoint/";
+    static string CheckpointPng(string id) => $"{CheckpointDir}checkpoint_twin_{id}_64px.png";
+    const int LampFrameWidth = 64;
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
@@ -115,6 +122,9 @@ public static class LevelMap
         foreach (var (r, c) in StrikeCells)
             PrepareSprite($"{StrikeDir}strike_r{r}c{c}_32px.png", false, new Vector2(0.5f, 0.5f));
         PrepareSprite($"{StrikeDir}strike_flash_32px.png", false, new Vector2(0f, 1f));
+        PrepareSprite(CheckpointPng("post"), false, new Vector2(0.5f, 0f));
+        PrepareStrip(CheckpointPng("tick"), LampFrameWidth, new Vector2(0.5f, 0f));
+        PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -338,13 +348,41 @@ public static class LevelMap
         public void Checkpoint(int x)
         {
             var go = Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
-            Prop(x, Surface(x), 3, 4);          // lit lantern
+            go.GetComponent<SpriteRenderer>().enabled = false;   // the lamp shows where it is
             var trigger = go.AddComponent<BoxCollider2D>();
             trigger.isTrigger = true;
             trigger.size = new Vector2(1f, 24f);        // local units: the marker is 0.5 x 0.5
             trigger.offset = new Vector2(0f, 11.5f);
             var feet = new Vector2(go.transform.position.x, root.transform.position.y + Surface(x));
             AddCheckpoint(go, ++checkpoints, feet);
+            Lamp(go, x);
+        }
+
+        // Twin lamp on a checkpoint: post standing on the ground (sunk by the
+        // ground tiles' 3 transparent top rows), a lantern overlay per player.
+        // The post is tinted with the lane's light; the lit lanterns are not.
+        void Lamp(GameObject checkpoint, int x)
+        {
+            var lamp = new GameObject($"{checkpoint.name}_Lamp");
+            lamp.transform.SetParent(markers, false);
+            lamp.transform.localPosition = new Vector3(checkpoint.transform.localPosition.x, Surface(x) - 3f / 32f, 0f);
+            SpriteRenderer Part(string partName, Sprite sprite, int order)
+            {
+                var part = new GameObject(partName);
+                part.transform.SetParent(lamp.transform, false);
+                var sr = part.AddComponent<SpriteRenderer>();
+                sr.sprite = sprite;
+                sr.sortingOrder = order;
+                return sr;
+            }
+            tinted.Add(Part("Post", AssetDatabase.LoadAssetAtPath<Sprite>(CheckpointPng("post")), 2));
+            var tickFrames = StripFrames(CheckpointPng("tick"));
+            var tockFrames = StripFrames(CheckpointPng("tock"));
+            var c = lamp.AddComponent<CheckpointLamp>();
+            c.checkpoint = checkpoint.GetComponent<Checkpoint>();
+            c.heads = new[] { Part("Tick", tickFrames[0], 3), Part("Tock", tockFrames[0], 3) };
+            c.tickFrames = tickFrames;
+            c.tockFrames = tockFrames;
         }
 
         public void RestPad(int x) => Marker("RestPad", x, Surface(x), 3, 0.25f, Rest);
@@ -796,6 +834,50 @@ public static class LevelMap
         ti.textureCompression = TextureImporterCompression.Uncompressed;
         ti.SaveAndReimport();
     }
+
+    // Horizontal strip of equal frames, sliced one sprite per frame (<file>_<n>),
+    // 32 PPU, point filter, every frame with the same pivot.
+    static void PrepareStrip(string path, int frameWidth, Vector2 pivot)
+    {
+        if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
+        var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        int count = tex.width / frameWidth;
+        if (ti.spriteImportMode == SpriteImportMode.Multiple && ti.spritePixelsPerUnit == 32
+            && StripFrames(path).Length == count) return;
+        ti.textureType = TextureImporterType.Sprite;
+        ti.spriteImportMode = SpriteImportMode.Multiple;
+        ti.spritePixelsPerUnit = 32;
+        ti.filterMode = FilterMode.Point;
+        ti.mipmapEnabled = false;
+        ti.alphaIsTransparency = true;
+        ti.wrapMode = TextureWrapMode.Clamp;
+        ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.SaveAndReimport();
+
+        var factory = new SpriteDataProviderFactories();
+        factory.Init();
+        var provider = factory.GetSpriteEditorDataProviderFromObject(ti);
+        provider.InitSpriteEditorDataProvider();
+        string sheet = System.IO.Path.GetFileNameWithoutExtension(path);
+        var rects = Enumerable.Range(0, count).Select(i => new SpriteRect
+        {
+            name = $"{sheet}_{i}",
+            rect = new Rect(i * frameWidth, 0, frameWidth, tex.height),
+            alignment = SpriteAlignment.Custom,
+            pivot = pivot,
+            spriteID = GUID.Generate(),
+        }).ToArray();
+        provider.SetSpriteRects(rects);
+        provider.GetDataProvider<ISpriteNameFileIdDataProvider>()?
+            .SetNameFileIdPairs(rects.Select(r => new SpriteNameFileIdPair(r.name, r.spriteID)));
+        provider.Apply();
+        ti.SaveAndReimport();
+    }
+
+    // Frames of a strip from PrepareStrip, in order.
+    static Sprite[] StripFrames(string path) =>
+        AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>()
+            .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
     // Keeps level scenes in Build Settings sorted by name (Level1_, Level2_, ...).
     static void AddToBuildSettings(string scenePath)

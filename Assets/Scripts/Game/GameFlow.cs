@@ -96,6 +96,9 @@ public class GameFlow : MonoBehaviour
         }
     }
 
+    // Highest checkpoint index the player of a lane has reached (0 before any).
+    public int Reached(int lane) => reached != null && lane >= 0 && lane < reached.Length ? reached[lane] : 0;
+
     public void Reach(Checkpoint c)
     {
         if (Respawning || c.lane < 0 || c.lane >= reached.Length) return;

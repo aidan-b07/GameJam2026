@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 83786c3af4f21454bbfbc74224ed2a63
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3252366039326442090
+    second: checkpoint_twin_tick_64px_0
+  - first:
+      213: 6411247174153396310
+    second: checkpoint_twin_tick_64px_1
+  - first:
+      213: -1633614033622214541
+    second: checkpoint_twin_tick_64px_2
+  - first:
+      213: -1969411749677246511
+    second: checkpoint_twin_tick_64px_3
+  - first:
+      213: 2716600202901598035
+    second: checkpoint_twin_tick_64px_4
+  - first:
+      213: -7803399944260368114
+    second: checkpoint_twin_tick_64px_5
+  - first:
+      213: -8153605799045211647
+    second: checkpoint_twin_tick_64px_6
+  - first:
+      213: 2487945542571418618
+    second: checkpoint_twin_tick_64px_7
+  - first:
+      213: 43308527769452536
+    second: checkpoint_twin_tick_64px_8
+  - first:
+      213: 3755163822783263560
+    second: checkpoint_twin_tick_64px_9
+  - first:
+      213: 6236757264455889118
+    second: checkpoint_twin_tick_64px_10
+  - first:
+      213: 1291638143670468083
+    second: checkpoint_twin_tick_64px_11
+  - first:
+      213: -4573720849402765185
+    second: checkpoint_twin_tick_64px_12
+  - first:
+      213: 8502505263918613857
+    second: checkpoint_twin_tick_64px_13
+  - first:
+      213: -1322456303907520583
+    second: checkpoint_twin_tick_64px_14
+  - first:
+      213: -3298766136247141840
+    second: checkpoint_twin_tick_64px_15
+  - first:
+      213: 5158522381284286715
+    second: checkpoint_twin_tick_64px_16
+  - first:
+      213: 5851049595858086434
+    second: checkpoint_twin_tick_64px_17
+  - first:
+      213: -4957526884443345743
+    second: checkpoint_twin_tick_64px_18
+  - first:
+      213: -4297594994382305406
+    second: checkpoint_twin_tick_64px_19
+  - first:
+      213: -4806686746727259998
+    second: checkpoint_twin_tick_64px_20
+  - first:
+      213: -545431070863387375
+    second: checkpoint_twin_tick_64px_21
+  - first:
+      213: 5731177909996710351
+    second: checkpoint_twin_tick_64px_22
+  - first:
+      213: -1713872654718963491
+    second: checkpoint_twin_tick_64px_23
+  - first:
+      213: -623662036255786322
+    second: checkpoint_twin_tick_64px_24
+  - first:
+      213: -462934575378701250
+    second: checkpoint_twin_tick_64px_25
+  - first:
+      213: -6579781497963518960
+    second: checkpoint_twin_tick_64px_26
+  - first:
+      213: -5113319525452202304
+    second: checkpoint_twin_tick_64px_27
+  - first:
+      213: -7889512045536790918
+    second: checkpoint_twin_tick_64px_28
+  - first:
+      213: 5008933904340976548
+    second: checkpoint_twin_tick_64px_29
+  - first:
+      213: -4178760567016968093
+    second: checkpoint_twin_tick_64px_30
+  - first:
+      213: 3468553903600120726
+    second: checkpoint_twin_tick_64px_31
+  - first:
+      213: 3918165691842176564
+    second: checkpoint_twin_tick_64px_32
+  - first:
+      213: -5514527305045286685
+    second: checkpoint_twin_tick_64px_33
+  - first:
+      213: 5366747728399974370
+    second: checkpoint_twin_tick_64px_34
+  - first:
+      213: 9010837830637234798
+    second: checkpoint_twin_tick_64px_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a6b1216718654b818ed1cb46ac17eb8
+      internalID: 3252366039326442090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b1b8c473f50f413c9ee2b12b15aa1bd
+      internalID: 6411247174153396310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0044cf3fff34e4de284d7e9d961f0ea7
+      internalID: -1633614033622214541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e03cd68abaae438d8a95559e1ca6130
+      internalID: -1969411749677246511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80c5db8f3dfd449aaa86dc2f7cd3f8ff
+      internalID: 2716600202901598035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 659983bc2f1cd4bdca4cff4814f69ea2
+      internalID: -7803399944260368114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb213a850aa604ddabaa6c80d0967fad
+      internalID: -8153605799045211647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_7
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23ac05e525b864156b5dd5476ad69e79
+      internalID: 2487945542571418618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_8
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9999ff0db4394fcab85d53738e0f8c2
+      internalID: 43308527769452536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77877f0de946945e1a81df4374808503
+      internalID: 3755163822783263560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_10
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6c2d7f8b412c44d0beb7d15a46415bd
+      internalID: 6236757264455889118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_11
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9599aeba000f84b52b3857129fe80fc7
+      internalID: 1291638143670468083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91463c4686c964d0d8f1a7b129a77e77
+      internalID: -4573720849402765185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_13
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bbcfa1e957394ee6b61b8283e879e88
+      internalID: 8502505263918613857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_14
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cb5207e4ab34434dab3a43619b833eb
+      internalID: -1322456303907520583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_15
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ba9dd315e6ec490d8a4d4af52d74a04
+      internalID: -3298766136247141840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_16
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98aeb0ab93ba24fb08e3dbd343db31ed
+      internalID: 5158522381284286715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_17
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb953cd0fd75c46d99c8c4b07989a813
+      internalID: 5851049595858086434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: checkpoint_twin_tick_64px_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 64
+        height: 96
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072d15de5213e459480d10ec9ee49846
+      internalID: -4957526884443345743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c366b6c7c51274bd7a83ef4bc4fbeeef
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      checkpoint_twin_tick_64px_0: 3252366039326442090
+      checkpoint_twin_tick_64px_1: 6411247174153396310
+      checkpoint_twin_tick_64px_10: 6236757264455889118
+      checkpoint_twin_tick_64px_11: 1291638143670468083
+      checkpoint_twin_tick_64px_12: -4573720849402765185
+      checkpoint_twin_tick_64px_13: 8502505263918613857
+      checkpoint_twin_tick_64px_14: -1322456303907520583
+      checkpoint_twin_tick_64px_15: -3298766136247141840
+      checkpoint_twin_tick_64px_16: 5158522381284286715
+      checkpoint_twin_tick_64px_17: 5851049595858086434
+      checkpoint_twin_tick_64px_18: -4957526884443345743
+      checkpoint_twin_tick_64px_2: -1633614033622214541
+      checkpoint_twin_tick_64px_3: -1969411749677246511
+      checkpoint_twin_tick_64px_4: 2716600202901598035
+      checkpoint_twin_tick_64px_5: -7803399944260368114
+      checkpoint_twin_tick_64px_6: -8153605799045211647
+      checkpoint_twin_tick_64px_7: 2487945542571418618
+      checkpoint_twin_tick_64px_8: 43308527769452536
+      checkpoint_twin_tick_64px_9: 3755163822783263560
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
