@@ -79,7 +79,15 @@ public class SkyClouds : MonoBehaviour
 
     static Color Rgb(int r, int g, int b) => new Color32((byte)r, (byte)g, (byte)b, 255);
 
-    void OnEnable() => Build();
+    // Camera height when enabled; the band rises with the camera after that
+    // (CoopCamera lifts a lane camera when its player is flung high).
+    float cameraRestY;
+
+    void OnEnable()
+    {
+        if (cameraTransform != null) cameraRestY = cameraTransform.position.y;
+        Build();
+    }
     void OnDisable() => Clear();
     // Objects cannot be destroyed in OnValidate; rebuild on the next frame.
     void OnValidate() => rebuild = true;
@@ -161,6 +169,7 @@ public class SkyClouds : MonoBehaviour
             t = GameManager.INSTANCE.GetLaneTime(lane);
 
         float camX = cameraTransform != null ? cameraTransform.position.x : transform.position.x;
+        float lift = cameraTransform != null ? cameraTransform.position.y - cameraRestY : 0f;
         float halfView = 20f;
         var cam = cameraTransform != null ? cameraTransform.GetComponent<Camera>() : null;
         if (cam != null && cam.orthographic) halfView = cam.orthographicSize * cam.aspect;
@@ -174,7 +183,7 @@ public class SkyClouds : MonoBehaviour
             float span = 2f * (halfView + c.width) + 2f;
             float rel = Mathf.Repeat(c.x0 + c.speed * t - camX * (1f - c.layer.depth), span) - span / 2f - c.width / 2f;
             if (pixelsPerUnit > 0f) rel = Mathf.Round(rel * pixelsPerUnit) / pixelsPerUnit;
-            c.sr.transform.position = new Vector3(camX + rel, transform.position.y + c.y, 0f);
+            c.sr.transform.position = new Vector3(camX + rel, transform.position.y + lift + c.y, 0f);
         }
     }
 
