@@ -31,6 +31,11 @@ public static class LevelMap
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
     // Drawbridge leaf from tools/make_drawbridge.py: 1x7 tiles, hinge at the top.
     const string DrawbridgeSprite = "Assets/Art/Obstacles/drawbridge_32px.png";
+    // Plunger crusher art from tools/make_plunger.py: 3x2 head with lamp and dial
+    // hand overlays (12 hand sprites, 00 = 12 o'clock), tiled rod, brass ring.
+    const string PlungerDir = "Assets/Art/Obstacles/Plunger/";
+    static string PlungerPng(string id) => $"{PlungerDir}plunger_{id}_32px.png";
+    static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
     const string RecessBackLeft = "recess_back_left";
@@ -73,6 +78,10 @@ public static class LevelMap
         PrepareSprite(ObstaclePng(RecessBack), false, RecessPivot);
         PrepareSprite(ObstaclePng(RecessBackLeft), false, RecessLeftPivot);
         PrepareSprite(ObstaclePng(RecessBackRight), false, RecessPivot);
+        foreach (var id in new[] { "head", "lamp_amber", "lamp_red" }.Concat(PlungerHands))
+            PrepareSprite(PlungerPng(id), false, new Vector2(0.5f, 0.5f));
+        PrepareSprite(PlungerPng("rod"), true, new Vector2(0.5f, 0f));
+        PrepareSprite(PlungerPng("gland"), false, new Vector2(0.5f, 1f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -304,14 +313,70 @@ public static class LevelMap
 
         public void RestPad(int x) => Marker("RestPad", x, Surface(x), 3, 0.25f, Rest);
 
-        // Crusher hanging from a stone housing, drawn in its raised position.
-        public void Crusher(int x)
+        // Plunger crusher hanging from a stone housing (rows 8-9) over x..x+2, drawn
+        // raised: a 3x2 head at y 5..7 on a rod, slamming down to the ground.
+        // PlungerMotion runs it on lane time; offset (lane seconds) shifts its cycle.
+        public GameObject Crusher(int x, float offset = 0f)
         {
             Fill(x - 1, x + 3, 10, 8);
-            Marker("Crusher", x, 5, 3, 3, Stone);
             Prop(x - 2, 8, 1, 1);
             Prop(x + 4, 8, 1, 1);
             Busy(x - 3, x + 5);
+
+            counts["Crusher"] = counts.TryGetValue("Crusher", out var n) ? n + 1 : 1;
+            var go = new GameObject($"Crusher_{counts["Crusher"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 1.5f, 6f, 0f);
+            int layer = LayerMask.NameToLayer(GroundLayer);   // players can stand on the head
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            go.AddComponent<BoxCollider2D>().size = new Vector2(3f, 2f);
+
+            SpriteRenderer Part(string partName, Transform parent, string id, int order, Vector3 at)
+            {
+                var part = new GameObject(partName);
+                part.transform.SetParent(parent, false);
+                part.transform.localPosition = at;
+                var sr = part.AddComponent<SpriteRenderer>();
+                sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(PlungerPng(id));
+                sr.sortingOrder = order;
+                tinted.Add(sr);
+                return sr;
+            }
+            var head = Part("Visual", go.transform, "head", 5, Vector3.zero);
+            var lamp = Part("Lamp", head.transform, "lamp_amber", 6, Vector3.zero);
+            lamp.enabled = false;
+            var hand = Part("Hand", head.transform, "hand_00", 6, Vector3.zero);
+            var rod = Part("Rod", head.transform, "rod", 4, new Vector3(0f, 1f, 0f));
+            rod.drawMode = SpriteDrawMode.Tiled;
+            rod.size = new Vector2(14f / 32f, 1f);
+            Part("Gland", markers, "gland", 6, new Vector3(x + 1.5f, 8f, 0f)).name = $"Crusher_{counts["Crusher"]}_Gland";
+
+            var motion = new SerializedObject(go.AddComponent<PlungerMotion>());
+            // Down to the ground, plus the 3 transparent top rows of the ground
+            // tiles (players' feet sink by as much), so the teeth meet the stone.
+            motion.FindProperty("travelDistance").floatValue = 5f - Surface(x + 1) + 3f / 32f;
+            motion.FindProperty("cycleOffset").floatValue = offset;
+            motion.FindProperty("visual").objectReferenceValue = head.transform;
+            motion.FindProperty("lamp").objectReferenceValue = lamp;
+            motion.FindProperty("amberLamp").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(PlungerPng("lamp_amber"));
+            motion.FindProperty("redLamp").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(PlungerPng("lamp_red"));
+            motion.FindProperty("hand").objectReferenceValue = hand;
+            var hands = motion.FindProperty("handSprites");
+            var handIds = PlungerHands.ToArray();
+            hands.arraySize = handIds.Length;
+            for (int i = 0; i < handIds.Length; i++)
+                hands.GetArrayElementAtIndex(i).objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(PlungerPng(handIds[i]));
+            motion.FindProperty("rod").objectReferenceValue = rod;
+            // Up to just inside the brass ring under the housing (ring spans y 7.75..8).
+            motion.FindProperty("rodTop").floatValue = root.transform.position.y + 8f - 2f / 32f;
+            motion.FindProperty("dustSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(WhiteSprite);
+            motion.FindProperty("lane").intValue = LaneIndex;
+            motion.ApplyModifiedPropertiesWithoutUndo();
+            return go;
         }
 
         // Laser gate between a floor emitter and a ceiling emitter, drawn "on".
