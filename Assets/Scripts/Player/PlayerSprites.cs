@@ -7,8 +7,9 @@ using UnityEngine;
 // attach pixels are from tools/make_player.py, make_death.py and
 // make_respawn.py (Assets/Art/Characters, KeyAttach.md).
 //
-// Lane time isn't wired up yet, so the key turns at a fixed default rate
-// (keyFps x KeyRate, KeyRate = 1). Later the lane's clock should set KeyRate.
+// The key turns at keyFps x KeyRate. In play mode KeyRate follows the
+// character's lane speed (GameManager.GetWorldSpeed, Tick lane 0, Tock lane 1),
+// so the key winds faster when the lane's time runs faster.
 public class PlayerSprites : MonoBehaviour
 {
     public enum Character { Tick, Tock }
@@ -47,12 +48,12 @@ public class PlayerSprites : MonoBehaviour
     [SerializeField] private float runFps = 12f;
     [SerializeField] private float deathFps = 12f;
     [SerializeField] private float respawnFps = 12f;
-    [Tooltip("Default key turning speed until lane time drives KeyRate.")]
+    [Tooltip("Key turning speed at lane speed 1.")]
     [SerializeField] private float keyFps = 10f;
     [Tooltip("Horizontal speed above which the run cycle plays.")]
     [SerializeField] private float runThreshold = 0.1f;
 
-    // Multiplier on keyFps; 1 until the lane clock sets it (0 stops the key).
+    // Multiplier on keyFps: the lane's world speed while a GameManager exists, else 1.
     public float KeyRate { get; set; } = 1f;
     public bool IsDead { get; private set; }
     public bool IsRespawning { get; private set; }
@@ -80,6 +81,8 @@ public class PlayerSprites : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.INSTANCE != null)
+            KeyRate = GameManager.INSTANCE.GetWorldSpeed(character == Character.Tick ? 0 : 1);
         keyTime += Time.deltaTime * keyFps * KeyRate;
         if (keyFrames.Length > 0)
             key.sprite = keyFrames[Mod((int)keyTime, keyFrames.Length)];
