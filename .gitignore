@@ -112,3 +112,19 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Unity Version Control workspace data (the project moved to git;
+# the UVCS cloud repo is kept read-only as an archive)
+.plastic/
+
+# UVCS private-file backups left by cm (Unity Version Control era)
+*.private
+*.private.meta
+*.private.[0-9]*
+
+# Editor folders
+.vscode/
+.idea/
+
+# MCP for Unity: local AI tooling on some machines only, not shared
+/Packages/com.coplaydev.unity-mcp/
