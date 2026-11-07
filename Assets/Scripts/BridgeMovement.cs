@@ -11,12 +11,14 @@ using UnityEngine.Serialization;
 // (bounce) or back to hanging (sway).
 //
 // The leaf is a kinematic Rigidbody2D moved with MoveRotation and MovePosition
-// in FixedUpdate, so it rotates exactly about the hinge point. It is only solid
-// near solidAngle, where it spans the pit; players cross by stopping lane time
-// (SpeedMultiplier = 0) at that moment. Elsewhere it is scenery and does not
-// shove or carry players. Players standing on the deck are carried along it
-// while it moves (PlayerMovement overwrites its horizontal velocity every step,
-// so friction alone would not carry them).
+// in FixedUpdate, so it rotates exactly about the hinge point. Players cross by
+// stopping lane time (SpeedMultiplier = 0) while it spans the pit (solidAngle).
+// By default it is solid all the way round: it shoves players out of its way,
+// and one caught between it and the ground is crushed (CrushDetector on the
+// player). A smaller solidWindow makes it solid only near solidAngle and
+// scenery elsewhere. Players standing on the deck are carried along it while
+// it moves (PlayerMovement overwrites its horizontal velocity every step, so
+// friction alone would not carry them).
 //
 // Angles are the body's world Z rotation in degrees. With the placeholder
 // (long axis = local Y, hinge at the top end) a rotation of 0 hangs straight
@@ -77,8 +79,8 @@ public class BridgeMovement : MonoBehaviour
              "from the pit's left edge.")]
     [SerializeField] private float solidAngle = 90f;
     [Tooltip("The leaf is solid only within this many degrees of solidAngle; " +
-             "elsewhere players pass through it.")]
-    [SerializeField, Range(0f, 90f)] private float solidWindow = 25f;
+             "elsewhere players pass through it. 180 = always solid.")]
+    [SerializeField, Range(0f, 180f)] private float solidWindow = 180f;
     [Tooltip("Carry bodies standing on the leaf while it moves.")]
     [SerializeField] private bool carryRiders = true;
     [Tooltip("Steepest slope (degrees) a rider is still carried on; steeper and they fall off.")]
@@ -277,7 +279,7 @@ public class BridgeMovement : MonoBehaviour
         return envelope * (bounce ? Mathf.Abs(wave) : wave);
     }
 
-    // Solid only while it spans the pit; elsewhere the leaf is scenery.
+    // Solid within solidWindow of spanning the pit; elsewhere the leaf is scenery.
     private void SetSolid(float angle)
     {
         bool solid = Mathf.Abs(Mathf.DeltaAngle(angle, solidAngle)) <= solidWindow;
