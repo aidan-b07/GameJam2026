@@ -32,6 +32,17 @@ public static class LevelMap
     const string WhiteSprite = "Assets/Art/Placeholder/white_16px.png";
     // Drawbridge leaf from tools/make_drawbridge.py: 1x7 tiles, hinge at the top.
     const string DrawbridgeSprite = "Assets/Art/Obstacles/drawbridge_32px.png";
+    // Geared hinge winch of the drawbridge from tools/make_winch.py: the still
+    // parts in one sprite (stand), the hinge gear and crank turned by
+    // DrawbridgeWinch, and the lamp states, with the pivots below.
+    const string WinchDir = "Assets/Art/Obstacles/Winch/";
+    static string WinchPng(string id) => $"{WinchDir}winch_{id}_32px.png";
+    static readonly (string id, Vector2 pivot)[] WinchParts =
+    {
+        ("stand", Vector2.zero), ("hinge_gear", Vector2.one * 0.5f), ("crank", Vector2.one * 0.5f),
+        ("lamp_off", Vector2.one * 0.5f), ("lamp_amber", Vector2.one * 0.5f), ("lamp_dim", Vector2.one * 0.5f),
+        ("lamp_red", Vector2.one * 0.5f), ("lamp_green", Vector2.one * 0.5f), ("glow", Vector2.one * 0.5f),
+    };
     // Plunger crusher art from tools/make_plunger.py: 3x2 head with lamp and dial
     // hand overlays (12 hand sprites, 00 = 12 o'clock), tiled rod, brass ring.
     const string PlungerDir = "Assets/Art/Obstacles/Plunger/";
@@ -114,6 +125,7 @@ public static class LevelMap
         PrepareWhiteSprite();
         PrepareSprite(DrawbridgeSprite, true, new Vector2(0.5f, 0.5f));
         PrepareSprite(ObstaclePng(RecessBack), false, RecessPivot);
+        foreach (var (id, pivot) in WinchParts) PrepareSprite(WinchPng(id), false, pivot);
         PrepareSprite(ObstaclePng(RecessBackLeft), false, RecessLeftPivot);
         PrepareSprite(ObstaclePng(RecessBackRight), false, RecessPivot);
         foreach (var id in new[] { "head", "lamp_amber", "lamp_red" }.Concat(PlungerHands))
@@ -328,7 +340,53 @@ public static class LevelMap
             // Lane time comes from GameManager.GetWorldSpeed(lane).
             bridge.FindProperty("lane").intValue = LaneIndex;
             bridge.ApplyModifiedPropertiesWithoutUndo();
+
+            Winch(go.GetComponent<BridgeMovement>(), new Vector2(x0 + 0.5f, -0.5f));
             return go;
+        }
+
+        // Geared hinge for a drawbridge whose hinge is at `hinge` (lane
+        // coordinates): a big gear on the hinge driving a crank wheel on the
+        // pit's lip, the hinge bracket and a lamp post. Offsets are in tiles from
+        // the hinge, as printed by tools/make_winch.py. The leaf is order 5; the
+        // lamp and the sparks sort below it so the leaf passes in front.
+        void Winch(BridgeMovement bridge, Vector2 hinge)
+        {
+            var root = new GameObject($"{bridge.name}_Winch");
+            root.transform.SetParent(markers, false);
+            root.transform.localPosition = hinge;
+
+            SpriteRenderer Part(string partName, string id, int order, Vector2 at, bool tint = true)
+            {
+                var part = new GameObject(partName);
+                part.transform.SetParent(root.transform, false);
+                part.transform.localPosition = at;
+                var sr = part.AddComponent<SpriteRenderer>();
+                sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(WinchPng(id));
+                sr.sortingOrder = order;
+                if (tint) tinted.Add(sr);
+                return sr;
+            }
+
+            var stand = Part("Stand", "stand", 1, new Vector2(-1.5f, -1f));
+            var gear = Part("HingeGear", "hinge_gear", 2, Vector2.zero);
+            var crank = Part("Crank", "crank", 3, new Vector2(-0.5f, 0.84375f));
+            var glow = Part("LampGlow", "glow", 3, new Vector2(-1.234375f, 1.484375f), false);
+            glow.enabled = false;
+            var lamp = Part("Lamp", "lamp_off", 4, new Vector2(-1.234375f, 1.484375f), false);
+
+            var winch = new SerializedObject(root.AddComponent<DrawbridgeWinch>());
+            void Set(string field, UnityEngine.Object value) => winch.FindProperty(field).objectReferenceValue = value;
+            Set("bridge", bridge);
+            Set("hingeGear", gear.transform);
+            Set("crank", crank.transform);
+            Set("lamp", lamp);
+            Set("glow", glow);
+            foreach (var state in new[] { "Off", "Amber", "Dim", "Red", "Green" })
+                Set("lamp" + state, AssetDatabase.LoadAssetAtPath<Sprite>(WinchPng("lamp_" + state.ToLowerInvariant())));
+            Set("moteSprite", AssetDatabase.LoadAssetAtPath<Sprite>(WhiteSprite));
+            Set("tintSource", stand);
+            winch.ApplyModifiedPropertiesWithoutUndo();
         }
 
         // One-tile-deep slot cut into the ground surface over x0..x1. Its floor and
