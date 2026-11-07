@@ -67,13 +67,7 @@ public class BridgeMovement : MonoBehaviour
     [SerializeField, Min(0f)] private float landBounceAngle = 3f;
     [Tooltip("Overshoot of the first sway when it drops back to hanging, in degrees.")]
     [SerializeField, Min(0f)] private float hangSwayAngle = 5f;
-
-    [Header("Lane time")]
-    [Tooltip("Lane time scale: 1 = normal, 0 = stopped, 2 = fast. Set from the " +
-             "time system through SpeedMultiplier.")]
-    [FormerlySerializedAs("speedMut")]
-    [SerializeField, Range(0f, MaxSpeedMultiplier)] private float speedMultiplier = 1f;
-
+    
     [Header("Collision and riders")]
     [Tooltip("Rotation where the leaf spans the pit, flat. 90 for a leaf hanging " +
              "from the pit's left edge.")]
@@ -86,6 +80,11 @@ public class BridgeMovement : MonoBehaviour
     [Tooltip("Steepest slope (degrees) a rider is still carried on; steeper and they fall off.")]
     [SerializeField, Range(0f, 89f)] private float maxCarrySlope = 60f;
 
+    [SerializeField] 
+    [Tooltip("Which lane is the object in? 0 = top, 1 = bottom")]
+    [Range(0, 1)]
+    private int lane;
+    
     private enum Phase { RestPause, Opening, OpenPause, Closing }
 
     // Faster than this the leaf moves too far per physics step to push or carry
@@ -102,13 +101,7 @@ public class BridgeMovement : MonoBehaviour
 
     private readonly List<ContactPoint2D> contacts = new List<ContactPoint2D>();
     private readonly HashSet<Rigidbody2D> carried = new HashSet<Rigidbody2D>();
-
-    // Lane time scale hook for the time system (clamped to >= 0).
-    public float SpeedMultiplier
-    {
-        get => speedMultiplier;
-        set => speedMultiplier = Mathf.Clamp(value, 0f, MaxSpeedMultiplier);
-    }
+    
 
     // Signed opening rotation, for example +270 for counterclockwise from 0 to 270.
     private float SwingDelta
@@ -171,7 +164,7 @@ public class BridgeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        phaseTime += Time.fixedDeltaTime * speedMultiplier;
+        phaseTime += Time.fixedDeltaTime * GameManager.INSTANCE.GetWorldSpeed(lane);
         AdvancePhase();
 
         float target = AngleForPhase();

@@ -269,6 +269,8 @@ public static class LevelMap
             // Hinge at the centre of the leaf's top tile, at ground level.
             var bridge = new SerializedObject(go.AddComponent<BridgeMovement>());
             bridge.FindProperty("hingeAnchor").vector2Value = new Vector2(0f, 0.5f - 0.5f / length);
+            // Lane time comes from GameManager.GetWorldSpeed(lane).
+            bridge.FindProperty("lane").intValue = LaneIndex;
             bridge.ApplyModifiedPropertiesWithoutUndo();
             return go;
         }

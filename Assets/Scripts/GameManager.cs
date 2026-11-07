@@ -22,10 +22,19 @@ public class GameManager : MonoBehaviour
     
     public void UpdateWorldSpeed(int player, float speedNormalised) {
         switch (player) {
-            case 0: player2WorldSpeedModifier = speedNormalised * maxWorldSpeedModifier; break;
-            case 1: player1WorldSpeedModifier = speedNormalised * maxWorldSpeedModifier; break;
+            case 0: player2WorldSpeedModifier = 1 + speedNormalised * maxWorldSpeedModifier; break;
+            case 1: player1WorldSpeedModifier = 1 + speedNormalised * maxWorldSpeedModifier; break;
             default: Debug.LogError("Invalid player");
                 break;
+        }
+    }
+
+    public float GetWorldSpeed(int lane) {
+        switch (lane) {
+            case 0: return player1WorldSpeedModifier;
+            case 1: return player2WorldSpeedModifier;
+            default: Debug.LogError("Invalid Lane");
+                return 1;
         }
     }
 }
