@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Death and respawn for the pair (DESIGN.md: one dies, both restart from the
-// last checkpoint). Any player's CrushDetector, or a hazard calling KillAll,
-// starts the sequence:
+// last checkpoint). Any player's CrushDetector, a player falling out of the
+// map (fallDepth below its lane's ground), or a hazard calling KillAll starts
+// the sequence:
 // 1. both players freeze and play their death animation;
 // 2. the camera eases back to the current checkpoint pair;
 // 3. both play the respawn animation there, then get control back.
@@ -18,6 +19,13 @@ public class GameFlow : MonoBehaviour
     [Tooltip("Players by lane: 0 = Tick, 1 = Tock (Checkpoint.lane).")]
     public Transform[] players;
     public CoopCamera cameraRig;
+
+    [Header("Falling out of the map")]
+    [Tooltip("Ground surface y of each lane, by lane (set by the builder).")]
+    public float[] laneGroundY = { 0f, -40f };
+    [Tooltip("A player whose feet drop this far below its lane's ground dies " +
+             "(the ground is 5 deep and the view ends about 2 below the surface).")]
+    public float fallDepth = 4f;
 
     [Header("Timing (seconds)")]
     [Tooltip("Pause after the death animation ends before the camera moves.")]
@@ -68,6 +76,20 @@ public class GameFlow : MonoBehaviour
     private void OnDestroy()
     {
         if (Instance == this) Instance = null;
+    }
+
+    private void FixedUpdate()
+    {
+        if (Respawning) return;
+        for (int lane = 0; lane < list.Count && lane < laneGroundY.Length; lane++)
+        {
+            var p = list[lane];
+            if (p.rb != null && Feet(p) < laneGroundY[lane] - fallDepth)
+            {
+                KillAll();
+                return;
+            }
+        }
     }
 
     public void Reach(Checkpoint c)
@@ -133,12 +155,19 @@ public class GameFlow : MonoBehaviour
             checkpoints.TryGetValue((i, lane), out c);
         if (c == null) return;
 
-        float feet = p.box != null ? (p.box.offset.y - p.box.size.y / 2f) * p.rb.transform.lossyScale.y : 0f;
-        Vector2 pos = c.feet - new Vector2(0f, feet);
+        Vector2 pos = c.feet - new Vector2(0f, FeetOffset(p));
         p.rb.position = pos;
         p.rb.transform.position = new Vector3(pos.x, pos.y, p.rb.transform.position.z);
         p.rb.linearVelocity = Vector2.zero;
     }
+
+    // Feet height relative to the body's position.
+    private static float FeetOffset(Player p)
+    {
+        return p.box != null ? (p.box.offset.y - p.box.size.y / 2f) * p.rb.transform.lossyScale.y : 0f;
+    }
+
+    private static float Feet(Player p) => p.rb.position.y + FeetOffset(p);
 
     private static void SetFrozen(Player p, bool frozen)
     {
