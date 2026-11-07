@@ -41,6 +41,12 @@ public static class LevelMap
     static readonly Vector2 RecessLeftPivot = new Vector2(18f / 34f, 1f - 16f / 38f);
     // Layer the player's ground check looks for (PlayerMovement.groundLayer).
     const string GroundLayer = "Ground";
+    // Player prefabs placed at each lane's spawn point (Tock's is a variant).
+    const string TickPrefab = "Assets/Prefabs/Player.prefab";
+    const string TockPrefab = "Assets/Prefabs/Player_Tock.prefab";
+    // Parallax depth of the background layers: 0 moves with the ground, 1 with the camera.
+    const float FarDepth = 0.85f;
+    const float MidDepth = 0.6f;
 
     static readonly Color TickColor = new Color(1f, 0.55f, 0.15f);
     static readonly Color TockColor = new Color(0.15f, 0.8f, 0.75f);
@@ -80,9 +86,13 @@ public static class LevelMap
 
         t.Sky.skyAnchor = CreateCamera("Camera_Tick", 0f, new Rect(0f, 0.5f, 1f, 0.5f), true);
         b.Sky.skyAnchor = CreateCamera("Camera_Tock", TockLaneY, new Rect(0f, 0f, 1f, 0.5f), false);
+        t.AddParallax(t.Sky.skyAnchor);
+        b.AddParallax(b.Sky.skyAnchor);
         t.Sky.Apply();
         b.Sky.Apply();
         CreateDivider();
+        CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor },
+            new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) });
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);
@@ -106,6 +116,8 @@ public static class LevelMap
         readonly Dictionary<int, int> surface = new Dictionary<int, int>();
         readonly List<(int x0, int x1)> busy = new List<(int, int)>();
         readonly Dictionary<string, int> counts = new Dictionary<string, int>();
+        readonly List<(Transform t, float depth)> backgrounds = new List<(Transform, float)>();
+        Vector3? spawn;
 
         public Lane(string name, float y, Color color, int length, float startHour)
         {
@@ -165,8 +177,37 @@ public static class LevelMap
         }
 
         // Spawn point only: the player sprite shows where it is, so the box is hidden.
-        public void Spawn(int x) =>
-            Marker($"Spawn_{name}", x, 0, 1, 1.5f, color).GetComponent<SpriteRenderer>().enabled = false;
+        public void Spawn(int x)
+        {
+            var go = Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
+            go.GetComponent<SpriteRenderer>().enabled = false;
+            spawn = new Vector3(go.transform.position.x, root.transform.position.y + Surface(x) + 0.5f, 0f);
+        }
+
+        // The player for this lane, standing on the spawn point (null without one).
+        public Transform PlacePlayer(string prefabPath)
+        {
+            var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
+            if (prefab == null || spawn == null)
+            {
+                Debug.LogWarning($"[LevelMap] No player placed in {name}'s lane (prefab {prefabPath}, spawn {spawn}).");
+                return null;
+            }
+            var go = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+            go.transform.position = spawn.Value;
+            return go.transform;
+        }
+
+        // Background layers scroll at their depth behind the lane camera.
+        public void AddParallax(Transform cam)
+        {
+            foreach (var (t, depth) in backgrounds)
+            {
+                var p = t.gameObject.AddComponent<Parallax>();
+                p.cameraTransform = cam;
+                p.depth = depth;
+            }
+        }
 
         // Drawbridge over the pit between x0 and x1 (ground ends at x0 and starts
         // again at x1). The leaf is as long as the pit is wide and hangs down the
@@ -313,18 +354,22 @@ public static class LevelMap
             var go = new GameObject("Sky");
             go.transform.SetParent(root.transform, false);
             Sky = go.AddComponent<LaneSky>();
-            Sky.layers = new[] { SkyLayer(go.transform, "Far", "bg_far_360h", -20), SkyLayer(go.transform, "Mid", "bg_mid_360h", -10) };
+            Sky.layers = new[]
+            {
+                SkyLayer(go.transform, "Far", "bg_far_360h", -20, FarDepth),
+                SkyLayer(go.transform, "Mid", "bg_mid_360h", -10, MidDepth),
+            };
             Sky.tilemaps = tilemaps;
             Sky.sun = SkyBody(go.transform, "Sun");
             Sky.moon = SkyBody(go.transform, "Moon");
             Sky.hour = startHour;
         }
 
-        LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order) => new LaneSky.Layer
+        LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order, float depth) => new LaneSky.Layer
         {
-            day = CreateBackground(parent, $"Background_{id}_Day", $"Assets/Art/Backgrounds/{file}_day.png", order),
-            dusk = CreateBackground(parent, $"Background_{id}_Dusk", $"Assets/Art/Backgrounds/{file}.png", order),
-            night = CreateBackground(parent, $"Background_{id}_Night", $"Assets/Art/Backgrounds/{file}_night.png", order),
+            day = CreateBackground(parent, $"Background_{id}_Day", $"Assets/Art/Backgrounds/{file}_day.png", order, depth),
+            dusk = CreateBackground(parent, $"Background_{id}_Dusk", $"Assets/Art/Backgrounds/{file}.png", order, depth),
+            night = CreateBackground(parent, $"Background_{id}_Night", $"Assets/Art/Backgrounds/{file}_night.png", order, depth),
             sortingOrder = order,
         };
 
@@ -390,7 +435,7 @@ public static class LevelMap
             return go.GetComponent<Tilemap>();
         }
 
-        SpriteRenderer CreateBackground(Transform parent, string id, string path, int order)
+        SpriteRenderer CreateBackground(Transform parent, string id, string path, int order, float depth)
         {
             var go = new GameObject(id);
             go.transform.SetParent(parent, false);
@@ -403,7 +448,10 @@ public static class LevelMap
             sr.sortingOrder = order;
             // Top edge just above the view; the bottom hides behind the ground.
             float bottom = CameraY + CameraSize + 0.25f - size.y;
+            // A layer at parallax depth d travels d times as far as the camera, so
+            // it still covers the view at both ends of the level.
             go.transform.localPosition = new Vector3(width / 2f - 30f, bottom + size.y / 2f, 0f);
+            backgrounds.Add((go.transform, depth));
             return sr;
         }
     }
@@ -437,6 +485,19 @@ public static class LevelMap
         cam.backgroundColor = new Color(0.1f, 0.06f, 0.15f);
         if (listener) go.AddComponent<AudioListener>();
         return go.transform;
+    }
+
+    // Shared side-scrolling camera: both lane cameras follow the players together,
+    // and ScreenLeash keeps each player inside the view with an elastic edge.
+    static void CreateCameraRig(int length, Transform[] cameras, Transform[] players)
+    {
+        var go = new GameObject("CameraRig");
+        var rig = go.AddComponent<CoopCamera>();
+        rig.cameras = cameras.Select(c => c.GetComponent<Camera>()).ToArray();
+        rig.players = players.Where(p => p != null).ToArray();
+        rig.levelLeft = -2f;
+        rig.levelRight = length + 2f;
+        go.AddComponent<ScreenLeash>();
     }
 
     // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is
