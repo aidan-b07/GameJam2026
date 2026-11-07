@@ -164,7 +164,9 @@ public static class LevelMap
             return go;
         }
 
-        public void Spawn(int x) => Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
+        // Spawn point only: the player sprite shows where it is, so the box is hidden.
+        public void Spawn(int x) =>
+            Marker($"Spawn_{name}", x, 0, 1, 1.5f, color).GetComponent<SpriteRenderer>().enabled = false;
 
         // Drawbridge over the pit between x0 and x1 (ground ends at x0 and starts
         // again at x1). The leaf is as long as the pit is wide and hangs down the
