@@ -33,18 +33,28 @@ public class GameManager : MonoBehaviour
     public float minutesPerSecond = 4f;
 
     // Seconds of lane time: real time scaled by the lane's world speed.
-    readonly float[] laneTime = new float[2];
+    // Not readonly, so a script reload in play mode keeps them.
+    float[] laneTime = new float[2];
 
     // Per lane: latest normalised speed reported, and the current boost (0..1).
-    private readonly float[] laneInput = new float[2];
-    private readonly float[] laneBoost = new float[2];
+    private float[] laneInput = new float[2];
+    private float[] laneBoost = new float[2];
 
-    void Awake() {
-        if (INSTANCE != null) {
+    // OnEnable, not Awake: the project enters play mode without a domain
+    // reload, and a script compile during play reloads the domain, which
+    // clears INSTANCE but only calls OnEnable again.
+    void OnEnable() {
+        if (INSTANCE != null && INSTANCE != this) {
             Destroy(INSTANCE.gameObject);
         }
 
         INSTANCE = this;
+    }
+
+    void OnDisable() {
+        if (INSTANCE == this) {
+            INSTANCE = null;
+        }
     }
 
     void Update() {
