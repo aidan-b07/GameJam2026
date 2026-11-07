@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 //   always on screen), fading to silence `fadeDistance` past the screen edge;
 // - pan: left or right by the position on screen, up to `maxPan` at the edge;
 // - pitch: follows the lane's world speed (GameManager), so a fast lane sounds
-//   higher (`pitchPerSpeed`, clamped to `minPitch`..`maxPitch`).
+//   higher (`pitchPerSpeed`, clamped to `minPitch`..`maxPitch`); a lane slower
+//   than `silentBelowSpeed` fades out, silent when frozen.
 // The Unraveling rift hums as a 2D loop that grows with the lanes' speed gap.
 //
 // Clips are loaded by name from Resources/Audio/Sfx (made by tools/make_sfx.py
@@ -30,6 +31,8 @@ public class Sfx : MonoBehaviour
     public float pitchPerSpeed = 0.12f;
     public float minPitch = 0.5f;
     public float maxPitch = 1.6f;
+    [Tooltip("Lane speed below which a lane's sounds fade out, silent at 0 (a frozen lane).")]
+    public float silentBelowSpeed = 0.25f;
 
     [Header("Rift hum")]
     public float riftMinVolume = 0.12f;
@@ -215,9 +218,18 @@ public class Sfx : MonoBehaviour
             gain *= gain;   // eases out, sounds more natural than linear
             pan = Mathf.Clamp(dx / half, -1f, 1f) * maxPan;
         }
+        gain *= LaneGain(lane);
         src.volume = masterVolume * volume * gain;
         src.panStereo = pan;
         src.pitch = pitch * LanePitch(lane);
+    }
+
+    // A frozen lane is silent: its sounds (the winch loop, say) fade out as it stops.
+    float LaneGain(int lane)
+    {
+        var gm = GameManager.INSTANCE;
+        if (lane < 0 || gm == null || silentBelowSpeed <= 0f) return 1f;
+        return Mathf.Clamp01(gm.GetWorldSpeed(lane) / silentBelowSpeed);
     }
 
     float LanePitch(int lane)
