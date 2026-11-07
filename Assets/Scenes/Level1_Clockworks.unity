@@ -45528,10 +45528,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5043e0372180774e94b2d4e79af7b2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  maxWorldSpeedModifier: 5
-  rampDuration: 0.6
-  rampSteepness: 8
-  decayHalfLife: 0.25
+  idleWorldSpeed: 0
+  maxWorldSpeed: 6
+  rampDuration: 0.3
+  rampSharpness: 2
+  holdTime: 0.25
+  windDownDuration: 1.2
   movingThreshold: 0.1
   player1WorldSpeedModifier: 1
   player2WorldSpeedModifier: 1
