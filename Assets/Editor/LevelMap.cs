@@ -69,6 +69,14 @@ public static class LevelMap
         ["bg_far_360h"] = (Rgb(134, 169, 208), Rgb(158, 96, 158), Rgb(78, 66, 122)),
         ["bg_mid_360h"] = (Rgb(126, 68, 72), Rgb(115, 54, 90), Rgb(110, 75, 75)),
     };
+    // Chimney mouths in each background picture (pixels from its bottom-left
+    // pixel), with the lane seconds between puffs and the puff size.
+    static readonly Dictionary<string, ChimneySmoke.Chimney[]> Chimneys = new Dictionary<string, ChimneySmoke.Chimney[]>
+    {
+        ["bg_mid_360h"] = new[] { Chimney(31f, 237f, 0.32f, 1f), Chimney(253.5f, 222f, 0.4f, 0.8f), Chimney(67.5f, 142f, 0.5f, 0.8f) },
+    };
+    static ChimneySmoke.Chimney Chimney(float x, float y, float interval, float size) =>
+        new ChimneySmoke.Chimney { mouth = new Vector2(x, y), interval = interval, size = size };
     static TowerClocks.Face Face(float x, float y, float r) => new TowerClocks.Face { centre = new Vector2(x, y), radius = r };
     static Color Rgb(int r, int g, int b) => new Color32((byte)r, (byte)g, (byte)b, 255);
 
@@ -255,6 +263,7 @@ public static class LevelMap
         // Background layers scroll at their depth behind the lane camera.
         public void AddParallax(Transform cam)
         {
+            if (Sky != null && Sky.clouds != null) Sky.clouds.cameraTransform = cam;
             foreach (var (t, depth) in backgrounds)
             {
                 var p = t.gameObject.AddComponent<Parallax>();
@@ -491,6 +500,7 @@ public static class LevelMap
             Sky.tilemaps = tilemaps;
             Sky.sun = SkyBody(go.transform, "Sun");
             Sky.moon = SkyBody(go.transform, "Moon");
+            Sky.clouds = CreateClouds(go.transform);
             Sky.hour = startHour;
             Sky.lane = LaneIndex;
         }
@@ -514,7 +524,36 @@ public static class LevelMap
             clocks.faces = ClockFaces[file];
             (clocks.dayHands, clocks.duskHands, clocks.nightHands) = ClockHands[file];
             layer.clocks = clocks;
+            if (Chimneys.TryGetValue(file, out var chimneys))
+            {
+                // Over the buildings and their clocks, under the level.
+                var smokeGo = new GameObject($"ChimneySmoke_{id}");
+                smokeGo.transform.SetParent(layer.day.transform, false);
+                smokeGo.AddComponent<SpriteRenderer>().sortingOrder = order + 3;
+                var smoke = smokeGo.AddComponent<ChimneySmoke>();
+                smoke.background = layer.day;
+                smoke.chimneys = chimneys;
+                smoke.lane = LaneIndex;
+                smoke.seed = LaneIndex + 1;
+                layer.smoke = smoke;
+            }
             return layer;
+        }
+
+        // In the clear sky above the far skyline (the top 136 rows of the far
+        // picture, whose spires reach row 140), in front of the sun and moon (-15),
+        // behind the mid layer (-10). The lane camera is set in AddParallax.
+        SkyClouds CreateClouds(Transform parent)
+        {
+            var go = new GameObject("Clouds");
+            go.transform.SetParent(parent, false);
+            var clouds = go.AddComponent<SkyClouds>();
+            float top = CameraY + CameraSize + 0.25f;   // top edge of the background pictures
+            clouds.bandTop = top - 2f / 32f;
+            clouds.bandBottom = top - 136f / 32f;
+            clouds.lane = LaneIndex;
+            clouds.seed = LaneIndex + 1;
+            return clouds;
         }
 
         // Between the far (-20) and mid (-10) layers, so buildings pass in front.
