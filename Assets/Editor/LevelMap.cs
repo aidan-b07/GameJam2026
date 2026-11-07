@@ -61,6 +61,9 @@ public static class LevelMap
     const string CheckpointDir = "Assets/Art/Obstacles/Checkpoint/";
     static string CheckpointPng(string id) => $"{CheckpointDir}checkpoint_twin_{id}_64px.png";
     const int LampFrameWidth = 96;
+    // Time gate (portcullis) and lane lift from tools/make_gate_lift.py.
+    const string GateLiftDir = "Assets/Art/Obstacles/GateLift/";
+    static string GateLiftPng(string id) => $"{GateLiftDir}{id}_32px.png";
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
@@ -138,6 +141,10 @@ public static class LevelMap
         PrepareSprite($"{StrikeDir}strike_flash_32px.png", false, new Vector2(0f, 1f));
         PrepareSprite(CheckpointPng("post"), false, new Vector2(0.5f, 0f));
         PrepareStrip(CheckpointPng("tick"), LampFrameWidth, new Vector2(0.5f, 0f));
+        PrepareSprite(GateLiftPng("gate_portcullis"), false, new Vector2(0.5f, 0.5f));
+        PrepareSprite(GateLiftPng("gate_lamp"), false, new Vector2(0.5f, 0.5f));
+        PrepareSprite(GateLiftPng("lift_platform"), false, new Vector2(0.5f, 1f));
+        PrepareSprite(GateLiftPng("lift_chain"), true, new Vector2(0.5f, 0f));
         PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
@@ -518,6 +525,103 @@ public static class LevelMap
             motion.FindProperty("dustSprite").objectReferenceValue = AssetDatabase.LoadAssetAtPath<Sprite>(WhiteSprite);
             motion.FindProperty("lane").intValue = LaneIndex;
             motion.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
+        // Portcullis across the path at x (Level 2), hanging from a stone housing
+        // that starts 4 tiles up: it hides the raised gate and stops players
+        // jumping over it. TimeGate winches it up while the lane runs fast (the
+        // partner is moving) and lets it sink at normal speed.
+        public GameObject TimeGate(int x)
+        {
+            int y = Surface(x);
+            Fill(x - 1, x + 1, y + 10, y + 4);
+            Busy(x - 2, x + 2);
+
+            counts["TimeGate"] = counts.TryGetValue("TimeGate", out var n) ? n + 1 : 1;
+            var go = new GameObject($"TimeGate_{counts["TimeGate"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 0.5f, y + 2f, 0f);
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            go.AddComponent<BoxCollider2D>().size = new Vector2(0.875f, 4f);
+            // Behind the ground tiles, so the raised gate disappears into the housing.
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("gate_portcullis"));
+            sr.sortingOrder = -1;
+            tinted.Add(sr);
+
+            // Lamp on the housing's face, left of the gate (the side players come from).
+            var lamp = new GameObject($"{go.name}_Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(markers, false);
+            lamp.transform.localPosition = new Vector3(x - 0.5f, y + 4.5f, 0f);
+            lamp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("gate_lamp"));
+            lamp.sortingOrder = 3;
+
+            var gate = new SerializedObject(go.AddComponent<TimeGate>());
+            gate.FindProperty("lane").intValue = LaneIndex;
+            gate.FindProperty("lamp").objectReferenceValue = lamp;
+            gate.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
+        // Lift over x..x+2 (Level 2): a one-way deck half a tile above the
+        // ground that rides up to stand level with `top` and back, on two chains
+        // from a stone beam above. LaneLift runs it on lane time; offset (lane
+        // seconds) shifts its cycle. Put the ledge it serves next to it.
+        public GameObject Lift(int x, int top, float offset = 0f)
+        {
+            int y = Surface(x);
+            Fill(x - 1, x + 3, top + 6, top + 5);
+            Busy(x - 1, x + 3);
+
+            counts["Lift"] = counts.TryGetValue("Lift", out var n) ? n + 1 : 1;
+            var go = new GameObject($"Lift_{counts["Lift"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 1.5f, y + 0.5f, 0f);
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            var box = go.AddComponent<BoxCollider2D>();
+            box.size = new Vector2(3f, 0.5f);
+            box.offset = new Vector2(0f, -0.25f);
+            box.usedByEffector = true;
+            go.AddComponent<PlatformEffector2D>().useOneWay = true;
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("lift_platform"));
+            sr.sortingOrder = 4;
+            tinted.Add(sr);
+
+            var chains = new SpriteRenderer[2];
+            for (int i = 0; i < 2; i++)
+            {
+                var chain = new GameObject(i == 0 ? "ChainLeft" : "ChainRight").AddComponent<SpriteRenderer>();
+                chain.transform.SetParent(go.transform, false);
+                chain.transform.localPosition = new Vector3(i == 0 ? -1.125f : 1.125f, 0f, 0f);
+                chain.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("lift_chain"));
+                chain.drawMode = SpriteDrawMode.Tiled;
+                chain.size = new Vector2(6f / 32f, top + 5f - y - 0.5f);
+                chain.sortingOrder = 3;
+                tinted.Add(chain);
+                chains[i] = chain;
+            }
+
+            var lift = new SerializedObject(go.AddComponent<LaneLift>());
+            lift.FindProperty("lane").intValue = LaneIndex;
+            lift.FindProperty("travel").floatValue = top - y - 0.5f;
+            lift.FindProperty("cycleOffset").floatValue = offset;
+            var list = lift.FindProperty("chains");
+            list.arraySize = 2;
+            for (int i = 0; i < 2; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = chains[i];
+            lift.FindProperty("chainTop").floatValue = root.transform.position.y + top + 5f;
+            lift.ApplyModifiedPropertiesWithoutUndo();
             return go;
         }
 
