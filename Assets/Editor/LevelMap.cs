@@ -91,8 +91,9 @@ public static class LevelMap
         t.Sky.Apply();
         b.Sky.Apply();
         CreateDivider();
-        CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor },
-            new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) });
+        var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
+        var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
+        CreateGameFlow(players, rig);
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);
@@ -118,6 +119,7 @@ public static class LevelMap
         readonly Dictionary<string, int> counts = new Dictionary<string, int>();
         readonly List<(Transform t, float depth)> backgrounds = new List<(Transform, float)>();
         Vector3? spawn;
+        int checkpoints;
 
         public Lane(string name, float y, Color color, int length, float startHour)
         {
@@ -176,12 +178,25 @@ public static class LevelMap
             return go;
         }
 
-        // Spawn point only: the player sprite shows where it is, so the box is hidden.
+        // Spawn point, also checkpoint 0. The player sprite shows where it is, so
+        // the box is hidden.
         public void Spawn(int x)
         {
             var go = Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
             go.GetComponent<SpriteRenderer>().enabled = false;
             spawn = new Vector3(go.transform.position.x, root.transform.position.y + Surface(x), 0f);
+            AddCheckpoint(go, 0, spawn.Value);
+        }
+
+        // Lane index for GameFlow.players and Checkpoint.lane.
+        int LaneIndex => root.transform.position.y < 0f ? 1 : 0;
+
+        void AddCheckpoint(GameObject go, int index, Vector2 feet)
+        {
+            var c = go.AddComponent<Checkpoint>();
+            c.index = index;
+            c.lane = LaneIndex;
+            c.feet = feet;
         }
 
         // The player for this lane, its collider standing on the spawn point (null without one).
@@ -270,10 +285,18 @@ public static class LevelMap
             Busy(x0 - 1, x1 + 1);
         }
 
+        // Respawn point, numbered in order after the spawn (checkpoint 0). Reached
+        // when a player walks through its column (a trigger 12 units tall).
         public void Checkpoint(int x)
         {
-            Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
+            var go = Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
             Prop(x, Surface(x), 3, 4);          // lit lantern
+            var trigger = go.AddComponent<BoxCollider2D>();
+            trigger.isTrigger = true;
+            trigger.size = new Vector2(1f, 24f);        // local units: the marker is 0.5 x 0.5
+            trigger.offset = new Vector2(0f, 11.5f);
+            var feet = new Vector2(go.transform.position.x, root.transform.position.y + Surface(x));
+            AddCheckpoint(go, ++checkpoints, feet);
         }
 
         public void RestPad(int x) => Marker("RestPad", x, Surface(x), 3, 0.25f, Rest);
@@ -489,9 +512,17 @@ public static class LevelMap
         return go.transform;
     }
 
+    // Death and respawn for both players (lane order: Tick, Tock).
+    static void CreateGameFlow(Transform[] players, CoopCamera rig)
+    {
+        var flow = new GameObject("GameFlow").AddComponent<GameFlow>();
+        flow.players = players;
+        flow.cameraRig = rig;
+    }
+
     // Shared side-scrolling camera: both lane cameras follow the players together,
     // and ScreenLeash keeps each player inside the view with an elastic edge.
-    static void CreateCameraRig(int length, Transform[] cameras, Transform[] players)
+    static CoopCamera CreateCameraRig(int length, Transform[] cameras, Transform[] players)
     {
         var go = new GameObject("CameraRig");
         var rig = go.AddComponent<CoopCamera>();
@@ -500,6 +531,7 @@ public static class LevelMap
         rig.levelLeft = -2f;
         rig.levelRight = length + 2f;
         go.AddComponent<ScreenLeash>();
+        return rig;
     }
 
     // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is

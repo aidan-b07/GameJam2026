@@ -71,9 +71,50 @@ public class CoopCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        float target = Target(x);
-        x = Mathf.SmoothDamp(x, target, ref velocity, smoothTime, maxSpeed, Time.deltaTime);
+        if (panning)
+        {
+            panTime += Time.deltaTime;
+            float u = Mathf.Clamp01(panTime / panDuration);
+            x = Mathf.Lerp(panFrom, panTo, u * u * (3f - 2f * u));
+            if (u >= 1f) panning = false;
+        }
+        else
+        {
+            float target = Target(x);
+            x = Mathf.SmoothDamp(x, target, ref velocity, smoothTime, maxSpeed, Time.deltaTime);
+        }
         Apply();
+    }
+
+    float panFrom, panTo, panTime, panDuration;
+    bool panning;
+
+    // Eases the view (no follow, no dead zone) to where it would settle around
+    // the players' current positions, for example after a respawn moved them.
+    // Takes distance / speed seconds, clamped to [minTime, maxTime]; returns it.
+    public float PanToPlayers(float speed, float minTime, float maxTime)
+    {
+        panFrom = x;
+        panTo = Target(Focus(x));
+        panDuration = Mathf.Clamp(Mathf.Abs(panTo - panFrom) / Mathf.Max(speed, 0.01f), minTime, maxTime);
+        panTime = 0f;
+        velocity = 0f;
+        panning = panDuration > 0f;
+        return panDuration;
+    }
+
+    // Players' midpoint shifted forward (current when there are no players).
+    float Focus(float current)
+    {
+        float min = float.PositiveInfinity, max = float.NegativeInfinity;
+        if (players != null)
+            foreach (var p in players)
+            {
+                if (p == null || !p.gameObject.activeInHierarchy) continue;
+                min = Mathf.Min(min, p.position.x);
+                max = Mathf.Max(max, p.position.x);
+            }
+        return min <= max ? (min + max) / 2f + forwardBias : current;
     }
 
     // Where the camera wants to be, given where it is now.
