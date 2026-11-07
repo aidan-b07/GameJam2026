@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 // Shared map builder for the Level<N>Builder scripts. A level is two lanes
 // (Tick on top, Tock below), each described in code with Fill/Ledge/Marker
@@ -12,7 +13,8 @@ using UnityEngine.Tilemaps;
 // one-way ledges, decor props, backgrounds, split-screen cameras, and
 // colour-coded placeholder objects for everything that will get logic later.
 // Each lane gets a LaneSky with day, dusk and night backgrounds, sun and moon;
-// Tick's lane starts at 10:00 (day) and Tock's at 02:00 (night).
+// Tick's lane starts at 10:00 (day) and Tock's at 02:00 (night). A screen
+// overlay draws the Unraveling crack on the seam between the two lanes.
 //
 // Units: 1 tile = 1 world unit (32px tiles at 32 PPU). Ground surface is y = 0,
 // so players stand at y = 0. Tick's lane sits at world y = 0, Tock's at y = -40.
@@ -64,6 +66,7 @@ public static class LevelMap
         b.Sky.skyAnchor = CreateCamera("Camera_Tock", TockLaneY, new Rect(0f, 0f, 1f, 0.5f), false);
         t.Sky.Apply();
         b.Sky.Apply();
+        CreateDivider();
 
         EditorSceneManager.SaveScene(scene, scenePath);
         AddToBuildSettings(scenePath);
@@ -337,6 +340,43 @@ public static class LevelMap
         cam.backgroundColor = new Color(0.1f, 0.06f, 0.15f);
         if (listener) go.AddComponent<AudioListener>();
         return go.transform;
+    }
+
+    // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is
+    // one art pixel (each lane is 360 px tall); the crack is centred on the seam.
+    static void CreateDivider()
+    {
+        var go = new GameObject("LaneDivider", typeof(Canvas), typeof(CanvasScaler));
+        go.layer = LayerMask.NameToLayer("UI");
+        var canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 10;
+        var scaler = go.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1280f, 720f);
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        scaler.matchWidthOrHeight = 1f;
+
+        var divider = go.AddComponent<LaneDivider>();
+        divider.crack = DividerLayer(go.transform, "Crack", "Assets/Art/UI/divider_crack.png");
+        divider.sparkles = DividerLayer(go.transform, "Sparkles", "Assets/Art/UI/divider_sparkles.png");
+    }
+
+    static RawImage DividerLayer(Transform parent, string id, string path)
+    {
+        var go = new GameObject(id, typeof(RectTransform), typeof(RawImage));
+        go.transform.SetParent(parent, false);
+        go.layer = parent.gameObject.layer;
+        var rt = (RectTransform)go.transform;
+        rt.anchorMin = new Vector2(0f, 0.5f);
+        rt.anchorMax = new Vector2(1f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.sizeDelta = new Vector2(0f, 48f);   // texture height
+        rt.anchoredPosition = Vector2.zero;
+        var image = go.GetComponent<RawImage>();
+        image.texture = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
+        image.raycastTarget = false;
+        return image;
     }
 
     static void PrepareWhiteSprite()

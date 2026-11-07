@@ -8,7 +8,8 @@ using UnityEngine.Tilemaps;
 
 // Imports the pixel-art sheets from unity-tiles/ (copied into Assets/Art).
 // Backgrounds (including the _day and _night variants) and the sun and moon
-// in Assets/Art/Sky are imported as single sprites.
+// in Assets/Art/Sky are imported as single sprites; Assets/Art/UI textures
+// (lane divider) as point-filtered, repeating textures.
 // Tick & Tock > Import Art: sets point-filter sprite settings, slices the tile
 // sheets into a grid (sprites named <sheet>_r<row>c<col>, row 0 at the top),
 // creates one Tile asset per non-empty cell and a Tile Palette per sheet.
@@ -17,6 +18,7 @@ public static class ArtImporter
     const string TilesDir = "Assets/Art/Tiles";
     const string BackgroundsDir = "Assets/Art/Backgrounds";
     const string SkyDir = "Assets/Art/Sky";
+    const string UiDir = "Assets/Art/UI";
     const string GeneratedDir = "Assets/Art/Tiles/Generated";
     const string PalettesDir = "Assets/Art/Tiles/Palettes";
 
@@ -29,6 +31,8 @@ public static class ArtImporter
             ImportBackground(path);
         foreach (var path in PngsIn(SkyDir))
             ImportSky(path);
+        foreach (var path in PngsIn(UiDir))
+            ImportUi(path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
         Debug.Log("[ArtImporter] Art import finished.");
@@ -179,6 +183,16 @@ public static class ArtImporter
         ApplyPixelSettings(ti, 32);
         ti.spriteImportMode = SpriteImportMode.Single;
         ti.wrapMode = TextureWrapMode.Clamp;
+        ti.SaveAndReimport();
+    }
+
+    // Screen overlay textures (the lane divider): point filter, repeat so they tile.
+    static void ImportUi(string path)
+    {
+        var ti = (TextureImporter)AssetImporter.GetAtPath(path);
+        ApplyPixelSettings(ti, 32);
+        ti.spriteImportMode = SpriteImportMode.Single;
+        ti.wrapMode = TextureWrapMode.Repeat;
         ti.SaveAndReimport();
     }
 
