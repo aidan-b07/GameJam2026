@@ -95,7 +95,10 @@ public class GameFlow : MonoBehaviour
     public void Reach(Checkpoint c)
     {
         if (!Respawning && c.index > CurrentCheckpoint)
+        {
             CurrentCheckpoint = c.index;
+            Sfx.PlayCentred("checkpoint", 0.8f);
+        }
     }
 
     // Kills both players and respawns them at the current checkpoint.
@@ -108,6 +111,7 @@ public class GameFlow : MonoBehaviour
     private IEnumerator DieAndRespawn()
     {
         Respawning = true;
+        Sfx.PlayCentred("death");
         float death = 0f;
         foreach (var p in list)
         {
@@ -128,6 +132,7 @@ public class GameFlow : MonoBehaviour
         if (cameraRig != null)
             yield return new WaitForSeconds(cameraRig.PanToPlayers(panSpeed, minPan, maxPan));
 
+        Sfx.PlayCentred("respawn");
         float respawn = 0f;
         foreach (var p in list)
         {
