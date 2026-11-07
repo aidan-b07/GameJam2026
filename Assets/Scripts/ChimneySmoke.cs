@@ -36,6 +36,8 @@ public class ChimneySmoke : MonoBehaviour
     public Chimney[] chimneys;
     [Tooltip("Lane whose clock runs the smoke in play mode (0 Tick, 1 Tock).")]
     public int lane = -1;
+    [Tooltip("How fast the smoke plays relative to lane time (rise, drift, puffs and fading alike).")]
+    [Range(0.1f, 2f)] public float tempo = 0.55f;
     [Tooltip("Redraws per second (real time).")]
     public float fps = 12f;
     [Tooltip("Rows of the picture above the highest mouth the smoke may reach.")]
@@ -143,7 +145,7 @@ public class ChimneySmoke : MonoBehaviour
             float now = GameManager.INSTANCE.GetLaneTime(lane);
             if (laneTime >= 0f)
             {
-                float dt = Mathf.Clamp(now - laneTime, 0f, 1f);
+                float dt = Mathf.Clamp(now - laneTime, 0f, 1f) * tempo;
                 while (dt > 0f)
                 {
                     float s = Mathf.Min(Step, dt);
