@@ -569,6 +569,53 @@ public static class LevelMap
             return go;
         }
 
+        // Sliding bridge over the pit between x0 and x1 (Level 2; ground ends
+        // at x0 and starts again at x1, like Drawbridge). The deck hides in the
+        // near wall under the ground surface and TimeGate runs it out across
+        // the pit while the lane is fast, pulling it back at normal speed.
+        public GameObject TimeBridge(int x0, int x1)
+        {
+            int length = x1 - x0;
+            float top = Surface(x0 - 1) - 1f / 32f;   // level with the ground collider's top
+            Busy(x0 - 2, x1);
+
+            counts["TimeBridge"] = counts.TryGetValue("TimeBridge", out var n) ? n + 1 : 1;
+            var go = new GameObject($"TimeBridge_{counts["TimeBridge"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x0 - length / 2f, top, 0f);
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            var box = go.AddComponent<BoxCollider2D>();
+            box.size = new Vector2(length, 0.5f);
+            box.offset = new Vector2(0f, -0.25f);
+            // Behind the ground tiles, so the pulled-in deck disappears into the wall.
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("lift_platform"));
+            sr.drawMode = SpriteDrawMode.Tiled;
+            sr.size = new Vector2(length, 0.5f);
+            sr.sortingOrder = -1;
+            tinted.Add(sr);
+
+            // Lamp on a short post at the pit's edge.
+            var lamp = new GameObject($"{go.name}_Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(markers, false);
+            lamp.transform.localPosition = new Vector3(x0 - 1.5f, top + 1.2f, 0f);
+            lamp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("gate_lamp"));
+            lamp.sortingOrder = 3;
+
+            var gate = new SerializedObject(go.AddComponent<TimeGate>());
+            gate.FindProperty("lane").intValue = LaneIndex;
+            gate.FindProperty("travel").floatValue = length;
+            gate.FindProperty("direction").vector2Value = Vector2.right;
+            gate.FindProperty("lamp").objectReferenceValue = lamp;
+            gate.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
         // Lift over x..x+2 (Level 2): a one-way deck half a tile above the
         // ground that rides up to stand level with `top` and back, on two chains
         // from a stone beam above. LaneLift runs it on lane time; offset (lane

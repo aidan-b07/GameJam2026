@@ -4,8 +4,8 @@ using static LevelMap;
 // Level 2 "The Foundry". Map only; see LevelMap. Denser than Level 1 and built
 // so both players are busy at once: each lane's obstacles sit next to ones in
 // the other lane that need the opposite from the partner. Moving speeds up the
-// partner's lane: time gates need the partner moving, lifts and the drawbridge
-// run faster with them moving, crushers are easier with them standing still.
+// partner's lane: time gates and bridges need the partner moving, lifts run
+// faster with them moving, crushers are easier with them standing still.
 public static class Level2Builder
 {
     public const string ScenePath = "Assets/Scenes/Level2_Foundry.unity";
@@ -24,8 +24,8 @@ public static class Level2Builder
         l.Fill(22, 25, 1);
 
         // 2. Crusher, then a lift to the high walk while Tock works the drawbridge.
-        //    Tock waiting at the bridge keeps the crusher slow; Tick pacing on the
-        //    lift deck winds the bridge round.
+        //    Tock waiting at the bridge keeps the crusher slow; Tick moving runs
+        //    Tock's bridge out, Tock crossing it speeds up the lift.
         l.Checkpoint(34);
         l.Crusher(40);
         l.Lift(48, 5);
@@ -57,18 +57,17 @@ public static class Level2Builder
 
     static void Tock(Lane l)
     {
-        l.Floor((-8, 7), (10, 16), (19, 49), (57, 95), (98, 101), (104, Length + 8));
+        l.Floor((-8, 7), (10, 16), (19, 49), (59, 95), (98, 101), (104, Length + 8));
         l.Spawn(3);
 
         // 1. Hops keep Tick's gate up, then Tick's hops hold this one.
         l.Fill(12, 14, 1);
         l.TimeGate(24);
 
-        // 2. Drawbridge: Tick moving winds it round, Tick still holds it across the pit.
+        // 2. Sliding bridge over a pit too wide to jump: out while Tick moves.
         l.Checkpoint(34);
         l.Ledge(37, 40, 2);
-        l.Drawbridge(50, 57);
-        l.Busy(48, 57);
+        l.TimeBridge(50, 59);
         l.Fill(61, 64, 1);
 
         // 3. Lift to the high walk and a gate up there, held by Tick running the crushers.
