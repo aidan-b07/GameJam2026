@@ -313,9 +313,21 @@ public class LaneHud : MonoBehaviour
         {
             view.vignette.enabled = s.warn > 0.01f;
             view.vignette.color = new Color(1f, 1f, 1f, s.warn * vignetteAlpha * Mathf.Lerp(0.75f, 1f, pulse));
-            // Hangs from the rift's edge, so the shade leads it down towards the player.
+            // Hangs from the rift's shallowest point in view, so the rift covers
+            // its flat top and the shade leads the edge down towards the player.
             var rt = view.vignette.rectTransform;
-            float reachPx = rift != null ? rift.Reach(lane) * 32f : 0f;
+            float reachPx = 0f;
+            if (rift != null)
+            {
+                var cams = flow != null && flow.cameraRig != null ? flow.cameraRig.cameras : null;
+                var cam = cams != null && lane < cams.Length ? cams[lane] : null;
+                if (cam != null)
+                {
+                    float x = cam.transform.position.x, half = cam.orthographicSize * cam.aspect;
+                    reachPx = rift.ShallowestReach(lane, x - half, x + half) * 32f;
+                }
+                else reachPx = rift.Reach(lane) * 32f;
+            }
             rt.anchoredPosition = new Vector2(0f, -Mathf.Round(reachPx));
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, vignetteHeight);
             // Tiled, not stretched, so the dither stays one art pixel wide.

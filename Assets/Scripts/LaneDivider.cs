@@ -4,15 +4,16 @@ using UnityEngine.UI;
 
 // The Unraveling rifts, drawn on a screen-space overlay canvas (one canvas
 // unit is one art pixel). Two bands, one per lane, each hanging from the top
-// edge of its lane's view and reaching down by LaneRift.Reach(lane):
+// edge of its lane's view and reaching down by LaneRift.ReachAt(lane, x)
+// (a front that keeps changing shape, and tendrils that sprout and pull back):
 // - rift, on the seam between Tick's lane (top) and Tock's (bottom), grows
 //   down into Tock's view; its top edge stays a thin crack in Tick's ground;
 // - topRift, along the top of the screen, grows down into Tick's view.
 //
 // Each rift is pixel art drawn into a texture at a low frame rate: stepped
 // 4 px edge columns, a dark outline and lit rim, a checker-dither glow,
-// twinkling sparkles inside and 2x2 chunks that break off the rim. Chunks fly
-// outwards while a rift grows and get pulled back in while it shrinks.
+// twinkling sparkles inside and 2x2 chunks: while a rift grows, bits of the
+// world below its edge drift up into it; while it shrinks, chunks fall out.
 //
 // The edges belong to the level: each edge's shape is fixed to its lane's
 // world (topCamera for the edges in Tick's view, bottomCamera for the one in
@@ -36,7 +37,7 @@ public class LaneDivider : MonoBehaviour
     [Tooltip("Reach in art pixels of a closed rift, and of the seam rift's crack up into Tick's ground.")]
     public float minHalfHeight = 9f;
     [Tooltip("Animation frames per second (real time), stepped like the sprites.")]
-    public float fps = 12f;
+    public float fps = 20f;
     [Tooltip("Seconds for the edge teeth to morph into a new shape.")]
     public float morphTime = 5f;
     [Tooltip("Rift growth (units) shown outside play mode (and when there is no LaneRift), for previewing.")]
@@ -165,6 +166,15 @@ public class LaneDivider : MonoBehaviour
         return minHalfHeight + previewDepth * PixelsPerUnit;
     }
 
+    // Reach in art pixels of the edge column at world pixel wx.
+    float ReachAt(int lane, int wx)
+    {
+        float x = wx / PixelsPerUnit;
+        if (Application.isPlaying && LaneRift.Instance != null)
+            return LaneRift.Instance.ReachAt(lane, x) * PixelsPerUnit * scale;
+        return (minHalfHeight + LaneRift.Front(previewDepth, x, 0f, lane) * PixelsPerUnit) * scale;
+    }
+
     bool EnsureTexture(Band b, int width)
     {
         if (b.tex != null && b.tex.width == width) return false;
@@ -184,7 +194,7 @@ public class LaneDivider : MonoBehaviour
     }
 
     // Edge extent (px from the anchor) of the world column containing world
-    // pixel wx: the mean reach plus teeth. The broad shape and the teeth each
+    // pixel wx: the column's reach plus teeth. The broad shape and the teeth each
     // cross-fade between fixed noise fields, so the edge reshapes in place
     // without sliding along the level.
     float Extent(int wx, float reach, float seconds, int seed)
@@ -221,7 +231,7 @@ public class LaneDivider : MonoBehaviour
             b.top[x] = b.upperEdge
                 ? Mathf.Clamp((int)Extent(origin + x + upperShift, minHalfHeight * scale, seconds, 1), 2, mid - 8)
                 : mid + 3;
-            b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, reach, seconds, b.seed), 2, Below - 8);
+            b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, ReachAt(b.lane, origin + x), seconds, b.seed), 2, Below - 8);
         }
 
         int band = heat > 0.5f ? 4 : 2;
@@ -279,26 +289,43 @@ public class LaneDivider : MonoBehaviour
                 }
             }
 
-        // Chunks: peel off the rim; outwards while growing, inwards while shrinking.
+        // Chunks: while the rift grows, bits of the world just below its edge
+        // drift up into it (consumed); while it shrinks, chunks fall out.
         if (tick)
         {
-            float rate = 0.25f + Mathf.Min(2f, Mathf.Abs(growth) * 0.5f) * w / 1280f;
-            int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
-            bool inward = growth < -0.5f;
-            for (int n = 0; n < count; n++)
+            float scaleW = w / 1280f;
+            if (growth > 0.01f)
             {
-                int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
-                bool up = b.upperEdge && rng.NextDouble() < 0.3;
-                float y = up ? mid - b.top[x] - 3 : mid + b.bottom[x] + 1;
-                if (inward) y += up ? -10 : 10;
-                float dir = (up ? -1f : 1f) * (inward ? -1f : 1f);
-                b.chunks.Add(new Chunk
+                float rate = (0.6f + Mathf.Min(2f, growth)) * scaleW;
+                int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
+                for (int n = 0; n < count; n++)
                 {
-                    x = origin + x, y = y,
-                    vx = (float)(rng.NextDouble() - 0.5) * 0.4f,
-                    vy = dir * (0.5f + (float)rng.NextDouble() * 0.5f) + (up ? 0f : growth),
-                    life = 10 + rng.Next(10),
-                });
+                    int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
+                    b.chunks.Add(new Chunk
+                    {
+                        x = origin + x, y = mid + b.bottom[x] + 6 + rng.Next(10),
+                        vx = (float)(rng.NextDouble() - 0.5) * 0.2f,
+                        vy = -(0.4f + (float)rng.NextDouble() * 0.5f),
+                        life = 14 + rng.Next(14),
+                    });
+                }
+            }
+            else if (growth < -0.5f || rng.NextDouble() < 0.25 * scaleW)
+            {
+                float rate = (0.25f + Mathf.Min(2f, -growth * 0.5f)) * scaleW;
+                int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
+                for (int n = 0; n < count; n++)
+                {
+                    int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
+                    bool up = b.upperEdge && rng.NextDouble() < 0.3;
+                    b.chunks.Add(new Chunk
+                    {
+                        x = origin + x, y = up ? mid - b.top[x] - 3 : mid + b.bottom[x] + 1,
+                        vx = (float)(rng.NextDouble() - 0.5) * 0.4f,
+                        vy = (up ? -1f : 1f) * (0.5f + (float)rng.NextDouble() * 0.5f),
+                        life = 10 + rng.Next(10),
+                    });
+                }
             }
             for (int n = b.chunks.Count - 1; n >= 0; n--)
             {

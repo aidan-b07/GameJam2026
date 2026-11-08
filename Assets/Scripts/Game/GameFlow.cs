@@ -298,6 +298,17 @@ public class GameFlow : MonoBehaviour
         return p.rb.position.y + top;
     }
 
+    // Left and right edges (world x) of the lane's player collider.
+    public Vector2 Span(int lane)
+    {
+        var p = list[lane];
+        if (p.rb == null) return Vector2.zero;
+        if (p.box == null) return new Vector2(p.rb.position.x, p.rb.position.x);
+        float sx = p.rb.transform.lossyScale.x;
+        float centre = p.rb.position.x + p.box.offset.x * sx, half = p.box.size.x * Mathf.Abs(sx) / 2f;
+        return new Vector2(centre - half, centre + half);
+    }
+
     // The lane's player's horizontal speed as a fraction (0..1) of their run speed.
     public float HorizontalSpeed(int lane)
     {
