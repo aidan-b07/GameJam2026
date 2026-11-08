@@ -64,8 +64,10 @@ public class DawnSky : MonoBehaviour
     float sunShift;             // chosen so the sun rises in open sky (px)
     int lastRaysFrame = -1;
     Vector2Int glowKey = new Vector2Int(int.MinValue, 0);
-    float[] mask;               // rw * rh, row 0 at the top
-    int[] roof;                 // per quarter column
+    float[] mask;               // city sky, rw * rh, row 0 at the top: tint, glow and disc
+    int[] roof;                 // per quarter column, of mask
+    float[] light;              // mask without what the level puts in front: rays and visibility
+    int[] lightRoof;
     Texture2D glowTex, discTex, tintMulTex, tintTex, raysTex, fxTex, warmTex;
     Color32[] glowPx, discPx, tintMulPx, tintPx, raysPx, fxPx;
     float[] fxAcc;
@@ -288,7 +290,6 @@ public class DawnSky : MonoBehaviour
     void BuildMask(Camera cam)
     {
         mask = new float[rw * rh];
-        roof = new int[rw];
         Color32[] src = null;
         int pw = 0, ph = 0;
         var sprite = midLayer != null ? midLayer.sprite : null;
@@ -351,18 +352,26 @@ public class DawnSky : MonoBehaviour
         // The level in front of the sky (gate housings, walls, the door, lamps)
         // blocks light too: render the lane without its sky and players and
         // take what covers the sky out of the mask.
+        // Kept apart from the city mask: obstacles move (crusher heads), and a
+        // hole in the tint where one stood when the ending began would show.
         var cover = Occluders(cam);
+        light = (float[])mask.Clone();
         if (cover != null)
-            for (int qy = 0; qy < rh; qy++)
-                for (int qx = 0; qx < rw; qx++)
-                    mask[qy * rw + qx] *= 1f - cover[qy * rw + qx];
+            for (int i = 0; i < light.Length; i++) light[i] *= 1f - cover[i];
+        roof = Roofline(mask);
+        lightRoof = Roofline(light);
+    }
 
+    int[] Roofline(float[] m)
+    {
+        var r = new int[rw];
         for (int x = 0; x < rw; x++)
         {
             int y = 0;
-            while (y < rh && mask[y * rw + x] > 0.5f) y++;
-            roof[x] = y;
+            while (y < rh && m[y * rw + x] > 0.5f) y++;
+            r[x] = y;
         }
+        return r;
     }
 
     // Coverage (0-1, quarter res, row 0 at the top) of the level in the lane
@@ -448,7 +457,7 @@ public class DawnSky : MonoBehaviour
     // Share (0-1) of a 7-cell disc round the sun above the roofline.
     public float SunVisible(Vector2 sun)
     {
-        if (roof == null) return 0f;
+        if (lightRoof == null) return 0f;
         float v = 0f; int n = 0;
         for (int dy = -7; dy <= 7; dy++)
             for (int dx = -7; dx <= 7; dx++)
@@ -456,7 +465,7 @@ public class DawnSky : MonoBehaviour
                 if (dx * dx + dy * dy > 49) continue;
                 int x = Mathf.FloorToInt(sun.x / 4f + dx + 0.5f), y = Mathf.FloorToInt(sun.y / 4f + dy + 0.5f);
                 n++;
-                if (x >= 0 && x < rw && y >= 0 && y < rh) v += y < roof[x] ? 1f : 0f;
+                if (x >= 0 && x < rw && y >= 0 && y < rh) v += y < lightRoof[x] ? 1f : 0f;
                 else if (y < 0) v++;
             }
         return v / n;
@@ -645,7 +654,7 @@ public class DawnSky : MonoBehaviour
             var b = beams[k];
             float l = Mathf.Repeat((t + b.a * 3f) / b.per, 1f);
             env[k] = Mathf.Sin(Mathf.PI * l);
-            ang[k] = b.a + t * 0.045f + b.sway * Mathf.Sin(t * 0.4f + b.a * 5f);
+            ang[k] = Mathf.Repeat(b.a + t * 0.045f + b.sway * Mathf.Sin(t * 0.4f + b.a * 5f) + Mathf.PI, Tau) - Mathf.PI;
             wid[k] = b.w * (0.7f + 0.5f * env[k]);
             len[k] = b.len * (0.45f + 0.55f * EOut(Mathf.Min(1f, l * 2f)));
         }
@@ -658,18 +667,21 @@ public class DawnSky : MonoBehaviour
         for (int y = 0; y < rh; y++)
             for (int x = 0; x < rw; x++)
             {
-                float dx = cx - x, dy = cy - y, dist = Mathf.Sqrt(dx * dx + dy * dy), mh = mask[y * rw + x];
+                float dx = cx - x, dy = cy - y, dist = System.MathF.Sqrt(dx * dx + dy * dy), mh = light[y * rw + x];
                 float v = 0f;
                 if (dist < reach)
                 {
-                    float a = Mathf.Atan2(-dy, -dx), beam = 0f;
+                    float a = System.MathF.Atan2(-dy, -dx), beam = 0f;
                     for (int k = 0; k < n; k++)
                     {
-                        float da = Mathf.Abs(((a - ang[k]) % Tau + Tau * 1.5f) % Tau - Mathf.PI);
+                        float da = a - ang[k];
+                        if (da > Mathf.PI) da -= Tau; else if (da < -Mathf.PI) da += Tau;
+                        if (da < 0f) da = -da;
                         if (da > wid[k]) continue;
                         float core = 1f - da / wid[k], fall = 1f - dist / (reach * len[k]);
-                        if (fall > 0f) beam = Mathf.Max(beam, core * core * fall * env[k] * (0.8f + 0.2f * Mathf.Sin(t * 1.7f + dist * 0.08f)));
+                        if (fall > 0f) beam = System.MathF.Max(beam, core * core * fall * env[k]);
                     }
+                    if (beam > 0f) beam *= 0.8f + 0.2f * System.MathF.Sin(t * 1.7f + dist * 0.08f);
                     if (beam > 0.02f)
                     {
                         if (Mathf.Abs(dist - front) < 3f) beam += 0.5f;
@@ -681,19 +693,19 @@ public class DawnSky : MonoBehaviour
                             else
                             {
                                 int sx = fx < 0f ? -1 : (int)fx, sy = (int)fy;
-                                mv = sx < 0 || sx >= rw || sy >= rh ? 0f : mask[sy * rw + sx];
+                                mv = sx < 0 || sx >= rw || sy >= rh ? 0f : light[sy * rw + sx];
                             }
                             acc += mv * weights[k];
                         }
-                        v = Mathf.Pow(acc / wsum, 1.6f) * (0.3f + 0.7f * mh) * beam * 1.35f;
+                        v = System.MathF.Pow(acc / wsum, 1.6f) * (0.3f + 0.7f * mh) * beam * 1.35f;
                     }
                 }
                 v += vis * (Mathf.Max(0f, 1f - dist / 22f) * 0.9f + Mathf.Max(0f, 1f - dist / 60f) * 0.25f);
-                if (sweep > 0f && mh < 0.5f && y * 4 < groundRow)
+                if (sweep > 0f && mask[y * rw + x] < 0.5f && y * 4 < groundRow)
                 {
                     float ax = Mathf.Abs(x - cx), top = Mathf.Clamp01(1f - (y - roof[x]) / 12f);
                     float band = (ax - sweep) / 5f;
-                    v += top * (Mathf.Exp(-band * band) * 0.9f * sweepFade + (ax < sweep ? behind : 0f));
+                    v += top * (System.MathF.Exp(-band * band) * 0.9f * sweepFade + (ax < sweep ? behind : 0f));
                 }
                 v *= on;
                 int lvl = Mathf.FloorToInt(v * 4f + Dither(x, y) * 0.9f);
