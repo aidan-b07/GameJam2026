@@ -9,10 +9,10 @@ using UnityEngine;
 // middle of its swing it is fast and throws them off the belt into a drop; at
 // the belt's outer tiles (nudgeBeyond from under the axis) a hit is only a
 // nudge, at any lane speed, so a player near the belt's end is never thrown
-// off it; at the very
-// ends it lifts over head height, so the last tile or so of the belt is never
-// touched. Moving away from a player it only blocks. Art from tools/make_pendulum.py (pendulum_clockbob_96px: frames by
-// speed, mirrored when it swings left); LevelMap.Lane.ClockPendulum builds it.
+// off it; at the very ends it lifts over head height, so the last tile or so
+// of the belt is never touched. Moving away from a player it only blocks. Art
+// from tools/make_pendulum.py (pendulum_clockbob_96px: frames by speed and
+// direction, never mirrored); LevelMap.Lane.ClockPendulum builds it.
 // Runs after PlayerMovement (which sets the velocity each step) and the belts.
 [DefaultExecutionOrder(60)]
 public class ClockPendulum : LaneObstacle
@@ -48,7 +48,7 @@ public class ClockPendulum : LaneObstacle
     [Tooltip("Turns with the swing; the rod, hub and bob are its children.")]
     public Transform arm;
     public SpriteRenderer bob;
-    [Tooltip("Bob frames: no smear, light, heavy (drawn moving right).")]
+    [Tooltip("Bob frames: no smear, light and heavy smear moving right, light and heavy smear moving left.")]
     public Sprite[] bobFrames;
     [Tooltip("Bob speeds (units per second) from which the light and heavy smear show.")]
     public float lightSmear = 9f, heavySmear = 20f;
@@ -118,7 +118,11 @@ public class ClockPendulum : LaneObstacle
         if (bob == null || bobFrames == null || bobFrames.Length < 3) return;
         float omega = Omega(t);
         float speed = Mathf.Abs(omega) * Mathf.Deg2Rad * reach;
-        bob.sprite = bobFrames[speed > heavySmear ? 2 : speed > lightSmear ? 1 : 0];
-        bob.flipX = omega < 0f;   // the smear trails behind: drawn for a bob moving right
+        int frame = speed > heavySmear ? 2 : speed > lightSmear ? 1 : 0;
+        // The art has its own left-moving smears (frames 3 and 4): mirroring
+        // the bob would flip its top-left lighting each time it turned round.
+        if (frame > 0 && omega < 0f && bobFrames.Length >= 5) frame += 2;
+        bob.sprite = bobFrames[frame];
+        bob.flipX = false;
     }
 }
