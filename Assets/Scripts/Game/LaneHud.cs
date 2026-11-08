@@ -179,7 +179,12 @@ public class LaneHud : MonoBehaviour
         {
             if (lanes[i]?.grade != null) lanes[i].grade.sharedProfile = null;
             if (state[i].tex != null) Destroy(state[i].tex);
-            if (state[i].profile != null) Destroy(state[i].profile);
+            if (state[i].profile != null)
+            {
+                // Destroying a profile does not destroy the components it holds.
+                foreach (var c in state[i].profile.components) if (c != null) Destroy(c);
+                Destroy(state[i].profile);
+            }
         }
         state = null;
     }
