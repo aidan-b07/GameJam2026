@@ -6,23 +6,32 @@ using static LevelMap;
 // The main level (Samuel's sketch, 2026-11-08; DESIGN.md "Main level").
 // Levels 1 and 2 are kept but left out of the build. Map only; see LevelMap.
 // Each lane's obstacle sits next to one in the other lane that needs the
-// opposite from the partner (moving speeds up the partner's lane, standing
-// still freezes it):
+// opposite from the partner (moving runs the partner's lane at up to 3x,
+// standing still slows it to 0.35x), while the rift (LaneRift) keeps a
+// player from standing still for more than about 5 s:
 // 1. Opening: Tick climbs a step while Tock passes a trap door, then they swap.
-// 2. Bridge and gate: Tick crosses the drawbridge (Tock must stand still so
-//    the leaf stops across the pit) and presses the button that opens the gate
-//    on the far lip of Tock's pit. Tock's belt runs toward that pit whenever
-//    Tick moves.
+// 2. Bridge and gate: Tick crosses the drawbridge (the winch holds the leaf
+//    across the pit for spanPause lane seconds; Tock stands still when it
+//    starts to winch, so the hold lasts seconds instead of a blink) and
+//    presses the button that opens the gate on the far lip of Tock's pit.
+//    Tock's belt runs toward that pit whenever Tick moves.
 // 3. Scenery: decor only.
 // 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
-//    directions. The last crusher in each lane has a button in its strike
-//    plate; both buttons (any order) open both final gates. A death lets the
+//    directions and a plain gap before the last crusher. The last crusher in
+//    each lane has a button in its strike plate; both buttons (any order)
+//    open both final gates. Whoever presses first waits in the plain gap,
+//    standing still, which slows the partner's crushers. A death lets the
 //    buttons go and shuts the gates.
+// Crossing notes (bot-measured timings): DESIGN.md "Main level".
 public static class MainLevelBuilder
 {
     public const string ScenePath = "Assets/Scenes/MainLevel.unity";
     const int Length = 136;
     const float Belt = 0.75f;   // units per lane second
+    const float SpanPause = 2.5f;   // lane seconds the drawbridge holds across its pit
+    // Lane seconds each crusher waits raised (PlungerMotion default 2): at 3x
+    // the gap under a head lasts about 1.4 s, enough for a 0.4 s reaction.
+    const float CrusherPause = 3.5f;
 
     static FloorButton gateButton, tickFinal;
     static ButtonGate tickGate;
@@ -44,6 +53,13 @@ public static class MainLevelBuilder
             .Concat(scenes.Where(s => s.path != ScenePath && !IsMenu(s))).ToArray();
     }
 
+    static void Crusher(Lane l, int x, float offset = 0f)
+    {
+        var motion = new SerializedObject(l.Crusher(x, offset).GetComponent<PlungerMotion>());
+        motion.FindProperty("raisedPause").floatValue = CrusherPause;
+        motion.ApplyModifiedPropertiesWithoutUndo();
+    }
+
     static void Tick(Lane l)
     {
         l.Floor((-8, 16), (21, 29), (39, 85), (91, 109), (114, Length + 8));
@@ -59,10 +75,15 @@ public static class MainLevelBuilder
         //    where the leaf lands: no safe spot between them. The checkpoint
         //    is on the one-tile sliver between them (x 21), its lamp behind
         //    the trap door's right lip lamp (pixel 180 of the trap door's
-        //    frame, which starts at x 16). The 9-wide pit is too wide to jump;
-        //    Tock standing still freezes the leaf across it. The button beyond
+        //    frame, which starts at x 16). The 9-wide pit is too wide to jump.
+        //    The winch holds the leaf across the pit for SpanPause lane
+        //    seconds: 0.8 s at 3x (too short to cross 9 tiles), 2.3 s when
+        //    Tock stands still as it starts to winch, longer if Tock stops
+        //    before. The button beyond
         //    opens Tock's gate.
-        l.Drawbridge(30, 39);
+        var bridge = new SerializedObject(l.Drawbridge(30, 39).GetComponent<BridgeMovement>());
+        bridge.FindProperty("spanPause").floatValue = SpanPause;
+        bridge.ApplyModifiedPropertiesWithoutUndo();
         l.Checkpoint(21, lampX: 20f / 32f, lampBehind: true);
         gateButton = l.Button(41);
 
@@ -80,16 +101,16 @@ public static class MainLevelBuilder
         l.Checkpoint(81);
 
         // 4. Gauntlet: crusher straight into a pit, a belt back toward it,
-        //    belts between crushers, then the last crusher's button with a hole
-        //    after it and the gate on the far lip: both wait under their
-        //    crushers until both buttons are down and the gates are up.
-        l.Crusher(82);
+        //    belts between crushers, a plain gap (104-106: the first to press
+        //    waits there), then the last crusher's button with a hole after it
+        //    and the gate on the far lip: both cross once both buttons are
+        //    down and the gates are up.
+        Crusher(l, 82);
         l.Conveyor(91, 94, -Belt);
-        l.Crusher(95, 0.9f);
+        Crusher(l, 95, 0.9f);
         l.Conveyor(98, 100, Belt);
-        l.Crusher(101, 1.8f);
-        l.Conveyor(104, 106, -Belt);
-        l.Crusher(107, 2.7f);
+        Crusher(l, 101, 1.8f);
+        Crusher(l, 107, 2.7f);
         tickFinal = l.Button(108, narrow: true);   // in the strike plate
         tickGate = l.ButtonGate(114);
 
@@ -132,13 +153,12 @@ public static class MainLevelBuilder
         l.Checkpoint(81);
 
         // 4. Gauntlet, offset from Tick's.
-        l.Crusher(83, 0.45f);
+        Crusher(l, 83, 0.45f);
         l.Conveyor(92, 95, -Belt);
-        l.Crusher(96, 1.35f);
+        Crusher(l, 96, 1.35f);
         l.Conveyor(99, 101, Belt);
-        l.Crusher(102, 2.25f);
-        l.Conveyor(105, 107, -Belt);
-        l.Crusher(108, 3.15f);
+        Crusher(l, 102, 2.25f);
+        Crusher(l, 108, 3.15f);
         var tockFinal = l.Button(109, narrow: true);
         var tockGate = l.ButtonGate(115);
         WireGate(tockGate, tickFinal, tockFinal);
