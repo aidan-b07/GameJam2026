@@ -52,9 +52,9 @@ public class LaneRift : MonoBehaviour
     [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
     public float slowGrace = 0.5f;
     [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second.")]
-    public float growthRate = 0.28f;
+    public float growthRate = 0.22f;
     [Tooltip("Depth (units) the exponential grows from: higher starts faster. " +
-             "From closed (after slowGrace) it reaches a standing player in about 9 s, sooner under a tendril.")]
+             "From closed (after slowGrace) it reaches a standing player in about 12 s, sooner under a tendril.")]
     public float growthSeed = 1f;
 
 
@@ -76,7 +76,7 @@ public class LaneRift : MonoBehaviour
 
     [Header("Shrink (player at or above the threshold)")]
     [Tooltip("Units per second the rift closes at full run speed; scales with the player's speed.")]
-    public float shrinkRate = 1.5f;
+    public float shrinkRate = 3f;
 
     [Header("Momentum")]
     [Tooltip("Seconds the rift's rate takes to ease to a new target (critically damped): higher turns around more slowly, " +

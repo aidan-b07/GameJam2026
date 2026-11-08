@@ -56084,9 +56084,9 @@ MonoBehaviour:
   restReach: 0.28125
   slowThreshold: 0.35
   slowGrace: 0.5
-  growthRate: 0.28
+  growthRate: 0.22
   growthSeed: 1
-  shrinkRate: 1.5
+  shrinkRate: 3
   rateSmoothTime: 0.7
   headMargin: -0.25
   maxDepth: 12
