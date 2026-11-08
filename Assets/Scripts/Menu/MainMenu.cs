@@ -14,7 +14,7 @@ using UnityEngine.UI;
 // turning on each side; pressing pushes it down a pixel. Each change of
 // selection makes the side rift flare.
 //
-// Play and Select Level open the level select, Quit closes the game (stops
+// Play opens the main level, Select Level the level select, Quit closes the game (stops
 // play mode in the editor), Settings has no screen yet and only logs. Every
 // press also raises Activated with the button.
 //
@@ -59,7 +59,9 @@ public class MainMenu : MonoBehaviour
     public Vector2 plateSize = new Vector2(168f, 32f);
     public float pixelsPerUnit = 32f;
     public float pressTime = 0.14f;
-    [Tooltip("Scene that Play and Select Level open (name in Build Settings).")]
+    [Tooltip("Scene that Play opens (name in Build Settings).")]
+    public string playScene = "MainLevel";
+    [Tooltip("Scene that Select Level opens (name in Build Settings).")]
     public string levelSelectScene = "LevelSelect";
     [Tooltip("Seconds between a press and its scene change or quit, so the press shows.")]
     public float leaveDelay = 0.3f;
@@ -218,7 +220,8 @@ public class MainMenu : MonoBehaviour
             case Button.SelectLevel:
             case Button.Quit:
                 leaving = true;                  // ignore input until we go
-                Invoke(button == Button.Quit ? nameof(QuitGame) : nameof(OpenLevelSelect), leaveDelay);
+                Invoke(button == Button.Quit ? nameof(QuitGame)
+                    : button == Button.Play ? nameof(OpenPlayScene) : nameof(OpenLevelSelect), leaveDelay);
                 break;
             default:
                 Debug.Log($"[MainMenu] {button} pressed (no screen for it yet).");
@@ -227,6 +230,8 @@ public class MainMenu : MonoBehaviour
     }
 
     bool leaving;
+
+    void OpenPlayScene() => SceneManager.LoadScene(playScene);
 
     void OpenLevelSelect() => SceneManager.LoadScene(levelSelectScene);
 
