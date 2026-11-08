@@ -4,11 +4,13 @@ using UnityEngine.SceneManagement;
 
 // Hidden shortcuts for showing the level to the jam judges (PLAN.md milestone
 // 6), in the Editor and in player builds, only on the F keys:
-//   F1-F3  both players to checkpoint 1-3 (made current, lamps light; the
-//          respawn sequence runs, ScreenLeash off meanwhile: GameFlow.WarpToCheckpoint);
-//   F4     both players a few steps before their clock doors (checkpoint set
+//   F1-F9  both players to checkpoint 1-9 (made current, lamps light; the
+//          respawn sequence runs, ScreenLeash off meanwhile: GameFlow.WarpToCheckpoint).
+//          Read from the level's Checkpoint components, so new checkpoints
+//          get a key without changes here; keys past the last one do nothing;
+//   F10    both players a few steps before their clock doors (checkpoint set
 //          to the last one): walk right to trigger the ending;
-//   F5     toggles a small readout: lane speeds, lane hours, rift depths, fps.
+//   F12    toggles a small readout: lane speeds, lane hours, rift depths, fps.
 // The warps do nothing while paused, during a respawn or once the ending runs.
 // Creates itself on scene load in scenes with a GameFlow, like PauseMenu.
 public class JudgeKeys : MonoBehaviour
@@ -50,20 +52,28 @@ public class JudgeKeys : MonoBehaviour
 
         var kb = Keyboard.current;
         if (kb == null) return;
-        if (kb.f5Key.wasPressedThisFrame) showReadout = !showReadout;
+        if (kb.f12Key.wasPressedThisFrame) showReadout = !showReadout;
 
-        int warp = kb.f1Key.wasPressedThisFrame ? 1 : kb.f2Key.wasPressedThisFrame ? 2
-            : kb.f3Key.wasPressedThisFrame ? 3 : kb.f4Key.wasPressedThisFrame ? 4 : 0;
-        if (warp == 0 || !CanWarp(out var flow)) return;
+        int checkpoint = 0;
+        for (int i = 0; i < CheckpointKeys.Length; i++)
+            if (kb[CheckpointKeys[i]].wasPressedThisFrame) checkpoint = i + 1;
+        bool doors = kb.f10Key.wasPressedThisFrame;
+        if ((checkpoint == 0 && !doors) || !CanWarp(out var flow)) return;
 
-        if (warp <= 3)
+        if (checkpoint > 0)
         {
-            if (!flow.WarpToCheckpoint(warp))
-                Debug.Log($"[JudgeKeys] No checkpoint {warp} in this level.");
+            if (!flow.WarpToCheckpoint(checkpoint))
+                Debug.Log($"[JudgeKeys] No checkpoint {checkpoint} in this level (last is {flow.HighestCheckpoint}).");
             return;
         }
         WarpToDoors(flow);
     }
+
+    // Checkpoint n warps on CheckpointKeys[n - 1].
+    static readonly Key[] CheckpointKeys =
+    {
+        Key.F1, Key.F2, Key.F3, Key.F4, Key.F5, Key.F6, Key.F7, Key.F8, Key.F9,
+    };
 
     static bool CanWarp(out GameFlow flow)
     {
