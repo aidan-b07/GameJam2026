@@ -123,15 +123,19 @@ public static class MainLevelBuilder
 
     static void Tock(Lane l)
     {
-        l.Floor((-8, 7), (12, 30), (35, 86), (92, 110), (115, Length + 8));
+        l.Floor((-8, 7), (12, 19), (23, 30), (35, 86), (92, 110), (115, Length + 8));
         l.Spawn(3);
 
         // 1. Trap door, then a ledge higher than a jump that drops straight
         //    onto the belt. The checkpoint is on the ledge, the last safe spot.
+        //    The ledge's right half overhangs a hole at the belt's start, so
+        //    walking left against the belt drops Tock in instead of letting
+        //    them lean on a wall (moving 0 keeps Tick's lane slow).
         l.TrapDoor(8);
         l.Fill(15, 17, 2);
-        l.Fill(18, 22, 4);
-        l.Checkpoint(20);
+        l.Fill(18, 19, 4);
+        l.Fill(20, 22, 4, bottom: 2);
+        l.Checkpoint(19);
 
         // 2. Belt toward a pit with a shut gate on its far lip: jumping into
         //    the bars drops Tock into the pit. Tick's button opens it.
