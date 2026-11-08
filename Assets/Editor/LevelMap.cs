@@ -1628,6 +1628,95 @@ public static class LevelMap
         // tiles stay under it for the collider): blasts a 4-tile steam column
         // that lifts players about 5.7 tiles (feet), over a wall 5 high that a jump
         // (3.2) can't clear.
+        // Piston run over x0..x0 + count - 1 (FloorRams): a ceiling slab 2 tiles
+        // thick from 2 tiles up (its top, 4 up, is out of a jump's reach), a
+        // dark back wall, one flush ram per tile with its housing over the
+        // ground tile (which keeps the collider), a strike rail under the
+        // ceiling, hazard lintels over both mouths and the speed gauge over
+        // the entrance. Needs ground under the whole run and a run-up before it.
+        public FloorRams FloorRams(int x0, int count)
+        {
+            const string dir = "Assets/Art/Obstacles/FloorRam/";
+            int y = Surface(x0);
+            int x1 = x0 + count - 1;
+            Busy(x0 - 1, x1 + 1);
+            Fill(x0, x1, y + 4, y + 2);
+
+            var go = new GameObject(Numbered("FloorRams"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x0, y, 0f);
+            var t = go.transform;
+
+            var back = LabPart("BackWall", t, LabSprite(dir + "ram_backwall_32px.png", Vector2.zero, true), -3, Vector2.zero);
+            back.drawMode = SpriteDrawMode.Tiled;
+            back.size = new Vector2(count, 2f);
+
+            var housing = LabSprite(dir + "ram_housing_32px.png", Vector2.zero);
+            var head = LabSprite(dir + "ram_head_32px.png", new Vector2(0f, 1f));
+            var shaft = LabSprite(dir + "ram_shaft_32px.png", Vector2.zero, true);
+            var rail = LabSprite(dir + "ram_rail_32px.png", Vector2.zero);
+            var flash = LabSprite(dir + "ram_flash_32px.png", Vector2.zero);
+            var sparks = LabSprite(dir + "ram_sparks_32px.png", new Vector2(0f, 1f));
+            var lintel = LabSprite(dir + "ram_lintel_32px.png", Vector2.zero);
+            var lampFrames = LabStrip(dir + "ram_lamp_32px.png", 32, Vector2.zero);
+
+            // The ground collider's top is 1 px under the cell top; flush rams
+            // sit 0.02 lower, so players walk on the ground, not on box seams.
+            float floor = -1f / 32f - 0.02f;
+            var r = go.AddComponent<global::FloorRams>();
+            r.lane = LaneIndex;
+            r.left = x0;
+            r.floorY = LaneY + y + floor;
+            r.ceilingY = LaneY + y + 2f;
+            float travel = 2f - floor;
+            r.rams = new Rigidbody2D[count];
+            r.heads = new Transform[count];
+            r.shafts = new SpriteRenderer[count];
+            r.lamps = new SpriteRenderer[count];
+            r.flashes = new SpriteRenderer[count];
+            r.sparks = new SpriteRenderer[count];
+            r.lampFrames = lampFrames;
+            for (int k = 0; k < count; k++)
+            {
+                LabPart($"Housing_{k}", t, housing, 1, new Vector2(k, -1f));
+                r.lamps[k] = LabPart($"Lamp_{k}", t, lampFrames.FirstOrDefault(), 5, new Vector2(k, -1f), false);
+                var sh = LabPart($"Shaft_{k}", t, shaft, 2, new Vector2(k, floor + 0.02f + 1f / 32f - 6f / 32f));
+                sh.drawMode = SpriteDrawMode.Tiled;
+                sh.size = new Vector2(1f, 0.01f);
+                sh.enabled = false;
+                r.shafts[k] = sh;
+
+                var ram = new GameObject($"Ram_{k}");
+                ram.transform.SetParent(t, false);
+                ram.transform.localPosition = new Vector3(k, floor, 0f);
+                r.rams[k] = Kinematic(ram);
+                var box = ram.AddComponent<BoxCollider2D>();
+                box.size = new Vector2(1f, travel);
+                box.offset = new Vector2(0.5f, -travel / 2f);
+                r.heads[k] = LabPart("Head", ram.transform, head, 3, new Vector2(0f, -(2f / 32f - 0.02f))).transform;
+
+                LabPart($"Rail_{k}", t, rail, 1, new Vector2(k, 2f));
+                var f = LabPart($"Flash_{k}", t, flash, 2, new Vector2(k, 2f), false);
+                f.enabled = false;
+                r.flashes[k] = f;
+                var sp = LabPart($"Sparks_{k}", t, sparks, 6, new Vector2(k, 2f), false);
+                sp.enabled = false;
+                r.sparks[k] = sp;
+            }
+            LabPart("LintelIn", t, lintel, 3, new Vector2(-2f / 32f, 2f));
+            LabPart("LintelOut", t, lintel, 3, new Vector2(count - 1 + 2f / 32f, 2f));
+
+            // Gauge on the slab over the entrance: needle on lane speed, lamp
+            // green while the run is armed and the lane slow enough.
+            var gaugeAt = new Vector2(0.25f, 2f + 18f / 32f);
+            LabPart("Gauge", t, LabSprite(dir + "ram_gauge_48px.png", Vector2.zero), 2, gaugeAt);
+            r.needleFrames = LabStrip(dir + "ram_gauge_needle_48px.png", 48, Vector2.zero);
+            r.needle = LabPart("GaugeNeedle", t, r.needleFrames.FirstOrDefault(), 3, gaugeAt);
+            r.goLampFrames = LabStrip(dir + "ram_gauge_lamp_48px.png", 48, Vector2.zero);
+            r.goLamp = LabPart("GaugeLamp", t, r.goLampFrames.FirstOrDefault(), 4, gaugeAt, false);
+            return r;
+        }
+
         public SteamVent SteamVent(int x, float offset = 0f)
         {
             const string dir = "Assets/Art/Obstacles/SteamVent/";
