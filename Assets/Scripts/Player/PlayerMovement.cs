@@ -96,8 +96,10 @@ public class PlayerMovement : MonoBehaviour
         float vx = horizontalInput * moveSpeed;
 
         // In the air, pushing into a wall pins the player there by friction.
-        // Stop pushing so they fall.
-        if (vx != 0f && !IsGrounded() && TouchingWall(Mathf.Sign(vx)))
+        // Stop pushing so they fall. The same friction brakes a jump that
+        // starts pressed against a wall (the ground check still reports
+        // grounded for the first steps), so it counts while rising too.
+        if (vx != 0f && (!IsGrounded() || rb.linearVelocity.y > 0.1f) && TouchingWall(Mathf.Sign(vx)))
             vx = 0f;
 
         rb.linearVelocity = new Vector2(vx, rb.linearVelocity.y);

@@ -43,8 +43,9 @@ public class LaneRift : MonoBehaviour
     public float shrinkRate = 2.5f;
 
     [Header("Kill")]
-    [Tooltip("Units above the top of the player's collider (their head) at which the rift kills; negative lets the teeth graze.")]
-    public float headMargin = 0f;
+    [Tooltip("Units above the top of the player's collider (their head) at which the rift kills; negative lets the teeth graze. " +
+             "-0.25 lets a full jump from a 4-tile ledge pass under a closed rift with room to spare.")]
+    public float headMargin = -0.25f;
     [Tooltip("Depth (units) at which the rift stops growing, about the full lane height.")]
     public float maxDepth = 12f;
 
