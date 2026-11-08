@@ -25,7 +25,8 @@ Shader "TickTock/EndingBlend"
 
         Pass
         {
-            Tags { "LightMode" = "Universal2D" }
+            // SRPDefaultUnlit: the 2D renderer skipped this pass when it was tagged Universal2D.
+            Tags { "LightMode" = "SRPDefaultUnlit" }
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag

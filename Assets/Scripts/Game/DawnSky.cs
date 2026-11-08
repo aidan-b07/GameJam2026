@@ -34,6 +34,12 @@ public class DawnSky : MonoBehaviour
     public SpriteRenderer midLayer;
     [Tooltip("View row (art px from the lane's top) of the ground surface's top; rows below are never sky.")]
     public int groundRow = 313;
+    [Tooltip("Where the sun ends its climb (view px from the lane's top). The mockup's 64 hides Tick's sun under the letterbox.")]
+    public float sunTop = 104f;
+    [Tooltip("Rays and effects are redrawn at this rate (stepped like the sprites); the rest every frame.")]
+    public float raysFps = 24f;
+    [Tooltip("Peek time the sun's horizontal placement aims for (the mockup's is about 7.8 s).")]
+    public float targetPeek = 7.8f;
 
     [Header("Sorting orders")]
     public int glowOrder = -16;
@@ -55,6 +61,9 @@ public class DawnSky : MonoBehaviour
 
     int viewW, rw, rh, fw, fh;
     float centreShift;          // mockup x to view x
+    float sunShift;             // chosen so the sun rises in open sky (px)
+    int lastRaysFrame = -1;
+    Vector2Int glowKey = new Vector2Int(int.MinValue, 0);
     float[] mask;               // rw * rh, row 0 at the top
     int[] roof;                 // per quarter column
     Texture2D glowTex, discTex, tintMulTex, tintTex, raysTex, fxTex, warmTex;
@@ -103,7 +112,7 @@ public class DawnSky : MonoBehaviour
     public Vector2 SunPath(float t)
     {
         float p = Seg(t, 6.6f, 12.4f);
-        return new Vector2(Mathf.Lerp(560f, 720f, p) + centreShift, Mathf.Lerp(336f, 64f, EOut(p)));
+        return new Vector2(Mathf.Lerp(560f, 720f, p) + centreShift + sunShift, Mathf.Lerp(336f, sunTop, EOut(p)));
     }
 
     // 1 on the horizon, 0 high up.
@@ -123,9 +132,7 @@ public class DawnSky : MonoBehaviour
         fw = viewW / 2; fh = LH / 2;
 
         BuildMask(cam0);
-        PeekTime = 99f;
-        for (float tt = 6.6f; tt < 12.4f; tt += 0.02f)
-            if (SunVisible(SunPath(tt)) > 0.03f) { PeekTime = tt; break; }
+        PlaceSun();
 
         beams = new Beam[14];
         for (int k = 0; k < beams.Length; k++)
@@ -341,12 +348,101 @@ public class DawnSky : MonoBehaviour
                 }
                 mask[qy * rw + qx] = m;
             }
+        // The level in front of the sky (gate housings, walls, the door, lamps)
+        // blocks light too: render the lane without its sky and players and
+        // take what covers the sky out of the mask.
+        var cover = Occluders(cam);
+        if (cover != null)
+            for (int qy = 0; qy < rh; qy++)
+                for (int qx = 0; qx < rw; qx++)
+                    mask[qy * rw + qx] *= 1f - cover[qy * rw + qx];
+
         for (int x = 0; x < rw; x++)
         {
             int y = 0;
             while (y < rh && mask[y * rw + x] > 0.5f) y++;
             roof[x] = y;
         }
+    }
+
+    // Coverage (0-1, quarter res, row 0 at the top) of the level in the lane
+    // camera's view, without the sky (the city layer's parent) and the players.
+    float[] Occluders(Camera cam)
+    {
+        var hidden = new System.Collections.Generic.List<Renderer>();
+        void Hide(Transform root)
+        {
+            if (root == null) return;
+            foreach (var r in root.GetComponentsInChildren<Renderer>())
+                if (r.enabled) { r.enabled = false; hidden.Add(r); }
+        }
+        Hide(midLayer != null ? midLayer.transform.parent : null);
+        if (GameFlow.Instance != null)
+            foreach (var p in GameFlow.Instance.players) Hide(p);
+
+        int pw = viewW, ph = LH;
+        var rt = RenderTexture.GetTemporary(pw, ph, 24, RenderTextureFormat.ARGB32);
+        var target = cam.targetTexture;
+        var rect = cam.rect;
+        var clear = cam.backgroundColor;
+        cam.backgroundColor = new Color(0f, 0f, 0f, 0f);
+        cam.rect = new Rect(0f, 0f, 1f, 1f);
+        cam.targetTexture = rt;
+        cam.Render();
+        cam.targetTexture = target;
+        cam.rect = rect;
+        cam.backgroundColor = clear;
+        foreach (var r in hidden) r.enabled = true;
+
+        var prev = RenderTexture.active;
+        RenderTexture.active = rt;
+        var read = new Texture2D(pw, ph, TextureFormat.RGBA32, false);
+        read.ReadPixels(new Rect(0, 0, pw, ph), 0, 0);
+        read.Apply(false);
+        RenderTexture.active = prev;
+        RenderTexture.ReleaseTemporary(rt);
+        var px = read.GetPixels32();
+        Destroy(read);
+
+        var cover = new float[rw * rh];
+        for (int qy = 0; qy < rh; qy++)
+            for (int qx = 0; qx < rw; qx++)
+            {
+                float a = 0f;
+                for (int dy = 0; dy < 4; dy++)
+                {
+                    int y = ph - 1 - (qy * 4 + dy);
+                    for (int dx = 0; dx < 4; dx++) a += px[y * pw + qx * 4 + dx].a / 255f;
+                }
+                cover[qy * rw + qx] = Mathf.Clamp01(a / 16f);
+            }
+        return cover;
+    }
+
+    // The mockup's path is fixed on its screen; here the level (gate housings,
+    // the end wall, the door) also blocks the sky, so the path is shifted
+    // sideways to where the sun peeks closest to targetPeek and ends in open
+    // sky, preferring small shifts.
+    void PlaceSun()
+    {
+        float best = float.MaxValue, bestShift = 0f, bestPeek = 99f;
+        for (float shift = -480f; shift <= 320f; shift += 8f)
+        {
+            sunShift = shift;
+            if (SunVisible(SunPath(12.4f)) < 0.95f) continue;
+            float peek = Peek(0.05f);
+            float score = Mathf.Abs(peek - targetPeek) + Mathf.Abs(shift) * 0.002f;
+            if (score < best) { best = score; bestShift = shift; bestPeek = peek; }
+        }
+        sunShift = bestShift;
+        PeekTime = bestPeek < 99f ? Peek(0.02f) : 99f;
+    }
+
+    float Peek(float step)
+    {
+        for (float tt = 6.6f; tt < 12.4f; tt += step)
+            if (SunVisible(SunPath(tt)) > 0.03f) return tt;
+        return 99f;
     }
 
     // Share (0-1) of a 7-cell disc round the sun above the roofline.
@@ -380,11 +476,24 @@ public class DawnSky : MonoBehaviour
 
         if (dawn)
         {
-            DrawGlow(sun, low);
+            // Glow and tint only change when the sun moves a quarter cell.
+            var key = new Vector2Int(Mathf.FloorToInt(sun.x / 4f), Mathf.FloorToInt(sun.y / 4f));
+            if (key != glowKey)
+            {
+                glowKey = key;
+                DrawGlow(sun, low);
+                DrawTint(sun, low);
+            }
             DrawDisc(sun, t, low);
-            DrawTint(sun, low);
-            DrawRays(sun, t, low, Seg(t, 6.6f, 7.4f), vis);
-            DrawFx(sun, t, low, Seg(t, 6.6f, 7.4f), vis);
+            int raysFrame = Mathf.FloorToInt(t * raysFps);
+            if (raysFrame != lastRaysFrame)
+            {
+                lastRaysFrame = raysFrame;
+                float tr = raysFrame / raysFps;
+                var rs = SunPath(tr);
+                DrawRays(rs, tr, Low(rs), Seg(tr, 6.6f, 7.4f), SunVisible(rs));
+                DrawFx(rs, tr, Low(rs), Seg(tr, 6.6f, 7.4f), SunVisible(rs));
+            }
         }
 
         float warm = 0.22f * Seg(t, 6.6f, 9f);
@@ -541,6 +650,10 @@ public class DawnSky : MonoBehaviour
             len[k] = b.len * (0.45f + 0.55f * EOut(Mathf.Min(1f, l * 2f)));
         }
         const int N = 22;
+        float wsum = 0f;
+        for (int k = 0; k < N; k++) wsum += Mathf.Pow(0.92f, k);
+        var weights = new float[N];
+        for (int k = 0; k < N; k++) weights[k] = Mathf.Pow(0.92f, k);
 
         for (int y = 0; y < rh; y++)
             for (int x = 0; x < rw; x++)
@@ -560,13 +673,17 @@ public class DawnSky : MonoBehaviour
                     if (beam > 0.02f)
                     {
                         if (Mathf.Abs(dist - front) < 3f) beam += 0.5f;
-                        float acc = 0f, wsum = 0f, w = 1f;
-                        for (int k = 0; k < N; k++)
+                        float acc = 0f, stepX = dx / N, stepY = dy / N, fx = x + 0.5f, fy = y + 0.5f;
+                        for (int k = 0; k < N; k++, fx += stepX, fy += stepY)
                         {
-                            float p = k / (float)N;
-                            int sx = Mathf.FloorToInt(x + dx * p + 0.5f), sy = Mathf.FloorToInt(y + dy * p + 0.5f);
-                            float mv = sy < 0 ? 1f : (sx < 0 || sx >= rw || sy >= rh) ? 0f : mask[sy * rw + sx];
-                            acc += mv * w; wsum += w; w *= 0.92f;
+                            float mv;
+                            if (fy < 0f) mv = 1f;
+                            else
+                            {
+                                int sx = fx < 0f ? -1 : (int)fx, sy = (int)fy;
+                                mv = sx < 0 || sx >= rw || sy >= rh ? 0f : mask[sy * rw + sx];
+                            }
+                            acc += mv * weights[k];
                         }
                         v = Mathf.Pow(acc / wsum, 1.6f) * (0.3f + 0.7f * mh) * beam * 1.35f;
                     }
