@@ -69,6 +69,9 @@ public class BridgeMovement : MonoBehaviour
     [SerializeField, Min(0f)] private float restPause = 2f;
     [Tooltip("Wait while open (flat) before closing.")]
     [SerializeField, Min(0f)] private float openPause = 2f;
+    [Tooltip("While opening, the winch holds the leaf across the pit (solidAngle) this long " +
+             "before lifting on. 0 lifts straight through.")]
+    [SerializeField, Min(0f)] private float spanPause = 0f;
 
     [Header("Bounces")]
     [Tooltip("Share of its speed the leaf keeps when it bounces off the ground (open).")]
@@ -114,6 +117,7 @@ public class BridgeMovement : MonoBehaviour
     // |SwingDelta| = open) and degrees per second.
     private float progress, speed, winchTime;
     private bool winching, freeFalling;
+    private float spanHeld = -1f;   // lane seconds held across the pit this opening; -1 before the hold
     private float gravity;          // K in degrees per second squared
 
     // Sounds (Sfx): winch loop while the winch lifts, a clank when the pawl
@@ -130,7 +134,9 @@ public class BridgeMovement : MonoBehaviour
     public Vector2 Pivot => pivot;
     public int Lane => lane;
     // The winch is lifting the leaf / the leaf is dropping freely before its first bounce.
-    public bool Winching => winching;
+    public bool Winching => winching && !HoldingSpan;
+    // The winch is holding the leaf across the pit (spanPause).
+    public bool HoldingSpan => spanHeld >= 0f && spanHeld < spanPause;
     public bool FreeFalling => freeFalling;
     // The leaf hit the ground (open = true) or the pit wall, at this speed in degrees per second.
     public event Action<float, bool> Impact;
@@ -201,7 +207,7 @@ public class BridgeMovement : MonoBehaviour
 
     private void Update()
     {
-        winchSound?.Set(winching, pivot, 0.7f);
+        winchSound?.Set(Winching, pivot, 0.7f);
         if (clankDue) Sfx.Play("ratchet_click", pivot, 1f, lane: lane);
         clankDue = false;
         foreach (var (hitSpeed, open) in impacts)
@@ -248,11 +254,22 @@ public class BridgeMovement : MonoBehaviour
                 phase = phase == Phase.RestPause ? Phase.Opening : Phase.Closing;
                 winching = true;
                 winchTime = 0f;
+                spanHeld = -1f;
                 return;
 
             case Phase.Opening:
                 if (winching)
                 {
+                    // Hold across the pit for spanPause, then ease the winch up again.
+                    float span = Mathf.Abs(Mathf.DeltaAngle(restAngle, solidAngle));
+                    if (spanPause > 0f && spanHeld < spanPause && progress >= span)
+                    {
+                        progress = span;
+                        speed = 0f;
+                        spanHeld = Mathf.Max(spanHeld, 0f) + h;
+                        if (spanHeld >= spanPause) winchTime = 0f;
+                        return;
+                    }
                     // Lift from rest up to the top, then let go at winch speed.
                     progress += WinchStep(h);
                     if (progress >= lift) LetGo(lift, speed);
