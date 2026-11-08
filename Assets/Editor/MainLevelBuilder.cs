@@ -95,9 +95,9 @@ public static class MainLevelBuilder
 
         // 5. Ending.
         l.Checkpoint(118);
-        l.Decor("lamp", 121.5f);
-        l.Door(124);
-        l.Decor("clock", 130.5f);
+        l.Decor("lamp", Length - 15.5f);
+        l.Door(Length - 12);   // the ending's clock door, placed from the lane's end
+        l.Decor("clock", Length - 5.5f);
     }
 
     static void Tock(Lane l)
@@ -146,8 +146,8 @@ public static class MainLevelBuilder
 
         // 5. Ending.
         l.Checkpoint(119);
-        l.Decor("lamp", 121.5f);
-        l.Door(124);
-        l.Decor("clock", 130.5f);
+        l.Decor("lamp", Length - 15.5f);
+        l.Door(Length - 12);
+        l.Decor("clock", Length - 5.5f);
     }
 }

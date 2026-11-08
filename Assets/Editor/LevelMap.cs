@@ -82,6 +82,13 @@ public static class LevelMap
     const string TrapDoorDir = "Assets/Art/Obstacles/TrapDoor/";
     static string TrapDoorPng(string id) => $"{TrapDoorDir}{id}_192px.png";
     const int TrapDoorFrameWidth = 192;
+    // Clock door at each lane's end from tools/make_clockdoor.py: 160x224
+    // frames, bottom-centre pivot on the walking surface, hands 48x48 centred
+    // on the hub (ClockDoorHub above the pivot).
+    const string ClockDoorDir = "Assets/Art/Obstacles/ClockDoor/";
+    const int ClockDoorFrameWidth = 160;
+    const float ClockDoorHub = (224f - 102f) / 32f;
+    static string ClockDoorPng(string id) => $"{ClockDoorDir}clockdoor_{id}.png";
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
     const string RecessBackLeft = "recess_back_left";
@@ -198,6 +205,10 @@ public static class LevelMap
         PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
         PrepareStrip(TrapDoorPng("trapdoor"), TrapDoorFrameWidth, Vector2.zero);
         PrepareStrip(TrapDoorPng("trapdoor_lamp"), TrapDoorFrameWidth, Vector2.zero);
+        foreach (var id in new[] { "tick_160px", "tock_160px", "light_tick_160px", "light_tock_160px" })
+            PrepareStrip(ClockDoorPng(id), ClockDoorFrameWidth, new Vector2(0.5f, 0f));
+        foreach (var id in new[] { "hand_hour_48px", "hand_minute_48px" })
+            PrepareSprite(ClockDoorPng(id), false, new Vector2(0.5f, 0.5f));
         foreach (var id in ConveyorParts) PrepareStrip(ConveyorPng(id), 32, Vector2.zero);
         foreach (var narrow in new[] { false, true })
             foreach (var id in new[] { "button", "button_lamp" })
@@ -225,10 +236,11 @@ public static class LevelMap
         b.AddParallax(b.Sky.skyAnchor);
         t.Sky.Apply();
         b.Sky.Apply();
-        CreateDivider(t.Sky.skyAnchor, b.Sky.skyAnchor);
+        var divider = CreateDivider(t.Sky.skyAnchor, b.Sky.skyAnchor);
         var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
         var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
         CreateGameFlow(players, rig);
+        if (t.ClockDoor != null && b.ClockDoor != null) CreateEnding(t, b, rig, divider);
         var manager = new GameObject("GameManager").AddComponent<GameManager>();
         manager.startHours = new[] { tickHour, tockHour };
 
@@ -966,14 +978,53 @@ public static class LevelMap
             Busy(x - 2, x + 2);
         }
 
-        // Clock door with the big clock face above it.
-        public void Door(int x)
+        public ClockDoor ClockDoor { get; private set; }
+
+        // Clock door (5 tiles wide, 7 tall) centred on tile x, standing on the
+        // surface. A player reaching 3.5 tiles before its centre unlocks it;
+        // in the ending they walk to markX, in front of its left leaf.
+        public ClockDoor Door(int x)
         {
             int y = Surface(x);
-            Marker("ClockDoor", x, y, 3, 3.5f, new Color(1f, 0.85f, 0.3f));
-            Prop(x, y + 5, 6, 6); Prop(x + 1, y + 5, 6, 7);
-            Prop(x, y + 4, 7, 6); Prop(x + 1, y + 4, 7, 7);
-            Busy(x - 3, x + 6);
+            Busy(x - 3, x + 3);
+            string variant = LaneIndex == 0 ? "tick" : "tock";
+            var go = new GameObject("ClockDoor");
+            go.transform.SetParent(markers, false);
+            float cx = x + 0.5f;
+            go.transform.localPosition = new Vector3(cx, y - 3f / 32f, 0f);
+            var bodyFrames = StripFrames(ClockDoorPng($"{variant}_160px"));
+            var lightFrames = StripFrames(ClockDoorPng($"light_{variant}_160px"));
+            var body = go.AddComponent<SpriteRenderer>();
+            body.sprite = bodyFrames.FirstOrDefault();
+            // Behind the decor (-2) and the level, in front of the backgrounds.
+            body.sortingOrder = -4;
+            tinted.Add(body);
+            var glow = new GameObject("Light").AddComponent<SpriteRenderer>();
+            glow.transform.SetParent(go.transform, false);
+            glow.sprite = lightFrames.FirstOrDefault();
+            glow.sortingOrder = -3;
+            Transform Hand(string id, int order)
+            {
+                var sr = new GameObject(id).AddComponent<SpriteRenderer>();
+                sr.transform.SetParent(go.transform, false);
+                sr.transform.localPosition = new Vector3(0f, ClockDoorHub, 0f);
+                sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ClockDoorPng($"hand_{id}_48px"));
+                sr.sortingOrder = order;
+                tinted.Add(sr);
+                return sr.transform;
+            }
+            var door = go.AddComponent<ClockDoor>();
+            door.lane = LaneIndex;
+            door.triggerX = root.transform.position.x + cx - 3.5f;
+            door.markX = root.transform.position.x + cx - 1.25f;
+            door.body = body;
+            door.glow = glow;
+            door.bodyFrames = bodyFrames;
+            door.lightFrames = lightFrames;
+            door.hourHand = Hand("hour", -3);
+            door.minuteHand = Hand("minute", -3);
+            ClockDoor = door;
+            return door;
         }
 
         public int Surface(int x) => surface.TryGetValue(x, out var s) ? s : 0;
@@ -1260,7 +1311,22 @@ public static class LevelMap
 
     // Screen-space overlay canvas at 1280x720 reference size, so one canvas unit is
     // one art pixel (each lane is 360 px tall); the rift is centred on the seam.
-    static void CreateDivider(Transform tickCamera, Transform tockCamera)
+    // The dawn ending (DawnEnding, DawnSky): starts once both clock doors are unlocked.
+    static void CreateEnding(Lane tick, Lane tock, CoopCamera rig, LaneDivider divider)
+    {
+        var go = new GameObject("DawnEnding");
+        var ending = go.AddComponent<DawnEnding>();
+        var sky = go.AddComponent<DawnSky>();
+        sky.cameras = rig.cameras;
+        sky.midLayer = tick.Sky.layers[1].day;
+        ending.sky = sky;
+        ending.doors = new[] { tick.ClockDoor, tock.ClockDoor };
+        ending.cameraRig = rig;
+        ending.skies = new[] { tick.Sky, tock.Sky };
+        ending.divider = divider;
+    }
+
+    static LaneDivider CreateDivider(Transform tickCamera, Transform tockCamera)
     {
         var go = new GameObject("LaneDivider", typeof(Canvas), typeof(CanvasScaler));
         go.layer = LayerMask.NameToLayer("UI");
@@ -1278,6 +1344,7 @@ public static class LevelMap
         divider.topRift = DividerLayer(go.transform, "TopRift", 1f);
         divider.topCamera = tickCamera;
         divider.bottomCamera = tockCamera;
+        return divider;
     }
 
     // The rift textures are drawn at runtime by LaneDivider, which also sizes

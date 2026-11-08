@@ -42,6 +42,9 @@ public class LaneDivider : MonoBehaviour
     [Tooltip("Rift growth (units) shown outside play mode (and when there is no LaneRift), for previewing.")]
     [Range(0f, 12f)] public float previewDepth = 0f;
 
+    // 1 normal, 0 closed: the ending shrinks both rifts to nothing.
+    [System.NonSerialized] public float scale = 1f;
+
     const float PixelsPerUnit = 32f;         // art pixels per world unit (32 PPU, 1 canvas unit = 1 px)
     const int Margin = 64;                   // extra pixels drawn each side, for sliding between frames
     const int Col = 4;                       // edge column width in pixels
@@ -117,6 +120,10 @@ public class LaneDivider : MonoBehaviour
             frame++;
         }
 
+        bool shown = scale > 0.08f;
+        if (rift != null) rift.enabled = shown;
+        if (topRift != null) topRift.enabled = shown;
+        if (!shown) return;
         if (seam != null) UpdateBand(seam, bottomCamera, topCamera, tick);
         if (screenTop != null) UpdateBand(screenTop, topCamera, null, tick);
     }
@@ -138,7 +145,7 @@ public class LaneDivider : MonoBehaviour
 
         if (tick || redraw || !Application.isPlaying)
         {
-            float reach = Reach(b.lane);
+            float reach = Reach(b.lane) * scale;
             float growth = tick && b.drawnReach >= 0f ? reach - b.drawnReach : 0f;
             b.drawnReach = reach;
             Draw(b, cameraPx, CameraPx(upperCamera) - cameraPx, viewWidth, growth, tick);
@@ -212,7 +219,7 @@ public class LaneDivider : MonoBehaviour
         {
             // Without an upper edge the void runs off the top of the texture.
             b.top[x] = b.upperEdge
-                ? Mathf.Clamp((int)Extent(origin + x + upperShift, minHalfHeight, seconds, 1), 2, mid - 8)
+                ? Mathf.Clamp((int)Extent(origin + x + upperShift, minHalfHeight * scale, seconds, 1), 2, mid - 8)
                 : mid + 3;
             b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, reach, seconds, b.seed), 2, Below - 8);
         }

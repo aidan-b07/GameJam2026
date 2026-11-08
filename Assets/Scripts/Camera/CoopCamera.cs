@@ -50,6 +50,8 @@ public class CoopCamera : MonoBehaviour
     float x, velocity;
 
     public float X => x;
+    // Holds the view still (the ending's shot).
+    public bool Hold { get; set; }
 
     // Half the width of the view in world units (every lane camera has the same).
     public float HalfWidth
@@ -75,7 +77,8 @@ public class CoopCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (panning)
+        if (Hold) { velocity = 0f; panning = false; }
+        else if (panning)
         {
             panTime += Time.deltaTime;
             float u = Mathf.Clamp01(panTime / panDuration);

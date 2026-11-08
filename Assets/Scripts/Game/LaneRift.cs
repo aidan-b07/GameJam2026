@@ -50,6 +50,15 @@ public class LaneRift : MonoBehaviour
 
     float[] depth = new float[2];
     float[] slowFor = new float[2];
+    bool[] safe = new bool[2];
+
+    // A safe lane's rift closes and cannot kill (a player waiting at the
+    // unlocked clock door). Suspended does that for both lanes (the ending).
+    public bool Suspended { get; set; }
+    public void SetSafe(int lane, bool value)
+    {
+        if (safe != null && lane >= 0 && lane < safe.Length) safe[lane] = value;
+    }
 
     // Rift reach (units) below the top of the lane's view: rest plus growth.
     public float Reach(int lane) => restReach + Depth(lane);
@@ -82,12 +91,13 @@ public class LaneRift : MonoBehaviour
     public void Close()
     {
         for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = 0f;
+        for (int i = 0; i < safe.Length; i++) safe[i] = false;
     }
 
     void Update()
     {
         var flow = GameFlow.Instance;
-        if (flow == null || flow.Respawning) return;
+        if (flow == null || flow.Respawning || flow.Finished && !Suspended) return;
         var cams = flow.cameraRig != null ? flow.cameraRig.cameras : null;
         float dt = Time.deltaTime;
 
@@ -97,6 +107,12 @@ public class LaneRift : MonoBehaviour
             if (player == null || !player.gameObject.activeInHierarchy) continue;
 
             float speed = flow.HorizontalSpeed(lane);
+            if (Suspended || safe[lane])
+            {
+                slowFor[lane] = 0f;
+                depth[lane] = Mathf.Max(0f, depth[lane] - shrinkRate * dt);
+                continue;
+            }
             if (speed < slowThreshold)
             {
                 slowFor[lane] += dt;
