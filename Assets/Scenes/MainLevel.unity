@@ -2667,7 +2667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Conveyor
   lane: 1
-  speed: -0.75
+  speed: -2
   left: 92
   width: 4
   top: -40.03125
@@ -2844,7 +2844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Conveyor
   lane: 0
-  speed: 0.75
+  speed: 2
   left: 98
   width: 3
   top: -0.03125
@@ -20322,7 +20322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Conveyor
   lane: 1
-  speed: 0.75
+  speed: 2
   left: 99
   width: 3
   top: -40.03125
@@ -39042,7 +39042,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Conveyor
   lane: 1
-  speed: 0.75
+  speed: 2
   left: 23
   width: 8
   top: -40.03125
@@ -55514,7 +55514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Conveyor
   lane: 0
-  speed: -0.75
+  speed: -2
   left: 91
   width: 4
   top: -0.03125

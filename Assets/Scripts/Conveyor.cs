@@ -15,8 +15,10 @@ public class Conveyor : MonoBehaviour
 {
     [Tooltip("Lane whose world speed drives the belt (0 = Tick, 1 = Tock).")]
     public int lane;
-    [Tooltip("Belt speed at 1x in units per lane second; negative runs left.")]
-    public float speed = -0.75f;
+    [Tooltip("Belt speed in units per second while the lane runs at its idle (slow) speed; negative runs left.")]
+    public float speed = -2f;
+    [Tooltip("Belt speed (magnitude) while the lane runs at full speed; in between it follows the lane speed linearly.")]
+    public float fastSpeed = 4f;
     [Tooltip("World x of the belt's left end and its width in units.")]
     public float left, width;
     [Tooltip("World y of the belt's walking surface (the ground collider's top).")]
@@ -40,11 +42,23 @@ public class Conveyor : MonoBehaviour
         players = FindObjectsByType<PlayerMovement>();
     }
 
-    private float LaneSpeed => GameManager.INSTANCE != null ? GameManager.INSTANCE.GetWorldSpeed(lane) : 1f;
+    // Belt velocity for the lane's speed: `speed` at the idle lane speed,
+    // `fastSpeed` at full speed, linear between, so a slow lane's belt still
+    // carries players briskly. Below idle (a scripted stop) it scales down
+    // to 0 with the lane.
+    private float Velocity()
+    {
+        var gm = GameManager.INSTANCE;
+        if (gm == null) return speed;
+        float lane = gm.GetWorldSpeed(this.lane), idle = gm.IdleWorldSpeed, max = gm.MaxWorldSpeed;
+        if (lane <= idle) return idle > 0f ? speed * lane / idle : speed;
+        float t = max > idle ? (lane - idle) / (max - idle) : 1f;
+        return Mathf.Sign(speed) * Mathf.LerpUnclamped(Mathf.Abs(speed), fastSpeed, t);
+    }
 
     private void FixedUpdate()
     {
-        float v = speed * LaneSpeed;
+        float v = Velocity();
         travel += v * Time.fixedDeltaTime;
         foreach (var p in players)
         {

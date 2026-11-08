@@ -716,7 +716,7 @@ public static class LevelMap
         }
 
         // Flush conveyor belt over the ground's top row from x0 to x1 (at least
-        // 2 tiles), carrying players at `speed` units per lane second (negative
+        // 2 tiles), carrying players at `speed` units per second at the idle lane speed (negative
         // runs left). The ground tiles stay under it for the collider; the belt
         // sprites cover them. Conveyor runs it on lane time.
         public GameObject Conveyor(int x0, int x1, float speed)
