@@ -15868,7 +15868,7 @@ MonoBehaviour:
   topCamera: {fileID: 843735460}
   bottomCamera: {fileID: 1443558122}
   minHalfHeight: 9
-  fps: 12
+  fps: 20
   morphTime: 5
   previewDepth: 0
 --- !u!114 &684297656

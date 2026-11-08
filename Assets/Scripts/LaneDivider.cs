@@ -12,8 +12,8 @@ using UnityEngine.UI;
 //
 // Each rift is pixel art drawn into a texture at a low frame rate: stepped
 // 4 px edge columns, a dark outline and lit rim, a checker-dither glow,
-// twinkling sparkles inside and 2x2 chunks that break off the rim. Chunks fly
-// outwards while a rift grows and get pulled back in while it shrinks.
+// twinkling sparkles inside and 2x2 chunks: while a rift grows, bits of the
+// world below its edge drift up into it; while it shrinks, chunks fall out.
 //
 // The edges belong to the level: each edge's shape is fixed to its lane's
 // world (topCamera for the edges in Tick's view, bottomCamera for the one in
@@ -37,7 +37,7 @@ public class LaneDivider : MonoBehaviour
     [Tooltip("Reach in art pixels of a closed rift, and of the seam rift's crack up into Tick's ground.")]
     public float minHalfHeight = 9f;
     [Tooltip("Animation frames per second (real time), stepped like the sprites.")]
-    public float fps = 12f;
+    public float fps = 20f;
     [Tooltip("Seconds for the edge teeth to morph into a new shape.")]
     public float morphTime = 5f;
     [Tooltip("Rift growth (units) shown outside play mode (and when there is no LaneRift), for previewing.")]
@@ -75,9 +75,7 @@ public class LaneDivider : MonoBehaviour
         public bool upperEdge;
         public Texture2D tex;
         public Color32[] pixels;
-        public int[] top, bottom, lastBottom;
-        public int lastOrigin;
-        public bool hasLast;
+        public int[] top, bottom;
         public readonly List<Chunk> chunks = new List<Chunk>();
         public float drawnReach = -1f;
         public int drawnCameraPx;
@@ -191,8 +189,6 @@ public class LaneDivider : MonoBehaviour
         b.pixels = new Color32[width * b.Height];
         b.top = new int[width];
         b.bottom = new int[width];
-        b.lastBottom = new int[width];
-        b.hasLast = false;
         b.image.texture = b.tex;
         return true;
     }
@@ -293,50 +289,44 @@ public class LaneDivider : MonoBehaviour
                 }
             }
 
-        // Chunks: peel off the rim; outwards while growing, inwards while shrinking.
+        // Chunks: while the rift grows, bits of the world just below its edge
+        // drift up into it (consumed); while it shrinks, chunks fall out.
         if (tick)
         {
-            float rate = 0.25f + Mathf.Min(2f, Mathf.Abs(growth) * 0.5f) * w / 1280f;
-            int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
-            bool inward = growth < -0.5f;
-            for (int n = 0; n < count; n++)
+            float scaleW = w / 1280f;
+            if (growth > 0.01f)
             {
-                int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
-                bool up = b.upperEdge && rng.NextDouble() < 0.3;
-                float y = up ? mid - b.top[x] - 3 : mid + b.bottom[x] + 1;
-                if (inward) y += up ? -10 : 10;
-                float dir = (up ? -1f : 1f) * (inward ? -1f : 1f);
-                b.chunks.Add(new Chunk
+                float rate = (0.6f + Mathf.Min(2f, growth)) * scaleW;
+                int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
+                for (int n = 0; n < count; n++)
                 {
-                    x = origin + x, y = y,
-                    vx = (float)(rng.NextDouble() - 0.5) * 0.4f,
-                    vy = dir * (0.5f + (float)rng.NextDouble() * 0.5f) + (up ? 0f : growth),
-                    life = 10 + rng.Next(10),
-                });
-            }
-            // Crumbs drop from columns that just cracked further down.
-            if (b.hasLast && growth > 0f)
-            {
-                int shift = origin - b.lastOrigin, crumbs = 0;
-                int cols = (w - 2 * Margin) / Col, start = rng.Next(Mathf.Max(1, cols));
-                for (int i = 0; i < cols && crumbs < 6; i++)
-                {
-                    int x = Margin + (start + i) % cols * Col, last = x + shift;
-                    if (last < 0 || last >= w || b.bottom[x] - b.lastBottom[last] < 6) continue;
-                    if (rng.NextDouble() > 0.2) continue;
-                    crumbs++;
+                    int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
                     b.chunks.Add(new Chunk
                     {
-                        x = origin + x + rng.Next(Col), y = mid + b.bottom[x] + 1,
-                        vx = (float)(rng.NextDouble() - 0.5) * 0.3f,
-                        vy = 1f + (float)rng.NextDouble(),
-                        life = 6 + rng.Next(6),
+                        x = origin + x, y = mid + b.bottom[x] + 6 + rng.Next(10),
+                        vx = (float)(rng.NextDouble() - 0.5) * 0.2f,
+                        vy = -(0.4f + (float)rng.NextDouble() * 0.5f),
+                        life = 14 + rng.Next(14),
                     });
                 }
             }
-            System.Array.Copy(b.bottom, b.lastBottom, w);
-            b.lastOrigin = origin;
-            b.hasLast = true;
+            else if (growth < -0.5f || rng.NextDouble() < 0.25 * scaleW)
+            {
+                float rate = (0.25f + Mathf.Min(2f, -growth * 0.5f)) * scaleW;
+                int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
+                for (int n = 0; n < count; n++)
+                {
+                    int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
+                    bool up = b.upperEdge && rng.NextDouble() < 0.3;
+                    b.chunks.Add(new Chunk
+                    {
+                        x = origin + x, y = up ? mid - b.top[x] - 3 : mid + b.bottom[x] + 1,
+                        vx = (float)(rng.NextDouble() - 0.5) * 0.4f,
+                        vy = (up ? -1f : 1f) * (0.5f + (float)rng.NextDouble() * 0.5f),
+                        life = 10 + rng.Next(10),
+                    });
+                }
+            }
             for (int n = b.chunks.Count - 1; n >= 0; n--)
             {
                 var c = b.chunks[n];

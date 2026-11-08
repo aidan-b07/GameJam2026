@@ -8,16 +8,16 @@ using UnityEngine;
 // Each lane's rift follows its own player's horizontal speed (0..1 of their
 // run speed). Below slowThreshold it grows exponentially: the growth rate is
 // proportional to how deep it already is (plus growthSeed), so a short pause
-// barely shows but a long one runs away. The growth comes in lurches (a slow
-// creep, then a surge every surgePeriod). At or above the threshold it
-// shrinks linearly, faster the faster the player runs (shrinkRate at full
-// speed).
+// barely shows but a long one runs away; it creeps on smoothly, no lurches.
+// At or above the threshold it shrinks linearly, faster the faster the
+// player runs (shrinkRate at full speed).
 //
 // Depth is the mean growth; the edge does not just stretch down. Its front
-// (Front) bulges and dips in shapes that keep morphing while the rift lives,
-// and tendrils sprout from it at random places (more the deeper it is): each
-// grows out to its own length, hangs there a moment, then pulls back while
-// new ones sprout elsewhere. Running pulls them all back fast. ReachAt gives
+// (Front) bulges and dips in shapes that slowly morph while the rift lives,
+// and tendrils creep out of it at random places (more the deeper it is):
+// each grows to its own length, hangs there, then shrinks slowly, so the
+// front catches up and swallows it while new ones creep out elsewhere.
+// Running pulls them all back. ReachAt gives
 // the edge (front plus tendrils, in 4 px columns fixed in the lane's world)
 // at a world x, and the kill uses the deepest column over the player's width.
 //
@@ -43,29 +43,27 @@ public class LaneRift : MonoBehaviour
     [Range(0f, 1f)] public float slowThreshold = 0.35f;
     [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
     public float slowGrace = 0.5f;
-    [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second (on average, see surges).")]
-    public float growthRate = 0.4f;
+    [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second.")]
+    public float growthRate = 0.36f;
     [Tooltip("Depth (units) the exponential grows from: higher starts faster. " +
-             "From closed (after slowGrace) it reaches a standing player in about 6.5-7.5 s, sooner under a tendril.")]
-    public float growthSeed = 0.6f;
-    [Tooltip("Seconds between growth surges; the rift creeps in between.")]
-    public float surgePeriod = 1.3f;
-    [Tooltip("Growth speed between surges, as a fraction of the average.")]
-    [Range(0f, 1f)] public float surgeFloor = 0.35f;
+             "From closed (after slowGrace) it reaches a standing player in about 7 s, sooner under a tendril.")]
+    public float growthSeed = 1f;
 
 
     [Header("Tendrils")]
     [Tooltip("Tendrils sprouting per second along a growing rift's view, plus tendrilsPerDepth per unit of depth.")]
-    public float tendrilRate = 2.5f;
-    public float tendrilsPerDepth = 0.6f;
+    public float tendrilRate = 1.5f;
+    public float tendrilsPerDepth = 0.4f;
     [Tooltip("Tendril length (units) is tendrilLength plus up to tendrilLengthPerDepth per unit of depth, times a random 0-1 on top of the minimum.")]
     public float tendrilLength = 0.5f;
     public float tendrilLengthPerDepth = 0.2f;
     [Tooltip("Units per second a tendril grows out at first (slowing as it nears its length).")]
-    public Vector2 tendrilSpeed = new Vector2(1f, 2.4f);
-    [Tooltip("Units per second a tendril pulls back while the rift grows, and while its player runs.")]
-    public float tendrilRecede = 0.9f;
-    public float tendrilRecedeRunning = 3f;
+    public Vector2 tendrilSpeed = new Vector2(0.25f, 0.6f);
+    [Tooltip("Seconds a grown tendril hangs before it shrinks.")]
+    public Vector2 tendrilHold = new Vector2(1f, 3f);
+    [Tooltip("Units per second a tendril shrinks while the rift grows (the front swallows it), and while its player runs.")]
+    public float tendrilRecede = 0.15f;
+    public float tendrilRecedeRunning = 1.5f;
     public int maxTendrils = 40;
 
     [Header("Shrink (player at or above the threshold)")]
@@ -81,7 +79,6 @@ public class LaneRift : MonoBehaviour
 
     float[] depth = new float[2];
     float[] slowFor = new float[2];
-    float[] growFor = new float[2];
     float[] frontClock = new float[2];
 
     class Tendril
@@ -134,8 +131,8 @@ public class LaneRift : MonoBehaviour
 
     // Growth (units) of the front in the edge column above world x: depth
     // times a lead of 0.55-1.35 from bulges (about 2.5 units wide) and bumps
-    // (0.7), both morphing into new shapes as clock runs, so the front
-    // changes shape instead of stretching. Snapped to 4 px; 0 at depth 0.
+    // (0.7), slowly morphing into new shapes as clock runs (every 6 and 3 s),
+    // so the front changes shape instead of stretching. Snapped to 4 px; 0 at depth 0.
     // Lane picks the pattern.
     public static float Front(float depth, float worldX, float clock, int lane)
     {
@@ -143,7 +140,7 @@ public class LaneRift : MonoBehaviour
         int col = Mathf.FloorToInt(worldX / ColumnWidth);
         float cx = col * ColumnWidth;
         int seed = 11 + lane * 37;
-        float lead = 0.55f + 0.6f * Morph(cx / 2.5f, clock / 1.8f, seed) + 0.2f * Morph(cx / 0.7f, clock / 0.8f, seed + 3);
+        float lead = 0.55f + 0.6f * Morph(cx / 2.5f, clock / 6f, seed) + 0.2f * Morph(cx / 0.7f, clock / 3f, seed + 3);
         return Mathf.Max(0f, Mathf.Floor(depth * lead / ColumnWidth + 0.5f) * ColumnWidth);
     }
 
@@ -173,7 +170,7 @@ public class LaneRift : MonoBehaviour
                 halfWidth = 0.15f + (float)rng.NextDouble() * 0.4f,
                 maxLength = tendrilLength + (float)rng.NextDouble() * (0.9f + tendrilLengthPerDepth * d),
                 speed = Mathf.Lerp(tendrilSpeed.x, tendrilSpeed.y, (float)rng.NextDouble()),
-                hold = 0.3f + (float)rng.NextDouble(),
+                hold = Mathf.Lerp(tendrilHold.x, tendrilHold.y, (float)rng.NextDouble()),
                 lean = (float)rng.NextDouble() * 0.6f - 0.3f,
             });
         for (int i = list.Count - 1; i >= 0; i--)
@@ -186,7 +183,7 @@ public class LaneRift : MonoBehaviour
                 if (t.length <= 0f) list.RemoveAt(i);
             }
             else if (t.length < t.maxLength * 0.97f)
-                t.length += t.speed * Mathf.Max(0.25f, 1f - t.length / t.maxLength) * dt;
+                t.length += t.speed * Mathf.Max(0.3f, 1f - t.length / t.maxLength) * dt;
             else if ((t.hold -= dt) <= 0f)
                 t.receding = true;
         }
@@ -215,15 +212,6 @@ public class LaneRift : MonoBehaviour
         return Mathf.Lerp(Hash(i * 7919 + seed * 104729), Hash((i + 1) * 7919 + seed * 104729), s);
     }
 
-    // Growth speed factor over a surge cycle: surgeFloor between surges, a
-    // sharp peak once per surgePeriod, 1 on average.
-    float Surge(float t)
-    {
-        float s = Mathf.Max(0f, Mathf.Sin(t / Mathf.Max(0.1f, surgePeriod) * 2f * Mathf.PI - 0.5f * Mathf.PI));
-        // max(0, sin)^3 averages 2 / (3 pi) over a cycle.
-        return surgeFloor + (1f - surgeFloor) * s * s * s * (1.5f * Mathf.PI);
-    }
-
     // Growth (units) beyond the closed rift.
     public float Depth(int lane) => depth != null && lane >= 0 && lane < depth.Length ? depth[lane] : 0f;
 
@@ -244,7 +232,7 @@ public class LaneRift : MonoBehaviour
 
     public void Close()
     {
-        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = growFor[i] = frontClock[i] = 0f;
+        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = frontClock[i] = 0f;
         foreach (var list in tendrils) list.Clear();
         for (int i = 0; i < safe.Length; i++) safe[i] = false;
     }
@@ -269,7 +257,7 @@ public class LaneRift : MonoBehaviour
             float speed = flow.HorizontalSpeed(lane);
             if (Suspended || safe[lane])
             {
-                slowFor[lane] = growFor[lane] = 0f;
+                slowFor[lane] = 0f;
                 depth[lane] = Mathf.Max(0f, depth[lane] - shrinkRate * dt);
                 UpdateTendrils(lane, false, false, viewX, halfView, dt);
                 continue;
@@ -281,13 +269,12 @@ public class LaneRift : MonoBehaviour
                 if (slowFor[lane] > slowGrace)
                 {
                     growing = true;
-                    growFor[lane] += dt;
-                    depth[lane] += (depth[lane] + growthSeed) * growthRate * Surge(growFor[lane]) * dt;
+                    depth[lane] += (depth[lane] + growthSeed) * growthRate * dt;
                 }
             }
             else
             {
-                slowFor[lane] = growFor[lane] = 0f;
+                slowFor[lane] = 0f;
                 depth[lane] -= shrinkRate * speed * dt;
             }
             depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
