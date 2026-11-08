@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Ledges up to this tall (units; 1 tile = 1) are stepped onto instead of blocking the player. Covers the few-pixel bumps between ground tiles.")]
     [SerializeField] private float maxStepHeight = 0.25f;
 
+    [Header("World Speed")]
+    [Tooltip("A move longer than this in one physics step (units) is a teleport (respawn, warp) and does not count as moving.")]
+    [SerializeField] private float teleportDistance = 1f;
+
     public float MoveSpeed => moveSpeed;
 
     private Rigidbody2D rb;
@@ -47,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     private float coyoteTimer;
     private float jumpBufferTimer;
     private bool facingRight = true;
+    private Vector2 lastPosition;
+    private bool hasLastPosition;
 
     private void Awake()
     {
@@ -88,8 +94,15 @@ public class PlayerMovement : MonoBehaviour
             Flip();
     }
 
+    private void OnEnable()
+    {
+        hasLastPosition = false;
+    }
+
     private void FixedUpdate()
     {
+        UpdateWorldSpeedModifiers();
+
         if (horizontalInput != 0f)
             TryStepUp(Mathf.Sign(horizontalInput), Mathf.Abs(horizontalInput) * moveSpeed * Time.fixedDeltaTime);
 
@@ -103,7 +116,6 @@ public class PlayerMovement : MonoBehaviour
             vx = 0f;
 
         rb.linearVelocity = new Vector2(vx, rb.linearVelocity.y);
-        UpdateWorldSpeedModifiers();
     }
 
     private bool TouchingWall(float dir)
@@ -224,7 +236,18 @@ public class PlayerMovement : MonoBehaviour
         if (GameManager.INSTANCE == null)
             return;
 
-        float amount = Mathf.Clamp01(Mathf.Abs(rb.linearVelocity.magnitude) / moveSpeed);
+        // The partner's lane follows how fast this player really moves: the
+        // distance the body covered since the last physics step, whatever
+        // moved it. Pushing into a wall reads 0, a conveyor carrying the
+        // player counts, and walking against a belt to hold still reads 0.
+        Vector2 position = rb.position;
+        float distance = hasLastPosition ? Vector2.Distance(position, lastPosition) : 0f;
+        lastPosition = position;
+        hasLastPosition = true;
+        if (distance > teleportDistance)
+            distance = 0f;
+
+        float amount = Mathf.Clamp01(distance / Time.fixedDeltaTime / moveSpeed);
         GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, amount);
     }
     
