@@ -54,11 +54,13 @@ public static class MainLevelBuilder
 
         // 2. Off the trap door straight into the drawbridge's slot (22-29),
         //    where the leaf lands: no safe spot between them. The checkpoint
-        //    lamp stands in the slot against its back wall. The 9-wide pit is
-        //    too wide to jump; Tock standing still freezes the leaf across it.
-        //    The button beyond opens Tock's gate.
+        //    is on the one-tile sliver between them (x 21), its lamp behind
+        //    the trap door's right lip lamp (pixel 180 of the trap door's
+        //    frame, which starts at x 16). The 9-wide pit is too wide to jump;
+        //    Tock standing still freezes the leaf across it. The button beyond
+        //    opens Tock's gate.
         l.Drawbridge(30, 39);
-        l.Checkpoint(25, lampDepth: 1);
+        l.Checkpoint(21, lampX: 20f / 32f, lampBehind: true);
         gateButton = l.Button(41);
 
         // 3. Scenery.
