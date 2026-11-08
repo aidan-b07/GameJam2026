@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,8 @@ public class CalmHalo : MonoBehaviour
     public Vector2 moteLife = new Vector2(3f, 6f);
     [Tooltip("Art pixels per second a mote rises.")]
     public Vector2 moteRise = new Vector2(5f, 14f);
-    public float fps = 20f;
+    [Tooltip("Redraws per second (the glow and motes move slowly).")]
+    public float fps = 12f;
     public int sortingOrder = 10;
 
     public float Amount { get; private set; }
@@ -42,7 +44,6 @@ public class CalmHalo : MonoBehaviour
     {
         public RawImage image;
         public Texture2D tex;
-        public Color32[] px;
         public float[] edge;    // exp(-d / falloff), d = art pixels to the frame edge
         public float[] diag;    // noise coordinate, x / 90 + y / 70
         public int w, h;
@@ -138,7 +139,6 @@ public class CalmHalo : MonoBehaviour
         if (l.tex != null) Destroy(l.tex);
         l.w = w; l.h = h;
         l.tex = new Texture2D(w, h, TextureFormat.RGBA32, false) { filterMode = FilterMode.Point, wrapMode = TextureWrapMode.Clamp };
-        l.px = new Color32[w * h];
         l.edge = new float[w * h];
         l.diag = new float[w * h];
         for (int y = 0; y < h; y++)
@@ -190,7 +190,7 @@ public class CalmHalo : MonoBehaviour
         for (int k = 0; k < n; k++) noise[k] = ValueNoise(baseCell + (float)k / NoiseRes);
         float frac = shift - baseCell;
 
-        var px = l.px;
+        var px = l.tex.GetPixelData<Color32>(0);
         Color32 clear = default;
         for (int y = 0; y < h; y++)
         {
@@ -212,24 +212,23 @@ public class CalmHalo : MonoBehaviour
         {
             float life = Mathf.Sin(Mathf.PI * m.age / m.life) * Amount * (0.7f + 0.3f * Mathf.Sin(clock * 5f + m.phase));
             int mx = Mathf.RoundToInt(m.x), my = Mathf.RoundToInt(m.y);
-            Put(l, mx, my, life * 0.95f);
+            Put(l, px, mx, my, life * 0.95f);
             if (m.big)
             {
-                Put(l, mx + 1, my, life * 0.45f); Put(l, mx - 1, my, life * 0.45f);
-                Put(l, mx, my + 1, life * 0.45f); Put(l, mx, my - 1, life * 0.45f);
+                Put(l, px, mx + 1, my, life * 0.45f); Put(l, px, mx - 1, my, life * 0.45f);
+                Put(l, px, mx, my + 1, life * 0.45f); Put(l, px, mx, my - 1, life * 0.45f);
             }
         }
-        l.tex.SetPixels32(px);
         l.tex.Apply(false);
     }
 
-    void Put(Lane l, int x, int y, float a)
+    void Put(Lane l, NativeArray<Color32> px, int x, int y, float a)
     {
         if (x < 0 || y < 0 || x >= l.w || y >= l.h || a <= 0f) return;
         int i = y * l.w + x;
         byte alpha = (byte)Mathf.Clamp(Mathf.RoundToInt(a * 255f), 0, 255);
-        if (l.px[i].a >= alpha) return;
-        l.px[i] = new Color32(moteColor.r, moteColor.g, moteColor.b, alpha);
+        if (px[i].a >= alpha) return;
+        px[i] = new Color32(moteColor.r, moteColor.g, moteColor.b, alpha);
     }
 
     static float Hash(int i)
