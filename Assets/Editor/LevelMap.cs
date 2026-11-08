@@ -65,6 +65,11 @@ public static class LevelMap
     const string GateLiftDir = "Assets/Art/Obstacles/GateLift/";
     static string GateLiftPng(string id) => $"{GateLiftDir}{id}_32px.png";
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
+    // Trap door from tools/make_trapdoor.py: 192x128 frames (6x4 tiles, the
+    // pit is tile columns 1-4), bottom-left pivot; body and untinted lamp overlay.
+    const string TrapDoorDir = "Assets/Art/Obstacles/TrapDoor/";
+    static string TrapDoorPng(string id) => $"{TrapDoorDir}{id}_192px.png";
+    const int TrapDoorFrameWidth = 192;
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
     const string RecessBackLeft = "recess_back_left";
@@ -179,6 +184,8 @@ public static class LevelMap
         PrepareSprite(GateLiftPng("lift_platform"), false, new Vector2(0.5f, 1f));
         PrepareSprite(GateLiftPng("lift_chain"), true, new Vector2(0.5f, 0f));
         PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
+        PrepareStrip(TrapDoorPng("trapdoor"), TrapDoorFrameWidth, Vector2.zero);
+        PrepareStrip(TrapDoorPng("trapdoor_lamp"), TrapDoorFrameWidth, Vector2.zero);
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -709,6 +716,71 @@ public static class LevelMap
             return go;
         }
 
+        // Trap door over the 4-tile pit x0..x0+3 (leave those columns out of the
+        // floor): two short drawbridge leaves hinged on the lips, level and
+        // flush with the ground when closed, dropping flat against the pit
+        // walls and winched back up. TrapDoor plays the sheet on lane time and
+        // turns the leaf colliders to the angle each frame shows.
+        public GameObject TrapDoor(int x0, float offset = 0f)
+        {
+            int y = Surface(x0 - 1);
+            Busy(x0 - 1, x0 + 4);
+
+            counts["TrapDoor"] = counts.TryGetValue("TrapDoor", out var n) ? n + 1 : 1;
+            var go = new GameObject($"TrapDoor_{counts["TrapDoor"]}");
+            go.transform.SetParent(markers, false);
+            // Frame bottom-left: the lip tile's column, 3 tiles under the surface
+            // tile row (frame row 32 is the top of that row, at the surface).
+            go.transform.localPosition = new Vector3(x0 - 1, y - 3f, 0f);
+            var bodyFrames = StripFrames(TrapDoorPng("trapdoor"));
+            var lampFrames = StripFrames(TrapDoorPng("trapdoor_lamp"));
+            var body = go.AddComponent<SpriteRenderer>();
+            body.sprite = bodyFrames.FirstOrDefault();
+            body.sortingOrder = 2;
+            tinted.Add(body);
+            var lamp = new GameObject("Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(go.transform, false);
+            lamp.sprite = lampFrames.FirstOrDefault();
+            lamp.sortingOrder = 3;
+
+            // Leaves: kinematic bodies on the hinge pins (frame px (37, 40) and
+            // (155, 40)), 64 x 10 px boxes reaching 59 px past the pin.
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            Rigidbody2D Leaf(string leafName, float pinX, float dir)
+            {
+                var leaf = new GameObject(leafName);
+                leaf.transform.SetParent(go.transform, false);
+                leaf.transform.localPosition = new Vector3(pinX / 32f, (128f - 40f) / 32f, 0f);
+                if (layer >= 0) leaf.layer = layer;
+                var rb = leaf.AddComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.gravityScale = 0f;
+                rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+                var box = leaf.AddComponent<BoxCollider2D>();
+                box.size = new Vector2(2f, 10f / 32f);
+                box.offset = new Vector2(dir * 27f / 32f, 0f);
+                return rb;
+            }
+
+            var door = new SerializedObject(go.AddComponent<TrapDoor>());
+            door.FindProperty("lane").intValue = LaneIndex;
+            door.FindProperty("cycleOffset").floatValue = offset;
+            door.FindProperty("body").objectReferenceValue = body;
+            door.FindProperty("lamp").objectReferenceValue = lamp;
+            void Frames(string prop, Sprite[] frames)
+            {
+                var list = door.FindProperty(prop);
+                list.arraySize = frames.Length;
+                for (int i = 0; i < frames.Length; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = frames[i];
+            }
+            Frames("bodyFrames", bodyFrames);
+            Frames("lampFrames", lampFrames);
+            door.FindProperty("leftLeaf").objectReferenceValue = Leaf("LeafLeft", 37f, 1f);
+            door.FindProperty("rightLeaf").objectReferenceValue = Leaf("LeafRight", 155f, -1f);
+            door.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
         // Laser gate between a floor emitter and a ceiling emitter, drawn "on".
         public void LaserGate(int x)
         {
@@ -1118,10 +1190,12 @@ public static class LevelMap
     static void PrepareStrip(string path, int frameWidth, Vector2 pivot)
     {
         if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
-        var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
-        int count = tex.width / frameWidth;
+        // Source size: a strip wider than the max texture size imports scaled down.
+        ti.GetSourceTextureWidthAndHeight(out int width, out int height);
+        int count = width / frameWidth;
+        int maxSize = Mathf.Max(2048, Mathf.NextPowerOfTwo(width));
         if (ti.spriteImportMode == SpriteImportMode.Multiple && ti.spritePixelsPerUnit == 32
-            && StripFrames(path).Length == count) return;
+            && ti.maxTextureSize >= maxSize && StripFrames(path).Length == count) return;
         ti.textureType = TextureImporterType.Sprite;
         ti.spriteImportMode = SpriteImportMode.Multiple;
         ti.spritePixelsPerUnit = 32;
@@ -1130,6 +1204,7 @@ public static class LevelMap
         ti.alphaIsTransparency = true;
         ti.wrapMode = TextureWrapMode.Clamp;
         ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.maxTextureSize = Mathf.Max(ti.maxTextureSize, maxSize);
         ti.SaveAndReimport();
 
         var factory = new SpriteDataProviderFactories();
@@ -1140,7 +1215,7 @@ public static class LevelMap
         var rects = Enumerable.Range(0, count).Select(i => new SpriteRect
         {
             name = $"{sheet}_{i}",
-            rect = new Rect(i * frameWidth, 0, frameWidth, tex.height),
+            rect = new Rect(i * frameWidth, 0, frameWidth, height),
             alignment = SpriteAlignment.Custom,
             pivot = pivot,
             spriteID = GUID.Generate(),
