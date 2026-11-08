@@ -23,7 +23,9 @@ using UnityEngine;
 //
 // A player whose head reaches the rift's edge dies (GameFlow.KillAll); that
 // includes being flung up off the top of the view, since the camera no longer
-// follows players upwards. Both rifts close again on every respawn.
+// follows players upwards. On a death both rifts draw back: they hold for
+// retractDelay, then ease closed over retractTime (fast at first, settling
+// gently), tendrils shrinking with them, so they are closed by the respawn.
 //
 // LaneDivider draws the rifts from ReachAt(lane, x).
 [DefaultExecutionOrder(-40)]   // after CoopCamera (-50), before LaneDivider (-30)
@@ -77,19 +79,27 @@ public class LaneRift : MonoBehaviour
     [Tooltip("Depth (units) at which the rift stops growing, about the full lane height.")]
     public float maxDepth = 12f;
 
+    [Header("Retract on death")]
+    [Tooltip("Seconds after a death before the rifts start to draw back, so the kill reads.")]
+    public float retractDelay = 0.3f;
+    [Tooltip("Seconds the rifts take to close after a death (ease out).")]
+    public float retractTime = 1.6f;
+
     float[] depth = new float[2];
     float[] slowFor = new float[2];
     float[] frontClock = new float[2];
 
     class Tendril
     {
-        public float x, halfWidth, length, maxLength, speed, hold, lean;
+        public float x, halfWidth, length, maxLength, speed, hold, lean, retractFrom;
         public bool receding;
     }
 
     readonly List<Tendril>[] tendrils = { new List<Tendril>(), new List<Tendril>() };
     readonly System.Random rng = new System.Random(23);
     bool[] safe = new bool[2];
+    float[] retractFrom = new float[2];
+    float retractClock = -1f;   // seconds since the death; -1 while alive
 
     // A safe lane's rift closes and cannot kill (a player waiting at the
     // unlocked clock door). Suspended does that for both lanes (the ending).
@@ -231,26 +241,78 @@ public class LaneRift : MonoBehaviour
     void OnEnable()
     {
         Instance = this;
-        GameFlow.LevelReset += Close;
+        GameFlow.LevelReset += ResetLanes;
     }
 
     void OnDisable()
     {
-        GameFlow.LevelReset -= Close;
+        GameFlow.LevelReset -= ResetLanes;
         if (Instance == this) Instance = null;
     }
 
+    // Snaps both rifts closed.
     public void Close()
     {
         for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = frontClock[i] = 0f;
         foreach (var list in tendrils) list.Clear();
-        for (int i = 0; i < safe.Length; i++) safe[i] = false;
+        ResetLanes();
+    }
+
+    // On a respawn the rifts keep closing on their own (Retract); only the
+    // lanes' state goes back.
+    void ResetLanes()
+    {
+        for (int i = 0; i < safe.Length; i++)
+        {
+            safe[i] = false;
+            slowFor[i] = 0f;
+        }
+    }
+
+    // During a death and respawn: hold, then ease both rifts closed.
+    void Retract(float dt)
+    {
+        if (retractClock < 0f)
+        {
+            retractClock = 0f;
+            for (int lane = 0; lane < depth.Length; lane++)
+            {
+                retractFrom[lane] = depth[lane];
+                foreach (var t in tendrils[lane]) { t.retractFrom = t.length; t.receding = true; }
+            }
+        }
+        retractClock += dt;
+        float p = Mathf.Clamp01((retractClock - retractDelay) / Mathf.Max(0.01f, retractTime));
+        float k = (1f - p) * (1f - p) * (1f - p);   // share still open: ease out cubic
+        for (int lane = 0; lane < depth.Length; lane++)
+        {
+            frontClock[lane] += dt;
+            depth[lane] = retractFrom[lane] * k;
+            var list = tendrils[lane];
+            for (int i = list.Count - 1; i >= 0; i--)
+            {
+                list[i].length = list[i].retractFrom * k;
+                if (k <= 0f) list.RemoveAt(i);
+            }
+        }
     }
 
     void Update()
     {
         var flow = GameFlow.Instance;
-        if (flow == null || flow.Respawning || flow.Finished && !Suspended) return;
+        if (flow == null) return;
+        if (flow.Respawning)
+        {
+            Retract(Time.deltaTime);
+            return;
+        }
+        if (retractClock >= 0f)
+        {
+            // Respawned: make sure nothing is left over.
+            retractClock = -1f;
+            if (Depth(0) > 0f || Depth(1) > 0f || tendrils[0].Count > 0 || tendrils[1].Count > 0) Close();
+        }
+        if (flow.Finished && !Suspended) return;
         var cams = flow.cameraRig != null ? flow.cameraRig.cameras : null;
         float dt = Time.deltaTime;
 
