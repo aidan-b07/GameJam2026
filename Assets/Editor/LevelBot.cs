@@ -33,7 +33,10 @@ public static class LevelBot
     public static float T;                  // seconds since Begin
     public static int Deaths;
     public static float logEvery = 0.5f;
-    public static bool manualInputUpdate = false;
+    public static bool manualInputUpdate = true;
+    static readonly bool[] jumpHeld = new bool[2];
+    static readonly System.Reflection.FieldInfo jumpBuffer =
+        typeof(PlayerMovement).GetField("jumpBufferTimer", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
     static readonly StringBuilder log = new StringBuilder();
 
     public static void Begin()
@@ -114,6 +117,15 @@ public static class LevelBot
         if (tock.jump) keys.Add(Key.UpArrow);
         InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(keys.ToArray()));
         if (manualInputUpdate) InputSystem.Update();
+        // The stepped Editor misses wasPressedThisFrame, so a jump press goes
+        // straight into the player's jump buffer (always a full jump).
+        bool[] jump = { tick.jump, tock.jump };
+        for (int lane = 0; lane < 2; lane++)
+        {
+            if (jump[lane] && !jumpHeld[lane])
+                jumpBuffer.SetValue(GameFlow.Instance.players[lane].GetComponent<PlayerMovement>(), 0.1f);
+            jumpHeld[lane] = jump[lane];
+        }
         EditorApplication.Step();
         T += Dt;
     }
