@@ -70,6 +70,8 @@ public static class LevelMap
     const string ConveyorDir = "Assets/Art/Obstacles/Conveyor/";
     static string ConveyorPng(string id) => $"{ConveyorDir}conveyor_flush_{id}_32px.png";
     static readonly string[] ConveyorParts = { "left", "mid", "right" };
+    static readonly string[] ConveyorSigns = { "sign", "sign_lamp" };
+    static string ConveyorSignPng(string id) => $"{ConveyorDir}conveyor_{id}_32px.png";
     // Latching floor button from tools/make_button.py: 64x32 (or narrow
     // 32x32) frames, 14 of them, bottom-left pivot; body and untinted lamp.
     const string ButtonDir = "Assets/Art/Obstacles/Button/";
@@ -213,6 +215,7 @@ public static class LevelMap
         foreach (var id in new[] { "hand_hour_48px", "hand_minute_48px" })
             PrepareSprite(ClockDoorPng(id), false, new Vector2(0.5f, 0.5f));
         foreach (var id in ConveyorParts) PrepareStrip(ConveyorPng(id), 32, Vector2.zero);
+        foreach (var id in ConveyorSigns) PrepareSprite(ConveyorSignPng(id), false, new Vector2(0.5f, 0.5f));
         foreach (var narrow in new[] { false, true })
             foreach (var id in new[] { "button", "button_lamp" })
                 PrepareStrip(ButtonPng(id, narrow), narrow ? 32 : 64, Vector2.zero);
@@ -739,6 +742,21 @@ public static class LevelMap
                 sr.sortingOrder = 1;   // over the ground tiles
                 tinted.Add(sr);
                 cells[i] = sr;
+            }
+            // Direction sign bolted to the slot face mid belt: a lit arrow that
+            // reads at any lane speed (the cleats alias when the belt runs
+            // fast). Plate top 6 px under the belt top, so its centre is 13.5
+            // px below the cell top; the art points right.
+            for (int k = 0; k < ConveyorSigns.Length; k++)
+            {
+                var sign = new GameObject(k == 0 ? "Sign" : "SignLamp");
+                sign.transform.SetParent(go.transform, false);
+                sign.transform.localPosition = new Vector3(cells.Length / 2f, 1f - 13.5f / 32f, 0f);
+                var sr = sign.AddComponent<SpriteRenderer>();
+                sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(ConveyorSignPng(ConveyorSigns[k]));
+                sr.flipX = speed < 0f;
+                sr.sortingOrder = 2 + k;   // over the belt; the lamp is not tinted, so it glows at night
+                if (k == 0) tinted.Add(sr);
             }
             var belt = go.AddComponent<global::Conveyor>();
             belt.lane = LaneIndex;
