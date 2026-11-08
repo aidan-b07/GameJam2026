@@ -70,7 +70,7 @@ public class DawnEnding : MonoBehaviour
         if (!Running)
         {
             if (doors != null && doors.Length > 0 && System.Array.TrueForAll(doors, d => d != null && d.Reached)
-                && GameFlow.Instance != null && !GameFlow.Instance.Respawning)
+                && GameFlow.Instance != null && !GameFlow.Instance.Respawning && !PauseMenu.IsPaused)
                 Begin();
             return;
         }

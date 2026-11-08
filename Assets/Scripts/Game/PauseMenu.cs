@@ -257,6 +257,11 @@ public class PauseMenu : MonoBehaviour
 
     void Thaw()
     {
+        // A death or the ending that started while paused owns movement now;
+        // GameFlow or DawnEnding gives control back when they are done.
+        var flow = GameFlow.Instance;
+        bool owned = flow != null && (flow.Respawning || flow.Finished);
+        if (owned) { frozen.Clear(); return; }
         foreach (var (m, was) in frozen)
             if (m != null && was) m.enabled = true;
         frozen.Clear();
