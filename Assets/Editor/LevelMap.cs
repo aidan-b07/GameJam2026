@@ -161,6 +161,8 @@ public static class LevelMap
     static TowerClocks.Face Face(float x, float y, float r) => new TowerClocks.Face { centre = new Vector2(x, y), radius = r };
     static Color Rgb(int r, int g, int b) => new Color32((byte)r, (byte)g, (byte)b, 255);
 
+    // Mid layer from painted sections (bg-sections) instead of the one repeating picture.
+    public static bool UseMidSections = true;
     const float FarDepth = 0.85f;
     const float MidDepth = 0.6f;
 
@@ -381,7 +383,10 @@ public static class LevelMap
             if (Sky != null && Sky.life != null) Sky.life.cameraTransform = cam;
             if (Sky != null && Sky.layers != null)
                 foreach (var layer in Sky.layers)
+                {
                     if (layer.life != null) layer.life.cameraTransform = cam;
+                    if (layer.sections != null) layer.sections.cameraTransform = cam;
+                }
             foreach (var (t, depth) in backgrounds)
             {
                 var p = t.gameObject.AddComponent<Parallax>();
@@ -1086,7 +1091,7 @@ public static class LevelMap
             Sky.layers = new[]
             {
                 SkyLayer(go.transform, "Far", "bg_far_360h", -20, FarDepth),
-                SkyLayer(go.transform, "Mid", "bg_mid_360h", -10, MidDepth),
+                UseMidSections ? SectionLayer(go.transform, -10) : SkyLayer(go.transform, "Mid", "bg_mid_360h", -10, MidDepth),
             };
             Sky.tilemaps = tilemaps;
             Sky.sun = SkyBody(go.transform, "Sun");
@@ -1095,6 +1100,19 @@ public static class LevelMap
             Sky.life = CreateSkyLife(go.transform);
             Sky.hour = startHour;
             Sky.lane = LaneIndex;
+        }
+
+        // The mid layer as a row of painted sections (MidSectionsBuilder). The
+        // camera starts at x 18 and the layer moves 0.6 of the camera's way, so
+        // the view covers local x 18 + 0.4 (camera x - 18) +- 20; the row spans
+        // that with a margin for wide windows.
+        LaneSky.Layer SectionLayer(Transform parent, int order)
+        {
+            float bottom = CameraY + CameraSize + 0.25f - MidSections.Height / MidSections.PixelsPerUnit;
+            var (rowRoot, sections, life) = MidSectionsBuilder.Build(parent, LaneIndex, bottom,
+                -24f, 0.4f * Length + 40f, 7 + LaneIndex * 12, root.transform.position.y, order);
+            backgrounds.Add((rowRoot, MidDepth));
+            return new LaneSky.Layer { sortingOrder = order, sections = sections, life = life };
         }
 
         LaneSky.Layer SkyLayer(Transform parent, string id, string file, int order, float depth)

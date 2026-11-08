@@ -16,6 +16,10 @@ public class MidLayerLife : MonoBehaviour
 {
     [Tooltip("The background whose picture the positions refer to.")]
     public SpriteRenderer background;
+    [Tooltip("Off for a row of background sections: positions are pixels of the whole row from its top-left, this object sits at the row's bottom-left, and nothing repeats.")]
+    public bool tiled = true;
+    [Tooltip("Size in pixels of the row of sections (untiled only).")]
+    public Vector2 pictureSize;
     public Transform cameraTransform;
     [Tooltip("Lane whose clock runs the layer (0 Tick, 1 Tock).")]
     public int lane = -1;
@@ -28,6 +32,8 @@ public class MidLayerLife : MonoBehaviour
     public RectInt[] ivy;
     [Tooltip("Top of the spire the pennant flies from, picture pixels.")]
     public Vector2 pennant;
+    [Tooltip("More spire tips with pennants, picture pixels.")]
+    public Vector2[] pennants;
     [Tooltip("Lit windows that flicker at night, picture pixels.")]
     public RectInt[] windows;
     [Tooltip("Tint of the pigeons, leaves and pennant at night.")]
@@ -45,7 +51,10 @@ public class MidLayerLife : MonoBehaviour
     readonly List<Pigeon> birds = new List<Pigeon>();
     readonly List<Leaf> leaves = new List<Leaf>();
     readonly List<Fly> flies = new List<Fly>();
-    SpriteRenderer[] pennantSr;
+    SpriteRenderer[][] pennantSr;
+    Vector2[] pennantTips;
+    int copies = 2;
+    const float Reach = 26f;   // local units from the camera beyond which fixed items are not updated
     SpriteRenderer[][] windowSr;
     float[] windowPhase;
     Sprite[] sit, fly, pennantFrames, leafSprites;
@@ -64,14 +73,25 @@ public class MidLayerLife : MonoBehaviour
 
     void Start()
     {
-        if (background == null || background.sprite == null) { enabled = false; return; }
+        if (tiled && (background == null || background.sprite == null)) { enabled = false; return; }
         rng = new System.Random(seed);
-        var src = background.sprite;
-        ppu = src.pixelsPerUnit;
-        picture = src.rect.size;
-        // Bottom-left corner of the tiled rect, in local units.
-        origin = -src.pivot / src.rect.size * background.size;
-        tileWidth = picture.x / ppu;
+        if (tiled)
+        {
+            var src = background.sprite;
+            ppu = src.pixelsPerUnit;
+            picture = src.rect.size;
+            // Bottom-left corner of the tiled rect, in local units.
+            origin = -src.pivot / src.rect.size * background.size;
+            tileWidth = picture.x / ppu;
+        }
+        else
+        {
+            ppu = 32f;
+            picture = pictureSize;
+            origin = Vector2.zero;
+            tileWidth = picture.x / ppu;
+            copies = 1;
+        }
         groundLocal = transform.InverseTransformPoint(new Vector3(0f, groundY, 0f)).y;
 
         var feet = new Vector2(0f, 0f);
@@ -90,15 +110,23 @@ public class MidLayerLife : MonoBehaviour
         };
         foreach (var p in pigeons ?? new Vector2[0])
         {
-            var b = new Pigeon { home = Local(p.x, p.y), timer = R(2f, 8f), phase = R(0f, 6f), sr = new SpriteRenderer[2] };
-            for (int i = 0; i < 2; i++) b.sr[i] = PixelArt.Renderer(transform, "Pigeon", sortingOrder);
+            var b = new Pigeon { home = Local(p.x, p.y), timer = R(2f, 8f), phase = R(0f, 6f), sr = new SpriteRenderer[copies] };
+            for (int i = 0; i < copies; i++) b.sr[i] = PixelArt.Renderer(transform, "Pigeon", sortingOrder);
             birds.Add(b);
         }
 
         pennantFrames = new Sprite[8];
         for (int f = 0; f < 8; f++) pennantFrames[f] = PennantFrame(f / 8f * 2f * Mathf.PI);
-        pennantSr = new SpriteRenderer[2];
-        for (int i = 0; i < 2; i++) pennantSr[i] = PixelArt.Renderer(transform, "Pennant", sortingOrder);
+        var tips = new List<Vector2>();
+        if (pennant != Vector2.zero) tips.Add(pennant);
+        if (pennants != null) tips.AddRange(pennants);
+        pennantTips = tips.ToArray();
+        pennantSr = new SpriteRenderer[pennantTips.Length][];
+        for (int k = 0; k < pennantTips.Length; k++)
+        {
+            pennantSr[k] = new SpriteRenderer[copies];
+            for (int i = 0; i < copies; i++) pennantSr[k][i] = PixelArt.Renderer(transform, "Pennant", sortingOrder);
+        }
 
         Color32[] leafColours = { new Color32(217, 130, 43, 255), new Color32(181, 83, 31, 255), new Color32(232, 163, 58, 255), new Color32(194, 98, 42, 255) };
         leafSprites = new Sprite[8];
@@ -115,8 +143,8 @@ public class MidLayerLife : MonoBehaviour
         for (int w = 0; w < n; w++)
         {
             windowPhase[w] = R(0f, 50f);
-            windowSr[w] = new SpriteRenderer[2];
-            for (int i = 0; i < 2; i++)
+            windowSr[w] = new SpriteRenderer[copies];
+            for (int i = 0; i < copies; i++)
             {
                 var sr = PixelArt.Renderer(transform, "Candle", sortingOrder - 2);
                 sr.sprite = candleSprite;
@@ -161,6 +189,7 @@ public class MidLayerLife : MonoBehaviour
     // Local x of the two repeats of a picture position nearest the camera.
     (float a, float b) Repeats(float x, float camLocal)
     {
+        if (!tiled) return (x, x);
         float k = Mathf.Round((camLocal - x) / tileWidth);
         float a = x + k * tileWidth;
         return (a, a + (camLocal > a ? tileWidth : -tileWidth));
@@ -206,10 +235,11 @@ public class MidLayerLife : MonoBehaviour
             }
             Sprite s = b.state == 0 ? sit[Mathf.Sin(b.phase * 2.3f) > 0.8f ? 1 : 0] : fly[Mathf.FloorToInt(t * 12f) % 3];
             var (xa, xb) = Repeats(b.home.x, camLocal);
-            for (int i = 0; i < 2; i++)
+            bool near = tiled || Mathf.Abs(xa - camLocal) < Reach;
+            for (int i = 0; i < copies; i++)
             {
                 var sr = b.sr[i];
-                sr.enabled = alpha > 0.01f;
+                sr.enabled = alpha > 0.01f && near;
                 sr.sprite = s;
                 sr.color = PixelArt.Alpha(tint, alpha);
                 sr.transform.localPosition = new Vector3((i == 0 ? xa : xb) + b.offset.x, b.home.y + b.offset.y, 0f);
@@ -219,15 +249,22 @@ public class MidLayerLife : MonoBehaviour
 
     void UpdatePennant(float camLocal, Color tint)
     {
-        if (pennant == Vector2.zero) { foreach (var sr in pennantSr) sr.enabled = false; return; }
-        var tip = Local(pennant.x, pennant.y);
-        var (xa, xb) = Repeats(tip.x, camLocal);
-        var frame = pennantFrames[Mathf.FloorToInt(t * 6.4f) % 8];
-        for (int i = 0; i < 2; i++)
+        for (int k = 0; k < pennantTips.Length; k++)
         {
-            pennantSr[i].sprite = frame;
-            pennantSr[i].color = tint;
-            pennantSr[i].transform.localPosition = new Vector3(i == 0 ? xa : xb, tip.y, 0f);
+            var tip = Local(pennantTips[k].x, pennantTips[k].y);
+            var (xa, xb) = Repeats(tip.x, camLocal);
+            // Each flag waves at its own phase.
+            var frame = pennantFrames[(Mathf.FloorToInt(t * 6.4f) + k * 3) % 8];
+            bool near = tiled || Mathf.Abs(xa - camLocal) < Reach;
+            for (int i = 0; i < copies; i++)
+            {
+                var sr = pennantSr[k][i];
+                sr.enabled = near;
+                if (!near) continue;
+                sr.sprite = frame;
+                sr.color = tint;
+                sr.transform.localPosition = new Vector3(i == 0 ? xa : xb, tip.y, 0f);
+            }
         }
     }
 
@@ -243,6 +280,9 @@ public class MidLayerLife : MonoBehaviour
             {
                 leafTimer = R(0.4f, 1.1f);
                 var r = ivy[rng.Next(ivy.Length)];
+                // Untiled, only clusters near the camera drop leaves.
+                for (int tries = 0; !tiled && tries < 8 && Mathf.Abs(Local(r.center.x, 0f).x - camLocal) > Reach; tries++)
+                    r = ivy[rng.Next(ivy.Length)];
                 var p = Local(R(r.xMin, r.xMax), R(r.yMin, r.yMax));
                 p.x = Repeats(p.x, camLocal).a;
                 var sr = PixelArt.Renderer(transform, "Leaf", sortingOrder);
@@ -278,11 +318,16 @@ public class MidLayerLife : MonoBehaviour
             var r = windows[w];
             var corner = Local(r.x, r.y + r.height);
             var (xa, xb) = Repeats(corner.x, camLocal);
+            if (!tiled && Mathf.Abs(xa - camLocal) > Reach)
+            {
+                if (windowSr[w][0].enabled) windowSr[w][0].enabled = false;
+                continue;
+            }
             // -1 gutters (the window dims), +1 flares (it brightens).
             float flicker = Mathf.Sin(t * 9f + windowPhase[w]) * Mathf.Sin(t * 3.7f + windowPhase[w] * 2f);
             var colour = flicker > 0f ? candleFlare : candleDim;
             float a = night * Mathf.Abs(flicker) * (flicker > 0f ? 0.45f : 0.55f);
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < copies; i++)
             {
                 var sr = windowSr[w][i];
                 sr.enabled = a > 0.01f;
@@ -296,7 +341,7 @@ public class MidLayerLife : MonoBehaviour
     // over a strip around the camera that wraps as it scrolls.
     void UpdateFireflies(float camLocal)
     {
-        float span = tileWidth * 2f;
+        float span = tiled ? tileWidth * 2f : 40f;
         foreach (var f in flies)
         {
             float a = t * f.speed + f.phase;

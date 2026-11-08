@@ -24,6 +24,8 @@ public class ChimneySmoke : MonoBehaviour
         public float interval;
         [Tooltip("Puff size, 1 = normal.")]
         public float size;
+        [Tooltip("Moved by script (a train's funnel, SetMouth); no puffs until it is first turned on.")]
+        public bool moving;
     }
 
     [System.Serializable]
@@ -49,6 +51,8 @@ public class ChimneySmoke : MonoBehaviour
     [Tooltip("Lane seconds simulated before the first frame, so the smoke is already up.")]
     public float warmUp = 8f;
     public int seed = 1;
+    [Tooltip("Draw only picture columns cropLeft to cropRight into an untiled texture (a background section); equal draws the whole picture, tiled.")]
+    public int cropLeft, cropRight;
     public Palette day = new Palette(Rgb(95, 87, 98), Rgb(236, 232, 230), Rgb(210, 204, 208), Rgb(170, 162, 174));
     public Palette dusk = new Palette(Rgb(72, 50, 72), Rgb(236, 184, 178), Rgb(196, 152, 168), Rgb(152, 114, 150));
     public Palette night = new Palette(Rgb(34, 30, 60), Rgb(124, 114, 164), Rgb(100, 92, 142), Rgb(80, 72, 122));
@@ -66,7 +70,9 @@ public class ChimneySmoke : MonoBehaviour
     SpriteRenderer sr;
     Texture2D tex;
     Color32[] pixels;
-    int width, rowLo, res;
+    int width, rowLo, res, colLo;
+    bool cropped;
+    bool[] off;
     Palette pal;
     bool dirty = true;
 
@@ -81,7 +87,9 @@ public class ChimneySmoke : MonoBehaviour
         var src = background.sprite;
         var rect = src.rect;
         res = Mathf.Max(1, resolution);
-        width = (int)rect.width;
+        cropped = cropRight > cropLeft;
+        colLo = cropped ? cropLeft : 0;
+        width = cropped ? cropRight - cropLeft : (int)rect.width;
         float lo = float.MaxValue, hi = float.MinValue;
         foreach (var c in chimneys) { lo = Mathf.Min(lo, c.mouth.y); hi = Mathf.Max(hi, c.mouth.y); }
         rowLo = Mathf.Max(0, Mathf.FloorToInt(lo) - 2);
@@ -94,12 +102,18 @@ public class ChimneySmoke : MonoBehaviour
         };
         pixels = new Color32[tex.width * tex.height];
         // Same pivot as the picture, so the band lines up with the rows it covers.
-        var pivot = new Vector2(src.pivot.x / width, (src.pivot.y - rowLo) * res / tex.height);
+        var pivot = new Vector2((src.pivot.x - colLo) / width, (src.pivot.y - rowLo) * res / tex.height);
         var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), pivot, src.pixelsPerUnit * res, 0, SpriteMeshType.FullRect);
         sprite.hideFlags = HideFlags.HideAndDontSave;
         sr.sprite = sprite;
-        sr.drawMode = SpriteDrawMode.Tiled;
-        sr.size = new Vector2(background.size.x, tex.height / (src.pixelsPerUnit * res));
+        if (cropped) sr.drawMode = SpriteDrawMode.Simple;
+        else
+        {
+            sr.drawMode = SpriteDrawMode.Tiled;
+            sr.size = new Vector2(background.size.x, tex.height / (src.pixelsPerUnit * res));
+        }
+        off = new bool[chimneys.Length];
+        for (int i = 0; i < off.Length; i++) off[i] = chimneys[i].moving;
 
         rng = new System.Random(seed);
         puffs.Clear();
@@ -140,6 +154,15 @@ public class ChimneySmoke : MonoBehaviour
         return x.r == y.r && x.g == y.g && x.b == y.b;
     }
 
+    // Moves a chimney (a train's funnel) and turns its puffs on or off; puffs
+    // already out keep drifting.
+    public void SetMouth(int i, Vector2 mouth, bool on)
+    {
+        if (chimneys == null || i < 0 || i >= chimneys.Length) return;
+        chimneys[i].mouth = mouth;
+        if (off != null && i < off.Length) off[i] = !on;
+    }
+
     Palette Pick(LaneSky.Look look) => look == LaneSky.Look.Day ? day : look == LaneSky.Look.Dusk ? dusk : night;
 
     void Update()
@@ -177,7 +200,7 @@ public class ChimneySmoke : MonoBehaviour
             var c = chimneys[i];
             var s = stacks[i];
             s.timer -= dt;
-            if (s.timer > 0f) continue;
+            if (s.timer > 0f || (off != null && off[i])) continue;
             s.timer = Mathf.Max(0.05f, c.interval) * R(0.85f, 1.15f);
             s.count++;
             bool big = s.count % 4 == 0;
@@ -217,14 +240,16 @@ public class ChimneySmoke : MonoBehaviour
             // Texels covering the puff; each is coloured by the art-pixel cell of
             // the puff it falls in, measured from the puff's exact centre.
             int tw = width * res, th = tex.height;
-            int X0 = Mathf.FloorToInt((f.x - r - 1f) * res), X1 = Mathf.CeilToInt((f.x + r + 1f) * res);
+            float fx = f.x - colLo;
+            int X0 = Mathf.FloorToInt((fx - r - 1f) * res), X1 = Mathf.CeilToInt((fx + r + 1f) * res);
+            if (cropped) { X0 = Mathf.Max(0, X0); X1 = Mathf.Min(tw - 1, X1); }
             int Y0 = Mathf.Max(0, Mathf.FloorToInt((f.y - r - 1f - rowLo) * res)), Y1 = Mathf.Min(th - 1, Mathf.CeilToInt((f.y + r + 1f - rowLo) * res));
             for (int Y = Y0; Y <= Y1; Y++)
             {
                 int yy = Mathf.FloorToInt((Y + 0.5f) / res + rowLo - f.y + 0.5f);
                 for (int X = X0; X <= X1; X++)
                 {
-                    int xx = Mathf.FloorToInt((X + 0.5f) / res - f.x + 0.5f);
+                    int xx = Mathf.FloorToInt((X + 0.5f) / res - fx + 0.5f);
                     float jag = (Hash(xx >> 1, yy >> 1, f.id) - 0.5f) * 0.8f;
                     if (xx * xx + yy * yy * 1.05f > (r + jag) * (r + jag)) continue;
                     // Thins from the edge in as it ages.

@@ -26,6 +26,8 @@ public class LaneSky : MonoBehaviour
         public ChimneySmoke smoke;
         [Tooltip("Pigeons, leaves, pennant, candle windows and fireflies on this layer.")]
         public MidLayerLife life;
+        [Tooltip("A row of painted sections instead of one tiled picture (day, dusk and night left empty).")]
+        public MidSections sections;
     }
 
     public Layer[] layers;
@@ -104,6 +106,7 @@ public class LaneSky : MonoBehaviour
                 if (layer.clocks != null) layer.clocks.Show(hour, from, to, t);
                 if (layer.smoke != null) layer.smoke.Show(from, to, t);
                 if (layer.life != null) layer.life.Show(from, to, t);
+                if (layer.sections != null) layer.sections.Show(hour, from, to, t);
             }
         }
         if (clouds != null) clouds.Show(from, to, t);

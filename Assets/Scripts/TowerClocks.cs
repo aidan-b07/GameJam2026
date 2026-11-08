@@ -22,12 +22,15 @@ public class TowerClocks : MonoBehaviour
     public SpriteRenderer background;
     public Face[] faces;
     public Color dayHands = Color.black, duskHands = Color.black, nightHands = Color.black;
+    [Tooltip("Only cover the faces with an untiled texture (a background section) instead of the whole tiled picture.")]
+    public bool crop;
 
     SpriteRenderer sr;
     Texture2D tex;
     Color32[] pixels;
     float hour = -1f;
     int drawn = -1;
+    int ox, oy;   // picture pixel of the texture's bottom-left
 
     void OnEnable() => Init();
 
@@ -37,19 +40,38 @@ public class TowerClocks : MonoBehaviour
         if (tex != null || background == null || background.sprite == null) return;
         var src = background.sprite;
         var rect = src.rect;
-        tex = new Texture2D((int)rect.width, (int)rect.height, TextureFormat.RGBA32, false)
+        int w = (int)rect.width, h = (int)rect.height;
+        ox = oy = 0;
+        if (crop && faces != null && faces.Length > 0)
+        {
+            float x0 = float.MaxValue, y0 = float.MaxValue, x1 = float.MinValue, y1 = float.MinValue;
+            foreach (var f in faces)
+            {
+                x0 = Mathf.Min(x0, f.centre.x - f.radius); x1 = Mathf.Max(x1, f.centre.x + f.radius);
+                y0 = Mathf.Min(y0, f.centre.y - f.radius); y1 = Mathf.Max(y1, f.centre.y + f.radius);
+            }
+            ox = Mathf.FloorToInt(x0) - 2;
+            oy = Mathf.FloorToInt(y0) - 2;
+            w = Mathf.CeilToInt(x1) + 3 - ox;
+            h = Mathf.CeilToInt(y1) + 3 - oy;
+        }
+        tex = new Texture2D(w, h, TextureFormat.RGBA32, false)
         {
             filterMode = FilterMode.Point,
             wrapMode = TextureWrapMode.Clamp,
             hideFlags = HideFlags.HideAndDontSave,
         };
         pixels = new Color32[tex.width * tex.height];
-        var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), src.pivot / rect.size,
+        var sprite = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), (src.pivot - new Vector2(ox, oy)) / new Vector2(w, h),
             src.pixelsPerUnit, 0, SpriteMeshType.FullRect);
         sprite.hideFlags = HideFlags.HideAndDontSave;
         sr.sprite = sprite;
-        sr.drawMode = SpriteDrawMode.Tiled;
-        sr.size = background.size;
+        if (crop) sr.drawMode = SpriteDrawMode.Simple;
+        else
+        {
+            sr.drawMode = SpriteDrawMode.Tiled;
+            sr.size = background.size;
+        }
         drawn = -1;
         if (hour >= 0f) Draw();
     }
@@ -125,6 +147,8 @@ public class TowerClocks : MonoBehaviour
 
     void Set(int x, int y)
     {
+        x -= ox;
+        y -= oy;
         if (x < 0 || y < 0 || x >= tex.width || y >= tex.height) return;
         pixels[y * tex.width + x] = new Color32(255, 255, 255, 255);
     }
