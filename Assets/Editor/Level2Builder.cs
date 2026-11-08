@@ -18,7 +18,7 @@ public static class Level2Builder
     // up both. A player standing in a gap is carried into the next head.
     const int RunStart = 138;               // first crusher's head x
     const int RunPitch = 6;                 // head to head: 3 head + 3 belt
-    const float BeltSpeed = 0.75f;          // units per lane second at 1x
+    const float BeltSpeed = 2f;             // units per second at the idle lane speed
 
     static void PistonRun(Lane l, float beltSpeed, float firstOffset, float offsetStep)
     {

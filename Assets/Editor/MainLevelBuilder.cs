@@ -27,7 +27,7 @@ public static class MainLevelBuilder
 {
     public const string ScenePath = "Assets/Scenes/MainLevel.unity";
     const int Length = 136;
-    const float Belt = 0.75f;   // units per lane second
+    const float Belt = 2f;   // units per second at the idle lane speed (Conveyor.fastSpeed at full)
     const float SpanPause = 2.5f;   // lane seconds the drawbridge holds across its pit
     // Lane seconds each crusher waits raised (PlungerMotion default 2): at 3x
     // the gap under a head lasts about 1.4 s, enough for a 0.4 s reaction.

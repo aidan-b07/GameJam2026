@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float IdleWorldSpeed => idleWorldSpeed;
+    public float MaxWorldSpeed => maxWorldSpeed;
+
     public float GetWorldSpeed(int lane) {
         switch (lane) {
             case 0: return player1WorldSpeedModifier;
