@@ -75,12 +75,12 @@ public class MidSections : MonoBehaviour
 
     LaneSky.Look from = LaneSky.Look.Dusk, to = LaneSky.Look.Dusk;
     float blend;
-    float hour = -1f;
+    bool shown;   // not saved: the first Show after loading sets every renderer
 
     public void Show(float hour, LaneSky.Look from, LaneSky.Look to, float t)
     {
-        this.hour = hour;
-        bool changed = from != this.from || to != this.to || !Mathf.Approximately(t, blend);
+        bool changed = !shown || from != this.from || to != this.to || !Mathf.Approximately(t, blend);
+        shown = true;
         this.from = from;
         this.to = to;
         blend = t;

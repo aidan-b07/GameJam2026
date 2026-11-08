@@ -24,6 +24,8 @@ public class ChimneySmoke : MonoBehaviour
         public float interval;
         [Tooltip("Puff size, 1 = normal.")]
         public float size;
+        [Tooltip("Moved by script (a train's funnel, SetMouth); no puffs until it is first turned on.")]
+        public bool moving;
     }
 
     [System.Serializable]
@@ -111,6 +113,7 @@ public class ChimneySmoke : MonoBehaviour
             sr.size = new Vector2(background.size.x, tex.height / (src.pixelsPerUnit * res));
         }
         off = new bool[chimneys.Length];
+        for (int i = 0; i < off.Length; i++) off[i] = chimneys[i].moving;
 
         rng = new System.Random(seed);
         puffs.Clear();

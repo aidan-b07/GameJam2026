@@ -225,7 +225,7 @@ public static class MidSectionsBuilder
                 p.a.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
                 p.b.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
                 p.smokeIndex = chimneys.Count;
-                chimneys.Add(new ChimneySmoke.Chimney { mouth = new Vector2(pd.track0 + p.mouth.x, p.mouth.y), interval = 0.3f, size = 0.75f });
+                chimneys.Add(new ChimneySmoke.Chimney { mouth = new Vector2(pd.track0 + p.mouth.x, p.mouth.y), interval = 0.3f, size = 0.75f, moving = true });
                 cropLeft = Mathf.Min(cropLeft, pd.track0 - 10);
                 cropRight = Mathf.Max(cropRight, pd.track1 + 110);
             }
