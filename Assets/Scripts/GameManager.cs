@@ -63,7 +63,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Scripted sequences (the ending) take the lane clocks over: Update stops
+    // driving them, and SetLane sets each lane's clock and world speed.
+    public bool Scripted { get; set; }
+
     void Update() {
+        if (Scripted)
+            return;
         float dt = Time.deltaTime;
         player1WorldSpeedModifier = Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(0, dt));
         player2WorldSpeedModifier = Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(1, dt));
@@ -73,6 +79,18 @@ public class GameManager : MonoBehaviour
     }
 
     public float GetLaneTime(int lane) => laneTime[lane];
+
+    // Hours on the lane's clock since midnight of the first day (not wrapped at 24).
+    public float GetLaneHoursTotal(int lane) => startHours[lane] + laneTime[lane] * minutesPerSecond / 60f;
+
+    // Sets the lane's clock to hoursTotal (as GetLaneHoursTotal; keep it rising,
+    // lane time never runs backwards) and its world speed, which turns the
+    // players' keys. For Scripted sequences.
+    public void SetLane(int lane, float hoursTotal, float worldSpeed) {
+        laneTime[lane] = Mathf.Max(laneTime[lane], (hoursTotal - startHours[lane]) * 60f / minutesPerSecond);
+        if (lane == 0) player1WorldSpeedModifier = worldSpeed;
+        else player2WorldSpeedModifier = worldSpeed;
+    }
 
     // Time of day (0-24) on the lane's clock; drives its sky and tower clocks.
     public float GetLaneHour(int lane) =>

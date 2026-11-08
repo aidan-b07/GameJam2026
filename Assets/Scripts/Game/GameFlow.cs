@@ -42,6 +42,8 @@ public class GameFlow : MonoBehaviour
     // (still hidden): buttons let go and their gates shut.
     public static event System.Action LevelReset;
     public bool Respawning { get; private set; }
+    // Set by the ending: nothing kills any more.
+    public bool Finished { get; set; }
 
     // Highest checkpoint index each lane's player has reached.
     private int[] reached;
@@ -88,7 +90,7 @@ public class GameFlow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Respawning) return;
+        if (Respawning || Finished) return;
         for (int lane = 0; lane < list.Count && lane < laneGroundY.Length; lane++)
         {
             var p = list[lane];
@@ -123,7 +125,7 @@ public class GameFlow : MonoBehaviour
     [ContextMenu("Kill All")]
     public void KillAll()
     {
-        if (!Respawning) StartCoroutine(DieAndRespawn());
+        if (!Respawning && !Finished) StartCoroutine(DieAndRespawn());
     }
 
     private IEnumerator DieAndRespawn()

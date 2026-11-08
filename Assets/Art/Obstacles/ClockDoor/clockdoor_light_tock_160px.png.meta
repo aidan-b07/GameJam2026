@@ -1,0 +1,1010 @@
+fileFormatVersion: 2
+guid: a038f7892ef664b43925ce10faa7c0d5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 272422620944573531
+    second: clockdoor_light_tock_160px_0
+  - first:
+      213: 6930014896906199154
+    second: clockdoor_light_tock_160px_1
+  - first:
+      213: -500542633315193448
+    second: clockdoor_light_tock_160px_2
+  - first:
+      213: 2466974616043042110
+    second: clockdoor_light_tock_160px_3
+  - first:
+      213: 2406070505433895942
+    second: clockdoor_light_tock_160px_4
+  - first:
+      213: -3174463597987127983
+    second: clockdoor_light_tock_160px_5
+  - first:
+      213: 3634283607716198803
+    second: clockdoor_light_tock_160px_6
+  - first:
+      213: -7191319501758636611
+    second: clockdoor_light_tock_160px_7
+  - first:
+      213: -8178743741641204406
+    second: clockdoor_light_tock_160px_8
+  - first:
+      213: 7769667701019432077
+    second: clockdoor_light_tock_160px_9
+  - first:
+      213: 6588445977509142117
+    second: clockdoor_light_tock_160px_10
+  - first:
+      213: 2207871232558493310
+    second: clockdoor_light_tock_160px_11
+  - first:
+      213: 7354108028404711690
+    second: clockdoor_light_tock_160px_12
+  - first:
+      213: 933912324623257367
+    second: clockdoor_light_tock_160px_13
+  - first:
+      213: -969960839701014905
+    second: clockdoor_light_tock_160px_14
+  - first:
+      213: -8060526863363531553
+    second: clockdoor_light_tock_160px_15
+  - first:
+      213: -4358746553226730796
+    second: clockdoor_light_tock_160px_16
+  - first:
+      213: 380573027907227966
+    second: clockdoor_light_tock_160px_17
+  - first:
+      213: -8733783056013196144
+    second: clockdoor_light_tock_160px_18
+  - first:
+      213: -3843294591465583780
+    second: clockdoor_light_tock_160px_19
+  - first:
+      213: -3998278472415452210
+    second: clockdoor_light_tock_160px_20
+  - first:
+      213: 8173107427884620547
+    second: clockdoor_light_tock_160px_21
+  - first:
+      213: -4327823947367567053
+    second: clockdoor_light_tock_160px_22
+  - first:
+      213: -1316104409567905988
+    second: clockdoor_light_tock_160px_23
+  - first:
+      213: 833030804971358537
+    second: clockdoor_light_tock_160px_24
+  - first:
+      213: -6349112573108187793
+    second: clockdoor_light_tock_160px_25
+  - first:
+      213: -4313835407488436716
+    second: clockdoor_light_tock_160px_26
+  - first:
+      213: 6752467456335353212
+    second: clockdoor_light_tock_160px_27
+  - first:
+      213: -59511415431991116
+    second: clockdoor_light_tock_160px_28
+  - first:
+      213: 7482281713075937070
+    second: clockdoor_light_tock_160px_29
+  - first:
+      213: -165543141525913963
+    second: clockdoor_light_tock_160px_30
+  - first:
+      213: -2633475870894675603
+    second: clockdoor_light_tock_160px_31
+  - first:
+      213: -3612459841538999470
+    second: clockdoor_light_tock_160px_32
+  - first:
+      213: 2082446539746330888
+    second: clockdoor_light_tock_160px_33
+  - first:
+      213: -3013656606624260101
+    second: clockdoor_light_tock_160px_34
+  - first:
+      213: 3319692169975849125
+    second: clockdoor_light_tock_160px_35
+  - first:
+      213: -5970878004557731389
+    second: clockdoor_light_tock_160px_36
+  - first:
+      213: 2791773416853944254
+    second: clockdoor_light_tock_160px_37
+  - first:
+      213: 474488801889373626
+    second: clockdoor_light_tock_160px_38
+  - first:
+      213: 2773338723136248999
+    second: clockdoor_light_tock_160px_39
+  - first:
+      213: -7780337686784183058
+    second: clockdoor_light_tock_160px_40
+  - first:
+      213: -1207429540489901871
+    second: clockdoor_light_tock_160px_41
+  - first:
+      213: 497342732343582871
+    second: clockdoor_light_tock_160px_42
+  - first:
+      213: -7557477835039654171
+    second: clockdoor_light_tock_160px_43
+  - first:
+      213: 7651733378440844895
+    second: clockdoor_light_tock_160px_44
+  - first:
+      213: -1007466877868521847
+    second: clockdoor_light_tock_160px_45
+  - first:
+      213: 6222929339585676969
+    second: clockdoor_light_tock_160px_46
+  - first:
+      213: -6812386438229274056
+    second: clockdoor_light_tock_160px_47
+  - first:
+      213: 5107821551260199673
+    second: clockdoor_light_tock_160px_48
+  - first:
+      213: -9115784713461708796
+    second: clockdoor_light_tock_160px_49
+  - first:
+      213: 4815386064236109178
+    second: clockdoor_light_tock_160px_50
+  - first:
+      213: 7717688686437181159
+    second: clockdoor_light_tock_160px_51
+  - first:
+      213: 4995640603127026063
+    second: clockdoor_light_tock_160px_52
+  - first:
+      213: -6204774303324731554
+    second: clockdoor_light_tock_160px_53
+  - first:
+      213: -7835483532675723531
+    second: clockdoor_light_tock_160px_54
+  - first:
+      213: 2912107439018586711
+    second: clockdoor_light_tock_160px_55
+  - first:
+      213: 7976085521310883860
+    second: clockdoor_light_tock_160px_56
+  - first:
+      213: -8777858766553372749
+    second: clockdoor_light_tock_160px_57
+  - first:
+      213: -7765814448331673610
+    second: clockdoor_light_tock_160px_58
+  - first:
+      213: 2557540237022371064
+    second: clockdoor_light_tock_160px_59
+  - first:
+      213: 7642265850849323469
+    second: clockdoor_light_tock_160px_60
+  - first:
+      213: 784470372542156240
+    second: clockdoor_light_tock_160px_61
+  - first:
+      213: -4618934449031821129
+    second: clockdoor_light_tock_160px_62
+  - first:
+      213: 8183544310763304484
+    second: clockdoor_light_tock_160px_63
+  - first:
+      213: 1743477701573629235
+    second: clockdoor_light_tock_160px_64
+  - first:
+      213: 5875855432743992728
+    second: clockdoor_light_tock_160px_65
+  - first:
+      213: 8767435195162624613
+    second: clockdoor_light_tock_160px_66
+  - first:
+      213: 1423310990331042783
+    second: clockdoor_light_tock_160px_67
+  - first:
+      213: -2437563541581395944
+    second: clockdoor_light_tock_160px_68
+  - first:
+      213: -286859501088387235
+    second: clockdoor_light_tock_160px_69
+  - first:
+      213: 7182598803243776573
+    second: clockdoor_light_tock_160px_70
+  - first:
+      213: 53310008138101808
+    second: clockdoor_light_tock_160px_71
+  - first:
+      213: 608612720481100710
+    second: clockdoor_light_tock_160px_72
+  - first:
+      213: -8009316808138465468
+    second: clockdoor_light_tock_160px_73
+  - first:
+      213: -1594052046481359991
+    second: clockdoor_light_tock_160px_74
+  - first:
+      213: 7510081131677052057
+    second: clockdoor_light_tock_160px_75
+  - first:
+      213: -2450279382304309607
+    second: clockdoor_light_tock_160px_76
+  - first:
+      213: 7348574706815136491
+    second: clockdoor_light_tock_160px_77
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4db5fd1e3c9c4080b379edbb900dd9c
+      internalID: 272422620944573531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_1
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df398a6d88df747308b0ead8d6273484
+      internalID: 6930014896906199154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_2
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 562a5dbbaa25b4dc494a94b46c7222dc
+      internalID: -500542633315193448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_3
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 999a5b30954614a1da952d080bb3b472
+      internalID: 2466974616043042110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76d024fb779c247748c051aa34f26d1f
+      internalID: 2406070505433895942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_5
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588076e40432c49189d5aaee775bdaf7
+      internalID: -3174463597987127983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_6
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02f082962f7fe4a319bbf53704ec50a1
+      internalID: 3634283607716198803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_7
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bcf8bf2874a344639abaf5ac34b7d26
+      internalID: -7191319501758636611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_8
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a838eccc97bed4b3ea4ffd59d2e43268
+      internalID: -8178743741641204406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_9
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2862a507638184fe09ae8f6a60171d42
+      internalID: 7769667701019432077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_10
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a892e098056cf4f8e9027e0412c843cc
+      internalID: 6588445977509142117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_11
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4a5cbc3b3344ef09263b58df810825
+      internalID: 2207871232558493310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_12
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbbf6cf642595428385f649d959d1345
+      internalID: 7354108028404711690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_13
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38f2c5fd2544f46f7b34c386491767fb
+      internalID: 933912324623257367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_14
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b005ddd8c83274852b04b41e204c0b4a
+      internalID: -969960839701014905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_15
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e53c9041d70f4dc791d534313c708c3
+      internalID: -8060526863363531553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_16
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 696b8d35b1551422d8815ad30f2607e3
+      internalID: -4358746553226730796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_17
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0450d4b264304532a886ddbeabc221a
+      internalID: 380573027907227966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_18
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c95dd60eb0ba4bd2a67307bad645266
+      internalID: -8733783056013196144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_19
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff8ac380c03c34947899013734ea8d31
+      internalID: -3843294591465583780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_20
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71bac8d54f85840f7bffb4622a7f33c6
+      internalID: -3998278472415452210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_21
+      rect:
+        serializedVersion: 2
+        x: 3360
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11ca4c93b90ae482da4cb8b2c235ed83
+      internalID: 8173107427884620547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_22
+      rect:
+        serializedVersion: 2
+        x: 3520
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1c683477c58f41ab852bc3d133d688d
+      internalID: -4327823947367567053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_23
+      rect:
+        serializedVersion: 2
+        x: 3680
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95d8f18b5a3d14c048e87ef14c5b82f3
+      internalID: -1316104409567905988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_24
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76900a65f20744ccb9200c01e6d7e395
+      internalID: 833030804971358537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_25
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48aefa70eda0474b8d8deb0b5b23a48
+      internalID: -6349112573108187793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_26
+      rect:
+        serializedVersion: 2
+        x: 4160
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f658bb05acc04c3297d813509091314
+      internalID: -4313835407488436716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clockdoor_light_tock_160px_27
+      rect:
+        serializedVersion: 2
+        x: 4320
+        y: 0
+        width: 160
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa460fb5d8b894067ab6d51004787301
+      internalID: 6752467456335353212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c774cee2288d346a5b39777248de9016
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      clockdoor_light_tock_160px_0: 272422620944573531
+      clockdoor_light_tock_160px_1: 6930014896906199154
+      clockdoor_light_tock_160px_10: 6588445977509142117
+      clockdoor_light_tock_160px_11: 2207871232558493310
+      clockdoor_light_tock_160px_12: 7354108028404711690
+      clockdoor_light_tock_160px_13: 933912324623257367
+      clockdoor_light_tock_160px_14: -969960839701014905
+      clockdoor_light_tock_160px_15: -8060526863363531553
+      clockdoor_light_tock_160px_16: -4358746553226730796
+      clockdoor_light_tock_160px_17: 380573027907227966
+      clockdoor_light_tock_160px_18: -8733783056013196144
+      clockdoor_light_tock_160px_19: -3843294591465583780
+      clockdoor_light_tock_160px_2: -500542633315193448
+      clockdoor_light_tock_160px_20: -3998278472415452210
+      clockdoor_light_tock_160px_21: 8173107427884620547
+      clockdoor_light_tock_160px_22: -4327823947367567053
+      clockdoor_light_tock_160px_23: -1316104409567905988
+      clockdoor_light_tock_160px_24: 833030804971358537
+      clockdoor_light_tock_160px_25: -6349112573108187793
+      clockdoor_light_tock_160px_26: -4313835407488436716
+      clockdoor_light_tock_160px_27: 6752467456335353212
+      clockdoor_light_tock_160px_3: 2466974616043042110
+      clockdoor_light_tock_160px_4: 2406070505433895942
+      clockdoor_light_tock_160px_5: -3174463597987127983
+      clockdoor_light_tock_160px_6: 3634283607716198803
+      clockdoor_light_tock_160px_7: -7191319501758636611
+      clockdoor_light_tock_160px_8: -8178743741641204406
+      clockdoor_light_tock_160px_9: 7769667701019432077
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

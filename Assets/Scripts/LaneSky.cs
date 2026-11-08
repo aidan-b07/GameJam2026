@@ -42,6 +42,9 @@ public class LaneSky : MonoBehaviour
     [Tooltip("Arc half-width, horizon height and peak height, relative to the anchor.")]
     public Vector3 arc = new Vector3(16f, -3.5f, 4f);
 
+    // The ending draws its own sun: hide the sun and moon sprites.
+    [System.NonSerialized] public bool hideBodies;
+
     public Color dayTint = Color.white;
     public Color duskTint = new Color(1f, 0.82f, 0.82f);
     public Color nightTint = new Color(0.72f, 0.72f, 0.9f);
@@ -117,6 +120,11 @@ public class LaneSky : MonoBehaviour
         // Sun is up 06:00-18:00, moon 18:00-06:00; each crosses its arc in 12 hours.
         Place(sun, (hour - 6f) / 12f);
         Place(moon, Mathf.Repeat(hour - 18f, 24f) / 12f);
+        if (hideBodies)
+        {
+            if (sun != null) sun.enabled = false;
+            if (moon != null) moon.enabled = false;
+        }
     }
 
     void Place(SpriteRenderer body, float s)
