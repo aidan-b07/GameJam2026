@@ -37,6 +37,9 @@ public class GameFlow : MonoBehaviour
     public float maxPan = 2f;
 
     public int CurrentCheckpoint { get; private set; }
+    // Raised during a death, once both players are back at their checkpoints
+    // (still hidden): buttons let go and their gates shut.
+    public static event System.Action LevelReset;
     public bool Respawning { get; private set; }
 
     // Highest checkpoint index each lane's player has reached.
@@ -142,6 +145,7 @@ public class GameFlow : MonoBehaviour
         // The death animation ends empty, so the move back is not seen.
         for (int lane = 0; lane < list.Count; lane++)
             MoveToCheckpoint(list[lane], lane);
+        LevelReset?.Invoke();
 
         if (cameraRig != null)
             yield return new WaitForSeconds(cameraRig.PanToPlayers(panSpeed, minPan, maxPan));
