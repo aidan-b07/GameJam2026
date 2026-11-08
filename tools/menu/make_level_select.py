@@ -4,17 +4,17 @@ Same sandstone, cracks, chipped corners and autumn ivy as the main menu plates
 (make_menu_buttons.py) and the same thresholded text (make_menu_text.py).
 
 Writes into the output folder:
-  card_<n>_idle.png, card_<n>_sel.png   n = 1..2, open levels. 140x120 canvas,
+  card_<n>_idle.png, card_<n>_sel.png   n = 1, the open level (Main Level). 140x120 canvas,
                                         the 116x100 card's top-left at (12, 10).
                                         A recessed window with a little vignette
                                         of the level, the level number in brass
                                         and the level's name engraved.
-  card_<n>_locked.png                   n = 3..8, coming soon: weathered stone,
+  card_<n>_locked.png                   n = 2..8, coming soon: weathered stone,
                                         boarded window, brass padlock, "Coming soon".
   header_select_level.png               "Select Level" in brass (Jersey 10, 48 px)
   back_idle.png, back_sel.png           84x34 canvas, 64x22 plate at (10, 6), "Back"
 
-Level names are in NAMES below (one line to change).
+Open levels are NAMES and VIGNETTES below, in card order; the rest are locked.
 
   py tools/menu/make_level_select.py --fonts <folder> Assets/Art/UI/LevelSelect
 """
@@ -24,8 +24,8 @@ import random
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-NAMES = ["Clockworks", "Foundry"]
-LOCKED = range(3, 9)
+NAMES = ["Main Level"]
+LOCKED = range(len(NAMES) + 1, 9)
 
 
 def hx(s):
@@ -409,6 +409,68 @@ def vignette_foundry(pl):
         pl.put(x, y, GLOW["g3"])
 
 
+def vignette_main(pl):
+    """Both lanes in one window: Tick's by day on top, Tock's by night below,
+    the Unraveling rift between them, a player standing in each."""
+    mid = WY + WH // 2
+    for y in range(WY, WY + WH):
+        for x in range(WX, WX + WW):
+            if y < mid:
+                c = hx("86a9d0") if y < WY + 8 else hx("9cb8d8")
+            else:
+                c = hx("28143a") if y < mid + 10 else hx("3a2050")
+            pl.put(x, y, c)
+    # sun and moon
+    for (cx, cy, r, col) in ((WX + 76, WY + 6, 3.6, hx("fcec8c")), (WX + 16, mid + 6, 3.0, hx("f4e6c0"))):
+        for y in range(int(cy - r - 1), int(cy + r + 2)):
+            for x in range(int(cx - r - 1), int(cx + r + 2)):
+                if math.hypot(x + 0.5 - cx, y + 0.5 - cy) <= r:
+                    pl.put(x, y, col)
+    for (x, y) in ((WX + 40, mid + 4), (WX + 58, mid + 7), (WX + 84, mid + 3), (WX + 30, mid + 9)):
+        pl.put(x, y, hx("f4e0ff"))   # stars
+    # skyline silhouettes and ground strips in each lane
+    for lane_top, sil, ground in ((WY, hx("b0705a"), hx("d97d58")), (mid, hx("482668"), hx("8a5a6a"))):
+        base = lane_top + WH // 2 - 5
+        for x in range(WX, WX + WW):
+            hgt = 3 + ((x * 7) % 5 if x % 9 else 7)
+            for y in range(base - hgt, base):
+                pl.put(x, y, sil)
+            for y in range(base, lane_top + WH // 2):
+                pl.put(x, y, O if y == base else ground)
+    # clock tower in Tick's lane
+    tx = WX + 54
+    for y in range(WY + 6, WY + WH // 2 - 5):
+        for x in range(tx - 4, tx + 5):
+            pl.put(x, y, O if x in (tx - 4, tx + 4) else hx("8a4a3a"))
+    for y in range(WY + 8, WY + 13):
+        for x in range(tx - 2, tx + 3):
+            pl.put(x, y, hx("f4e6c0"))
+    pl.put(tx, WY + 10, O)
+    # the rift across the seam: outline, lit rim, purple core, sparkles
+    for x in range(WX, WX + WW):
+        jag = (1 if (x // 4) % 3 == 0 else 0)
+        pl.put(x, mid - 2 - jag, hx("22101e"))
+        pl.put(x, mid - 1 - jag, hx("c478e0"))
+        pl.put(x, mid, hx("8040a8"))
+        pl.put(x, mid + 1 + (1 - jag), hx("22101e"))
+        if x % 11 == 3:
+            pl.put(x, mid, hx("f4e0ff"))
+    # Tick (orange) above, Tock (teal) below, standing on their ground
+    for (px_, ground_y, body, shade) in ((WX + 24, WY + WH // 2 - 5, hx("f08a2a"), hx("c05a1c")),
+                                         (WX + 68, mid + WH // 2 - 5, hx("3ac8c0"), hx("1e8a8a"))):
+        for y in range(ground_y - 6, ground_y):
+            for x in range(px_ - 3, px_ + 3):
+                edge = x in (px_ - 3, px_ + 2) or y == ground_y - 6
+                pl.put(x, y, O if edge else body if y < ground_y - 2 else shade)
+        pl.put(px_ - 1, ground_y - 4, O)
+        pl.put(px_ + 1, ground_y - 4, O)
+        pl.put(px_, ground_y - 8, BRASS["b2"])   # the wind-up key
+        pl.put(px_, ground_y - 7, BRASS["b1"])
+
+
+VIGNETTES = [vignette_main]
+
+
 def boarded(pl):
     for y in range(WY, WY + WH):
         for x in range(WX, WX + WW):
@@ -486,7 +548,7 @@ def medallion(pl, folder, index, b):
 
 
 def card(index, folder, selected=False):
-    """index is 1-based; open for 1..2, locked for 3..8."""
+    """index is 1-based; open for 1..len(NAMES), locked after that."""
     locked = index in LOCKED
     rng = random.Random(f"level-{index}")
     pl = Plate(CW, CH, MX, MY, W, H, 6.2)
@@ -496,7 +558,7 @@ def card(index, folder, selected=False):
     if locked:
         boarded(pl)
     else:
-        [vignette_clockworks, vignette_foundry][index - 1](pl)
+        VIGNETTES[index - 1](pl)
 
     # name (or "Coming soon") centred under the window, at the largest crisp size that fits
     area_x0, area_x1 = 6, W - 6

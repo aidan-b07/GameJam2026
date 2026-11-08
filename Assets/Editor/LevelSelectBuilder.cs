@@ -27,7 +27,7 @@ public static class LevelSelectBuilder
     static readonly Vector2Int CardInset = new Vector2Int(12, 10), BackInset = new Vector2Int(10, 6);
 
     // Playable levels in card order; every card after these is locked (coming soon).
-    static readonly string[] Levels = { "Level1_Clockworks", "Level2_Foundry" };
+    static readonly string[] Levels = { "MainLevel" };
 
     [MenuItem("Tick & Tock/Build Level Select")]
     public static void Build()
