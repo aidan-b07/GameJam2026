@@ -15,8 +15,11 @@ using UnityEngine.UI;
 // dithered shade hangs from the top of the lane, faster and stronger the
 // closer the rift is to the player's head.
 //
-// Feel: above fastFrom the lane gets faint speed streaks drifting left and a
-// warm, slightly more saturated grade; near idle a cool, slightly paler one.
+// Feel: above fastFrom the lane gets "edge wind" and a warm, slightly more
+// saturated grade; near idle a cool, slightly paler one. The wind is single
+// streaks in the top and bottom bands of the lane, each fading in, gliding
+// left and fading out, drawn as dithered art pixels into a runtime texture
+// (look picked by Samuel from mockups/speed-lines/, intensity 2.85).
 // The grade is a local URP Volume (ColorAdjustments) on each lane camera,
 // whose profile is made here at runtime.
 //
@@ -36,7 +39,7 @@ public class LaneHud : MonoBehaviour
         public RawImage dial;
         [Tooltip("Shade hanging from the top of the lane while its rift grows.")]
         public RawImage vignette;
-        [Tooltip("Speed streaks over the lane (texture repeats both ways).")]
+        [Tooltip("Edge wind over the lane (its texture is replaced at runtime).")]
         public RawImage streaks;
         [Tooltip("Local volume on the lane camera for the fast and slow grade.")]
         public Volume grade;
@@ -66,18 +69,31 @@ public class LaneHud : MonoBehaviour
     public float vignetteHeight = 96f;
 
     [Header("Feel")]
-    [Tooltip("Lane speed where the streaks and the warm grade begin.")]
+    [Tooltip("Lane speed where the wind and the warm grade begin.")]
     public float fastFrom = 1.5f;
-    [Tooltip("Streak opacity at full speed.")]
-    [Range(0f, 1f)] public float streakAlpha = 0.5f;
-    [Tooltip("Streak drift in art pixels per real second, per 1x of lane speed.")]
-    public float streakDrift = 120f;
     [Tooltip("Saturation added at full speed (URP ColorAdjustments, -100..100).")]
     public float warmSaturation = 14f;
     [Tooltip("Saturation removed at idle speed.")]
     public float coolDesaturation = 12f;
     public Color warmFilter = new Color(1f, 0.96f, 0.88f);
     public Color coolFilter = new Color(0.95f, 0.97f, 1.03f);
+
+    [Header("Edge wind")]
+    [Tooltip("Overall strength: more, longer, brighter streaks (doubled above 1.5) in wider bands. 1 = the first mockup.")]
+    public float windIntensity = 2.85f;
+    [Tooltip("New streaks per second at full speed and intensity 1.")]
+    public float windRate = 9f;
+    [Tooltip("Streak opacity at full speed and intensity 1 (dithered).")]
+    public float windStrength = 0.32f;
+    [Tooltip("Depth of the top and bottom bands in art pixels at intensity 1 (grows with its square root).")]
+    public float windBand = 80f;
+    [Tooltip("Drift in art pixels per second, per 1x of lane speed.")]
+    public float windDrift = 70f;
+    public Vector2 windLength = new Vector2(18f, 46f);
+    [Tooltip("Lifetime range in seconds (fade in, glide, fade out).")]
+    public Vector2 windLife = new Vector2(0.7f, 1.3f);
+    public Color32 windColor = new Color32(255, 244, 220, 255);
+    public Color32 windWarmColor = new Color32(255, 226, 180, 255);
 
     // Art layout from tools/make_hud.py (pixels, y down from the top).
     const int W = 136, H = 56;
@@ -92,11 +108,21 @@ public class LaneHud : MonoBehaviour
     static readonly Color32 Ink = new Color32(52, 30, 22, 255);
     static readonly Color32 HandRed = new Color32(176, 40, 26, 255);
 
+    struct Streak
+    {
+        public float x, len, life, max, v;
+        public int y;
+        public bool warm;
+    }
+
     class State
     {
         public float shown, velocity;
         public float lastDepth, warn;
-        public float streakX;
+        public readonly System.Collections.Generic.List<Streak> wind = new System.Collections.Generic.List<Streak>();
+        public readonly System.Collections.Generic.List<int> windDrawn = new System.Collections.Generic.List<int>();
+        public float windAcc;
+        public Texture2D windTex;
         public Texture2D tex;
         public Color32[] px;
         public int drawnAngle = int.MinValue, drawnMinute = int.MinValue;
@@ -184,6 +210,7 @@ public class LaneHud : MonoBehaviour
         {
             if (lanes[i]?.grade != null) lanes[i].grade.sharedProfile = null;
             if (state[i].tex != null) Destroy(state[i].tex);
+            if (state[i].windTex != null) Destroy(state[i].windTex);
             if (state[i].profile != null)
             {
                 // Destroying a profile does not destroy the components it holds.
@@ -342,19 +369,7 @@ public class LaneHud : MonoBehaviour
         float fast = effects ? Smooth(fastFrom, maxSpeed, speed) : 0f;
         float slow = effects ? 1f - Smooth(idleSpeed, 1f, speed) : 0f;
 
-        if (view.streaks != null)
-        {
-            view.streaks.enabled = fast > 0.01f;
-            var tex = view.streaks.texture;
-            if (fast > 0.01f && tex != null)
-            {
-                s.streakX += dt * speed * streakDrift;
-                var rect = view.streaks.rectTransform.rect;
-                float px = Mathf.Floor(s.streakX);
-                view.streaks.uvRect = new Rect(px / tex.width, 0f, rect.width / tex.width, rect.height / tex.height);
-                view.streaks.color = new Color(1f, 1f, 1f, fast * streakAlpha);
-            }
-        }
+        if (view.streaks != null) UpdateWind(view.streaks, s, speed, fast, Time.deltaTime);
 
         if (s.adjust != null)
         {
@@ -362,6 +377,108 @@ public class LaneHud : MonoBehaviour
             var c = Color.Lerp(Color.white, coolFilter, slow);
             s.adjust.colorFilter.value = Color.Lerp(c, warmFilter, fast);
         }
+    }
+
+    static readonly int[] Bayer = { 0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5 };
+
+    // Edge wind: spawn, move and draw the streaks of one lane. Uses scaled time,
+    // so the pause menu freezes it.
+    void UpdateWind(RawImage image, State s, float speed, float fast, float dt)
+    {
+        float k = Mathf.Max(0f, windIntensity);
+        if (fast > 0.01f)
+        {
+            s.windAcc += dt * fast * windRate * k;
+            var rect = image.rectTransform.rect;
+            float reach = Mathf.Min(rect.height * 0.5f, windBand * Mathf.Sqrt(k));
+            while (s.windAcc >= 1f)
+            {
+                s.windAcc -= 1f;
+                bool top = Random.value < 0.55f;
+                float y = top ? Random.Range(4f, reach) : Random.Range(rect.height - reach, rect.height - 6f);
+                s.wind.Add(new Streak
+                {
+                    x = Random.Range(0f, rect.width + 200f),
+                    y = Mathf.FloorToInt(y),
+                    len = Random.Range(windLength.x, windLength.y) * (0.6f + 0.4f * k),
+                    max = Random.Range(windLife.x, windLife.y),
+                    v = Random.Range(0.7f, 1.1f),
+                    warm = Random.value < 0.3f,
+                });
+            }
+        }
+        if (s.wind.Count == 0 && s.windDrawn.Count == 0)
+        {
+            image.enabled = false;
+            return;
+        }
+
+        int w = Mathf.Max(1, Mathf.RoundToInt(image.rectTransform.rect.width));
+        int h = Mathf.Max(1, Mathf.RoundToInt(image.rectTransform.rect.height));
+        if (s.windTex == null || s.windTex.width != w || s.windTex.height != h)
+        {
+            if (s.windTex != null) Destroy(s.windTex);
+            s.windTex = new Texture2D(w, h, TextureFormat.RGBA32, false)
+            {
+                filterMode = FilterMode.Point,
+                wrapMode = TextureWrapMode.Clamp,
+                hideFlags = HideFlags.HideAndDontSave,
+            };
+            s.windTex.SetPixelData(new Color32[w * h], 0);
+            s.windDrawn.Clear();
+        }
+        if (image.texture != s.windTex)
+        {
+            image.texture = s.windTex;
+            image.uvRect = new Rect(0f, 0f, 1f, 1f);
+            image.color = Color.white;
+        }
+
+        var px = s.windTex.GetPixelData<Color32>(0);
+        var clear = new Color32(0, 0, 0, 0);
+        foreach (int i in s.windDrawn) px[i] = clear;
+        s.windDrawn.Clear();
+
+        for (int n = s.wind.Count - 1; n >= 0; n--)
+        {
+            var st = s.wind[n];
+            st.life += dt;
+            st.x -= dt * speed * windDrift * st.v;
+            if (st.life >= st.max || st.x < -60f)
+            {
+                s.wind.RemoveAt(n);
+                continue;
+            }
+            s.wind[n] = st;
+            float env = Mathf.Sin(Mathf.PI * Mathf.Min(1f, st.life / st.max));
+            float a = Mathf.Min(1f, env * windStrength * Mathf.Sqrt(k) * (0.4f + 0.6f * fast));
+            int len = Mathf.FloorToInt(st.len * (0.5f + 0.5f * fast));
+            var c = st.warm ? windWarmColor : windColor;
+            int x0 = Mathf.FloorToInt(st.x);
+            if (k > 1.5f && st.len > 40f)
+            {
+                // A fainter second line under the big streaks.
+                int len2 = Mathf.FloorToInt(len * 0.6f);
+                for (int i = 0; i < len2; i++)
+                    WindPixel(px, s.windDrawn, w, h, x0 + i + 3, st.y + 1, a * 0.5f * Mathf.Pow(1f - (float)i / len2, 1.4f), c);
+            }
+            for (int i = 0; i < len; i++)
+                WindPixel(px, s.windDrawn, w, h, x0 + i, st.y, a * Mathf.Pow(1f - (float)i / len, 1.4f), c);
+        }
+        s.windTex.Apply(false);
+        image.enabled = true;
+    }
+
+    // One dithered pixel, y down from the top: drawn when its strength beats the
+    // 4x4 Bayer threshold, so the streaks stay crisp art pixels with no soft alpha.
+    static void WindPixel(Unity.Collections.NativeArray<Color32> px, System.Collections.Generic.List<int> drawn,
+        int w, int h, int x, int y, float a, Color32 c)
+    {
+        if (x < 0 || x >= w || y < 0 || y >= h) return;
+        if (a * 16f <= Bayer[(y & 3) * 4 + (x & 3)] + 0.5f) return;
+        int i = (h - 1 - y) * w + x;
+        px[i] = c;
+        drawn.Add(i);
     }
 
     static float Smooth(float a, float b, float v)
