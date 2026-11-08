@@ -89,7 +89,7 @@ public class WaterWheel : LaneObstacle
     void Start()
     {
         sound = Sfx.Loop("water_loop");
-        lastNotch = Mathf.FloorToInt(Angle / 45f);
+        lastNotch = Mathf.FloorToInt((Angle + 22.5f) / 45f);
     }
 
     void OnDestroy() => Sfx.Release(sound);
@@ -136,7 +136,7 @@ public class WaterWheel : LaneObstacle
         Omega += accel * dt;
         Angle += Omega * dt;
 
-        int notch = Mathf.FloorToInt(Angle / 45f);
+        int notch = Mathf.FloorToInt((Angle + 22.5f) / 45f);   // between rest positions, so a settled wheel stays quiet
         if (notch != lastNotch) Sfx.Play("ratchet_click", centre, 0.35f, lane: lane);
         lastNotch = notch;
 

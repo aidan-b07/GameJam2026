@@ -1418,7 +1418,8 @@ public static class LevelMap
 
         // Steam vent over x..x + 1, flush in the ground's top row (the ground
         // tiles stay under it for the collider): blasts a 4-tile steam column
-        // that lifts players about 5.4 tiles, over a wall a jump can't clear.
+        // that lifts players about 5.7 tiles (feet), over a wall 5 high that a jump
+        // (3.2) can't clear.
         public SteamVent SteamVent(int x, float offset = 0f)
         {
             const string dir = "Assets/Art/Obstacles/SteamVent/";

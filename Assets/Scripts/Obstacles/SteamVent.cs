@@ -14,11 +14,11 @@ using UnityEngine;
 public class SteamVent : LaneObstacle
 {
     [Tooltip("Lane seconds idle, warning and blowing (the loop, between start and stop).")]
-    public float idleTime = 2.2f, warnTime = 0.9f, blowTime = 1.6f;
+    public float idleTime = 1.4f, warnTime = 0.7f, blowTime = 1.6f;
     [Tooltip("Upward acceleration in the column (units/s^2; gravity on players is 29.4).")]
-    public float lift = 75f;
+    public float lift = 90f;
     [Tooltip("Fastest the steam pushes a player up (units/s).")]
-    public float maxRise = 9f;
+    public float maxRise = 10f;
     [Tooltip("World x of the column's centre, y of its bottom, its width and height.")]
     public float columnX, columnBottom, columnWidth = 1.25f, columnHeight = 4f;
 
