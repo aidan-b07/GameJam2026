@@ -11,7 +11,7 @@ using UnityEngine.SceneManagement;
 // - pitch: follows the lane's world speed (GameManager), so a fast lane sounds
 //   higher (`pitchPerSpeed`, clamped to `minPitch`..`maxPitch`); a lane slower
 //   than `silentBelowSpeed` fades out, silent when frozen.
-// The Unraveling rift hums as a 2D loop that grows with the lanes' speed gap.
+// The Unraveling rift hums as a 2D loop that grows as the deeper lane rift opens (LaneRift).
 //
 // Clips are loaded by name from Resources/Audio/Sfx (made by tools/make_sfx.py
 // in the jam workspace). The object creates itself on scene load, so the level
@@ -37,8 +37,8 @@ public class Sfx : MonoBehaviour
     [Header("Rift hum")]
     public float riftMinVolume = 0.12f;
     public float riftMaxVolume = 0.5f;
-    [Tooltip("Speed gap between the lanes at which the hum is about 63 % of the way to its maximum.")]
-    public float riftGapScale = 2f;
+    [Tooltip("Rift openness (LaneRift.Openness, 0..1) at which the hum is about 63 % of the way to its maximum.")]
+    public float riftOpenScale = 0.25f;
 
     [Header("Mix")]
     [Range(0f, 1f)] public float masterVolume = 1f;
@@ -197,11 +197,10 @@ public class Sfx : MonoBehaviour
             if (l.playing) Apply(l.source, l.position, true, l.volume, l.pitch, l.lane);
         }
 
-        var gm = GameManager.INSTANCE;
         if (rift != null)
         {
-            float gap = gm != null ? Mathf.Abs(gm.GetWorldSpeed(0) - gm.GetWorldSpeed(1)) : 0f;
-            float k = 1f - Mathf.Exp(-gap / Mathf.Max(0.01f, riftGapScale));
+            float open = LaneRift.Instance != null ? LaneRift.Instance.Openness : 0f;
+            float k = 1f - Mathf.Exp(-open / Mathf.Max(0.01f, riftOpenScale));
             rift.volume = masterVolume * Mathf.Lerp(riftMinVolume, riftMaxVolume, k);
         }
     }

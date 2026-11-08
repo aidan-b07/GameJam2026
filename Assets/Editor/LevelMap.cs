@@ -1239,6 +1239,7 @@ public static class LevelMap
         flow.players = players;
         flow.cameraRig = rig;
         flow.laneGroundY = new[] { 0f, TockLaneY };
+        flow.gameObject.AddComponent<LaneRift>();
     }
 
     // Shared side-scrolling camera: both lane cameras follow the players together,
@@ -1271,22 +1272,24 @@ public static class LevelMap
         scaler.matchWidthOrHeight = 1f;
 
         var divider = go.AddComponent<LaneDivider>();
-        divider.rift = DividerLayer(go.transform, "Rift");
+        divider.rift = DividerLayer(go.transform, "Rift", 0.5f);
+        divider.topRift = DividerLayer(go.transform, "TopRift", 1f);
         divider.topCamera = tickCamera;
         divider.bottomCamera = tockCamera;
     }
 
-    // The rift texture is drawn at runtime by LaneDivider.
-    static RawImage DividerLayer(Transform parent, string id)
+    // The rift textures are drawn at runtime by LaneDivider, which also sizes
+    // the rect around its anchor line (anchorY: 0.5 the seam, 1 the screen top).
+    static RawImage DividerLayer(Transform parent, string id, float anchorY)
     {
         var go = new GameObject(id, typeof(RectTransform), typeof(RawImage));
         go.transform.SetParent(parent, false);
         go.layer = parent.gameObject.layer;
         var rt = (RectTransform)go.transform;
-        rt.anchorMin = new Vector2(0f, 0.5f);
-        rt.anchorMax = new Vector2(1f, 0.5f);
+        rt.anchorMin = new Vector2(0f, anchorY);
+        rt.anchorMax = new Vector2(1f, anchorY);
         rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.sizeDelta = new Vector2(0f, LaneDivider.TextureHeight);
+        rt.sizeDelta = Vector2.zero;
         rt.anchoredPosition = Vector2.zero;
         var image = go.GetComponent<RawImage>();
         image.raycastTarget = false;

@@ -4,10 +4,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager INSTANCE;
 
-    [Tooltip("Lane speed while the partner stands still. 0 freezes the lane.")]
-    [SerializeField] private float idleWorldSpeed = 0f;
+    [Tooltip("Lane speed while the partner stands still: slow, but not frozen. 0 freezes the lane.")]
+    [SerializeField] private float idleWorldSpeed = 0.35f;
     [Tooltip("Lane speed while the partner keeps moving.")]
-    [SerializeField] private float maxWorldSpeed = 6f;
+    [SerializeField] private float maxWorldSpeed = 3f;
 
     [Header("Ramp Up (while the partner is moving)")]
     [Tooltip("Seconds of continuous movement from idle to full speed.")]

@@ -4,7 +4,8 @@ using UnityEngine;
 
 // Death and respawn for the pair (DESIGN.md: one dies, both restart from the
 // last checkpoint). Any player's CrushDetector, a player falling out of the
-// map (fallDepth below its lane's ground), or a hazard calling KillAll starts
+// map (fallDepth below its lane's ground), a lane's rift reaching its player
+// (LaneRift), or a hazard calling KillAll starts
 // the sequence:
 // 1. both players freeze and play their death animation;
 // 2. the camera eases back to the current checkpoint pair;
@@ -191,6 +192,23 @@ public class GameFlow : MonoBehaviour
     }
 
     private static float Feet(Player p) => p.rb.position.y + FeetOffset(p);
+
+    // Top of the lane's player collider (world y).
+    public float Top(int lane)
+    {
+        var p = list[lane];
+        if (p.rb == null) return float.NegativeInfinity;
+        float top = p.box != null ? (p.box.offset.y + p.box.size.y / 2f) * p.rb.transform.lossyScale.y : 0f;
+        return p.rb.position.y + top;
+    }
+
+    // The lane's player's horizontal speed as a fraction (0..1) of their run speed.
+    public float HorizontalSpeed(int lane)
+    {
+        var p = list[lane];
+        if (p.rb == null || p.movement == null) return 0f;
+        return Mathf.Clamp01(Mathf.Abs(p.rb.linearVelocity.x) / Mathf.Max(0.01f, p.movement.MoveSpeed));
+    }
 
     private static void SetFrozen(Player p, bool frozen)
     {
