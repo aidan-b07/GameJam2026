@@ -58,6 +58,7 @@ public class DawnEnding : MonoBehaviour
     float leaving = -1f;
     int lastTick = -1;
     bool chimed;
+    bool wasAnyDown = true, wasEscapeDown = true;
 
     Canvas canvas;
     RawImage seam, barTop, barBottom, title, theEnd, prompt, fade;
@@ -83,11 +84,15 @@ public class DawnEnding : MonoBehaviour
         Overlay(t, rf);
         Audio(t);
 
+        // Presses are edges of our own (down now, up last frame), so a key
+        // still held from the level when the ending starts does not count.
+        bool anyDown = AnyDown(out bool escapeDown);
+        bool press = anyDown && !wasAnyDown, escape = escapeDown && !wasEscapeDown;
+        wasAnyDown = anyDown;
+        wasEscapeDown = escapeDown;
         if (leaving < 0f)
         {
-            bool escape = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
-            foreach (var pad in Gamepad.all) escape |= pad.startButton.wasPressedThisFrame;
-            if ((escape && t > 0.5f) || (t >= skipFrom && AnyPress()) || t >= autoReturn) leaving = 0f;
+            if ((escape && t > 0.5f) || (t >= skipFrom && press) || t >= autoReturn) leaving = 0f;
         }
         else
         {
@@ -297,12 +302,17 @@ public class DawnEnding : MonoBehaviour
         prompt.color = new Color(1f, 1f, 1f, on ? 1f : 0f);
     }
 
-    static bool AnyPress()
+    // Any key or the gamepad's A, B or Start held; escape: Escape or Start.
+    static bool AnyDown(out bool escape)
     {
-        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame) return true;
+        var kb = Keyboard.current;
+        bool any = kb != null && kb.anyKey.isPressed;
+        escape = kb != null && kb.escapeKey.isPressed;
         foreach (var pad in Gamepad.all)
-            if (pad.buttonSouth.wasPressedThisFrame || pad.buttonEast.wasPressedThisFrame || pad.startButton.wasPressedThisFrame)
-                return true;
-        return false;
+        {
+            any |= pad.buttonSouth.isPressed || pad.buttonEast.isPressed || pad.startButton.isPressed;
+            escape |= pad.startButton.isPressed;
+        }
+        return any;
     }
 }
