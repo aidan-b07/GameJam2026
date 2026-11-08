@@ -1323,7 +1323,7 @@ public static class LevelMap
             var streaks = HudImage(laneFx, "Streaks", "hud_streaks", true,
                 Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
             streaks.enabled = false;
-            var vignette = HudImage(laneFx, "RiftShade", "hud_vignette", false,
+            var vignette = HudImage(laneFx, "RiftShade", "hud_vignette", true,
                 new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 1f), Vector2.zero, new Vector2(0f, 96f));
             vignette.enabled = false;
 

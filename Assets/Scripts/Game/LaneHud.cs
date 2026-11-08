@@ -62,8 +62,8 @@ public class LaneHud : MonoBehaviour
     public float warnFromDepth = 0.05f;
     [Tooltip("Strongest vignette alpha.")]
     [Range(0f, 1f)] public float vignetteAlpha = 0.7f;
-    [Tooltip("Vignette height in art pixels at full warning, below the rift's edge.")]
-    public float vignetteHeight = 150f;
+    [Tooltip("Vignette height in art pixels below the rift's edge (the texture is 96 tall).")]
+    public float vignetteHeight = 96f;
 
     [Header("Feel")]
     [Tooltip("Lane speed where the streaks and the warm grade begin.")]
@@ -307,7 +307,11 @@ public class LaneHud : MonoBehaviour
             var rt = view.vignette.rectTransform;
             float reachPx = rift != null ? rift.Reach(lane) * 32f : 0f;
             rt.anchoredPosition = new Vector2(0f, -Mathf.Round(reachPx));
-            rt.sizeDelta = new Vector2(rt.sizeDelta.x, Mathf.Round(vignetteHeight * Mathf.Lerp(0.6f, 1f, s.warn)));
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, vignetteHeight);
+            // Tiled, not stretched, so the dither stays one art pixel wide.
+            var tex = view.vignette.texture;
+            if (tex != null)
+                view.vignette.uvRect = new Rect(0f, 0f, rt.rect.width / tex.width, vignetteHeight / tex.height);
         }
     }
 
