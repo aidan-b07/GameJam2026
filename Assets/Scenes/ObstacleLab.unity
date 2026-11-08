@@ -57054,11 +57054,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneRift
   restReach: 0.28125
-  slowThreshold: 0.35
+  growBelow: 0.1
+  holdFrom: 0.2
+  shrinkFrom: 0.35
+  holdTendrils: 0.5
   slowGrace: 0.5
-  growthRate: 0.36
+  growthRate: 0.22
   growthSeed: 1
-  shrinkRate: 2.5
+  shrinkRate: 3
+  rateSmoothTime: 0.7
   headMargin: -0.25
   maxDepth: 12
 --- !u!114 &2084745404
