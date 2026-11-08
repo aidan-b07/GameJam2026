@@ -9,7 +9,10 @@ using UnityEngine;
 // the sequence:
 // 1. both players freeze and play their death animation;
 // 2. the camera eases back to the current checkpoint pair;
-// 3. both play the respawn animation there, then get control back.
+// 3. each player's light leaves their lantern on the checkpoint lamp as a
+//    wisp (SpawnWisp; it starts as the pan ends) and bursts at the respawn
+//    point;
+// 4. both play the respawn animation there, then get control back.
 //
 // The current checkpoint is the highest index both players have reached, each
 // in their own lane; the spawn points are checkpoint 0.
@@ -57,12 +60,18 @@ public class GameFlow : MonoBehaviour
 
     private readonly List<Player> list = new List<Player>();
     private readonly Dictionary<(int index, int lane), Checkpoint> checkpoints = new Dictionary<(int, int), Checkpoint>();
+    private readonly Dictionary<Checkpoint, CheckpointLamp> lamps = new Dictionary<Checkpoint, CheckpointLamp>();
+    private SpawnWisp wisp;
 
     private void Awake()
     {
         Instance = this;
         foreach (var c in FindObjectsByType<Checkpoint>())
             checkpoints[(c.index, c.lane)] = c;
+        foreach (var l in FindObjectsByType<CheckpointLamp>())
+            if (l.checkpoint != null) lamps[l.checkpoint] = l;
+        wisp = GetComponent<SpawnWisp>();
+        if (wisp == null) wisp = gameObject.AddComponent<SpawnWisp>();
 
         foreach (var t in players)
         {
@@ -144,12 +153,26 @@ public class GameFlow : MonoBehaviour
         yield return new WaitForSeconds(death + afterDeath);
 
         // The death animation ends empty, so the move back is not seen.
+        var at = new Checkpoint[list.Count];
         for (int lane = 0; lane < list.Count; lane++)
-            MoveToCheckpoint(list[lane], lane);
+            at[lane] = MoveToCheckpoint(list[lane], lane);
         LevelReset?.Invoke();
 
-        if (cameraRig != null)
-            yield return new WaitForSeconds(cameraRig.PanToPlayers(panSpeed, minPan, maxPan));
+        float pan = cameraRig != null ? cameraRig.PanToPlayers(panSpeed, minPan, maxPan) : 0f;
+        // The lanterns flare while the camera settles; the wisps burst as the
+        // respawn animation starts.
+        float lead = wisp != null ? Mathf.Min(wisp.Lead, pan) : 0f;
+        yield return new WaitForSeconds(pan - lead);
+        if (wisp != null)
+        {
+            for (int lane = 0; lane < list.Count; lane++)
+            {
+                if (list[lane].rb == null || at[lane] == null) continue;
+                lamps.TryGetValue(at[lane], out var lamp);
+                wisp.Play(lane, lamp, new Vector3(list[lane].rb.position.x, at[lane].feet.y, 0f));
+            }
+            yield return new WaitForSeconds(wisp.Duration);
+        }
 
         Sfx.PlayCentred("respawn");
         float respawn = 0f;
@@ -170,19 +193,20 @@ public class GameFlow : MonoBehaviour
         Respawning = false;
     }
 
-    private void MoveToCheckpoint(Player p, int lane)
+    private Checkpoint MoveToCheckpoint(Player p, int lane)
     {
-        if (p.rb == null) return;
+        if (p.rb == null) return null;
         // Highest checkpoint at or below the current one that exists in this lane.
         Checkpoint c = null;
         for (int i = CurrentCheckpoint; i >= 0 && c == null; i--)
             checkpoints.TryGetValue((i, lane), out c);
-        if (c == null) return;
+        if (c == null) return null;
 
         Vector2 pos = c.feet - new Vector2(0f, FeetOffset(p));
         p.rb.position = pos;
         p.rb.transform.position = new Vector3(pos.x, pos.y, p.rb.transform.position.z);
         p.rb.linearVelocity = Vector2.zero;
+        return c;
     }
 
     // Feet height relative to the body's position.
