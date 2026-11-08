@@ -16,7 +16,9 @@ using static LevelMap;
 //    presses the button that opens the gate on the far lip of Tock's pit.
 //    Tock's belt runs toward that pit whenever Tick moves.
 // 3. Scenery: decor only, with a landmark in each lane (Tick's fountain,
-//    Tock's orrery; animated on lane time).
+//    Tock's orrery; animated on lane time). A breather (ScenicZone): while
+//    both players are in it, both lanes run in real time and the rifts
+//    retract.
 // 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
 //    directions and a plain gap before the last crusher. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
@@ -155,6 +157,10 @@ public static class MainLevelBuilder
         l.Landmark("orrery", 72f, 192);     // Founders' Orrery, x 69-75
         l.Decor("hedge", 77.5f);
         l.Checkpoint(81);
+        // Tick's range starts past the gate button, Tock's past its gate;
+        // both end at the gauntlet's checkpoint.
+        new GameObject("ScenicZone").AddComponent<ScenicZone>().ranges =
+            new[] { new Vector2(44f, 81f), new Vector2(38f, 81f) };
 
         // 4. Gauntlet, offset from Tick's.
         Crusher(l, 83, 0.45f);

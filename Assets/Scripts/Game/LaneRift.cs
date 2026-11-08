@@ -132,6 +132,8 @@ public class LaneRift : MonoBehaviour
     // A safe lane's rift closes and cannot kill (a player waiting at the
     // unlocked clock door). Suspended does that for both lanes (the ending).
     public bool Suspended { get; set; }
+    // Calm closes both rifts too (both players in the ScenicZone).
+    public bool Calm { get; set; }
     public void SetSafe(int lane, bool value)
     {
         if (safe != null && lane >= 0 && lane < safe.Length) safe[lane] = value;
@@ -357,7 +359,7 @@ public class LaneRift : MonoBehaviour
 
             float speed = flow.MeasuredSpeed(lane);
             float target;
-            bool open = !(Suspended || safe[lane]);
+            bool open = !(Suspended || Calm || safe[lane]);
             if (!open)
             {
                 slowFor[lane] = 0f;

@@ -60,6 +60,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [Header("Calm (ScenicZone)")]
+    [Tooltip("Seconds to ease between the partner-driven speed and real time (1x) when Calm switches.")]
+    [SerializeField] private float calmBlendTime = 1.5f;
+
+    // While Calm (both players in the scenic zone) both lanes run in real time
+    // (1x) whatever the partner does. The boost keeps following the partner
+    // underneath, so leaving the zone eases back onto the current curve.
+    public bool Calm { get; set; }
+    float calmBlend;
+
     // Scripted sequences (the ending) take the lane clocks over: Update stops
     // driving them, and SetLane sets each lane's clock and world speed.
     public bool Scripted { get; set; }
@@ -68,8 +78,10 @@ public class GameManager : MonoBehaviour
         if (Scripted)
             return;
         float dt = Time.deltaTime;
-        player1WorldSpeedModifier = Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(0, dt));
-        player2WorldSpeedModifier = Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(1, dt));
+        calmBlend = Mathf.MoveTowards(calmBlend, Calm ? 1f : 0f, dt / Mathf.Max(0.0001f, calmBlendTime));
+        float calm = SmoothStep(calmBlend);
+        player1WorldSpeedModifier = Mathf.Lerp(Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(0, dt)), 1f, calm);
+        player2WorldSpeedModifier = Mathf.Lerp(Mathf.Lerp(idleWorldSpeed, maxWorldSpeed, Step(1, dt)), 1f, calm);
         for (int lane = 0; lane < laneTime.Length; lane++) {
             laneTime[lane] += dt * GetWorldSpeed(lane);
         }
