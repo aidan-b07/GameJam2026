@@ -4,20 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // The scenic zone's cue (concept C "Calm halo", Samuel's pick 2026-11-08;
-// mockup mockups/pretty-zone/glow.html): while the ScenicZone is active a
+// mockup mockups/pretty-zone/glow.html): when the ScenicZone's calm starts a
 // soft golden glow breathes round the inside of each lane's frame, motes
 // drift up through it and LaneHud warms the grade a little. Screen space,
-// not tied to the world: it shows the state, not the place. Drawn in art
+// not tied to the world: it marks the calm, not the place. Drawn in art
 // pixels with the 4x4 Bayer dither the rift and HUD use, one runtime texture
 // per lane on its own overlay canvas (under the HUD gauges). Added at runtime
-// by ScenicZone; fades with the same 1.5 s smoothstep as the lane speed.
+// by ScenicZone. It is a greeting, not a state (Samuel): it fades in with
+// the lane speed's 1.5 s smoothstep as the calm starts, holds a moment, then
+// fades away while the calm goes on; leaving early fades it out at once.
 public class CalmHalo : MonoBehaviour
 {
     public ScenicZone zone;
     public Color32 glow = new Color32(255, 204, 132, 255);
     public Color32 moteColor = new Color32(255, 236, 190, 255);
-    [Tooltip("Seconds to fade in or out (smoothstep), like GameManager's calm blend.")]
+    [Tooltip("Seconds to fade in (smoothstep), like GameManager's calm blend.")]
     public float fadeTime = 1.5f;
+    [Tooltip("Seconds the halo stays at full strength after fading in.")]
+    public float holdTime = 2f;
+    [Tooltip("Seconds to fade out, after the hold or when a player leaves.")]
+    public float fadeOutTime = 3f;
     [Tooltip("Glow alpha at the frame edge at full calm.")]
     public float strength = 0.4f;
     [Tooltip("Art pixels over which the glow falls to 1/e from the frame edge.")]
@@ -54,6 +60,7 @@ public class CalmHalo : MonoBehaviour
 
     Lane[] lanes;
     float blend, clock, sinceDraw;
+    float shown = -1f;   // seconds since the calm started; -1 while not calm
     int next;   // the lane drawn next: lanes take turns, so a frame redraws at most one
     float[] noise = new float[0];
     readonly System.Random rng = new System.Random(5);
@@ -103,8 +110,10 @@ public class CalmHalo : MonoBehaviour
     {
         if (lanes == null) return;
         float dt = Time.deltaTime;
-        bool on = zone != null && zone.Active;
-        blend = Mathf.MoveTowards(blend, on ? 1f : 0f, dt / Mathf.Max(0.0001f, fadeTime));
+        bool calm = zone != null && zone.Active;
+        shown = calm ? (shown < 0f ? 0f : shown + dt) : -1f;
+        bool on = calm && shown < fadeTime + holdTime;
+        blend = Mathf.MoveTowards(blend, on ? 1f : 0f, dt / Mathf.Max(0.0001f, on ? fadeTime : fadeOutTime));
         Amount = blend * blend * (3f - 2f * blend);
         if (LaneHud.Instance != null) LaneHud.Instance.Calm = Amount;
 
