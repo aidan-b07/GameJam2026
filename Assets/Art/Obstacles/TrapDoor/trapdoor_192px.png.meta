@@ -1,0 +1,3123 @@
+fileFormatVersion: 2
+guid: f82d0a3553e1042ebb9636899a5d5df4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8214382432310549892
+    second: trapdoor_192px_0
+  - first:
+      213: 1663729195718800026
+    second: trapdoor_192px_1
+  - first:
+      213: 7789907011468326998
+    second: trapdoor_192px_2
+  - first:
+      213: -3832243612404576820
+    second: trapdoor_192px_3
+  - first:
+      213: 3075459312383271059
+    second: trapdoor_192px_4
+  - first:
+      213: -6821467603937989194
+    second: trapdoor_192px_5
+  - first:
+      213: -2219675456699124326
+    second: trapdoor_192px_6
+  - first:
+      213: 7621869556346921914
+    second: trapdoor_192px_7
+  - first:
+      213: -2353391601082602606
+    second: trapdoor_192px_8
+  - first:
+      213: -4743878015722847894
+    second: trapdoor_192px_9
+  - first:
+      213: -5414802219736468546
+    second: trapdoor_192px_10
+  - first:
+      213: 5243805667842620436
+    second: trapdoor_192px_11
+  - first:
+      213: -2767735648198412994
+    second: trapdoor_192px_12
+  - first:
+      213: -5452882023104635312
+    second: trapdoor_192px_13
+  - first:
+      213: 1791870007547438936
+    second: trapdoor_192px_14
+  - first:
+      213: -6101229632613640293
+    second: trapdoor_192px_15
+  - first:
+      213: -2462423627736710726
+    second: trapdoor_192px_16
+  - first:
+      213: -1789901055653203481
+    second: trapdoor_192px_17
+  - first:
+      213: 4637842859463530869
+    second: trapdoor_192px_18
+  - first:
+      213: 1641810141247553364
+    second: trapdoor_192px_19
+  - first:
+      213: 2980121770442033121
+    second: trapdoor_192px_20
+  - first:
+      213: 2000382575128205631
+    second: trapdoor_192px_21
+  - first:
+      213: -8309693816239193976
+    second: trapdoor_192px_22
+  - first:
+      213: -4593269977615743264
+    second: trapdoor_192px_23
+  - first:
+      213: 2223226245970624485
+    second: trapdoor_192px_24
+  - first:
+      213: 6060422802139596662
+    second: trapdoor_192px_25
+  - first:
+      213: 4227251747339818916
+    second: trapdoor_192px_26
+  - first:
+      213: -2420273103835921548
+    second: trapdoor_192px_27
+  - first:
+      213: -5104635421764567022
+    second: trapdoor_192px_28
+  - first:
+      213: 6935521948709710441
+    second: trapdoor_192px_29
+  - first:
+      213: -1849044370357649511
+    second: trapdoor_192px_30
+  - first:
+      213: -7289399481637674970
+    second: trapdoor_192px_31
+  - first:
+      213: 6281518819980127688
+    second: trapdoor_192px_32
+  - first:
+      213: -5846517348421134767
+    second: trapdoor_192px_33
+  - first:
+      213: 2578254868483145668
+    second: trapdoor_192px_34
+  - first:
+      213: 3768450842841030262
+    second: trapdoor_192px_35
+  - first:
+      213: -2169618013280669141
+    second: trapdoor_192px_36
+  - first:
+      213: -5053689001598904836
+    second: trapdoor_192px_37
+  - first:
+      213: 4433140277627834383
+    second: trapdoor_192px_38
+  - first:
+      213: 2881836720001859653
+    second: trapdoor_192px_39
+  - first:
+      213: 151315564325152085
+    second: trapdoor_192px_40
+  - first:
+      213: 45575445303333251
+    second: trapdoor_192px_41
+  - first:
+      213: 6664835531406914922
+    second: trapdoor_192px_42
+  - first:
+      213: -7129537996580414278
+    second: trapdoor_192px_43
+  - first:
+      213: 737307802199254152
+    second: trapdoor_192px_44
+  - first:
+      213: -4764304049653578504
+    second: trapdoor_192px_45
+  - first:
+      213: 8784203667224208942
+    second: trapdoor_192px_46
+  - first:
+      213: -7376099862752388725
+    second: trapdoor_192px_47
+  - first:
+      213: 4386660682245123661
+    second: trapdoor_192px_48
+  - first:
+      213: -3941958825981372989
+    second: trapdoor_192px_49
+  - first:
+      213: 4228701475007693831
+    second: trapdoor_192px_50
+  - first:
+      213: 2819472855758142004
+    second: trapdoor_192px_51
+  - first:
+      213: 5740823310336469812
+    second: trapdoor_192px_52
+  - first:
+      213: -4246355228977687676
+    second: trapdoor_192px_53
+  - first:
+      213: 7096145654433885187
+    second: trapdoor_192px_54
+  - first:
+      213: 5012364217305506177
+    second: trapdoor_192px_55
+  - first:
+      213: 8071887229425820994
+    second: trapdoor_192px_56
+  - first:
+      213: -5524127051753412200
+    second: trapdoor_192px_57
+  - first:
+      213: 4193835914855826337
+    second: trapdoor_192px_58
+  - first:
+      213: 6818644856687086676
+    second: trapdoor_192px_59
+  - first:
+      213: -4681504687858041698
+    second: trapdoor_192px_60
+  - first:
+      213: -4495045715086080894
+    second: trapdoor_192px_61
+  - first:
+      213: 3730435986840332479
+    second: trapdoor_192px_62
+  - first:
+      213: -481874210269453428
+    second: trapdoor_192px_63
+  - first:
+      213: -3958812987072807347
+    second: trapdoor_192px_64
+  - first:
+      213: 2201839926681918816
+    second: trapdoor_192px_65
+  - first:
+      213: -3711584527205349276
+    second: trapdoor_192px_66
+  - first:
+      213: -1907548827063151694
+    second: trapdoor_192px_67
+  - first:
+      213: 6505915543318789568
+    second: trapdoor_192px_68
+  - first:
+      213: -7404886730313219143
+    second: trapdoor_192px_69
+  - first:
+      213: 4885655454356317691
+    second: trapdoor_192px_70
+  - first:
+      213: -1459902512243418134
+    second: trapdoor_192px_71
+  - first:
+      213: 4083392758241753354
+    second: trapdoor_192px_72
+  - first:
+      213: 7710396661751017024
+    second: trapdoor_192px_73
+  - first:
+      213: -1168736107464509029
+    second: trapdoor_192px_74
+  - first:
+      213: 6151653350616465373
+    second: trapdoor_192px_75
+  - first:
+      213: -2248485611597888533
+    second: trapdoor_192px_76
+  - first:
+      213: -233676403052655626
+    second: trapdoor_192px_77
+  - first:
+      213: 7477529083051100272
+    second: trapdoor_192px_78
+  - first:
+      213: 5124233702558140685
+    second: trapdoor_192px_79
+  - first:
+      213: 5800424882879029838
+    second: trapdoor_192px_80
+  - first:
+      213: -5555912841897752132
+    second: trapdoor_192px_81
+  - first:
+      213: 4272254324657507130
+    second: trapdoor_192px_82
+  - first:
+      213: 5749837991195739134
+    second: trapdoor_192px_83
+  - first:
+      213: -2651509869107066218
+    second: trapdoor_192px_84
+  - first:
+      213: 8952708491972222873
+    second: trapdoor_192px_85
+  - first:
+      213: -734224780382695911
+    second: trapdoor_192px_86
+  - first:
+      213: 3706278893288515264
+    second: trapdoor_192px_87
+  - first:
+      213: -1012905514027637940
+    second: trapdoor_192px_88
+  - first:
+      213: 2424141935393872229
+    second: trapdoor_192px_89
+  - first:
+      213: 1115705361370262682
+    second: trapdoor_192px_90
+  - first:
+      213: -8715010747388929135
+    second: trapdoor_192px_91
+  - first:
+      213: -818828213227318127
+    second: trapdoor_192px_92
+  - first:
+      213: 8140202538707319500
+    second: trapdoor_192px_93
+  - first:
+      213: 1874171067706915601
+    second: trapdoor_192px_94
+  - first:
+      213: -9024535987781017793
+    second: trapdoor_192px_95
+  - first:
+      213: -9208566298794587121
+    second: trapdoor_192px_96
+  - first:
+      213: -1970868616118880526
+    second: trapdoor_192px_97
+  - first:
+      213: -6054188457292520586
+    second: trapdoor_192px_98
+  - first:
+      213: -8196778867461819103
+    second: trapdoor_192px_99
+  - first:
+      213: 5385590157533421038
+    second: trapdoor_192px_100
+  - first:
+      213: -5998707829765222115
+    second: trapdoor_192px_101
+  - first:
+      213: -6793266798486755418
+    second: trapdoor_192px_102
+  - first:
+      213: 3413426309663735879
+    second: trapdoor_192px_103
+  - first:
+      213: -5798385400749021426
+    second: trapdoor_192px_104
+  - first:
+      213: 2474004258972029786
+    second: trapdoor_192px_105
+  - first:
+      213: 43254086251015814
+    second: trapdoor_192px_106
+  - first:
+      213: 1308326682880595638
+    second: trapdoor_192px_107
+  - first:
+      213: 7372464046178818335
+    second: trapdoor_192px_108
+  - first:
+      213: 2901373665419730956
+    second: trapdoor_192px_109
+  - first:
+      213: 2600254064956640432
+    second: trapdoor_192px_110
+  - first:
+      213: 2518137013797614301
+    second: trapdoor_192px_111
+  - first:
+      213: 4610568742404909255
+    second: trapdoor_192px_112
+  - first:
+      213: 6463137356474288873
+    second: trapdoor_192px_113
+  - first:
+      213: 8069277340219453775
+    second: trapdoor_192px_114
+  - first:
+      213: 1036290754008347143
+    second: trapdoor_192px_115
+  - first:
+      213: -8574892525878849385
+    second: trapdoor_192px_116
+  - first:
+      213: -3022446199788170189
+    second: trapdoor_192px_117
+  - first:
+      213: -3613412424149315658
+    second: trapdoor_192px_118
+  - first:
+      213: -5391740214287911510
+    second: trapdoor_192px_119
+  - first:
+      213: 2354728910696139336
+    second: trapdoor_192px_120
+  - first:
+      213: 8867639067174983668
+    second: trapdoor_192px_121
+  - first:
+      213: -8016003788310317769
+    second: trapdoor_192px_122
+  - first:
+      213: -5372910635512170613
+    second: trapdoor_192px_123
+  - first:
+      213: -6608874062514731837
+    second: trapdoor_192px_124
+  - first:
+      213: -8187696023076189311
+    second: trapdoor_192px_125
+  - first:
+      213: -8678267217072783654
+    second: trapdoor_192px_126
+  - first:
+      213: 297344624719014433
+    second: trapdoor_192px_127
+  - first:
+      213: -2433811570536399850
+    second: trapdoor_192px_128
+  - first:
+      213: -6228240159994924677
+    second: trapdoor_192px_129
+  - first:
+      213: -1527417608242354863
+    second: trapdoor_192px_130
+  - first:
+      213: -6252440717702266616
+    second: trapdoor_192px_131
+  - first:
+      213: 5099130538335004354
+    second: trapdoor_192px_132
+  - first:
+      213: 6963103141063701935
+    second: trapdoor_192px_133
+  - first:
+      213: -5076482299665233444
+    second: trapdoor_192px_134
+  - first:
+      213: -1623696950180432267
+    second: trapdoor_192px_135
+  - first:
+      213: 3170596981522417115
+    second: trapdoor_192px_136
+  - first:
+      213: -7478970653628855486
+    second: trapdoor_192px_137
+  - first:
+      213: 4284318642238858027
+    second: trapdoor_192px_138
+  - first:
+      213: 1341211945410304275
+    second: trapdoor_192px_139
+  - first:
+      213: -4843499216162444578
+    second: trapdoor_192px_140
+  - first:
+      213: 3363906020964550951
+    second: trapdoor_192px_141
+  - first:
+      213: -8483611053470440185
+    second: trapdoor_192px_142
+  - first:
+      213: -5795563923288086705
+    second: trapdoor_192px_143
+  - first:
+      213: -1048458412290027898
+    second: trapdoor_192px_144
+  - first:
+      213: -7622905213232954718
+    second: trapdoor_192px_145
+  - first:
+      213: -5624572754399946151
+    second: trapdoor_192px_146
+  - first:
+      213: -1599031708381877188
+    second: trapdoor_192px_147
+  - first:
+      213: -2039627383636370097
+    second: trapdoor_192px_148
+  - first:
+      213: -3518613084026154126
+    second: trapdoor_192px_149
+  - first:
+      213: 7718607374311926597
+    second: trapdoor_192px_150
+  - first:
+      213: -6896777734342612368
+    second: trapdoor_192px_151
+  - first:
+      213: -6021010682227909607
+    second: trapdoor_192px_152
+  - first:
+      213: 3901934383793409965
+    second: trapdoor_192px_153
+  - first:
+      213: -5598949241677269711
+    second: trapdoor_192px_154
+  - first:
+      213: -509781334403311360
+    second: trapdoor_192px_155
+  - first:
+      213: 7634722778795916132
+    second: trapdoor_192px_156
+  - first:
+      213: -695904041965575066
+    second: trapdoor_192px_157
+  - first:
+      213: 4850707224600961074
+    second: trapdoor_192px_158
+  - first:
+      213: -8934244334346164613
+    second: trapdoor_192px_159
+  - first:
+      213: -2071520319601200374
+    second: trapdoor_192px_160
+  - first:
+      213: -2304641773106034372
+    second: trapdoor_192px_161
+  - first:
+      213: 6841230095179043133
+    second: trapdoor_192px_162
+  - first:
+      213: -2280643354601914763
+    second: trapdoor_192px_163
+  - first:
+      213: -2232187559779404355
+    second: trapdoor_192px_164
+  - first:
+      213: -4660406410490886434
+    second: trapdoor_192px_165
+  - first:
+      213: 6839983772784489134
+    second: trapdoor_192px_166
+  - first:
+      213: -7814574542537894736
+    second: trapdoor_192px_167
+  - first:
+      213: -7220210733709973158
+    second: trapdoor_192px_168
+  - first:
+      213: 181330278744353978
+    second: trapdoor_192px_169
+  - first:
+      213: -1472936674223048969
+    second: trapdoor_192px_170
+  - first:
+      213: -4120299548667729835
+    second: trapdoor_192px_171
+  - first:
+      213: -6912240777524024353
+    second: trapdoor_192px_172
+  - first:
+      213: -5775201730098613717
+    second: trapdoor_192px_173
+  - first:
+      213: -7737035336940687106
+    second: trapdoor_192px_174
+  - first:
+      213: 3269394074708381099
+    second: trapdoor_192px_175
+  - first:
+      213: 8926680373279532562
+    second: trapdoor_192px_176
+  - first:
+      213: -5226001137962216348
+    second: trapdoor_192px_177
+  - first:
+      213: -7488310476101808382
+    second: trapdoor_192px_178
+  - first:
+      213: -7986325172267932035
+    second: trapdoor_192px_179
+  - first:
+      213: 1631184451347775552
+    second: trapdoor_192px_180
+  - first:
+      213: -5370969713830928104
+    second: trapdoor_192px_181
+  - first:
+      213: -3178146023411829734
+    second: trapdoor_192px_182
+  - first:
+      213: -2232224023990261483
+    second: trapdoor_192px_183
+  - first:
+      213: 8870267661492047538
+    second: trapdoor_192px_184
+  - first:
+      213: -1123368248667883005
+    second: trapdoor_192px_185
+  - first:
+      213: 6202042121955507207
+    second: trapdoor_192px_186
+  - first:
+      213: 6987681270603980473
+    second: trapdoor_192px_187
+  - first:
+      213: 4261366830994208635
+    second: trapdoor_192px_188
+  - first:
+      213: 2072567287850025607
+    second: trapdoor_192px_189
+  - first:
+      213: -5278991636313092849
+    second: trapdoor_192px_190
+  - first:
+      213: -2482723514341307954
+    second: trapdoor_192px_191
+  - first:
+      213: -4863864076069261878
+    second: trapdoor_192px_192
+  - first:
+      213: 8349574965123684388
+    second: trapdoor_192px_193
+  - first:
+      213: -2404139468718587102
+    second: trapdoor_192px_194
+  - first:
+      213: 4271641291123141230
+    second: trapdoor_192px_195
+  - first:
+      213: -3381097047156053543
+    second: trapdoor_192px_196
+  - first:
+      213: 2309228415727159522
+    second: trapdoor_192px_197
+  - first:
+      213: -7870144228623071697
+    second: trapdoor_192px_198
+  - first:
+      213: 4201960945233627237
+    second: trapdoor_192px_199
+  - first:
+      213: -9052165226719729219
+    second: trapdoor_192px_200
+  - first:
+      213: 3961519852647585503
+    second: trapdoor_192px_201
+  - first:
+      213: -358584634202419904
+    second: trapdoor_192px_202
+  - first:
+      213: 2405042044331385576
+    second: trapdoor_192px_203
+  - first:
+      213: 2577932670092505903
+    second: trapdoor_192px_204
+  - first:
+      213: 1006267573322231679
+    second: trapdoor_192px_205
+  - first:
+      213: -3750250582220631160
+    second: trapdoor_192px_206
+  - first:
+      213: 4336469923308687780
+    second: trapdoor_192px_207
+  - first:
+      213: 3577793639425384721
+    second: trapdoor_192px_208
+  - first:
+      213: -7397769263813015851
+    second: trapdoor_192px_209
+  - first:
+      213: 6227611167538279328
+    second: trapdoor_192px_210
+  - first:
+      213: -5352242755655685800
+    second: trapdoor_192px_211
+  - first:
+      213: -2257147687131461711
+    second: trapdoor_192px_212
+  - first:
+      213: 7902035238118487684
+    second: trapdoor_192px_213
+  - first:
+      213: -8445712400379336057
+    second: trapdoor_192px_214
+  - first:
+      213: 3928110694897543858
+    second: trapdoor_192px_215
+  - first:
+      213: 7079137281986183383
+    second: trapdoor_192px_216
+  - first:
+      213: 8170292286947906225
+    second: trapdoor_192px_217
+  - first:
+      213: -6055421177963666562
+    second: trapdoor_192px_218
+  - first:
+      213: -4785806932582337473
+    second: trapdoor_192px_219
+  - first:
+      213: 8255365932512706001
+    second: trapdoor_192px_220
+  - first:
+      213: 8514420096577805065
+    second: trapdoor_192px_221
+  - first:
+      213: -4482346522238629998
+    second: trapdoor_192px_222
+  - first:
+      213: 9212712896294131850
+    second: trapdoor_192px_223
+  - first:
+      213: -2009468735918320518
+    second: trapdoor_192px_224
+  - first:
+      213: -7152410984455294632
+    second: trapdoor_192px_225
+  - first:
+      213: 5058547996599895962
+    second: trapdoor_192px_226
+  - first:
+      213: 261616454225456538
+    second: trapdoor_192px_227
+  - first:
+      213: 1362009232851212034
+    second: trapdoor_192px_228
+  - first:
+      213: 7091918603543933642
+    second: trapdoor_192px_229
+  - first:
+      213: 5588292735370282228
+    second: trapdoor_192px_230
+  - first:
+      213: -3310874108556674905
+    second: trapdoor_192px_231
+  - first:
+      213: -7282233578605662273
+    second: trapdoor_192px_232
+  - first:
+      213: 1234190615204050154
+    second: trapdoor_192px_233
+  - first:
+      213: -4361177151855674975
+    second: trapdoor_192px_234
+  - first:
+      213: 6703676096786648013
+    second: trapdoor_192px_235
+  - first:
+      213: -73031316441936951
+    second: trapdoor_192px_236
+  - first:
+      213: -5974343844210614352
+    second: trapdoor_192px_237
+  - first:
+      213: 8564368820863698860
+    second: trapdoor_192px_238
+  - first:
+      213: 1405680248978970813
+    second: trapdoor_192px_239
+  - first:
+      213: -5457884032336613740
+    second: trapdoor_192px_240
+  - first:
+      213: 24517133906245628
+    second: trapdoor_192px_241
+  - first:
+      213: -1604541113496946891
+    second: trapdoor_192px_242
+  - first:
+      213: -1721266369919669084
+    second: trapdoor_192px_243
+  - first:
+      213: -1187517937059736423
+    second: trapdoor_192px_244
+  - first:
+      213: 1965922392433721825
+    second: trapdoor_192px_245
+  - first:
+      213: -6732764420279997289
+    second: trapdoor_192px_246
+  - first:
+      213: 8782196214740399382
+    second: trapdoor_192px_247
+  - first:
+      213: 7382034578667696215
+    second: trapdoor_192px_248
+  - first:
+      213: 2479519941847853020
+    second: trapdoor_192px_249
+  - first:
+      213: 5156711534705824184
+    second: trapdoor_192px_250
+  - first:
+      213: -5037034314675406140
+    second: trapdoor_192px_251
+  - first:
+      213: 4696551774514175381
+    second: trapdoor_192px_252
+  - first:
+      213: 290192731195186618
+    second: trapdoor_192px_253
+  - first:
+      213: 5312480206441090
+    second: trapdoor_192px_254
+  - first:
+      213: -4978403191349640675
+    second: trapdoor_192px_255
+  - first:
+      213: 697535549883871414
+    second: trapdoor_192px_256
+  - first:
+      213: 7591585202517707910
+    second: trapdoor_192px_257
+  - first:
+      213: 157972000676907900
+    second: trapdoor_192px_258
+  - first:
+      213: 4873952177254649311
+    second: trapdoor_192px_259
+  - first:
+      213: 349154565100912141
+    second: trapdoor_192px_260
+  - first:
+      213: 5128006899351157956
+    second: trapdoor_192px_261
+  - first:
+      213: 3724892660719142956
+    second: trapdoor_192px_262
+  - first:
+      213: 50978880608067648
+    second: trapdoor_192px_263
+  - first:
+      213: -3431818301405592473
+    second: trapdoor_192px_264
+  - first:
+      213: 8221196134138874833
+    second: trapdoor_192px_265
+  - first:
+      213: -5661052819724793254
+    second: trapdoor_192px_266
+  - first:
+      213: -6749836615436157675
+    second: trapdoor_192px_267
+  - first:
+      213: -5364732016871614438
+    second: trapdoor_192px_268
+  - first:
+      213: -8318339220988726526
+    second: trapdoor_192px_269
+  - first:
+      213: -3365562251598170182
+    second: trapdoor_192px_270
+  - first:
+      213: -2959259102958610752
+    second: trapdoor_192px_271
+  - first:
+      213: 7829828760325622059
+    second: trapdoor_192px_272
+  - first:
+      213: -2682808331866689524
+    second: trapdoor_192px_273
+  - first:
+      213: 6671862341175829790
+    second: trapdoor_192px_274
+  - first:
+      213: -7672024535181603817
+    second: trapdoor_192px_275
+  - first:
+      213: -2619437713822745219
+    second: trapdoor_192px_276
+  - first:
+      213: -6397559942838496675
+    second: trapdoor_192px_277
+  - first:
+      213: 5395153082392653461
+    second: trapdoor_192px_278
+  - first:
+      213: 7943079571713640334
+    second: trapdoor_192px_279
+  - first:
+      213: 7103329305673646295
+    second: trapdoor_192px_280
+  - first:
+      213: 4887732433481340102
+    second: trapdoor_192px_281
+  - first:
+      213: -4826572679638406009
+    second: trapdoor_192px_282
+  - first:
+      213: 1470808086810961398
+    second: trapdoor_192px_283
+  - first:
+      213: -7687133193720430688
+    second: trapdoor_192px_284
+  - first:
+      213: 4585531780987265333
+    second: trapdoor_192px_285
+  - first:
+      213: -819457791366364623
+    second: trapdoor_192px_286
+  - first:
+      213: -618308258741849467
+    second: trapdoor_192px_287
+  - first:
+      213: 4845323160827616321
+    second: trapdoor_192px_288
+  - first:
+      213: 172098429400577170
+    second: trapdoor_192px_289
+  - first:
+      213: 8388528376208108189
+    second: trapdoor_192px_290
+  - first:
+      213: 4913360419459420417
+    second: trapdoor_192px_291
+  - first:
+      213: 757146109836985958
+    second: trapdoor_192px_292
+  - first:
+      213: -2603951714376973745
+    second: trapdoor_192px_293
+  - first:
+      213: 5883022652368819159
+    second: trapdoor_192px_294
+  - first:
+      213: 2051062401369531832
+    second: trapdoor_192px_295
+  - first:
+      213: -5457956178351767318
+    second: trapdoor_192px_296
+  - first:
+      213: -8005206872951121319
+    second: trapdoor_192px_297
+  - first:
+      213: -8937109758203065882
+    second: trapdoor_192px_298
+  - first:
+      213: 4212670030248964686
+    second: trapdoor_192px_299
+  - first:
+      213: 3650449711342835431
+    second: trapdoor_192px_300
+  - first:
+      213: 3752009317497930089
+    second: trapdoor_192px_301
+  - first:
+      213: -8014787000752130798
+    second: trapdoor_192px_302
+  - first:
+      213: -5704051296342990965
+    second: trapdoor_192px_303
+  - first:
+      213: -85152423852762200
+    second: trapdoor_192px_304
+  - first:
+      213: 2614649451286868922
+    second: trapdoor_192px_305
+  - first:
+      213: 5394416466401108322
+    second: trapdoor_192px_306
+  - first:
+      213: -603213468671450183
+    second: trapdoor_192px_307
+  - first:
+      213: -4388827842915523956
+    second: trapdoor_192px_308
+  - first:
+      213: 3011085235147350958
+    second: trapdoor_192px_309
+  - first:
+      213: 7007954719311136442
+    second: trapdoor_192px_310
+  - first:
+      213: -6962857529206862244
+    second: trapdoor_192px_311
+  - first:
+      213: 2331071385025915199
+    second: trapdoor_192px_312
+  - first:
+      213: 11742544656931666
+    second: trapdoor_192px_313
+  - first:
+      213: 85540801122728518
+    second: trapdoor_192px_314
+  - first:
+      213: 3846342571018044077
+    second: trapdoor_192px_315
+  - first:
+      213: 6429068996957300471
+    second: trapdoor_192px_316
+  - first:
+      213: -1133799692662073828
+    second: trapdoor_192px_317
+  - first:
+      213: 8006577250630029344
+    second: trapdoor_192px_318
+  - first:
+      213: 7009635054508394507
+    second: trapdoor_192px_319
+  - first:
+      213: 7710840546341667133
+    second: trapdoor_192px_320
+  - first:
+      213: -6751130463232200237
+    second: trapdoor_192px_321
+  - first:
+      213: 4542574429771187884
+    second: trapdoor_192px_322
+  - first:
+      213: -2050720984351299592
+    second: trapdoor_192px_323
+  - first:
+      213: 2039564986076174
+    second: trapdoor_192px_324
+  - first:
+      213: -6727855223091432953
+    second: trapdoor_192px_325
+  - first:
+      213: 8517173720889493781
+    second: trapdoor_192px_326
+  - first:
+      213: -880661447028568578
+    second: trapdoor_192px_327
+  - first:
+      213: -8998219921151210134
+    second: trapdoor_192px_328
+  - first:
+      213: 7475910423128270192
+    second: trapdoor_192px_329
+  - first:
+      213: 6467799131915808183
+    second: trapdoor_192px_330
+  - first:
+      213: 4602994942808578223
+    second: trapdoor_192px_331
+  - first:
+      213: 6355698358252873737
+    second: trapdoor_192px_332
+  - first:
+      213: -6800722248643023851
+    second: trapdoor_192px_333
+  - first:
+      213: 4352743795150659548
+    second: trapdoor_192px_334
+  - first:
+      213: 3919150922318858887
+    second: trapdoor_192px_335
+  - first:
+      213: -6826433554349056272
+    second: trapdoor_192px_336
+  - first:
+      213: 2612833424703202155
+    second: trapdoor_192px_337
+  - first:
+      213: -1906614710351431524
+    second: trapdoor_192px_338
+  - first:
+      213: 7024531793721394428
+    second: trapdoor_192px_339
+  - first:
+      213: -2330421588584962551
+    second: trapdoor_192px_340
+  - first:
+      213: -7123958013854425303
+    second: trapdoor_192px_341
+  - first:
+      213: -998891650459112159
+    second: trapdoor_192px_342
+  - first:
+      213: 268697795461187577
+    second: trapdoor_192px_343
+  - first:
+      213: 4181970524323190464
+    second: trapdoor_192px_344
+  - first:
+      213: -1365001676764261446
+    second: trapdoor_192px_345
+  - first:
+      213: -1019514026181580987
+    second: trapdoor_192px_346
+  - first:
+      213: 3993695222995941233
+    second: trapdoor_192px_347
+  - first:
+      213: -8175670662488755661
+    second: trapdoor_192px_348
+  - first:
+      213: 8986420091431414960
+    second: trapdoor_192px_349
+  - first:
+      213: -8708220091453946231
+    second: trapdoor_192px_350
+  - first:
+      213: -6184088781752628640
+    second: trapdoor_192px_351
+  - first:
+      213: -3082387214970072741
+    second: trapdoor_192px_352
+  - first:
+      213: -3749049373188079999
+    second: trapdoor_192px_353
+  - first:
+      213: 2781283327183451412
+    second: trapdoor_192px_354
+  - first:
+      213: -2394232906326917710
+    second: trapdoor_192px_355
+  - first:
+      213: -8791523384654336250
+    second: trapdoor_192px_356
+  - first:
+      213: 4438321414599448502
+    second: trapdoor_192px_357
+  - first:
+      213: -2291164684850267527
+    second: trapdoor_192px_358
+  - first:
+      213: 7019468463445667653
+    second: trapdoor_192px_359
+  - first:
+      213: 4753231227841642625
+    second: trapdoor_192px_360
+  - first:
+      213: 6454651002545513273
+    second: trapdoor_192px_361
+  - first:
+      213: -2893759575287375321
+    second: trapdoor_192px_362
+  - first:
+      213: 3470767726481830287
+    second: trapdoor_192px_363
+  - first:
+      213: 567538458390546869
+    second: trapdoor_192px_364
+  - first:
+      213: -276333120851179996
+    second: trapdoor_192px_365
+  - first:
+      213: -6800478898182581340
+    second: trapdoor_192px_366
+  - first:
+      213: 5499851535057017983
+    second: trapdoor_192px_367
+  - first:
+      213: -7975790713449400617
+    second: trapdoor_192px_368
+  - first:
+      213: 2882876020873446224
+    second: trapdoor_192px_369
+  - first:
+      213: 2228439465009848459
+    second: trapdoor_192px_370
+  - first:
+      213: -6953754761238906898
+    second: trapdoor_192px_371
+  - first:
+      213: 1148720239410778727
+    second: trapdoor_192px_372
+  - first:
+      213: -2825824632986298102
+    second: trapdoor_192px_373
+  - first:
+      213: -245289654892568494
+    second: trapdoor_192px_374
+  - first:
+      213: 8347060026571854048
+    second: trapdoor_192px_375
+  - first:
+      213: 698455076219067319
+    second: trapdoor_192px_376
+  - first:
+      213: 4832721451932065604
+    second: trapdoor_192px_377
+  - first:
+      213: 5041744992233341911
+    second: trapdoor_192px_378
+  - first:
+      213: -2475331313648008585
+    second: trapdoor_192px_379
+  - first:
+      213: 5491474558459780265
+    second: trapdoor_192px_380
+  - first:
+      213: -6581196003106023599
+    second: trapdoor_192px_381
+  - first:
+      213: -9009079784786142374
+    second: trapdoor_192px_382
+  - first:
+      213: 5561027810963960554
+    second: trapdoor_192px_383
+  - first:
+      213: 6009244605388073793
+    second: trapdoor_192px_384
+  - first:
+      213: -6634354409896965657
+    second: trapdoor_192px_385
+  - first:
+      213: 6594799969635289159
+    second: trapdoor_192px_386
+  - first:
+      213: -748983838910131958
+    second: trapdoor_192px_387
+  - first:
+      213: 8612057272912554189
+    second: trapdoor_192px_388
+  - first:
+      213: -6231764729122844860
+    second: trapdoor_192px_389
+  - first:
+      213: -4118407577972701493
+    second: trapdoor_192px_390
+  - first:
+      213: -4663729417584475585
+    second: trapdoor_192px_391
+  - first:
+      213: -5354029400246314853
+    second: trapdoor_192px_392
+  - first:
+      213: 1646035740709129722
+    second: trapdoor_192px_393
+  - first:
+      213: 3052344311514774917
+    second: trapdoor_192px_394
+  - first:
+      213: -5116450495621782354
+    second: trapdoor_192px_395
+  - first:
+      213: 2728988318781539635
+    second: trapdoor_192px_396
+  - first:
+      213: -2735607138035362976
+    second: trapdoor_192px_397
+  - first:
+      213: -6581615432973323800
+    second: trapdoor_192px_398
+  - first:
+      213: 9170059955712922204
+    second: trapdoor_192px_399
+  - first:
+      213: 1011660090325277053
+    second: trapdoor_192px_400
+  - first:
+      213: -8218934572634981764
+    second: trapdoor_192px_401
+  - first:
+      213: 7248404971961253784
+    second: trapdoor_192px_402
+  - first:
+      213: 5670934293635233495
+    second: trapdoor_192px_403
+  - first:
+      213: -1600416510637130574
+    second: trapdoor_192px_404
+  - first:
+      213: 7057278873742354978
+    second: trapdoor_192px_405
+  - first:
+      213: 5724484399490185299
+    second: trapdoor_192px_406
+  - first:
+      213: -9202934839015147397
+    second: trapdoor_192px_407
+  - first:
+      213: 3645054786825360295
+    second: trapdoor_192px_408
+  - first:
+      213: -8695296504955753663
+    second: trapdoor_192px_409
+  - first:
+      213: -1075439956144415925
+    second: trapdoor_192px_410
+  - first:
+      213: -1762659637553050587
+    second: trapdoor_192px_411
+  - first:
+      213: -8620014016536092642
+    second: trapdoor_192px_412
+  - first:
+      213: -4791919779818933670
+    second: trapdoor_192px_413
+  - first:
+      213: 1998112894810326507
+    second: trapdoor_192px_414
+  - first:
+      213: -4413689705115602354
+    second: trapdoor_192px_415
+  - first:
+      213: 6367634831997663116
+    second: trapdoor_192px_416
+  - first:
+      213: 1905847163766737593
+    second: trapdoor_192px_417
+  - first:
+      213: -8320149582555988391
+    second: trapdoor_192px_418
+  - first:
+      213: -5777266914885351584
+    second: trapdoor_192px_419
+  - first:
+      213: -8650743543571500076
+    second: trapdoor_192px_420
+  - first:
+      213: -4451036438705008240
+    second: trapdoor_192px_421
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: trapdoor_192px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c863cc56c53e249bfaa5865174c10cd0
+      internalID: -8214382432310549892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47c6e99538939454e83ef33225c3785d
+      internalID: 1663729195718800026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c3cb1dbe6aff43bf82ea2b2cd26f1b7
+      internalID: 7789907011468326998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 636eac6a8773848de8208dbd529d1e53
+      internalID: -3832243612404576820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f02784ef7b7143aa9cccb2a5293c361
+      internalID: 3075459312383271059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_5
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1da220f62caa443feb47304c4f9ebc7b
+      internalID: -6821467603937989194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24aab2f4cc184335ba2b1da8ead5a64
+      internalID: -2219675456699124326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_7
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5594ac848ce2d49d384bb5cafff723f0
+      internalID: 7621869556346921914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07ae551894dcc4881b10853fe0da0ea5
+      internalID: -2353391601082602606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_9
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbb29b5fec1842c394bdeb97f727962
+      internalID: -4743878015722847894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_10
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f63657304c0476692768bc39e274a3
+      internalID: -5414802219736468546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_11
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55d4c1c336eb74125933fd8c4391584d
+      internalID: 5243805667842620436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_12
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a45f9dced568348f5b6158e937a447e3
+      internalID: -2767735648198412994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_13
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f311c8b2716e4862958c0bb0d479f9f
+      internalID: -5452882023104635312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_14
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 078ad3843ea6d49ef923f71e4251b5ae
+      internalID: 1791870007547438936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_15
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c721fff7f410240fb8293955f6892c86
+      internalID: -6101229632613640293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc8a9ec8dce5a466ca6bacc8ecb1adc4
+      internalID: -2462423627736710726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_17
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5924c0501359a4008b281e5fff5bff51
+      internalID: -1789901055653203481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_18
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cddb652eefc7645f39df9c780b60ae85
+      internalID: 4637842859463530869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_19
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cce48910afdd44e29d3af6d1466fa76
+      internalID: 1641810141247553364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_20
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 815dfc6161a4045578d69547d4fdd786
+      internalID: 2980121770442033121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_21
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fa39fe6869eb4d39818c60a5c8c7091
+      internalID: 2000382575128205631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_22
+      rect:
+        serializedVersion: 2
+        x: 4224
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90e2dcf94243042b09951e30ffe79126
+      internalID: -8309693816239193976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_23
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 353e30ebefdf245d78f0da46d667ebc5
+      internalID: -4593269977615743264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_24
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd616372696954758be9709c1b0e1512
+      internalID: 2223226245970624485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_25
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5816498152364b0397bf25718f7876d
+      internalID: 6060422802139596662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_26
+      rect:
+        serializedVersion: 2
+        x: 4992
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aba4230585e534aefb2c01569b72f8c8
+      internalID: 4227251747339818916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_27
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89b8fadfb08574393930bb75c067eae3
+      internalID: -2420273103835921548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_28
+      rect:
+        serializedVersion: 2
+        x: 5376
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51565f0ede7ce4891aba54de6d8f5b68
+      internalID: -5104635421764567022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_29
+      rect:
+        serializedVersion: 2
+        x: 5568
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b38cb6e0a570e4f7b958283e2338f2a3
+      internalID: 6935521948709710441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_30
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7888ca6a4bae945dfb5b84bb7913a35e
+      internalID: -1849044370357649511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_31
+      rect:
+        serializedVersion: 2
+        x: 5952
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dff03d4a3bc54385a712b4fc7d3e89d
+      internalID: -7289399481637674970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_32
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a7965e0136e45f5abee06e0f6158cd
+      internalID: 6281518819980127688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_33
+      rect:
+        serializedVersion: 2
+        x: 6336
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12df4b699ebd64051a439efc2a5b9da3
+      internalID: -5846517348421134767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_34
+      rect:
+        serializedVersion: 2
+        x: 6528
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23a80ca8f56e54429a16b5736c3a9bfc
+      internalID: 2578254868483145668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_35
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35bbbecb989f54110a4950f8870422dd
+      internalID: 3768450842841030262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_36
+      rect:
+        serializedVersion: 2
+        x: 6912
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72d7398c76d774a83b385bfb4e5b6c10
+      internalID: -2169618013280669141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_37
+      rect:
+        serializedVersion: 2
+        x: 7104
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8753ed5682931404b969d55a0818635d
+      internalID: -5053689001598904836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_38
+      rect:
+        serializedVersion: 2
+        x: 7296
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a65f73b0187c4028970da3e86b9fed8
+      internalID: 4433140277627834383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_39
+      rect:
+        serializedVersion: 2
+        x: 7488
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b0974b6541d5e4b9e8138cf4a67843e8
+      internalID: 2881836720001859653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_40
+      rect:
+        serializedVersion: 2
+        x: 7680
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceb769de14fef4c3b829e26c2d07339e
+      internalID: 151315564325152085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_41
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbdabe02afe554c6989b357b2420d0bb
+      internalID: 45575445303333251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_42
+      rect:
+        serializedVersion: 2
+        x: 8064
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6610fe115a68644e58a804a1559dae64
+      internalID: 6664835531406914922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_43
+      rect:
+        serializedVersion: 2
+        x: 8256
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 016c3ac5458db41e1824fa204b098362
+      internalID: -7129537996580414278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_44
+      rect:
+        serializedVersion: 2
+        x: 8448
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cd1903536f594ab5b914cf59187e173
+      internalID: 737307802199254152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_45
+      rect:
+        serializedVersion: 2
+        x: 8640
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 904427b6593fa41cf8ab8536e4839c30
+      internalID: -4764304049653578504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_46
+      rect:
+        serializedVersion: 2
+        x: 8832
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cdd636e739ed5461dab17ea685254ccc
+      internalID: 8784203667224208942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_47
+      rect:
+        serializedVersion: 2
+        x: 9024
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6958c02361c974a3f964657a159464fa
+      internalID: -7376099862752388725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_48
+      rect:
+        serializedVersion: 2
+        x: 9216
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7174c9b9dfe36445cb5d204f034d223a
+      internalID: 4386660682245123661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_49
+      rect:
+        serializedVersion: 2
+        x: 9408
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97f9a74fcb07946c6b6efd9d0ebd8382
+      internalID: -3941958825981372989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_50
+      rect:
+        serializedVersion: 2
+        x: 9600
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a609214b7d04f4e9b974d41aefdc72b1
+      internalID: 4228701475007693831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_51
+      rect:
+        serializedVersion: 2
+        x: 9792
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e8e2c42b0e24041937dc14fa6a850a
+      internalID: 2819472855758142004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_52
+      rect:
+        serializedVersion: 2
+        x: 9984
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38ad881e584dd41559d7fc4d78a2e110
+      internalID: 5740823310336469812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_53
+      rect:
+        serializedVersion: 2
+        x: 10176
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 582cbfa19333d4dd78f40536d39a6f7b
+      internalID: -4246355228977687676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_54
+      rect:
+        serializedVersion: 2
+        x: 10368
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eedd29c9c58e446f8b7deedb2ab9d76c
+      internalID: 7096145654433885187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_55
+      rect:
+        serializedVersion: 2
+        x: 10560
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6cdc9ddb9ba84058a95eae93d42403d
+      internalID: 5012364217305506177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_56
+      rect:
+        serializedVersion: 2
+        x: 10752
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3510c6fe8037f4f1a9fdf4e401a4ffae
+      internalID: 8071887229425820994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_57
+      rect:
+        serializedVersion: 2
+        x: 10944
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ed5cd815b6c4424c9387352a1f0be64
+      internalID: -5524127051753412200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_58
+      rect:
+        serializedVersion: 2
+        x: 11136
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7406ac26179f7425f9628721b3958f55
+      internalID: 4193835914855826337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_59
+      rect:
+        serializedVersion: 2
+        x: 11328
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90fb4aa5f09c744fa85b716c587ff841
+      internalID: 6818644856687086676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_60
+      rect:
+        serializedVersion: 2
+        x: 11520
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6fb57c6bb566c48ab9a9b4c62f5dd52b
+      internalID: -4681504687858041698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_61
+      rect:
+        serializedVersion: 2
+        x: 11712
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f17b48600b09346ecb0a7267a7076cef
+      internalID: -4495045715086080894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_62
+      rect:
+        serializedVersion: 2
+        x: 11904
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43337eee232fa484b98c611b10d33cae
+      internalID: 3730435986840332479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_63
+      rect:
+        serializedVersion: 2
+        x: 12096
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec8bd34fa7a8e4753b6dac88b3867259
+      internalID: -481874210269453428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_64
+      rect:
+        serializedVersion: 2
+        x: 12288
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0ecbd01f8f964a228d41dcf11b3a232
+      internalID: -3958812987072807347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_65
+      rect:
+        serializedVersion: 2
+        x: 12480
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 447a94775beae4fa591d5e001e13a2ce
+      internalID: 2201839926681918816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_66
+      rect:
+        serializedVersion: 2
+        x: 12672
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 049bae2baf72c4ad5a7951707932a270
+      internalID: -3711584527205349276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_67
+      rect:
+        serializedVersion: 2
+        x: 12864
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f4efdc1ddb9b44d6980720ce9dbd617
+      internalID: -1907548827063151694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_68
+      rect:
+        serializedVersion: 2
+        x: 13056
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa46e2656632401ebfbeed85301981f
+      internalID: 6505915543318789568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_69
+      rect:
+        serializedVersion: 2
+        x: 13248
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfc675fb9f3de47bcbebef675e2030d4
+      internalID: -7404886730313219143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_70
+      rect:
+        serializedVersion: 2
+        x: 13440
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ec5e138cdbd8447fbabbdd1cc969cc8
+      internalID: 4885655454356317691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_71
+      rect:
+        serializedVersion: 2
+        x: 13632
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a1151df98d30415e8f6b1f7830e404e
+      internalID: -1459902512243418134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_72
+      rect:
+        serializedVersion: 2
+        x: 13824
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3574cdae215444431808f42f4071805e
+      internalID: 4083392758241753354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_73
+      rect:
+        serializedVersion: 2
+        x: 14016
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6208cb089459b4984bd53d347b3a8469
+      internalID: 7710396661751017024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_192px_74
+      rect:
+        serializedVersion: 2
+        x: 14208
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a2499302f2645bb9775f7980a03f99
+      internalID: -1168736107464509029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 738073722674c49c78eced8293146e97
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      trapdoor_192px_0: -8214382432310549892
+      trapdoor_192px_1: 1663729195718800026
+      trapdoor_192px_10: -5414802219736468546
+      trapdoor_192px_11: 5243805667842620436
+      trapdoor_192px_12: -2767735648198412994
+      trapdoor_192px_13: -5452882023104635312
+      trapdoor_192px_14: 1791870007547438936
+      trapdoor_192px_15: -6101229632613640293
+      trapdoor_192px_16: -2462423627736710726
+      trapdoor_192px_17: -1789901055653203481
+      trapdoor_192px_18: 4637842859463530869
+      trapdoor_192px_19: 1641810141247553364
+      trapdoor_192px_2: 7789907011468326998
+      trapdoor_192px_20: 2980121770442033121
+      trapdoor_192px_21: 2000382575128205631
+      trapdoor_192px_22: -8309693816239193976
+      trapdoor_192px_23: -4593269977615743264
+      trapdoor_192px_24: 2223226245970624485
+      trapdoor_192px_25: 6060422802139596662
+      trapdoor_192px_26: 4227251747339818916
+      trapdoor_192px_27: -2420273103835921548
+      trapdoor_192px_28: -5104635421764567022
+      trapdoor_192px_29: 6935521948709710441
+      trapdoor_192px_3: -3832243612404576820
+      trapdoor_192px_30: -1849044370357649511
+      trapdoor_192px_31: -7289399481637674970
+      trapdoor_192px_32: 6281518819980127688
+      trapdoor_192px_33: -5846517348421134767
+      trapdoor_192px_34: 2578254868483145668
+      trapdoor_192px_35: 3768450842841030262
+      trapdoor_192px_36: -2169618013280669141
+      trapdoor_192px_37: -5053689001598904836
+      trapdoor_192px_38: 4433140277627834383
+      trapdoor_192px_39: 2881836720001859653
+      trapdoor_192px_4: 3075459312383271059
+      trapdoor_192px_40: 151315564325152085
+      trapdoor_192px_41: 45575445303333251
+      trapdoor_192px_42: 6664835531406914922
+      trapdoor_192px_43: -7129537996580414278
+      trapdoor_192px_44: 737307802199254152
+      trapdoor_192px_45: -4764304049653578504
+      trapdoor_192px_46: 8784203667224208942
+      trapdoor_192px_47: -7376099862752388725
+      trapdoor_192px_48: 4386660682245123661
+      trapdoor_192px_49: -3941958825981372989
+      trapdoor_192px_5: -6821467603937989194
+      trapdoor_192px_50: 4228701475007693831
+      trapdoor_192px_51: 2819472855758142004
+      trapdoor_192px_52: 5740823310336469812
+      trapdoor_192px_53: -4246355228977687676
+      trapdoor_192px_54: 7096145654433885187
+      trapdoor_192px_55: 5012364217305506177
+      trapdoor_192px_56: 8071887229425820994
+      trapdoor_192px_57: -5524127051753412200
+      trapdoor_192px_58: 4193835914855826337
+      trapdoor_192px_59: 6818644856687086676
+      trapdoor_192px_6: -2219675456699124326
+      trapdoor_192px_60: -4681504687858041698
+      trapdoor_192px_61: -4495045715086080894
+      trapdoor_192px_62: 3730435986840332479
+      trapdoor_192px_63: -481874210269453428
+      trapdoor_192px_64: -3958812987072807347
+      trapdoor_192px_65: 2201839926681918816
+      trapdoor_192px_66: -3711584527205349276
+      trapdoor_192px_67: -1907548827063151694
+      trapdoor_192px_68: 6505915543318789568
+      trapdoor_192px_69: -7404886730313219143
+      trapdoor_192px_7: 7621869556346921914
+      trapdoor_192px_70: 4885655454356317691
+      trapdoor_192px_71: -1459902512243418134
+      trapdoor_192px_72: 4083392758241753354
+      trapdoor_192px_73: 7710396661751017024
+      trapdoor_192px_74: -1168736107464509029
+      trapdoor_192px_8: -2353391601082602606
+      trapdoor_192px_9: -4743878015722847894
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

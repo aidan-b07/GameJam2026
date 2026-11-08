@@ -1,0 +1,2307 @@
+fileFormatVersion: 2
+guid: e29165d49bfae4e72b0a11f30df7a807
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7353568467567728531
+    second: trapdoor_lamp_192px_0
+  - first:
+      213: -9132278381127322602
+    second: trapdoor_lamp_192px_1
+  - first:
+      213: 1484396627205593208
+    second: trapdoor_lamp_192px_2
+  - first:
+      213: 2407516480836666166
+    second: trapdoor_lamp_192px_3
+  - first:
+      213: -6984943254601804209
+    second: trapdoor_lamp_192px_4
+  - first:
+      213: 8360188286688701765
+    second: trapdoor_lamp_192px_5
+  - first:
+      213: 4508985930494722591
+    second: trapdoor_lamp_192px_6
+  - first:
+      213: -8991754886682625799
+    second: trapdoor_lamp_192px_7
+  - first:
+      213: -6689240370403088113
+    second: trapdoor_lamp_192px_8
+  - first:
+      213: 2284707146860697452
+    second: trapdoor_lamp_192px_9
+  - first:
+      213: 5331889405211099059
+    second: trapdoor_lamp_192px_10
+  - first:
+      213: 7987686025644955165
+    second: trapdoor_lamp_192px_11
+  - first:
+      213: 7332736629436162097
+    second: trapdoor_lamp_192px_12
+  - first:
+      213: -7149295251599435285
+    second: trapdoor_lamp_192px_13
+  - first:
+      213: 5397206492676521728
+    second: trapdoor_lamp_192px_14
+  - first:
+      213: -2193707840188778587
+    second: trapdoor_lamp_192px_15
+  - first:
+      213: -4805841991174602222
+    second: trapdoor_lamp_192px_16
+  - first:
+      213: -2418485907371512491
+    second: trapdoor_lamp_192px_17
+  - first:
+      213: 6860701710305509238
+    second: trapdoor_lamp_192px_18
+  - first:
+      213: 7331565685700897603
+    second: trapdoor_lamp_192px_19
+  - first:
+      213: 182703702424056084
+    second: trapdoor_lamp_192px_20
+  - first:
+      213: -6055009511137809248
+    second: trapdoor_lamp_192px_21
+  - first:
+      213: 123283682980991258
+    second: trapdoor_lamp_192px_22
+  - first:
+      213: 4397927781124057683
+    second: trapdoor_lamp_192px_23
+  - first:
+      213: -3896327655654761317
+    second: trapdoor_lamp_192px_24
+  - first:
+      213: -7177913639289248101
+    second: trapdoor_lamp_192px_25
+  - first:
+      213: 8332991543506308479
+    second: trapdoor_lamp_192px_26
+  - first:
+      213: 1607711268543965902
+    second: trapdoor_lamp_192px_27
+  - first:
+      213: 5940643087903426157
+    second: trapdoor_lamp_192px_28
+  - first:
+      213: -2646309311453801207
+    second: trapdoor_lamp_192px_29
+  - first:
+      213: -5607080274096271696
+    second: trapdoor_lamp_192px_30
+  - first:
+      213: -5524256859460854830
+    second: trapdoor_lamp_192px_31
+  - first:
+      213: -3684720342810700191
+    second: trapdoor_lamp_192px_32
+  - first:
+      213: 5325968453362110176
+    second: trapdoor_lamp_192px_33
+  - first:
+      213: 494814072019624022
+    second: trapdoor_lamp_192px_34
+  - first:
+      213: -8434589756069833817
+    second: trapdoor_lamp_192px_35
+  - first:
+      213: -1116274019872639415
+    second: trapdoor_lamp_192px_36
+  - first:
+      213: 2557138090526192051
+    second: trapdoor_lamp_192px_37
+  - first:
+      213: 4964620949610751157
+    second: trapdoor_lamp_192px_38
+  - first:
+      213: -3190307497312276498
+    second: trapdoor_lamp_192px_39
+  - first:
+      213: -7382575075187693240
+    second: trapdoor_lamp_192px_40
+  - first:
+      213: -9119187323131935080
+    second: trapdoor_lamp_192px_41
+  - first:
+      213: 7462285484685562102
+    second: trapdoor_lamp_192px_42
+  - first:
+      213: -1170690481385052882
+    second: trapdoor_lamp_192px_43
+  - first:
+      213: 4536210350737370509
+    second: trapdoor_lamp_192px_44
+  - first:
+      213: 2109575945687334617
+    second: trapdoor_lamp_192px_45
+  - first:
+      213: -2491381612280041242
+    second: trapdoor_lamp_192px_46
+  - first:
+      213: -5472137281301209490
+    second: trapdoor_lamp_192px_47
+  - first:
+      213: -4265185910593952778
+    second: trapdoor_lamp_192px_48
+  - first:
+      213: 2182764927840534512
+    second: trapdoor_lamp_192px_49
+  - first:
+      213: -3810103885377627721
+    second: trapdoor_lamp_192px_50
+  - first:
+      213: -2298033692106820086
+    second: trapdoor_lamp_192px_51
+  - first:
+      213: 6352403319992945878
+    second: trapdoor_lamp_192px_52
+  - first:
+      213: 8730092575673457387
+    second: trapdoor_lamp_192px_53
+  - first:
+      213: 6756105908947864292
+    second: trapdoor_lamp_192px_54
+  - first:
+      213: 6677430914115398267
+    second: trapdoor_lamp_192px_55
+  - first:
+      213: 621307066989258521
+    second: trapdoor_lamp_192px_56
+  - first:
+      213: 4581267567858016481
+    second: trapdoor_lamp_192px_57
+  - first:
+      213: 7764748456387894238
+    second: trapdoor_lamp_192px_58
+  - first:
+      213: 6449803660804622357
+    second: trapdoor_lamp_192px_59
+  - first:
+      213: 5925871589009447489
+    second: trapdoor_lamp_192px_60
+  - first:
+      213: -2497323561934460700
+    second: trapdoor_lamp_192px_61
+  - first:
+      213: 8277631993711511356
+    second: trapdoor_lamp_192px_62
+  - first:
+      213: 9079514344237127909
+    second: trapdoor_lamp_192px_63
+  - first:
+      213: -8989385379124872175
+    second: trapdoor_lamp_192px_64
+  - first:
+      213: 5101782655748059650
+    second: trapdoor_lamp_192px_65
+  - first:
+      213: -1121149577634233905
+    second: trapdoor_lamp_192px_66
+  - first:
+      213: 5775671523143209476
+    second: trapdoor_lamp_192px_67
+  - first:
+      213: 3965861003507138043
+    second: trapdoor_lamp_192px_68
+  - first:
+      213: -8889246237133329304
+    second: trapdoor_lamp_192px_69
+  - first:
+      213: 1734028713275480155
+    second: trapdoor_lamp_192px_70
+  - first:
+      213: 6247923787380450664
+    second: trapdoor_lamp_192px_71
+  - first:
+      213: -6635559889909389924
+    second: trapdoor_lamp_192px_72
+  - first:
+      213: -5005310856930990756
+    second: trapdoor_lamp_192px_73
+  - first:
+      213: 3522898920572522873
+    second: trapdoor_lamp_192px_74
+  - first:
+      213: -6872640188648959773
+    second: trapdoor_lamp_192px_75
+  - first:
+      213: -2841974546713246430
+    second: trapdoor_lamp_192px_76
+  - first:
+      213: -1861565630025355841
+    second: trapdoor_lamp_192px_77
+  - first:
+      213: 5104439357033856640
+    second: trapdoor_lamp_192px_78
+  - first:
+      213: 1029802222718152869
+    second: trapdoor_lamp_192px_79
+  - first:
+      213: -7009182877508423786
+    second: trapdoor_lamp_192px_80
+  - first:
+      213: -8733770501427333106
+    second: trapdoor_lamp_192px_81
+  - first:
+      213: 6979289426031194801
+    second: trapdoor_lamp_192px_82
+  - first:
+      213: 7944071556498072802
+    second: trapdoor_lamp_192px_83
+  - first:
+      213: 8480301877127553694
+    second: trapdoor_lamp_192px_84
+  - first:
+      213: 8857287532937792095
+    second: trapdoor_lamp_192px_85
+  - first:
+      213: 2037389913027928550
+    second: trapdoor_lamp_192px_86
+  - first:
+      213: -4027750940517984133
+    second: trapdoor_lamp_192px_87
+  - first:
+      213: 5479597116800662462
+    second: trapdoor_lamp_192px_88
+  - first:
+      213: 7057016999520439198
+    second: trapdoor_lamp_192px_89
+  - first:
+      213: 5193855062989705017
+    second: trapdoor_lamp_192px_90
+  - first:
+      213: 3785854820853489402
+    second: trapdoor_lamp_192px_91
+  - first:
+      213: -6167931912435512445
+    second: trapdoor_lamp_192px_92
+  - first:
+      213: 7441734555100300570
+    second: trapdoor_lamp_192px_93
+  - first:
+      213: -7799253605604639940
+    second: trapdoor_lamp_192px_94
+  - first:
+      213: 2395337449027671152
+    second: trapdoor_lamp_192px_95
+  - first:
+      213: -305256660558161085
+    second: trapdoor_lamp_192px_96
+  - first:
+      213: -6507062012730127438
+    second: trapdoor_lamp_192px_97
+  - first:
+      213: -7831496398057612195
+    second: trapdoor_lamp_192px_98
+  - first:
+      213: 2604592296512691448
+    second: trapdoor_lamp_192px_99
+  - first:
+      213: -6727105994868940281
+    second: trapdoor_lamp_192px_100
+  - first:
+      213: -2378788107377097735
+    second: trapdoor_lamp_192px_101
+  - first:
+      213: -1694061756339022843
+    second: trapdoor_lamp_192px_102
+  - first:
+      213: 5602661982096516703
+    second: trapdoor_lamp_192px_103
+  - first:
+      213: 5019284225549141141
+    second: trapdoor_lamp_192px_104
+  - first:
+      213: -687551184247012898
+    second: trapdoor_lamp_192px_105
+  - first:
+      213: -7341385701359247336
+    second: trapdoor_lamp_192px_106
+  - first:
+      213: -7478003448858582324
+    second: trapdoor_lamp_192px_107
+  - first:
+      213: -2149597566335529564
+    second: trapdoor_lamp_192px_108
+  - first:
+      213: 4556849259437124056
+    second: trapdoor_lamp_192px_109
+  - first:
+      213: 7869159372517199705
+    second: trapdoor_lamp_192px_110
+  - first:
+      213: -7088095869942491072
+    second: trapdoor_lamp_192px_111
+  - first:
+      213: -5238103650573723154
+    second: trapdoor_lamp_192px_112
+  - first:
+      213: -4631501486153110134
+    second: trapdoor_lamp_192px_113
+  - first:
+      213: 9183615991908253233
+    second: trapdoor_lamp_192px_114
+  - first:
+      213: -5872700506965218847
+    second: trapdoor_lamp_192px_115
+  - first:
+      213: 5199407606952950524
+    second: trapdoor_lamp_192px_116
+  - first:
+      213: -4422880248407950500
+    second: trapdoor_lamp_192px_117
+  - first:
+      213: -3582260369819882151
+    second: trapdoor_lamp_192px_118
+  - first:
+      213: 7489728803536116498
+    second: trapdoor_lamp_192px_119
+  - first:
+      213: 6436413185587664628
+    second: trapdoor_lamp_192px_120
+  - first:
+      213: -6742936855090441034
+    second: trapdoor_lamp_192px_121
+  - first:
+      213: 7953710251499477003
+    second: trapdoor_lamp_192px_122
+  - first:
+      213: -1220776403780593990
+    second: trapdoor_lamp_192px_123
+  - first:
+      213: 6472299295172008184
+    second: trapdoor_lamp_192px_124
+  - first:
+      213: 2334570274704769032
+    second: trapdoor_lamp_192px_125
+  - first:
+      213: 5666394225465883811
+    second: trapdoor_lamp_192px_126
+  - first:
+      213: -1401294653438187143
+    second: trapdoor_lamp_192px_127
+  - first:
+      213: -9123891506551685144
+    second: trapdoor_lamp_192px_128
+  - first:
+      213: 8434800169917821011
+    second: trapdoor_lamp_192px_129
+  - first:
+      213: -6018583763378933787
+    second: trapdoor_lamp_192px_130
+  - first:
+      213: 3905591476199533938
+    second: trapdoor_lamp_192px_131
+  - first:
+      213: 8412011457808162110
+    second: trapdoor_lamp_192px_132
+  - first:
+      213: -9053622489482950512
+    second: trapdoor_lamp_192px_133
+  - first:
+      213: 5714856466355121137
+    second: trapdoor_lamp_192px_134
+  - first:
+      213: 8504478028963646195
+    second: trapdoor_lamp_192px_135
+  - first:
+      213: -1526022308044642321
+    second: trapdoor_lamp_192px_136
+  - first:
+      213: -3828800442234951455
+    second: trapdoor_lamp_192px_137
+  - first:
+      213: 2453382019694046983
+    second: trapdoor_lamp_192px_138
+  - first:
+      213: -4829845003406352280
+    second: trapdoor_lamp_192px_139
+  - first:
+      213: -6822880703678577120
+    second: trapdoor_lamp_192px_140
+  - first:
+      213: 46946660459167649
+    second: trapdoor_lamp_192px_141
+  - first:
+      213: 1444922848129625400
+    second: trapdoor_lamp_192px_142
+  - first:
+      213: -5099648226175491412
+    second: trapdoor_lamp_192px_143
+  - first:
+      213: 8258832243266660306
+    second: trapdoor_lamp_192px_144
+  - first:
+      213: -168650347438489063
+    second: trapdoor_lamp_192px_145
+  - first:
+      213: 8306094650435100590
+    second: trapdoor_lamp_192px_146
+  - first:
+      213: -6053257239745465612
+    second: trapdoor_lamp_192px_147
+  - first:
+      213: -7311755281791186971
+    second: trapdoor_lamp_192px_148
+  - first:
+      213: -8386432791536089374
+    second: trapdoor_lamp_192px_149
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f58566961e6843fe8c9b8c24a3da845
+      internalID: 7353568467567728531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c544089bb825a444eac4298df6f75b5f
+      internalID: -9132278381127322602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69af58467ad2f4b7587a49e7cd666509
+      internalID: 1484396627205593208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 739d1a9f2c1cc45ea8cc728de73f68a5
+      internalID: 2407516480836666166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 136d82fe2c5c3435084b7d6cdfc35c51
+      internalID: -6984943254601804209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_5
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0347b1b678d7b42a0b6eda281a63ec66
+      internalID: 8360188286688701765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfff78246afe644e793ee70f26db411e
+      internalID: 4508985930494722591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_7
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a90938721f5840b286fe0f4ec551e30
+      internalID: -8991754886682625799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6a812863af7148feaa1dec508a17c65
+      internalID: -6689240370403088113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_9
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70fe4b620962949708b276e88f9fe637
+      internalID: 2284707146860697452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_10
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 013c0a0ada05f478bbf715b0c4b1b34c
+      internalID: 5331889405211099059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_11
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f5837adb809c40f58097f6809122bac
+      internalID: 7987686025644955165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_12
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a409ae928a941fba775204dab36f5e
+      internalID: 7332736629436162097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_13
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9516cb0c277b74791a994b7b207395c5
+      internalID: -7149295251599435285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_14
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20b9631e4f21d42efa4d2be1f546b0b8
+      internalID: 5397206492676521728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_15
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ef52745a4e9a4cd58a1852250b77d52
+      internalID: -2193707840188778587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a452adfe3bfc54a6099793287d15fb18
+      internalID: -4805841991174602222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_17
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49a83ce2bdfef4dcb94ac15d5cfaf29b
+      internalID: -2418485907371512491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_18
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a6187e561b0e4b90a9dc900d6f4b1e6
+      internalID: 6860701710305509238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_19
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6767071b94ebf4e4fb1958cb922b3973
+      internalID: 7331565685700897603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_20
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6015147efabf5467a8b7379acac687cc
+      internalID: 182703702424056084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_21
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb12ffb6d61c452c8314cbf444200c1
+      internalID: -6055009511137809248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_22
+      rect:
+        serializedVersion: 2
+        x: 4224
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b869291b448104014944f2b9b67f4062
+      internalID: 123283682980991258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_23
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5948e77e4298647c29248f538fa40b19
+      internalID: 4397927781124057683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_24
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 837853e4c13d2405796b2e74ead3e9c8
+      internalID: -3896327655654761317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_25
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 599b4a367f2f34db28cf2a5f9810b10c
+      internalID: -7177913639289248101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_26
+      rect:
+        serializedVersion: 2
+        x: 4992
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a48b4e4ab08943f48328514ef473f99
+      internalID: 8332991543506308479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_27
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df40c0e678ff44c73b6c319afcb7be68
+      internalID: 1607711268543965902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_28
+      rect:
+        serializedVersion: 2
+        x: 5376
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29ec1946050da46be8a5ff6e2f963808
+      internalID: 5940643087903426157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_29
+      rect:
+        serializedVersion: 2
+        x: 5568
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a71e652d59145424299c5f7779a571da
+      internalID: -2646309311453801207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_30
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b50b81a2fdee466e90482bcdd60050a
+      internalID: -5607080274096271696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_31
+      rect:
+        serializedVersion: 2
+        x: 5952
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313aa5dc9e6f54898af8a9c27da30de1
+      internalID: -5524256859460854830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_32
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a12fd5fb35be435f8d2fba708eedc04
+      internalID: -3684720342810700191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_33
+      rect:
+        serializedVersion: 2
+        x: 6336
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f142d03bc6493489f877ae17df86fb54
+      internalID: 5325968453362110176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_34
+      rect:
+        serializedVersion: 2
+        x: 6528
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8379a2e791ed4884b78ddc55827c605
+      internalID: 494814072019624022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_35
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 716c8cb52bb3247a09687ce438d08369
+      internalID: -8434589756069833817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_36
+      rect:
+        serializedVersion: 2
+        x: 6912
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fa37efbb30f045478a4a2f59e103b1a
+      internalID: -1116274019872639415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_37
+      rect:
+        serializedVersion: 2
+        x: 7104
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: badf10beac0844f3ebb9e099ba2a28e9
+      internalID: 2557138090526192051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_38
+      rect:
+        serializedVersion: 2
+        x: 7296
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80259f638d39641c8848c24903f97b71
+      internalID: 4964620949610751157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_39
+      rect:
+        serializedVersion: 2
+        x: 7488
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0943a645db12448abb52c3c052c8ef5e
+      internalID: -3190307497312276498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_40
+      rect:
+        serializedVersion: 2
+        x: 7680
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 134cdaebd913c432686c10c1aa0b92a3
+      internalID: -7382575075187693240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_41
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af26a859776e4de0a1e6df78a44556d
+      internalID: -9119187323131935080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_42
+      rect:
+        serializedVersion: 2
+        x: 8064
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1321e7b51d49e438f8dc47800fda9d3e
+      internalID: 7462285484685562102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_43
+      rect:
+        serializedVersion: 2
+        x: 8256
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a591357ee4e1432eb283ae865b2929b
+      internalID: -1170690481385052882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_44
+      rect:
+        serializedVersion: 2
+        x: 8448
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aedbe07d76f514bb5af4558758e88bdf
+      internalID: 4536210350737370509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_45
+      rect:
+        serializedVersion: 2
+        x: 8640
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3fd94ef2534c49e1bdfd69381d9a0a1
+      internalID: 2109575945687334617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_46
+      rect:
+        serializedVersion: 2
+        x: 8832
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13bc8118a517e473bae6d3b6f5564bef
+      internalID: -2491381612280041242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_47
+      rect:
+        serializedVersion: 2
+        x: 9024
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8b739df4d89d4c8ea3c72c96115497d
+      internalID: -5472137281301209490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_48
+      rect:
+        serializedVersion: 2
+        x: 9216
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 791e2abfadf6e43fa863014cf3a80bab
+      internalID: -4265185910593952778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_49
+      rect:
+        serializedVersion: 2
+        x: 9408
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2db1f0094dc3f414d968b3d9857a4f14
+      internalID: 2182764927840534512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_50
+      rect:
+        serializedVersion: 2
+        x: 9600
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e6299e49788e4226a14ef2574af5b29
+      internalID: -3810103885377627721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_51
+      rect:
+        serializedVersion: 2
+        x: 9792
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5def9f49519ba4ebaaf21108bcbd2461
+      internalID: -2298033692106820086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_52
+      rect:
+        serializedVersion: 2
+        x: 9984
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5f4a3ba3a5a04f69a4f8a447e959fc2
+      internalID: 6352403319992945878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_53
+      rect:
+        serializedVersion: 2
+        x: 10176
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45531da7fb978415baa1a0463e657d0a
+      internalID: 8730092575673457387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_54
+      rect:
+        serializedVersion: 2
+        x: 10368
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f42a70467fc414cd3a51b9136cb706a6
+      internalID: 6756105908947864292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_55
+      rect:
+        serializedVersion: 2
+        x: 10560
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7781fc14519c41898752ec1182ab1a7
+      internalID: 6677430914115398267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_56
+      rect:
+        serializedVersion: 2
+        x: 10752
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cb719d5f49954a72bd67a9013a260d8
+      internalID: 621307066989258521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_57
+      rect:
+        serializedVersion: 2
+        x: 10944
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb03e8ce0b0b9432aaafc005e703ebcc
+      internalID: 4581267567858016481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_58
+      rect:
+        serializedVersion: 2
+        x: 11136
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c70f0bc14d6ce41ae8c919e5d657b0d4
+      internalID: 7764748456387894238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_59
+      rect:
+        serializedVersion: 2
+        x: 11328
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce2e91d144bb84fb4af9419d4ed18390
+      internalID: 6449803660804622357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_60
+      rect:
+        serializedVersion: 2
+        x: 11520
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a58491d7ac644e38c54a3be02f5a71
+      internalID: 5925871589009447489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_61
+      rect:
+        serializedVersion: 2
+        x: 11712
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c8e14e96b5d544b496a33dfd9764e74
+      internalID: -2497323561934460700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_62
+      rect:
+        serializedVersion: 2
+        x: 11904
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a23e63a2c49f04ef5bc01d78d2dcdcbf
+      internalID: 8277631993711511356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_63
+      rect:
+        serializedVersion: 2
+        x: 12096
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfa77ee6df63b439f8e1eecbdf60eff9
+      internalID: 9079514344237127909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_64
+      rect:
+        serializedVersion: 2
+        x: 12288
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edd534ce05ec9490c9bbebf2d8bcfc4a
+      internalID: -8989385379124872175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_65
+      rect:
+        serializedVersion: 2
+        x: 12480
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78f155d7f15194902bf57e44c096797c
+      internalID: 5101782655748059650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_66
+      rect:
+        serializedVersion: 2
+        x: 12672
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e1b6ab747bd498dac8369d61056b60
+      internalID: -1121149577634233905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_67
+      rect:
+        serializedVersion: 2
+        x: 12864
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5025bd54e6ce84082a67665a67738d81
+      internalID: 5775671523143209476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_68
+      rect:
+        serializedVersion: 2
+        x: 13056
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0dfe2a1b69144a89a4edfee3cd4af5a
+      internalID: 3965861003507138043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_69
+      rect:
+        serializedVersion: 2
+        x: 13248
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1cb7619b266a4bb49e7ffd4f4e10862
+      internalID: -8889246237133329304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_70
+      rect:
+        serializedVersion: 2
+        x: 13440
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f980e2617cf4cfcba88975b9cd003a
+      internalID: 1734028713275480155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_71
+      rect:
+        serializedVersion: 2
+        x: 13632
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85188766be314570ad4acb4533cefe5
+      internalID: 6247923787380450664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_72
+      rect:
+        serializedVersion: 2
+        x: 13824
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eafd8bf957c34705b2008cf27da9a44
+      internalID: -6635559889909389924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_73
+      rect:
+        serializedVersion: 2
+        x: 14016
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 979bb507a82974cc7a16b32e0991b1d9
+      internalID: -5005310856930990756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trapdoor_lamp_192px_74
+      rect:
+        serializedVersion: 2
+        x: 14208
+        y: 0
+        width: 192
+        height: 128
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 461e72c22f91e494dbb27d3ded5c1135
+      internalID: 3522898920572522873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3ba5932813c824d1386f7ee7fe7f13fb
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      trapdoor_lamp_192px_0: 7353568467567728531
+      trapdoor_lamp_192px_1: -9132278381127322602
+      trapdoor_lamp_192px_10: 5331889405211099059
+      trapdoor_lamp_192px_11: 7987686025644955165
+      trapdoor_lamp_192px_12: 7332736629436162097
+      trapdoor_lamp_192px_13: -7149295251599435285
+      trapdoor_lamp_192px_14: 5397206492676521728
+      trapdoor_lamp_192px_15: -2193707840188778587
+      trapdoor_lamp_192px_16: -4805841991174602222
+      trapdoor_lamp_192px_17: -2418485907371512491
+      trapdoor_lamp_192px_18: 6860701710305509238
+      trapdoor_lamp_192px_19: 7331565685700897603
+      trapdoor_lamp_192px_2: 1484396627205593208
+      trapdoor_lamp_192px_20: 182703702424056084
+      trapdoor_lamp_192px_21: -6055009511137809248
+      trapdoor_lamp_192px_22: 123283682980991258
+      trapdoor_lamp_192px_23: 4397927781124057683
+      trapdoor_lamp_192px_24: -3896327655654761317
+      trapdoor_lamp_192px_25: -7177913639289248101
+      trapdoor_lamp_192px_26: 8332991543506308479
+      trapdoor_lamp_192px_27: 1607711268543965902
+      trapdoor_lamp_192px_28: 5940643087903426157
+      trapdoor_lamp_192px_29: -2646309311453801207
+      trapdoor_lamp_192px_3: 2407516480836666166
+      trapdoor_lamp_192px_30: -5607080274096271696
+      trapdoor_lamp_192px_31: -5524256859460854830
+      trapdoor_lamp_192px_32: -3684720342810700191
+      trapdoor_lamp_192px_33: 5325968453362110176
+      trapdoor_lamp_192px_34: 494814072019624022
+      trapdoor_lamp_192px_35: -8434589756069833817
+      trapdoor_lamp_192px_36: -1116274019872639415
+      trapdoor_lamp_192px_37: 2557138090526192051
+      trapdoor_lamp_192px_38: 4964620949610751157
+      trapdoor_lamp_192px_39: -3190307497312276498
+      trapdoor_lamp_192px_4: -6984943254601804209
+      trapdoor_lamp_192px_40: -7382575075187693240
+      trapdoor_lamp_192px_41: -9119187323131935080
+      trapdoor_lamp_192px_42: 7462285484685562102
+      trapdoor_lamp_192px_43: -1170690481385052882
+      trapdoor_lamp_192px_44: 4536210350737370509
+      trapdoor_lamp_192px_45: 2109575945687334617
+      trapdoor_lamp_192px_46: -2491381612280041242
+      trapdoor_lamp_192px_47: -5472137281301209490
+      trapdoor_lamp_192px_48: -4265185910593952778
+      trapdoor_lamp_192px_49: 2182764927840534512
+      trapdoor_lamp_192px_5: 8360188286688701765
+      trapdoor_lamp_192px_50: -3810103885377627721
+      trapdoor_lamp_192px_51: -2298033692106820086
+      trapdoor_lamp_192px_52: 6352403319992945878
+      trapdoor_lamp_192px_53: 8730092575673457387
+      trapdoor_lamp_192px_54: 6756105908947864292
+      trapdoor_lamp_192px_55: 6677430914115398267
+      trapdoor_lamp_192px_56: 621307066989258521
+      trapdoor_lamp_192px_57: 4581267567858016481
+      trapdoor_lamp_192px_58: 7764748456387894238
+      trapdoor_lamp_192px_59: 6449803660804622357
+      trapdoor_lamp_192px_6: 4508985930494722591
+      trapdoor_lamp_192px_60: 5925871589009447489
+      trapdoor_lamp_192px_61: -2497323561934460700
+      trapdoor_lamp_192px_62: 8277631993711511356
+      trapdoor_lamp_192px_63: 9079514344237127909
+      trapdoor_lamp_192px_64: -8989385379124872175
+      trapdoor_lamp_192px_65: 5101782655748059650
+      trapdoor_lamp_192px_66: -1121149577634233905
+      trapdoor_lamp_192px_67: 5775671523143209476
+      trapdoor_lamp_192px_68: 3965861003507138043
+      trapdoor_lamp_192px_69: -8889246237133329304
+      trapdoor_lamp_192px_7: -8991754886682625799
+      trapdoor_lamp_192px_70: 1734028713275480155
+      trapdoor_lamp_192px_71: 6247923787380450664
+      trapdoor_lamp_192px_72: -6635559889909389924
+      trapdoor_lamp_192px_73: -5005310856930990756
+      trapdoor_lamp_192px_74: 3522898920572522873
+      trapdoor_lamp_192px_8: -6689240370403088113
+      trapdoor_lamp_192px_9: 2284707146860697452
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

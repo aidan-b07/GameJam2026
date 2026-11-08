@@ -65,6 +65,11 @@ public static class LevelMap
     const string GateLiftDir = "Assets/Art/Obstacles/GateLift/";
     static string GateLiftPng(string id) => $"{GateLiftDir}{id}_32px.png";
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
+    // Trap door from tools/make_trapdoor.py: 192x128 frames (6x4 tiles, the
+    // pit is tile columns 1-4), bottom-left pivot; body and untinted lamp overlay.
+    const string TrapDoorDir = "Assets/Art/Obstacles/TrapDoor/";
+    static string TrapDoorPng(string id) => $"{TrapDoorDir}{id}_192px.png";
+    const int TrapDoorFrameWidth = 192;
     // Back wall of the slot the drawbridge lands in, from tools/make_recess.py.
     const string RecessBack = "recess_back";
     const string RecessBackLeft = "recess_back_left";
@@ -98,6 +103,39 @@ public static class LevelMap
     {
         ["bg_mid_360h"] = new[] { Chimney(31f, 237f, 0.32f, 1f), Chimney(253.5f, 222f, 0.4f, 0.8f), Chimney(67.5f, 142f, 0.5f, 0.8f) },
     };
+    // Life on the mid picture (MidLayerLife), in pixels from its top-left:
+    // pigeons' feet on the arcade railing (its top is row 179), the ivy clusters
+    // leaves fall from, the clock tower spire tip for the pennant, and the lit
+    // windows of the night picture (rects found by colour, the clock face left
+    // out) that flicker like candles.
+    class LayerLife { public Vector2[] pigeons; public RectInt[] ivy, windows; public Vector2 pennant; }
+    static readonly Dictionary<string, LayerLife> MidLife = new Dictionary<string, LayerLife>
+    {
+        ["bg_mid_360h"] = new LayerLife
+        {
+            pigeons = new[] { new Vector2(112f, 179f), new Vector2(124f, 179f), new Vector2(340f, 179f), new Vector2(520f, 179f) },
+            ivy = new[] { Box(41, 159, 58, 180), Box(222, 204, 265, 227), Box(260, 206, 299, 226), Box(381, 223, 429, 231), Box(430, 209, 441, 240), Box(591, 215, 615, 229), Box(441, 242, 494, 250), Box(507, 242, 575, 260), Box(10, 254, 54, 278), Box(606, 259, 639, 276), Box(340, 282, 389, 300), Box(153, 285, 174, 300), Box(492, 284, 525, 296), Box(37, 227, 45, 252) },
+            pennant = new Vector2(448f, 112f),
+            windows = new[]
+            {
+                W(443, 147, 4, 6), W(452, 147, 4, 6), W(263, 175, 3, 10), W(267, 175, 4, 10), W(278, 175, 3, 10), W(282, 175, 3, 10),
+                W(3, 183, 4, 11), W(8, 183, 4, 11), W(23, 183, 8, 11), W(627, 183, 8, 11), W(400, 192, 3, 8), W(404, 193, 3, 7),
+                W(400, 202, 3, 7), W(404, 202, 3, 7), W(445, 210, 5, 5), W(451, 210, 4, 5), W(277, 211, 3, 11), W(250, 212, 3, 5),
+                W(281, 212, 3, 10), W(240, 217, 3, 5), W(445, 217, 4, 8), W(451, 217, 5, 8), W(445, 227, 5, 9), W(451, 227, 5, 9),
+                W(14, 231, 4, 6), W(19, 232, 5, 5), W(630, 232, 6, 5), W(14, 239, 4, 13), W(19, 239, 5, 13), W(628, 239, 8, 13),
+                W(80, 244, 4, 6), W(85, 244, 3, 6), W(111, 244, 4, 6), W(116, 244, 4, 6), W(244, 246, 4, 5), W(391, 249, 6, 10),
+                W(413, 249, 7, 10), W(267, 250, 4, 5), W(273, 250, 4, 5), W(295, 250, 5, 5), W(301, 250, 4, 5), W(209, 256, 3, 5),
+                W(267, 257, 4, 9), W(273, 257, 4, 9), W(295, 257, 5, 9), W(301, 257, 4, 9), W(360, 259, 3, 5), W(205, 263, 7, 12),
+                W(331, 265, 7, 10), W(356, 265, 3, 10), W(360, 265, 3, 10), W(77, 267, 4, 5), W(108, 267, 3, 5), W(134, 267, 3, 5),
+                W(138, 267, 4, 5), W(295, 267, 5, 7), W(469, 267, 4, 5), W(474, 267, 3, 5), W(301, 268, 5, 7), W(31, 271, 5, 6),
+                W(77, 274, 4, 9), W(82, 274, 4, 9), W(107, 274, 4, 9), W(112, 274, 4, 9), W(134, 274, 3, 9), W(138, 274, 4, 9),
+                W(448, 274, 3, 9), W(452, 274, 4, 9), W(469, 274, 4, 9), W(474, 274, 3, 9), W(165, 275, 4, 5), W(175, 275, 4, 5),
+                W(397, 279, 4, 5), W(408, 279, 4, 5), W(361, 283, 6, 5),
+            },
+        },
+    };
+    static RectInt W(int x, int y, int w, int h) => new RectInt(x, y, w, h);
+    static RectInt Box(int x0, int y0, int x1, int y1) => new RectInt(x0, y0, x1 - x0 + 1, y1 - y0 + 1);
     static ChimneySmoke.Chimney Chimney(float x, float y, float interval, float size) =>
         new ChimneySmoke.Chimney { mouth = new Vector2(x, y), interval = interval, size = size };
     static TowerClocks.Face Face(float x, float y, float r) => new TowerClocks.Face { centre = new Vector2(x, y), radius = r };
@@ -146,6 +184,8 @@ public static class LevelMap
         PrepareSprite(GateLiftPng("lift_platform"), false, new Vector2(0.5f, 1f));
         PrepareSprite(GateLiftPng("lift_chain"), true, new Vector2(0.5f, 0f));
         PrepareStrip(CheckpointPng("tock"), LampFrameWidth, new Vector2(0.5f, 0f));
+        PrepareStrip(TrapDoorPng("trapdoor"), TrapDoorFrameWidth, Vector2.zero);
+        PrepareStrip(TrapDoorPng("trapdoor_lamp"), TrapDoorFrameWidth, Vector2.zero);
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -295,6 +335,10 @@ public static class LevelMap
         public void AddParallax(Transform cam)
         {
             if (Sky != null && Sky.clouds != null) Sky.clouds.cameraTransform = cam;
+            if (Sky != null && Sky.life != null) Sky.life.cameraTransform = cam;
+            if (Sky != null && Sky.layers != null)
+                foreach (var layer in Sky.layers)
+                    if (layer.life != null) layer.life.cameraTransform = cam;
             foreach (var (t, depth) in backgrounds)
             {
                 var p = t.gameObject.AddComponent<Parallax>();
@@ -672,6 +716,71 @@ public static class LevelMap
             return go;
         }
 
+        // Trap door over the 4-tile pit x0..x0+3 (leave those columns out of the
+        // floor): two short drawbridge leaves hinged on the lips, level and
+        // flush with the ground when closed, dropping flat against the pit
+        // walls and winched back up. TrapDoor plays the sheet on lane time and
+        // turns the leaf colliders to the angle each frame shows.
+        public GameObject TrapDoor(int x0, float offset = 0f)
+        {
+            int y = Surface(x0 - 1);
+            Busy(x0 - 1, x0 + 4);
+
+            counts["TrapDoor"] = counts.TryGetValue("TrapDoor", out var n) ? n + 1 : 1;
+            var go = new GameObject($"TrapDoor_{counts["TrapDoor"]}");
+            go.transform.SetParent(markers, false);
+            // Frame bottom-left: the lip tile's column, 3 tiles under the surface
+            // tile row (frame row 32 is the top of that row, at the surface).
+            go.transform.localPosition = new Vector3(x0 - 1, y - 3f, 0f);
+            var bodyFrames = StripFrames(TrapDoorPng("trapdoor"));
+            var lampFrames = StripFrames(TrapDoorPng("trapdoor_lamp"));
+            var body = go.AddComponent<SpriteRenderer>();
+            body.sprite = bodyFrames.FirstOrDefault();
+            body.sortingOrder = 2;
+            tinted.Add(body);
+            var lamp = new GameObject("Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(go.transform, false);
+            lamp.sprite = lampFrames.FirstOrDefault();
+            lamp.sortingOrder = 3;
+
+            // Leaves: kinematic bodies on the hinge pins (frame px (37, 40) and
+            // (155, 40)), 64 x 10 px boxes reaching 59 px past the pin.
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            Rigidbody2D Leaf(string leafName, float pinX, float dir)
+            {
+                var leaf = new GameObject(leafName);
+                leaf.transform.SetParent(go.transform, false);
+                leaf.transform.localPosition = new Vector3(pinX / 32f, (128f - 40f) / 32f, 0f);
+                if (layer >= 0) leaf.layer = layer;
+                var rb = leaf.AddComponent<Rigidbody2D>();
+                rb.bodyType = RigidbodyType2D.Kinematic;
+                rb.gravityScale = 0f;
+                rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+                var box = leaf.AddComponent<BoxCollider2D>();
+                box.size = new Vector2(2f, 10f / 32f);
+                box.offset = new Vector2(dir * 27f / 32f, 0f);
+                return rb;
+            }
+
+            var door = new SerializedObject(go.AddComponent<TrapDoor>());
+            door.FindProperty("lane").intValue = LaneIndex;
+            door.FindProperty("cycleOffset").floatValue = offset;
+            door.FindProperty("body").objectReferenceValue = body;
+            door.FindProperty("lamp").objectReferenceValue = lamp;
+            void Frames(string prop, Sprite[] frames)
+            {
+                var list = door.FindProperty(prop);
+                list.arraySize = frames.Length;
+                for (int i = 0; i < frames.Length; i++) list.GetArrayElementAtIndex(i).objectReferenceValue = frames[i];
+            }
+            Frames("bodyFrames", bodyFrames);
+            Frames("lampFrames", lampFrames);
+            door.FindProperty("leftLeaf").objectReferenceValue = Leaf("LeafLeft", 37f, 1f);
+            door.FindProperty("rightLeaf").objectReferenceValue = Leaf("LeafRight", 155f, -1f);
+            door.ApplyModifiedPropertiesWithoutUndo();
+            return go;
+        }
+
         // Laser gate between a floor emitter and a ceiling emitter, drawn "on".
         public void LaserGate(int x)
         {
@@ -750,6 +859,7 @@ public static class LevelMap
             Sky.sun = SkyBody(go.transform, "Sun");
             Sky.moon = SkyBody(go.transform, "Moon");
             Sky.clouds = CreateClouds(go.transform);
+            Sky.life = CreateSkyLife(go.transform);
             Sky.hour = startHour;
             Sky.lane = LaneIndex;
         }
@@ -786,7 +896,36 @@ public static class LevelMap
                 smoke.seed = LaneIndex + 1;
                 layer.smoke = smoke;
             }
+            if (MidLife.TryGetValue(file, out var life))
+            {
+                var lifeGo = new GameObject($"Life_{id}");
+                lifeGo.transform.SetParent(layer.day.transform, false);
+                var l = lifeGo.AddComponent<MidLayerLife>();
+                l.background = layer.day;
+                l.lane = LaneIndex;
+                l.seed = LaneIndex + 1;
+                l.groundY = root.transform.position.y;
+                l.pigeons = life.pigeons;
+                l.ivy = life.ivy;
+                l.pennant = life.pennant;
+                l.windows = life.windows;
+                layer.life = l;
+            }
             return layer;
+        }
+
+        // Birds, airship, bats and stars, in the same sky band as the clouds.
+        SkyLife CreateSkyLife(Transform parent)
+        {
+            var go = new GameObject("Life");
+            go.transform.SetParent(parent, false);
+            var life = go.AddComponent<SkyLife>();
+            float top = CameraY + CameraSize + 0.25f;
+            life.bandTop = top - 2f / 32f;
+            life.bandBottom = top - 136f / 32f;
+            life.lane = LaneIndex;
+            life.seed = LaneIndex + 11;
+            return life;
         }
 
         // In the clear sky above the far skyline (the top 136 rows of the far
@@ -1051,10 +1190,12 @@ public static class LevelMap
     internal static void PrepareStrip(string path, int frameWidth, Vector2 pivot)
     {
         if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
-        var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(path);
-        int count = tex.width / frameWidth;
+        // Source size: a strip wider than the max texture size imports scaled down.
+        ti.GetSourceTextureWidthAndHeight(out int width, out int height);
+        int count = width / frameWidth;
+        int maxSize = Mathf.Max(2048, Mathf.NextPowerOfTwo(width));
         if (ti.spriteImportMode == SpriteImportMode.Multiple && ti.spritePixelsPerUnit == 32
-            && StripFrames(path).Length == count) return;
+            && ti.maxTextureSize >= maxSize && StripFrames(path).Length == count) return;
         ti.textureType = TextureImporterType.Sprite;
         ti.spriteImportMode = SpriteImportMode.Multiple;
         ti.spritePixelsPerUnit = 32;
@@ -1063,6 +1204,7 @@ public static class LevelMap
         ti.alphaIsTransparency = true;
         ti.wrapMode = TextureWrapMode.Clamp;
         ti.textureCompression = TextureImporterCompression.Uncompressed;
+        ti.maxTextureSize = Mathf.Max(ti.maxTextureSize, maxSize);
         ti.SaveAndReimport();
 
         var factory = new SpriteDataProviderFactories();
@@ -1073,7 +1215,7 @@ public static class LevelMap
         var rects = Enumerable.Range(0, count).Select(i => new SpriteRect
         {
             name = $"{sheet}_{i}",
-            rect = new Rect(i * frameWidth, 0, frameWidth, tex.height),
+            rect = new Rect(i * frameWidth, 0, frameWidth, height),
             alignment = SpriteAlignment.Custom,
             pivot = pivot,
             spriteID = GUID.Generate(),
