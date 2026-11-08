@@ -34,6 +34,7 @@ public static class ObstacleLabBuilder
         var scenes = EditorBuildSettings.scenes.ToList();
         foreach (var s in scenes) if (s.path == ScenePath) s.enabled = false;
         EditorBuildSettings.scenes = scenes.Where(s => s.enabled).Concat(scenes.Where(s => !s.enabled)).ToArray();
+        AssetDatabase.SaveAssets();   // else the disabled flag stays unsaved until the next save
     }
 
     static void Lab(Lane l)

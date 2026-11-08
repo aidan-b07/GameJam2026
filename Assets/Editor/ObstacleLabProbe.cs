@@ -38,6 +38,8 @@ public static class ObstacleLabProbe
         var leash = Object.FindAnyObjectByType<ScreenLeash>();
         if (leash != null) leash.enabled = false;
         Partner.enabled = false;
+        // A run in the other lane left this player disabled as its partner.
+        GameFlow.Instance.players[lane].GetComponent<PlayerMovement>().enabled = true;
     }
 
     public static Rigidbody2D Body(int lane) => GameFlow.Instance.players[lane].GetComponent<Rigidbody2D>();
