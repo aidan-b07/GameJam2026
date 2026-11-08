@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditor.U2D.Sprites;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
@@ -226,6 +227,7 @@ public static class LevelMap
         t.Sky.Apply();
         b.Sky.Apply();
         CreateDivider(t.Sky.skyAnchor, b.Sky.skyAnchor);
+        CreateHud(t.Sky.skyAnchor, b.Sky.skyAnchor);
         var players = new[] { t.PlacePlayer(TickPrefab), b.PlacePlayer(TockPrefab) };
         var rig = CreateCameraRig(length, new[] { t.Sky.skyAnchor, b.Sky.skyAnchor }, players);
         CreateGameFlow(players, rig);
@@ -1278,6 +1280,127 @@ public static class LevelMap
         divider.topRift = DividerLayer(go.transform, "TopRift", 1f);
         divider.topCamera = tickCamera;
         divider.bottomCamera = tockCamera;
+    }
+
+    const string HudDir = "Assets/Art/UI/Hud/";
+
+    // Lane HUD (LaneHud): a gauge in the top-left corner of each lane over the
+    // rifts (sorting 11), and per lane a speed-streak layer and a rift shade
+    // under them (nested canvas, sorting 9). Each lane camera gets post
+    // processing and a local Volume around it for LaneHud's colour grade.
+    static void CreateHud(Transform tickCamera, Transform tockCamera)
+    {
+        var go = new GameObject("LaneHud", typeof(Canvas), typeof(CanvasScaler), typeof(CanvasGroup));
+        go.layer = LayerMask.NameToLayer("UI");
+        var canvas = go.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 11;
+        canvas.pixelPerfect = true;
+        var scaler = go.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1280f, 720f);
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        scaler.matchWidthOrHeight = 1f;
+        var group = go.GetComponent<CanvasGroup>();
+        group.interactable = false;
+        group.blocksRaycasts = false;
+
+        var fx = HudRect(go.transform, "Fx", Vector2.zero, Vector2.one, Vector2.zero, Vector2.zero, Vector2.zero);
+        var fxCanvas = fx.gameObject.AddComponent<Canvas>();
+        fxCanvas.overrideSorting = true;
+        fxCanvas.sortingOrder = 9;
+
+        var hud = go.AddComponent<LaneHud>();
+        hud.gauges = group;
+        string[] names = { "Tick", "Tock" };
+        var cameras = new[] { tickCamera, tockCamera };
+        for (int lane = 0; lane < 2; lane++)
+        {
+            float y0 = lane == 0 ? 0.5f : 0f, y1 = y0 + 0.5f;
+            var laneFx = HudRect(fx, names[lane] + "_Fx", new Vector2(0f, y0), new Vector2(1f, y1),
+                new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            laneFx.gameObject.AddComponent<RectMask2D>();
+            var streaks = HudImage(laneFx, "Streaks", "hud_streaks", true,
+                Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            streaks.enabled = false;
+            var vignette = HudImage(laneFx, "RiftShade", "hud_vignette", false,
+                new Vector2(0f, 1f), new Vector2(1f, 1f), new Vector2(0.5f, 1f), Vector2.zero, new Vector2(0f, 96f));
+            vignette.enabled = false;
+
+            var gauge = HudRect(go.transform, names[lane] + "_Gauge", new Vector2(0f, y1), new Vector2(0f, y1),
+                new Vector2(0f, 1f), new Vector2(8f, -12f), new Vector2(136f, 56f));
+            HudImage(gauge, "Plate", "hud_gauge_" + names[lane].ToLower(), false,
+                Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            var warn = HudImage(gauge, "Warn", "hud_warn", false,
+                Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            warn.enabled = false;
+            var dial = HudImage(gauge, "Dial", null, false,
+                Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+
+            var cam = cameras[lane].GetComponent<Camera>();
+            var data = cam.GetUniversalAdditionalCameraData();
+            data.renderPostProcessing = true;
+            data.volumeTrigger = cam.transform;
+            var gradeGo = new GameObject("LaneGrade");
+            gradeGo.transform.SetParent(cam.transform, false);
+            var box = gradeGo.AddComponent<BoxCollider>();
+            box.isTrigger = true;
+            box.size = new Vector3(4f, 4f, 40f);
+            var volume = gradeGo.AddComponent<UnityEngine.Rendering.Volume>();
+            volume.isGlobal = false;
+            volume.blendDistance = 0f;
+
+            hud.lanes[lane] = new LaneHud.LaneView
+            {
+                gauge = gauge, warn = warn, dial = dial, vignette = vignette, streaks = streaks, grade = volume,
+            };
+        }
+    }
+
+    static RectTransform HudRect(Transform parent, string id, Vector2 anchorMin, Vector2 anchorMax,
+        Vector2 pivot, Vector2 position, Vector2 size)
+    {
+        var go = new GameObject(id, typeof(RectTransform));
+        go.transform.SetParent(parent, false);
+        go.layer = parent.gameObject.layer;
+        var rt = (RectTransform)go.transform;
+        rt.anchorMin = anchorMin;
+        rt.anchorMax = anchorMax;
+        rt.pivot = pivot;
+        rt.anchoredPosition = position;
+        rt.sizeDelta = size;
+        return rt;
+    }
+
+    static RawImage HudImage(Transform parent, string id, string png, bool repeat, Vector2 anchorMin,
+        Vector2 anchorMax, Vector2 pivot, Vector2 position, Vector2 size)
+    {
+        var rt = HudRect(parent, id, anchorMin, anchorMax, pivot, position, size);
+        var image = rt.gameObject.AddComponent<RawImage>();
+        image.raycastTarget = false;
+        if (png != null) image.texture = PrepareHudTexture(HudDir + png + ".png", repeat);
+        return image;
+    }
+
+    // Point filtered, uncompressed, no mipmaps, kept at its pixel size.
+    static Texture2D PrepareHudTexture(string path, bool repeat)
+    {
+        var ti = (TextureImporter)AssetImporter.GetAtPath(path);
+        var wrap = repeat ? TextureWrapMode.Repeat : TextureWrapMode.Clamp;
+        if (ti.textureType != TextureImporterType.Default || ti.filterMode != FilterMode.Point
+            || ti.mipmapEnabled || ti.npotScale != TextureImporterNPOTScale.None || ti.wrapMode != wrap
+            || ti.textureCompression != TextureImporterCompression.Uncompressed || !ti.alphaIsTransparency)
+        {
+            ti.textureType = TextureImporterType.Default;
+            ti.filterMode = FilterMode.Point;
+            ti.mipmapEnabled = false;
+            ti.npotScale = TextureImporterNPOTScale.None;
+            ti.wrapMode = wrap;
+            ti.textureCompression = TextureImporterCompression.Uncompressed;
+            ti.alphaIsTransparency = true;
+            ti.SaveAndReimport();
+        }
+        return AssetDatabase.LoadAssetAtPath<Texture2D>(path);
     }
 
     // The rift textures are drawn at runtime by LaneDivider, which also sizes
