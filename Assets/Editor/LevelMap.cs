@@ -1109,8 +1109,10 @@ public static class LevelMap
         LaneSky.Layer SectionLayer(Transform parent, int order)
         {
             float bottom = CameraY + CameraSize + 0.25f - MidSections.Height / MidSections.PixelsPerUnit;
-            var (rowRoot, sections, life) = MidSectionsBuilder.Build(parent, LaneIndex, bottom,
+            var row = MidSectionsBuilder.Build(parent, LaneIndex, bottom,
                 -24f, 0.4f * Length + 40f, 7 + LaneIndex * 12, root.transform.position.y, order);
+            if (row == null) return SkyLayer(parent, "Mid", "bg_mid_360h", order, MidDepth);
+            var (rowRoot, sections, life) = row.Value;
             backgrounds.Add((rowRoot, MidDepth));
             return new LaneSky.Layer { sortingOrder = order, sections = sections, life = life };
         }

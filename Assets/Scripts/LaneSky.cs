@@ -64,7 +64,28 @@ public class LaneSky : MonoBehaviour
         set { hour = Mathf.Repeat(value, 24f); Apply(); }
     }
 
-    void OnValidate() => Apply();
+    // Apply writes to renderers, which logs "SendMessage cannot be called
+    // during ... OnValidate" when done inside OnValidate: in edit mode it runs
+    // on the next editor tick instead.
+    void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorApplication.delayCall -= DeferredApply;
+            UnityEditor.EditorApplication.delayCall += DeferredApply;
+            return;
+        }
+#endif
+        Apply();
+    }
+
+#if UNITY_EDITOR
+    void DeferredApply()
+    {
+        if (this != null) Apply();
+    }
+#endif
     void LateUpdate()
     {
         if (Application.isPlaying && lane >= 0 && GameManager.INSTANCE != null)

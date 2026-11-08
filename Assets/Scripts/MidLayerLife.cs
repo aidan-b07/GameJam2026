@@ -65,6 +65,30 @@ public class MidLayerLife : MonoBehaviour
 
     float R(float a, float b) => a + (float)rng.NextDouble() * (b - a);
 
+    // The runtime sprites (PixelArt.Make) and their textures are not saved
+    // or collected with the scene: free them with the component.
+    void OnDestroy()
+    {
+        var all = new List<Sprite>();
+        foreach (var set in new[] { sit, fly, pennantFrames, leafSprites })
+            if (set != null) all.AddRange(set);
+        all.Add(candleSprite);
+        all.Add(fireflySprite);
+        foreach (var s in all)
+        {
+            if (s == null) continue;
+            var tex = s.texture;
+            Free(s);
+            if (tex != null) Free(tex);
+        }
+    }
+
+    static void Free(Object o)
+    {
+        if (Application.isPlaying) Destroy(o);
+        else DestroyImmediate(o);
+    }
+
     public void Show(LaneSky.Look from, LaneSky.Look to, float blend) => (day, night) = PixelArt.DayNight(from, to, blend);
 
     // Picture pixel (from the top-left) to this layer's local units, on the

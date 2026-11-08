@@ -78,7 +78,31 @@ public class ChimneySmoke : MonoBehaviour
 
     static Color Rgb(int r, int g, int b) => new Color32((byte)r, (byte)g, (byte)b, 255);
 
-    void OnEnable() => Init();
+    void OnEnable() => RequestInit();
+
+    // OnEnable can run while Unity is loading the scene or validating, when
+    // setting a renderer's sprite logs "SendMessage cannot be called during
+    // Awake, CheckConsistency, or OnValidate". In edit mode the texture is
+    // made on the next editor tick instead; in play mode at once.
+    void RequestInit()
+    {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorApplication.delayCall -= DeferredInit;
+            UnityEditor.EditorApplication.delayCall += DeferredInit;
+            return;
+        }
+#endif
+        Init();
+    }
+
+#if UNITY_EDITOR
+    void DeferredInit()
+    {
+        if (this != null && isActiveAndEnabled) Init();
+    }
+#endif
 
     void Init()
     {
@@ -138,7 +162,7 @@ public class ChimneySmoke : MonoBehaviour
 
     public void Show(LaneSky.Look from, LaneSky.Look to, float t)
     {
-        if (isActiveAndEnabled && tex == null) Init();
+        if (isActiveAndEnabled && tex == null) RequestInit();
         var a = Pick(from);
         var b = Pick(to);
         var p = new Palette(Color.Lerp(a.soot, b.soot, t), Color.Lerp(a.hi, b.hi, t), Color.Lerp(a.body, b.body, t), Color.Lerp(a.sh, b.sh, t));
