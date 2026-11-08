@@ -77,8 +77,9 @@ public static class MainLevelBuilder
     // swing +-36 degrees in 3 lane s, so the bob reaches within 0.7 tiles of
     // the belt's ends but passes over head height there (the last tile is
     // never touched); it is fast and low (0.7 above the belt) in the middle.
-    // In the outer 40% of the swing a hit is only a nudge (2.5 units/s, under
-    // a tile) at any lane speed, so the belt ends never throw anyone off.
+    // On the outer 2 tiles of each belt (more than 2.5 from under the axis) a
+    // hit is only a nudge (2.5 units/s, under a tile) at any lane speed, so
+    // the belt ends never throw anyone off; the middle 5 tiles throw.
     // Bob speed at the bottom 3 units/s at 0.35x (a nudge), 8.6 at 1x, 26 at
     // 3x (thrown off). dirs: each belt's direction; phases: each pendulum's
     // starting point as a share of its swing.

@@ -7,8 +7,9 @@ using UnityEngine;
 // the player is thrown at knockScale times its velocity (capped at maxKnock)
 // plus a lift, and loses control for knockTime (PlayerMovement.Knock). In the
 // middle of its swing it is fast and throws them off the belt into a drop; at
-// the outer part of its swing (nudgeFrom) a hit is only a nudge, at any lane
-// speed, so a player near the belt's end is never thrown off it; at the very
+// the belt's outer tiles (nudgeBeyond from under the axis) a hit is only a
+// nudge, at any lane speed, so a player near the belt's end is never thrown
+// off it; at the very
 // ends it lifts over head height, so the last tile or so of the belt is never
 // touched. Moving away from a player it only blocks. Art from tools/make_pendulum.py (pendulum_clockbob_96px: frames by
 // speed, mirrored when it swings left); LevelMap.Lane.ClockPendulum builds it.
@@ -36,8 +37,8 @@ public class ClockPendulum : LaneObstacle
     public float knockTime = 0.35f;
     [Tooltip("A bob moving into a player slower than this (units/s) only pushes.")]
     public float minKnockSpeed = 1f;
-    [Tooltip("Outer part of the swing, as a share of the amplitude, where a hit is only a nudge whatever the lane speed.")]
-    [Range(0f, 1f)] public float nudgeFrom = 0.6f;
+    [Tooltip("A player whose body centre is further than this (units) from under the axis is only nudged, whatever the lane speed: the belt's ends.")]
+    public float nudgeBeyond = 2.5f;
     [Tooltip("Horizontal speed (units/s) of a nudge; with knockTime it moves a player under a tile, so it never throws them off the belt.")]
     public float nudgeSpeed = 2.5f;
     [Tooltip("Upward speed of a nudge (units/s).")]
@@ -92,7 +93,7 @@ public class ClockPendulum : LaneObstacle
             if (into > minKnockSpeed && !p.Knocked)
             {
                 float speed = velocity.magnitude;
-                bool nudge = Mathf.Abs(a) >= nudgeFrom * amplitude;
+                bool nudge = Mathf.Abs(box.center.x - transform.position.x) > nudgeBeyond;
                 var knock = nudge
                     ? new Vector2(Mathf.Clamp(velocity.x * knockScale, -nudgeSpeed, nudgeSpeed), nudgeLift)
                     : new Vector2(Mathf.Clamp(velocity.x * knockScale, -maxKnock, maxKnock),
