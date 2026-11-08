@@ -50,6 +50,8 @@ public class DawnEnding : MonoBehaviour
         public Rigidbody2D rb;
         public PlayerMovement movement;
         public float speed;
+        // Set once the actor reaches its mark; from then on it stands still.
+        public bool arrived;
     }
 
     Actor[] actors;
@@ -115,10 +117,14 @@ public class DawnEnding : MonoBehaviour
         if (!Running || actors == null) return;
         for (int lane = 0; lane < actors.Length; lane++)
         {
-            var a = actors[lane];
+            ref var a = ref actors[lane];
             if (a.rb == null) continue;
             float mark = doors[lane].markX, dx = mark - a.rb.position.x;
-            float vx = Mathf.Abs(dx) < 0.03f ? 0f : Mathf.Sign(dx) * Mathf.Min(a.speed, Mathf.Abs(dx) / Time.fixedDeltaTime);
+            // Latch the arrival: the body settles a little after it stops, and
+            // walking again whenever it drifts past the tolerance flickered the
+            // sprite between run and idle.
+            if (Mathf.Abs(dx) < 0.05f) a.arrived = true;
+            float vx = a.arrived ? 0f : Mathf.Sign(dx) * Mathf.Min(a.speed, Mathf.Abs(dx) / Time.fixedDeltaTime);
             a.rb.linearVelocity = new Vector2(vx, a.rb.linearVelocity.y);
             // Face the way they walk, then the door (right).
             var s = a.t.localScale;

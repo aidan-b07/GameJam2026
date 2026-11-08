@@ -1,0 +1,1782 @@
+fileFormatVersion: 2
+guid: 60066b067a49142f1ae29831b82a5fed
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3827044047578659688
+    second: landmark_orrery_glow_32px_0
+  - first:
+      213: -3498808425778273136
+    second: landmark_orrery_glow_32px_1
+  - first:
+      213: -5777797929717088426
+    second: landmark_orrery_glow_32px_2
+  - first:
+      213: -7987150332001435441
+    second: landmark_orrery_glow_32px_3
+  - first:
+      213: -823037207803771518
+    second: landmark_orrery_glow_32px_4
+  - first:
+      213: -4515518301291942832
+    second: landmark_orrery_glow_32px_5
+  - first:
+      213: 1875508014989596318
+    second: landmark_orrery_glow_32px_6
+  - first:
+      213: -300080255993555548
+    second: landmark_orrery_glow_32px_7
+  - first:
+      213: 2960569747113474318
+    second: landmark_orrery_glow_32px_8
+  - first:
+      213: -8088160791092170950
+    second: landmark_orrery_glow_32px_9
+  - first:
+      213: -664491926675536762
+    second: landmark_orrery_glow_32px_10
+  - first:
+      213: 4560461081248931254
+    second: landmark_orrery_glow_32px_11
+  - first:
+      213: 780110452060073064
+    second: landmark_orrery_glow_32px_12
+  - first:
+      213: -6586314151391649549
+    second: landmark_orrery_glow_32px_13
+  - first:
+      213: 2718402481562735149
+    second: landmark_orrery_glow_32px_14
+  - first:
+      213: -1717615697081033349
+    second: landmark_orrery_glow_32px_15
+  - first:
+      213: -5035828275198134001
+    second: landmark_orrery_glow_32px_16
+  - first:
+      213: -4676756867614248833
+    second: landmark_orrery_glow_32px_17
+  - first:
+      213: -3221531033273754477
+    second: landmark_orrery_glow_32px_18
+  - first:
+      213: -265441158597895537
+    second: landmark_orrery_glow_32px_19
+  - first:
+      213: -865483247778456737
+    second: landmark_orrery_glow_32px_20
+  - first:
+      213: 6804878865759836396
+    second: landmark_orrery_glow_32px_21
+  - first:
+      213: -2441801688305449596
+    second: landmark_orrery_glow_32px_22
+  - first:
+      213: -7267885043047177056
+    second: landmark_orrery_glow_32px_23
+  - first:
+      213: 2387730425636708798
+    second: landmark_orrery_glow_32px_24
+  - first:
+      213: 3247158252708092360
+    second: landmark_orrery_glow_32px_25
+  - first:
+      213: 8751679453893930440
+    second: landmark_orrery_glow_32px_26
+  - first:
+      213: 8328824974738582550
+    second: landmark_orrery_glow_32px_27
+  - first:
+      213: 2157077080615450757
+    second: landmark_orrery_glow_32px_28
+  - first:
+      213: 6075355016273357576
+    second: landmark_orrery_glow_32px_29
+  - first:
+      213: 7144527205163600332
+    second: landmark_orrery_glow_32px_30
+  - first:
+      213: 2477714028296861719
+    second: landmark_orrery_glow_32px_31
+  - first:
+      213: 5751739973798227385
+    second: landmark_orrery_glow_32px_32
+  - first:
+      213: 4445035591058129360
+    second: landmark_orrery_glow_32px_33
+  - first:
+      213: -8631943150003155463
+    second: landmark_orrery_glow_32px_34
+  - first:
+      213: 4453094675966582427
+    second: landmark_orrery_glow_32px_35
+  - first:
+      213: -4955587780603262194
+    second: landmark_orrery_glow_32px_36
+  - first:
+      213: -8661251059573898388
+    second: landmark_orrery_glow_32px_37
+  - first:
+      213: -529762033702463084
+    second: landmark_orrery_glow_32px_38
+  - first:
+      213: -7919204407745979134
+    second: landmark_orrery_glow_32px_39
+  - first:
+      213: -8531347186650198107
+    second: landmark_orrery_glow_32px_40
+  - first:
+      213: -4196784492570658001
+    second: landmark_orrery_glow_32px_41
+  - first:
+      213: 7936958017175986987
+    second: landmark_orrery_glow_32px_42
+  - first:
+      213: 7215844390576248202
+    second: landmark_orrery_glow_32px_43
+  - first:
+      213: 1441906733460012641
+    second: landmark_orrery_glow_32px_44
+  - first:
+      213: -271387033265589995
+    second: landmark_orrery_glow_32px_45
+  - first:
+      213: 5535232611355581197
+    second: landmark_orrery_glow_32px_46
+  - first:
+      213: -1459978528417929515
+    second: landmark_orrery_glow_32px_47
+  - first:
+      213: 4855408231385634202
+    second: landmark_orrery_glow_32px_48
+  - first:
+      213: -3500566420438093694
+    second: landmark_orrery_glow_32px_49
+  - first:
+      213: -3538791222693523561
+    second: landmark_orrery_glow_32px_50
+  - first:
+      213: -2170498424007812389
+    second: landmark_orrery_glow_32px_51
+  - first:
+      213: 258791450261024990
+    second: landmark_orrery_glow_32px_52
+  - first:
+      213: -2566032627278429580
+    second: landmark_orrery_glow_32px_53
+  - first:
+      213: 7095451238295227343
+    second: landmark_orrery_glow_32px_54
+  - first:
+      213: -3135929468892818654
+    second: landmark_orrery_glow_32px_55
+  - first:
+      213: -6474632281914651417
+    second: landmark_orrery_glow_32px_56
+  - first:
+      213: -5568697374586719451
+    second: landmark_orrery_glow_32px_57
+  - first:
+      213: 3247903279923180383
+    second: landmark_orrery_glow_32px_58
+  - first:
+      213: 5697481126585772798
+    second: landmark_orrery_glow_32px_59
+  - first:
+      213: -7653631079020889666
+    second: landmark_orrery_glow_32px_60
+  - first:
+      213: -7102126324294991449
+    second: landmark_orrery_glow_32px_61
+  - first:
+      213: -5069131681322290047
+    second: landmark_orrery_glow_32px_62
+  - first:
+      213: -6217370438842193931
+    second: landmark_orrery_glow_32px_63
+  - first:
+      213: 4116870174826224888
+    second: landmark_orrery_glow_32px_64
+  - first:
+      213: -7305392658649958299
+    second: landmark_orrery_glow_32px_65
+  - first:
+      213: 2522476004495392094
+    second: landmark_orrery_glow_32px_66
+  - first:
+      213: 2571140123062724949
+    second: landmark_orrery_glow_32px_67
+  - first:
+      213: 580828071622682813
+    second: landmark_orrery_glow_32px_68
+  - first:
+      213: -5941211306327985447
+    second: landmark_orrery_glow_32px_69
+  - first:
+      213: -6807937568635687128
+    second: landmark_orrery_glow_32px_70
+  - first:
+      213: -1110765376772610318
+    second: landmark_orrery_glow_32px_71
+  - first:
+      213: -7098038532612846899
+    second: landmark_orrery_glow_32px_72
+  - first:
+      213: -6165447211173597363
+    second: landmark_orrery_glow_32px_73
+  - first:
+      213: 3876273791244808120
+    second: landmark_orrery_glow_32px_74
+  - first:
+      213: 4828127782010045400
+    second: landmark_orrery_glow_32px_75
+  - first:
+      213: -5543993421655718932
+    second: landmark_orrery_glow_32px_76
+  - first:
+      213: 3892090249930106221
+    second: landmark_orrery_glow_32px_77
+  - first:
+      213: 702411525084186021
+    second: landmark_orrery_glow_32px_78
+  - first:
+      213: 2161567822996515916
+    second: landmark_orrery_glow_32px_79
+  - first:
+      213: 4114913282523633963
+    second: landmark_orrery_glow_32px_80
+  - first:
+      213: 727949264378471495
+    second: landmark_orrery_glow_32px_81
+  - first:
+      213: -6391954172455960176
+    second: landmark_orrery_glow_32px_82
+  - first:
+      213: -5113293300830077401
+    second: landmark_orrery_glow_32px_83
+  - first:
+      213: 3122899083418373665
+    second: landmark_orrery_glow_32px_84
+  - first:
+      213: -2119862251953821177
+    second: landmark_orrery_glow_32px_85
+  - first:
+      213: 9083467796783736492
+    second: landmark_orrery_glow_32px_86
+  - first:
+      213: -144547793000866044
+    second: landmark_orrery_glow_32px_87
+  - first:
+      213: -1315917730372084977
+    second: landmark_orrery_glow_32px_88
+  - first:
+      213: -7745967110663044726
+    second: landmark_orrery_glow_32px_89
+  - first:
+      213: -7852539550690590312
+    second: landmark_orrery_glow_32px_90
+  - first:
+      213: 917805187862287915
+    second: landmark_orrery_glow_32px_91
+  - first:
+      213: -3788177904292510458
+    second: landmark_orrery_glow_32px_92
+  - first:
+      213: -5628292629260966520
+    second: landmark_orrery_glow_32px_93
+  - first:
+      213: -5644151439558896369
+    second: landmark_orrery_glow_32px_94
+  - first:
+      213: 7464214366444201070
+    second: landmark_orrery_glow_32px_95
+  - first:
+      213: 3275681829162151129
+    second: landmark_orrery_glow_32px_96
+  - first:
+      213: -5757507999900618631
+    second: landmark_orrery_glow_32px_97
+  - first:
+      213: -500920638820574160
+    second: landmark_orrery_glow_32px_98
+  - first:
+      213: 8686916982908717910
+    second: landmark_orrery_glow_32px_99
+  - first:
+      213: 8685348522109668380
+    second: landmark_orrery_glow_32px_100
+  - first:
+      213: -6909977285866282322
+    second: landmark_orrery_glow_32px_101
+  - first:
+      213: 8275113273730542901
+    second: landmark_orrery_glow_32px_102
+  - first:
+      213: -3517679065443624143
+    second: landmark_orrery_glow_32px_103
+  - first:
+      213: 819082085567261267
+    second: landmark_orrery_glow_32px_104
+  - first:
+      213: -5550215947824190060
+    second: landmark_orrery_glow_32px_105
+  - first:
+      213: 7295026655036524660
+    second: landmark_orrery_glow_32px_106
+  - first:
+      213: -8951319928484140721
+    second: landmark_orrery_glow_32px_107
+  - first:
+      213: 4833885066013452612
+    second: landmark_orrery_glow_32px_108
+  - first:
+      213: 3392691206194560297
+    second: landmark_orrery_glow_32px_109
+  - first:
+      213: 1191852753682874885
+    second: landmark_orrery_glow_32px_110
+  - first:
+      213: 2450481985350275926
+    second: landmark_orrery_glow_32px_111
+  - first:
+      213: 175156768058341156
+    second: landmark_orrery_glow_32px_112
+  - first:
+      213: 7048290569568223165
+    second: landmark_orrery_glow_32px_113
+  - first:
+      213: -3073320924116895926
+    second: landmark_orrery_glow_32px_114
+  - first:
+      213: 1300751084615098189
+    second: landmark_orrery_glow_32px_115
+  - first:
+      213: -6006046515604897340
+    second: landmark_orrery_glow_32px_116
+  - first:
+      213: 2398874932615077869
+    second: landmark_orrery_glow_32px_117
+  - first:
+      213: 7698731061841989664
+    second: landmark_orrery_glow_32px_118
+  - first:
+      213: -4613243945372317740
+    second: landmark_orrery_glow_32px_119
+  - first:
+      213: -6977406805223711897
+    second: landmark_orrery_glow_32px_120
+  - first:
+      213: 5044460428225317831
+    second: landmark_orrery_glow_32px_121
+  - first:
+      213: -950184629550232190
+    second: landmark_orrery_glow_32px_122
+  - first:
+      213: 9100513929452534465
+    second: landmark_orrery_glow_32px_123
+  - first:
+      213: 2073921924763113910
+    second: landmark_orrery_glow_32px_124
+  - first:
+      213: -3689543539188969808
+    second: landmark_orrery_glow_32px_125
+  - first:
+      213: 8998626054088197266
+    second: landmark_orrery_glow_32px_126
+  - first:
+      213: 8314989568555453469
+    second: landmark_orrery_glow_32px_127
+  - first:
+      213: -1453511202887916507
+    second: landmark_orrery_glow_32px_128
+  - first:
+      213: 572518515577674254
+    second: landmark_orrery_glow_32px_129
+  - first:
+      213: 5498006426905339764
+    second: landmark_orrery_glow_32px_130
+  - first:
+      213: 8897286644307809692
+    second: landmark_orrery_glow_32px_131
+  - first:
+      213: 3670685801201986514
+    second: landmark_orrery_glow_32px_132
+  - first:
+      213: -8978716717313549270
+    second: landmark_orrery_glow_32px_133
+  - first:
+      213: -6489262162063153848
+    second: landmark_orrery_glow_32px_134
+  - first:
+      213: -3092881350929185671
+    second: landmark_orrery_glow_32px_135
+  - first:
+      213: 1980409543129439030
+    second: landmark_orrery_glow_32px_136
+  - first:
+      213: 9047462955138581157
+    second: landmark_orrery_glow_32px_137
+  - first:
+      213: 606423532632838906
+    second: landmark_orrery_glow_32px_138
+  - first:
+      213: -3575507356002277371
+    second: landmark_orrery_glow_32px_139
+  - first:
+      213: -8063873109607674342
+    second: landmark_orrery_glow_32px_140
+  - first:
+      213: -1243589507685834828
+    second: landmark_orrery_glow_32px_141
+  - first:
+      213: 1376565316725774040
+    second: landmark_orrery_glow_32px_142
+  - first:
+      213: 3880393202217107163
+    second: landmark_orrery_glow_32px_143
+  - first:
+      213: -5377317117581419962
+    second: landmark_orrery_glow_32px_144
+  - first:
+      213: 2353713858849999727
+    second: landmark_orrery_glow_32px_145
+  - first:
+      213: -3251562910212922766
+    second: landmark_orrery_glow_32px_146
+  - first:
+      213: 1581890504727453219
+    second: landmark_orrery_glow_32px_147
+  - first:
+      213: -2432115338739136731
+    second: landmark_orrery_glow_32px_148
+  - first:
+      213: -4342286358591732735
+    second: landmark_orrery_glow_32px_149
+  - first:
+      213: -543092512179609967
+    second: landmark_orrery_glow_32px_150
+  - first:
+      213: -6441424688788640731
+    second: landmark_orrery_glow_32px_151
+  - first:
+      213: 1195474092587252622
+    second: landmark_orrery_glow_32px_152
+  - first:
+      213: -4918954330634999400
+    second: landmark_orrery_glow_32px_153
+  - first:
+      213: -3092785617090853777
+    second: landmark_orrery_glow_32px_154
+  - first:
+      213: -6528230535375659285
+    second: landmark_orrery_glow_32px_155
+  - first:
+      213: -7825548797692946326
+    second: landmark_orrery_glow_32px_156
+  - first:
+      213: 8772582035417742335
+    second: landmark_orrery_glow_32px_157
+  - first:
+      213: 1749090646171370039
+    second: landmark_orrery_glow_32px_158
+  - first:
+      213: 1983120211429410805
+    second: landmark_orrery_glow_32px_159
+  - first:
+      213: 569321973507566183
+    second: landmark_orrery_glow_32px_160
+  - first:
+      213: -802218798815263954
+    second: landmark_orrery_glow_32px_161
+  - first:
+      213: 2524052357627278127
+    second: landmark_orrery_glow_32px_162
+  - first:
+      213: 130915819901922075
+    second: landmark_orrery_glow_32px_163
+  - first:
+      213: -3876978397504835682
+    second: landmark_orrery_glow_32px_164
+  - first:
+      213: -6093184630468308598
+    second: landmark_orrery_glow_32px_165
+  - first:
+      213: -5420376834952151759
+    second: landmark_orrery_glow_32px_166
+  - first:
+      213: -3458243125179254279
+    second: landmark_orrery_glow_32px_167
+  - first:
+      213: -9091591033491572109
+    second: landmark_orrery_glow_32px_168
+  - first:
+      213: 6566555368831426644
+    second: landmark_orrery_glow_32px_169
+  - first:
+      213: 6304510060899597147
+    second: landmark_orrery_glow_32px_170
+  - first:
+      213: 1663486323072813163
+    second: landmark_orrery_glow_32px_171
+  - first:
+      213: -1006715594347057602
+    second: landmark_orrery_glow_32px_172
+  - first:
+      213: 475370543493898484
+    second: landmark_orrery_glow_32px_173
+  - first:
+      213: -4468513842094122492
+    second: landmark_orrery_glow_32px_174
+  - first:
+      213: -8680397260307320899
+    second: landmark_orrery_glow_32px_175
+  - first:
+      213: 5018412753689311923
+    second: landmark_orrery_glow_32px_176
+  - first:
+      213: 2103520079824484304
+    second: landmark_orrery_glow_32px_177
+  - first:
+      213: 1068960817178704558
+    second: landmark_orrery_glow_32px_178
+  - first:
+      213: -2432983235062677120
+    second: landmark_orrery_glow_32px_179
+  - first:
+      213: 260919476328868445
+    second: landmark_orrery_glow_32px_180
+  - first:
+      213: 3727225587953595944
+    second: landmark_orrery_glow_32px_181
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9782a28ed2ba84b81883c56ae0e521b4
+      internalID: 3827044047578659688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 375498140848d463aaf198d41e95ad57
+      internalID: -3498808425778273136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_2
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d498afb071cc74efeab47573fbdf50e0
+      internalID: -5777797929717088426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_3
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8496bef8e73424d9d839d8473d2509d7
+      internalID: -7987150332001435441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b0ce2b39591942b4998b19b3a85822e
+      internalID: -823037207803771518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_5
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d613de62d0d53401fae6794fe1712dea
+      internalID: -4515518301291942832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_6
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a10f9d6ad16644ac28e536d8b41660cf
+      internalID: 1875508014989596318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_7
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13b39777f19b144eda2adfe940638051
+      internalID: -300080255993555548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_8
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 285e3a70c7c614722b8a74379182472c
+      internalID: 2960569747113474318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_9
+      rect:
+        serializedVersion: 2
+        x: 1728
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28e4b87e2563045d8a55f06c395ee108
+      internalID: -8088160791092170950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_10
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 738342663578149a5a702fc378b4c01d
+      internalID: -664491926675536762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_11
+      rect:
+        serializedVersion: 2
+        x: 2112
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9399a0fc28a0480ca6c453a3af4493c
+      internalID: 4560461081248931254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_12
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bda054ce2e17452b92e16e5e21fc99d
+      internalID: 780110452060073064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_13
+      rect:
+        serializedVersion: 2
+        x: 2496
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf79a0bb98b3e41d79d881d49d9bf061
+      internalID: -6586314151391649549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_14
+      rect:
+        serializedVersion: 2
+        x: 2688
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b642d3f432a624bdc9229bafcee2fe74
+      internalID: 2718402481562735149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_15
+      rect:
+        serializedVersion: 2
+        x: 2880
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3da418a93753f4a2ba12182416a0b126
+      internalID: -1717615697081033349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_16
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 792c1517e6d46460380868a65256426b
+      internalID: -5035828275198134001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_17
+      rect:
+        serializedVersion: 2
+        x: 3264
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b014ddfbabe0049959253d5cf14eedf9
+      internalID: -4676756867614248833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_18
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2414c1c0eb01d41b4b5f7997cc93bb1d
+      internalID: -3221531033273754477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_19
+      rect:
+        serializedVersion: 2
+        x: 3648
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97202d54940464b988ef91a4fb24b483
+      internalID: -265441158597895537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_20
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13fa0ef3da2f646499e83f9b4f2c56bd
+      internalID: -865483247778456737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_21
+      rect:
+        serializedVersion: 2
+        x: 4032
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db4ff8328d28948349a1a5088751bd72
+      internalID: 6804878865759836396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_22
+      rect:
+        serializedVersion: 2
+        x: 4224
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b09761d6ee4408eb1a59df140ab504
+      internalID: -2441801688305449596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_23
+      rect:
+        serializedVersion: 2
+        x: 4416
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab254048ae3648e6b344881196aa246
+      internalID: -7267885043047177056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_24
+      rect:
+        serializedVersion: 2
+        x: 4608
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 146858ce939304677a7ec2da1ebec764
+      internalID: 2387730425636708798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_25
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 108502817f97e44a38f822ffab88c5bb
+      internalID: 3247158252708092360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_26
+      rect:
+        serializedVersion: 2
+        x: 4992
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae627dc5cce8b4f1a944c339e0d84ff2
+      internalID: 8751679453893930440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_27
+      rect:
+        serializedVersion: 2
+        x: 5184
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40fae5d8e7ef643438df671c03cd4c05
+      internalID: 8328824974738582550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_28
+      rect:
+        serializedVersion: 2
+        x: 5376
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 237018327876d4b2ba4d35b9bbacf06b
+      internalID: 2157077080615450757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_29
+      rect:
+        serializedVersion: 2
+        x: 5568
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c848e0e775be64934bd46ae9701e455c
+      internalID: 6075355016273357576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_30
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2adf71d9b1b9d467792e38b2153ae122
+      internalID: 7144527205163600332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_31
+      rect:
+        serializedVersion: 2
+        x: 5952
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc82b0e2c3cce46988f399fa437d875c
+      internalID: 2477714028296861719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_32
+      rect:
+        serializedVersion: 2
+        x: 6144
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a849a60abdc40b286a9cfd149db28e
+      internalID: 5751739973798227385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_33
+      rect:
+        serializedVersion: 2
+        x: 6336
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 264dd1fb71f8343959bfc367cc2205cf
+      internalID: 4445035591058129360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_34
+      rect:
+        serializedVersion: 2
+        x: 6528
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 414d44a6827c34b2e9be01cb7ac8f945
+      internalID: -8631943150003155463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_35
+      rect:
+        serializedVersion: 2
+        x: 6720
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b79d442fb5abf4451924304d91fdf6f0
+      internalID: 4453094675966582427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_36
+      rect:
+        serializedVersion: 2
+        x: 6912
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7502a702f16d04359baacae866d7c113
+      internalID: -4955587780603262194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_37
+      rect:
+        serializedVersion: 2
+        x: 7104
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f5a35b17af4498c96458d540674658
+      internalID: -8661251059573898388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_38
+      rect:
+        serializedVersion: 2
+        x: 7296
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8510ac37c53c5449a86b5b83ad35c173
+      internalID: -529762033702463084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_39
+      rect:
+        serializedVersion: 2
+        x: 7488
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f2a1687b50b34e1bbca5d83ff226bd6
+      internalID: -7919204407745979134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_40
+      rect:
+        serializedVersion: 2
+        x: 7680
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 306963e953a7442b5b7d9836d0c02cd6
+      internalID: -8531347186650198107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_41
+      rect:
+        serializedVersion: 2
+        x: 7872
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fbe4f374ae8d4b6e816ce06eec38879
+      internalID: -4196784492570658001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_42
+      rect:
+        serializedVersion: 2
+        x: 8064
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb8fcfddc64164a6fae8cc83912db6ca
+      internalID: 7936958017175986987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_43
+      rect:
+        serializedVersion: 2
+        x: 8256
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e6ed53effece48429b3f46d23f818f1
+      internalID: 7215844390576248202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_44
+      rect:
+        serializedVersion: 2
+        x: 8448
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bfbd49dcbdb244dbaf77e33d3104004
+      internalID: 1441906733460012641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_45
+      rect:
+        serializedVersion: 2
+        x: 8640
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 418da92bceddc441583a3aed0f808e6b
+      internalID: -271387033265589995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_46
+      rect:
+        serializedVersion: 2
+        x: 8832
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf81acfe188d14afb839e5c14faa3913
+      internalID: 5535232611355581197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: landmark_orrery_glow_32px_47
+      rect:
+        serializedVersion: 2
+        x: 9024
+        y: 0
+        width: 192
+        height: 224
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb9c0c8ea6d3428b8bde6c337c73296
+      internalID: -1459978528417929515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      landmark_orrery_glow_32px_0: 3827044047578659688
+      landmark_orrery_glow_32px_1: -3498808425778273136
+      landmark_orrery_glow_32px_10: -664491926675536762
+      landmark_orrery_glow_32px_11: 4560461081248931254
+      landmark_orrery_glow_32px_12: 780110452060073064
+      landmark_orrery_glow_32px_13: -6586314151391649549
+      landmark_orrery_glow_32px_14: 2718402481562735149
+      landmark_orrery_glow_32px_15: -1717615697081033349
+      landmark_orrery_glow_32px_16: -5035828275198134001
+      landmark_orrery_glow_32px_17: -4676756867614248833
+      landmark_orrery_glow_32px_18: -3221531033273754477
+      landmark_orrery_glow_32px_19: -265441158597895537
+      landmark_orrery_glow_32px_2: -5777797929717088426
+      landmark_orrery_glow_32px_20: -865483247778456737
+      landmark_orrery_glow_32px_21: 6804878865759836396
+      landmark_orrery_glow_32px_22: -2441801688305449596
+      landmark_orrery_glow_32px_23: -7267885043047177056
+      landmark_orrery_glow_32px_24: 2387730425636708798
+      landmark_orrery_glow_32px_25: 3247158252708092360
+      landmark_orrery_glow_32px_26: 8751679453893930440
+      landmark_orrery_glow_32px_27: 8328824974738582550
+      landmark_orrery_glow_32px_28: 2157077080615450757
+      landmark_orrery_glow_32px_29: 6075355016273357576
+      landmark_orrery_glow_32px_3: -7987150332001435441
+      landmark_orrery_glow_32px_30: 7144527205163600332
+      landmark_orrery_glow_32px_31: 2477714028296861719
+      landmark_orrery_glow_32px_32: 5751739973798227385
+      landmark_orrery_glow_32px_33: 4445035591058129360
+      landmark_orrery_glow_32px_34: -8631943150003155463
+      landmark_orrery_glow_32px_35: 4453094675966582427
+      landmark_orrery_glow_32px_36: -4955587780603262194
+      landmark_orrery_glow_32px_37: -8661251059573898388
+      landmark_orrery_glow_32px_38: -529762033702463084
+      landmark_orrery_glow_32px_39: -7919204407745979134
+      landmark_orrery_glow_32px_4: -823037207803771518
+      landmark_orrery_glow_32px_40: -8531347186650198107
+      landmark_orrery_glow_32px_41: -4196784492570658001
+      landmark_orrery_glow_32px_42: 7936958017175986987
+      landmark_orrery_glow_32px_43: 7215844390576248202
+      landmark_orrery_glow_32px_44: 1441906733460012641
+      landmark_orrery_glow_32px_45: -271387033265589995
+      landmark_orrery_glow_32px_46: 5535232611355581197
+      landmark_orrery_glow_32px_47: -1459978528417929515
+      landmark_orrery_glow_32px_5: -4515518301291942832
+      landmark_orrery_glow_32px_6: 1875508014989596318
+      landmark_orrery_glow_32px_7: -300080255993555548
+      landmark_orrery_glow_32px_8: 2960569747113474318
+      landmark_orrery_glow_32px_9: -8088160791092170950
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

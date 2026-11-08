@@ -15,8 +15,10 @@ using static LevelMap;
 //    starts to winch, so the hold lasts seconds instead of a blink) and
 //    presses the button that opens the gate on the far lip of Tock's pit.
 //    Tock's belt runs toward that pit whenever Tick moves.
-// 3. Scenery: decor only, and a breather (ScenicZone): while both players
-//    are in it, both lanes run in real time and the rifts retract.
+// 3. Scenery: decor only, with a landmark in each lane (Tick's fountain,
+//    Tock's orrery; animated on lane time). A breather (ScenicZone): while
+//    both players are in it, both lanes run in real time and the rifts
+//    retract.
 // 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
 //    directions and a plain gap before the last crusher. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
@@ -92,8 +94,7 @@ public static class MainLevelBuilder
         l.Decor("hedge", 46.5f);
         l.Decor("lamp", 49.5f);
         l.Decor("bench", 52f);
-        l.Decor("planter", 55f);
-        l.Decor("fountain", 60f);
+        l.Landmark("fountain", 59f, 256);   // Grand Clockwork Fountain, x 55-63
         l.Decor("planter", 65f);
         l.Decor("lamp", 67.5f);
         l.Decor("topiary", 70.5f);
@@ -124,15 +125,19 @@ public static class MainLevelBuilder
 
     static void Tock(Lane l)
     {
-        l.Floor((-8, 7), (12, 30), (35, 86), (92, 110), (115, Length + 8));
+        l.Floor((-8, 7), (12, 19), (23, 30), (35, 86), (92, 110), (115, Length + 8));
         l.Spawn(3);
 
         // 1. Trap door, then a ledge higher than a jump that drops straight
         //    onto the belt. The checkpoint is on the ledge, the last safe spot.
+        //    The ledge's right half overhangs a hole at the belt's start, so
+        //    walking left against the belt drops Tock in instead of letting
+        //    them lean on a wall (moving 0 keeps Tick's lane slow).
         l.TrapDoor(8);
         l.Fill(15, 17, 2);
-        l.Fill(18, 22, 4);
-        l.Checkpoint(20);
+        l.Fill(18, 19, 4);
+        l.Fill(20, 22, 4, bottom: 2);
+        l.Checkpoint(19);
 
         // 2. Belt toward a pit with a shut gate on its far lip: jumping into
         //    the bars drops Tock into the pit. Tick's button opens it.
@@ -149,7 +154,7 @@ public static class MainLevelBuilder
         l.Decor("lamp", 59.5f);
         l.Decor("gears", 63f);
         l.Decor("planter", 67f);
-        l.Decor("fountain", 72f);
+        l.Landmark("orrery", 72f, 192);     // Founders' Orrery, x 69-75
         l.Decor("hedge", 77.5f);
         l.Checkpoint(81);
         // Tick's range starts past the gate button, Tock's past its gate;
