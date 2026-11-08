@@ -15,6 +15,11 @@ using UnityEngine;
 // At or above the threshold it shrinks linearly, faster the faster the
 // player runs (shrinkRate at full speed).
 //
+// Those give the rift's target rate; its actual rate eases towards it
+// (critically damped, rateSmoothTime), so the rift has momentum: when the
+// player starts moving it slows to a stop, then retreats, and when they stop
+// it slows its retreat, then creeps back down.
+//
 // Depth is the mean growth; the edge does not just stretch down. Its front
 // (Front) bulges and dips in shapes that slowly morph while the rift lives,
 // and tendrils creep out of it at random places (more the deeper it is):
@@ -47,9 +52,9 @@ public class LaneRift : MonoBehaviour
     [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
     public float slowGrace = 0.5f;
     [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second.")]
-    public float growthRate = 0.36f;
+    public float growthRate = 0.28f;
     [Tooltip("Depth (units) the exponential grows from: higher starts faster. " +
-             "From closed (after slowGrace) it reaches a standing player in about 7 s, sooner under a tendril.")]
+             "From closed (after slowGrace) it reaches a standing player in about 9 s, sooner under a tendril.")]
     public float growthSeed = 1f;
 
 
@@ -71,7 +76,12 @@ public class LaneRift : MonoBehaviour
 
     [Header("Shrink (player at or above the threshold)")]
     [Tooltip("Units per second the rift closes at full run speed; scales with the player's speed.")]
-    public float shrinkRate = 2.5f;
+    public float shrinkRate = 1.5f;
+
+    [Header("Momentum")]
+    [Tooltip("Seconds the rift's rate takes to ease to a new target (critically damped): higher turns around more slowly, " +
+             "so a rift keeps growing a little after its player starts moving.")]
+    public float rateSmoothTime = 0.7f;
 
     [Header("Kill")]
     [Tooltip("Units above the top of the player's collider (their head) at which the rift kills; negative lets the teeth graze. " +
@@ -82,6 +92,8 @@ public class LaneRift : MonoBehaviour
 
     float[] depth = new float[2];
     float[] slowFor = new float[2];
+    float[] rate = new float[2];        // units per second, positive grows
+    float[] rateAccel = new float[2];   // SmoothDamp state of rate
     float[] frontClock = new float[2];
 
     class Tendril
@@ -245,7 +257,7 @@ public class LaneRift : MonoBehaviour
 
     public void Close()
     {
-        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = frontClock[i] = 0f;
+        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = frontClock[i] = rate[i] = rateAccel[i] = 0f;
         foreach (var list in tendrils) list.Clear();
         for (int i = 0; i < safe.Length; i++) safe[i] = false;
     }
@@ -268,30 +280,34 @@ public class LaneRift : MonoBehaviour
             frontClock[lane] += dt;
 
             float speed = flow.MeasuredSpeed(lane);
-            if (Suspended || safe[lane])
+            float target;
+            bool open = !(Suspended || safe[lane]);
+            if (!open)
             {
                 slowFor[lane] = 0f;
-                depth[lane] = Mathf.Max(0f, depth[lane] - shrinkRate * dt);
-                UpdateTendrils(lane, false, false, viewX, halfView, dt);
-                continue;
+                target = -shrinkRate;
             }
-            bool growing = false;
-            if (speed < slowThreshold)
+            else if (speed < slowThreshold)
             {
                 slowFor[lane] += dt;
-                if (slowFor[lane] > slowGrace)
-                {
-                    growing = true;
-                    depth[lane] += (depth[lane] + growthSeed) * growthRate * dt;
-                }
+                target = slowFor[lane] > slowGrace ? (depth[lane] + growthSeed) * growthRate : 0f;
             }
             else
             {
                 slowFor[lane] = 0f;
-                depth[lane] -= shrinkRate * speed * dt;
+                target = -shrinkRate * speed;
             }
-            depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
-            UpdateTendrils(lane, growing, speed >= slowThreshold, viewX, halfView, dt);
+            rate[lane] = Mathf.SmoothDamp(rate[lane], target, ref rateAccel[lane], rateSmoothTime, Mathf.Infinity, dt);
+            depth[lane] += rate[lane] * dt;
+            if (depth[lane] <= 0f || depth[lane] >= maxDepth)
+            {
+                // A closed or full rift stops dead instead of carrying its rate on.
+                depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
+                if (depth[lane] <= 0f ? rate[lane] < 0f : rate[lane] > 0f) rate[lane] = rateAccel[lane] = 0f;
+            }
+            bool growing = open && rate[lane] > 0f;
+            UpdateTendrils(lane, growing, open && rate[lane] < 0f, viewX, halfView, dt);
+            if (!open) continue;
 
             if (cam == null) continue;
             float edge = cam.transform.position.y + cam.orthographicSize - TipReach(lane);
