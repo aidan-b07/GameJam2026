@@ -73,6 +73,9 @@ public class DawnSky : MonoBehaviour
     float[] fxAcc;
     Sprite[] birdFrames;
     Sprite white;
+    // Runtime textures and sprites this component made (not the effect
+    // textures above, which OnDestroy frees itself); destroyed in OnDestroy.
+    readonly System.Collections.Generic.List<UnityEngine.Object> owned = new System.Collections.Generic.List<UnityEngine.Object>();
     Material screenMat, addMat, mulMat;
     LaneFx[] lanes;
     readonly Stopwatch watch = new Stopwatch();
@@ -174,14 +177,17 @@ public class DawnSky : MonoBehaviour
         var wt = NewTex(1, 1, out var wpx, "DawnWhite");
         wpx[0] = new Color32(255, 255, 255, 255);
         wt.SetPixels32(wpx); wt.Apply(false);
+        owned.Add(wt);
         white = Sprite.Create(wt, new Rect(0, 0, 1, 1), new Vector2(0f, 1f), 1f);
         white.hideFlags = HideFlags.HideAndDontSave;
+        owned.Add(white);
 
         var quarter = new Vector2(0f, 1f);
         Sprite S(Texture2D tex, float ppu, Vector2 pivot)
         {
             var s = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), pivot, ppu, 0, SpriteMeshType.FullRect);
             s.hideFlags = HideFlags.HideAndDontSave;
+            owned.Add(s);
             return s;
         }
         var glowS = S(glowTex, Ppu / 4f, quarter);
@@ -258,12 +264,13 @@ public class DawnSky : MonoBehaviour
 
     // Bird of the mockup (bird()), 2 px blocks, frame f of the 4-frame flap;
     // pivot at the body's top-left pixel.
-    static Sprite BirdSprite(int f)
+    Sprite BirdSprite(int f)
     {
         int[] wys = { -4, -2, 2, -2 };
         int wy = wys[f];
         const int ox = 8, oy = 6, w = 24, h = 14;
         var tex = NewTex(w, h, out var px, "DawnBird");
+        owned.Add(tex);
         var c = new Color32(0x3a, 0x2a, 0x3a, 255);
         void P(int x, int y, int pw, int ph)
         {
@@ -282,6 +289,7 @@ public class DawnSky : MonoBehaviour
         tex.Apply(false);
         var s = Sprite.Create(tex, new Rect(0, 0, w, h), new Vector2(ox / (float)w, 1f - oy / (float)h), Ppu, 0, SpriteMeshType.FullRect);
         s.hideFlags = HideFlags.HideAndDontSave;
+        owned.Add(s);
         return s;
     }
 
@@ -870,5 +878,8 @@ public class DawnSky : MonoBehaviour
             if (tex != null) Destroy(tex);
         foreach (var m in new[] { screenMat, addMat, mulMat })
             if (m != null) Destroy(m);
+        foreach (var o in owned)
+            if (o != null) Destroy(o);
+        owned.Clear();
     }
 }

@@ -62,6 +62,8 @@ public class DawnEnding : MonoBehaviour
 
     Canvas canvas;
     RawImage seam, barTop, barBottom, title, theEnd, prompt, fade;
+    // Textures made here (the seam band and the pixel-font text), destroyed in OnDestroy.
+    readonly System.Collections.Generic.List<Texture2D> owned = new System.Collections.Generic.List<Texture2D>();
 
     void Update()
     {
@@ -249,6 +251,7 @@ public class DawnEnding : MonoBehaviour
         }
         band.SetPixels32(px);
         band.Apply(false);
+        owned.Add(band);
         seam = Image(go.transform, "Seam", band, new Vector2(0f, 0.5f), new Vector2(1f, 0.5f), new Vector2(0f, 60f), Vector2.zero);
 
         barTop = Image(go.transform, "LetterboxTop", null, new Vector2(0f, 1f), new Vector2(1f, 1f), Vector2.zero, Vector2.zero);
@@ -266,6 +269,13 @@ public class DawnEnding : MonoBehaviour
         Overlay(0f, 0f);
     }
 
+    void OnDestroy()
+    {
+        foreach (var tex in owned)
+            if (tex != null) Destroy(tex);
+        owned.Clear();
+    }
+
     static RawImage Image(Transform parent, string name, Texture tex, Vector2 min, Vector2 max, Vector2 size, Vector2 pos)
     {
         var go = new GameObject(name, typeof(RectTransform), typeof(RawImage));
@@ -279,9 +289,10 @@ public class DawnEnding : MonoBehaviour
     }
 
     // Pixel-font text, scale x its pixels, centred y px above the seam.
-    static RawImage Text(Transform parent, string name, string text, Color32 fill, Color32 outline, float scale, float y)
+    RawImage Text(Transform parent, string name, string text, Color32 fill, Color32 outline, float scale, float y)
     {
         var tex = PixelFont.Render(text, fill, outline);
+        owned.Add(tex);
         var img = Image(parent, name, tex, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f),
             new Vector2(tex.width * scale, tex.height * scale), new Vector2(0f, y));
         img.color = new Color(1f, 1f, 1f, 0f);
