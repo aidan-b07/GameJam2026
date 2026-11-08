@@ -14,11 +14,12 @@ public static class Level1Builder
 
     static void Tick(Lane l)
     {
-        l.Floor((-8, Length + 8));
+        l.Floor((-8, 29), (34, Length + 8));
         l.Spawn(3);
 
         // 1. Tutorial A: crusher. Tock must STOP to freeze it.
         l.Crusher(22);
+        l.TrapDoor(30);                           // drops on lane time; Tock stopping freezes it
 
         // 2. Tutorial B: treadmill. Tick runs on it to drop Tock's drawbridge.
         l.Checkpoint(40);
