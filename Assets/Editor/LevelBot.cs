@@ -33,6 +33,7 @@ public static class LevelBot
     public static float T;                  // seconds since Begin
     public static int Deaths;
     public static float logEvery = 0.5f;
+    public static bool manualInputUpdate = false;
     static readonly StringBuilder log = new StringBuilder();
 
     public static void Begin()
@@ -112,7 +113,7 @@ public static class LevelBot
         if (tock.dir > 0) keys.Add(Key.RightArrow);
         if (tock.jump) keys.Add(Key.UpArrow);
         InputSystem.QueueStateEvent(Keyboard.current, new KeyboardState(keys.ToArray()));
-        InputSystem.Update();
+        if (manualInputUpdate) InputSystem.Update();
         EditorApplication.Step();
         T += Dt;
     }
