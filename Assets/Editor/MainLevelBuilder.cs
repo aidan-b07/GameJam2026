@@ -60,13 +60,13 @@ public static class MainLevelBuilder
         l.Decor("hedge", 71.5f);
         l.Decor("lamp", 75.5f);
         l.Decor("bench", 78f);
-        l.Decor("flowerbed", 82f);
+        l.Decor("planter", 82f);
         l.Decor("fountain", 88f);
-        l.Decor("flowerbed", 94f);
+        l.Decor("planter", 94f);
         l.Decor("lamp", 97.5f);
         l.Decor("topiary", 100.5f);
         l.Decor("hedge", 104.5f);
-        l.Decor("gear_sculpture", 109f);
+        l.Decor("gears", 109f);
         l.Checkpoint(113);
 
         // 4. Gauntlet: crusher, pit, then belts between crushers.
@@ -83,6 +83,7 @@ public static class MainLevelBuilder
         // 5. Ending.
         l.Checkpoint(151);
         l.Decor("lamp", 155.5f);
+        l.Decor("clock", 165.5f);
         l.Door(159);
     }
 
@@ -104,14 +105,14 @@ public static class MainLevelBuilder
         WireGate(gate, gateButton);
 
         // 3. Scenery.
-        l.Decor("flowerbed", 62f);
+        l.Decor("planter", 62f);
         l.Decor("lamp", 66.5f);
         l.Decor("topiary", 70.5f);
         l.Decor("hedge", 75.5f);
         l.Decor("bench", 80f);
         l.Decor("lamp", 84.5f);
-        l.Decor("gear_sculpture", 89f);
-        l.Decor("flowerbed", 94f);
+        l.Decor("gears", 89f);
+        l.Decor("planter", 94f);
         l.Decor("fountain", 100f);
         l.Decor("hedge", 106.5f);
         l.Checkpoint(113);
@@ -132,6 +133,7 @@ public static class MainLevelBuilder
         // 5. Ending.
         l.Checkpoint(152);
         l.Decor("lamp", 156.5f);
+        l.Decor("clock", 165.5f);
         l.Door(159);
     }
 }
