@@ -53,7 +53,8 @@ public class Music : MonoBehaviour
     void Update()
     {
         if (source == null || source.clip == null) return;
-        float step = fadeIn > 0f ? volume / fadeIn * Time.unscaledDeltaTime : volume;
+        // At least a quarter of full volume per fadeIn, so fading down to 0 (the ending) moves too.
+        float step = fadeIn > 0f ? Mathf.Max(volume, 0.25f) / fadeIn * Time.unscaledDeltaTime : 1f;
         source.volume = Mathf.MoveTowards(source.volume, volume, step);
     }
 
