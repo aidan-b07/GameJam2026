@@ -19,7 +19,11 @@ using static LevelMap;
 //    Tock's orrery; animated on lane time). A breather (ScenicZone): while
 //    both players are in it, both lanes run in real time and the rifts
 //    retract.
-// 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
+// 4. Pendulum belts: three belts over drops, a long clock pendulum over
+//    each belt's middle (ClockPendulum). The bob shoves a player off the belt
+//    as hard as it moves, which is the partner's speed: one crosses while the
+//    other slows their lane. The last tile or so of each belt is never hit.
+// 5. Gauntlet: a crusher, a pit, then belts between crushers in alternating
 //    directions and a plain gap before the last crusher. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
 //    open both final gates. Whoever presses first waits in the plain gap,
@@ -29,7 +33,10 @@ using static LevelMap;
 public static class MainLevelBuilder
 {
     public const string ScenePath = "Assets/Scenes/MainLevel.unity";
-    const int Length = 136;
+    const int Length = 173;
+    // Tiles the pendulum belts section (x 82-117) moved the gauntlet and the
+    // ending right by; their coordinates below are written as the old x + P.
+    const int P = 37;
     const float Belt = 2f;   // units per second at the idle lane speed (Conveyor.fastSpeed at full)
     const float SpanPause = 2.5f;   // lane seconds the drawbridge holds across its pit
     // Lane seconds each crusher waits raised (PlungerMotion default 2): at 3x
@@ -63,9 +70,33 @@ public static class MainLevelBuilder
         motion.ApplyModifiedPropertiesWithoutUndo();
     }
 
+    // Pendulum belts (x 82-117, both lanes alike): entry ground 82-83, three
+    // 9-tile belts (84-92, 96-104, 108-116) with 3-tile drops between them,
+    // exit ground from 117 with a checkpoint at 118. A clock pendulum hangs
+    // over each belt's centre from one beam on posts at 82 and 117: rod 6.5,
+    // swing +-36 degrees in 3 lane s, so the bob reaches within 0.7 tiles of
+    // the belt's ends but passes over head height there (the last tile is
+    // never touched); it is fast and low (0.7 above the belt) in the middle.
+    // Bob speed at the bottom 3 units/s at 0.35x (a nudge), 8.6 at 1x, 26 at
+    // 3x (thrown off). dirs: each belt's direction; phases: each pendulum's
+    // starting point as a share of its swing.
+    const float PendulumPeriod = 3f;
+
+    static void PendulumBelts(Lane l, float[] dirs, float[] phases)
+    {
+        int[] belts = { 84, 96, 108 };
+        for (int i = 0; i < belts.Length; i++)
+        {
+            l.Conveyor(belts[i], belts[i] + 8, dirs[i] * Belt);
+            l.ClockPendulum(belts[i] + 4.5f, phases[i] * PendulumPeriod, period: PendulumPeriod);
+        }
+        l.PendulumBeam(82.5f, 117.5f, Lane.ClockAxisHeight() + Lane.BeamGap);
+        l.Checkpoint(81 + P);
+    }
+
     static void Tick(Lane l)
     {
-        l.Floor((-8, 16), (21, 29), (39, 85), (91, 109), (114, Length + 8));
+        l.Floor((-8, 16), (21, 29), (39, 92), (96, 104), (108, 85 + P), (91 + P, 109 + P), (114 + P, Length + 8));
         l.Spawn(3);
 
         // 1. Step up to a ledge higher than a jump (no way back), dropping
@@ -102,22 +133,25 @@ public static class MainLevelBuilder
         l.Decor("gears", 78f);
         l.Checkpoint(81);
 
-        // 4. Gauntlet: crusher straight into a pit, a belt back toward it,
-        //    belts between crushers, a plain gap (104-106: the first to press
-        //    waits there), then the last crusher's button with a hole after it
-        //    and the gate on the far lip: both cross once both buttons are
-        //    down and the gates are up.
-        Crusher(l, 82);
-        l.Conveyor(91, 94, -Belt);
-        Crusher(l, 95, 0.9f);
-        l.Conveyor(98, 100, Belt);
-        Crusher(l, 101, 1.8f);
-        Crusher(l, 107, 2.7f);
-        tickFinal = l.Button(108, narrow: true);   // in the strike plate
-        tickGate = l.ButtonGate(114);
+        // 4. Pendulum belts: belts running right, left, right.
+        PendulumBelts(l, new[] { 1f, -1f, 1f }, new[] { 0f, 0.5f, 0.25f });
 
-        // 5. Ending.
-        l.Checkpoint(118);
+        // 5. Gauntlet: crusher straight into a pit, a belt back toward it,
+        //    belts between crushers, a plain gap (104-106 + P: the first to
+        //    press waits there), then the last crusher's button with a hole
+        //    after it and the gate on the far lip: both cross once both buttons
+        //    are down and the gates are up.
+        Crusher(l, 82 + P);
+        l.Conveyor(91 + P, 94 + P, -Belt);
+        Crusher(l, 95 + P, 0.9f);
+        l.Conveyor(98 + P, 100 + P, Belt);
+        Crusher(l, 101 + P, 1.8f);
+        Crusher(l, 107 + P, 2.7f);
+        tickFinal = l.Button(108 + P, narrow: true);   // in the strike plate
+        tickGate = l.ButtonGate(114 + P);
+
+        // 6. Ending.
+        l.Checkpoint(118 + P);
         l.Decor("lamp", Length - 15.5f);
         l.Door(Length - 12);   // the ending's clock door, placed from the lane's end
         l.Decor("clock", Length - 5.5f);
@@ -125,7 +159,7 @@ public static class MainLevelBuilder
 
     static void Tock(Lane l)
     {
-        l.Floor((-8, 7), (12, 19), (23, 30), (35, 86), (92, 110), (115, Length + 8));
+        l.Floor((-8, 7), (12, 19), (23, 30), (35, 92), (96, 104), (108, 86 + P), (92 + P, 110 + P), (115 + P, Length + 8));
         l.Spawn(3);
 
         // 1. Trap door, then a ledge higher than a jump that drops straight
@@ -162,20 +196,23 @@ public static class MainLevelBuilder
         new GameObject("ScenicZone").AddComponent<ScenicZone>().ranges =
             new[] { new Vector2(44f, 81f), new Vector2(38f, 81f) };
 
-        // 4. Gauntlet, offset from Tick's.
-        Crusher(l, 83, 0.45f);
-        l.Conveyor(92, 95, -Belt);
-        Crusher(l, 96, 1.35f);
-        l.Conveyor(99, 101, Belt);
-        Crusher(l, 102, 2.25f);
-        Crusher(l, 108, 3.15f);
-        var tockFinal = l.Button(109, narrow: true);
-        var tockGate = l.ButtonGate(115);
+        // 4. Pendulum belts, belts and swings opposite to Tick's.
+        PendulumBelts(l, new[] { -1f, 1f, -1f }, new[] { 0.5f, 0f, 0.75f });
+
+        // 5. Gauntlet, offset from Tick's.
+        Crusher(l, 83 + P, 0.45f);
+        l.Conveyor(92 + P, 95 + P, -Belt);
+        Crusher(l, 96 + P, 1.35f);
+        l.Conveyor(99 + P, 101 + P, Belt);
+        Crusher(l, 102 + P, 2.25f);
+        Crusher(l, 108 + P, 3.15f);
+        var tockFinal = l.Button(109 + P, narrow: true);
+        var tockGate = l.ButtonGate(115 + P);
         WireGate(tockGate, tickFinal, tockFinal);
         WireGate(tickGate, tickFinal, tockFinal);
 
-        // 5. Ending.
-        l.Checkpoint(119);
+        // 6. Ending.
+        l.Checkpoint(119 + P);
         l.Decor("lamp", Length - 15.5f);
         l.Door(Length - 12);
         l.Decor("clock", Length - 5.5f);

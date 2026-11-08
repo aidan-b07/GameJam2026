@@ -63,6 +63,25 @@ public class PlayerMovement : MonoBehaviour
     private bool facingRight = true;
     private Vector2 lastPosition;
     private bool hasLastPosition;
+    private float knockTimer;
+    private float knockElapsed;
+
+    // True while a shove (Knock) has taken the controls away.
+    public bool Knocked => knockTimer > 0f;
+
+    // Something hit the player (ClockPendulum's bob): throw them at `velocity`
+    // and take their controls away for `duration` seconds or until they land,
+    // whichever comes first. The throw keeps its horizontal speed in the air;
+    // after it the run speed eases back to the input as usual.
+    public void Knock(Vector2 velocity, float duration)
+    {
+        knockTimer = duration;
+        knockElapsed = 0f;
+        runVelocity = velocity.x;
+        jumpBufferTimer = 0f;
+        coyoteTimer = 0f;
+        rb.linearVelocity = velocity;
+    }
 
     private void Awake()
     {
@@ -89,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
         else
             jumpBufferTimer -= Time.deltaTime;
 
-        if (jumpBufferTimer > 0f && coyoteTimer > 0f)
+        if (jumpBufferTimer > 0f && coyoteTimer > 0f && !Knocked)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpBufferTimer = 0f;
@@ -108,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
     {
         hasLastPosition = false;
         runVelocity = 0f;
+        knockTimer = 0f;
     }
 
     // GameFlow switches movement off while the players are dead (and the pause
@@ -124,6 +144,18 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         UpdateWorldSpeedModifiers();
+
+        // Thrown: no steering until the throw ends (time out, or landed after
+        // the first 0.1 s); the body flies on its own velocity.
+        if (knockTimer > 0f)
+        {
+            knockTimer -= Time.fixedDeltaTime;
+            knockElapsed += Time.fixedDeltaTime;
+            if (knockElapsed > 0.1f && rb.linearVelocity.y <= 0.01f && IsGrounded())
+                knockTimer = 0f;
+            runVelocity = rb.linearVelocity.x;
+            return;
+        }
 
         if (horizontalInput != 0f)
             TryStepUp(Mathf.Sign(horizontalInput), Mathf.Abs(horizontalInput) * moveSpeed * Time.fixedDeltaTime);

@@ -1442,6 +1442,74 @@ public static class LevelMap
             return p;
         }
 
+        // Clock pendulum (pendulum belts section): a blunt brass bob on a long rod,
+        // swinging `amplitude` degrees either side in `period` lane seconds over
+        // axisX, the bob's bottom passing `clearance` above the surface. It shoves
+        // players instead of killing them (ClockPendulum). Hang it from a
+        // PendulumBeam at ClockAxisHeight(...) + BeamGap.
+        public ClockPendulum ClockPendulum(float axisX, float offset = 0f, float reach = 6.5f,
+                                           float amplitude = 36f, float period = 3f, float clearance = 0.7f)
+        {
+            const string dir = "Assets/Art/Obstacles/Pendulum/";
+            int y = Surface(Mathf.FloorToInt(axisX));
+            var go = new GameObject(Numbered("ClockPendulum"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(axisX, y + ClockAxisHeight(reach, clearance), 0f);
+            LabPart("Bracket", go.transform, LabSprite(dir + "pendulum_bracket_32px.png", new Vector2(0.5f, 10f / 32f)), 4, Vector2.zero);
+            var arm = new GameObject("Arm").transform;
+            arm.SetParent(go.transform, false);
+            float socket = reach - (ClockBobCentre - ClockBobSocket) / 32f;   // axis to the bob's socket: the rod
+            var rod = LabPart("Rod", arm, LabSprite(dir + "pendulum_rod_32px.png", new Vector2(0.5f, 1f), true), 21, Vector2.zero);
+            rod.drawMode = SpriteDrawMode.Tiled;
+            rod.size = new Vector2(10f / 32f, socket + 4f / 32f);   // a little into the socket
+            LabPart("Hub", arm, LabSprite(dir + "pendulum_hub_32px.png", new Vector2(0.5f, 0.5f)), 23, Vector2.zero);
+            var bobFrames = LabStrip(dir + "pendulum_clockbob_96px.png", 96, new Vector2(0.5f, (72f - ClockBobSocket) / 72f));
+            // In front of the players (order 20), so a hit reads as the bob striking them.
+            var bob = LabPart("Bob", arm, bobFrames.FirstOrDefault(), 22, new Vector2(0f, -socket));
+
+            var p = go.AddComponent<global::ClockPendulum>();
+            p.lane = LaneIndex;
+            p.cycleOffset = offset;
+            p.amplitude = amplitude;
+            p.period = period;
+            p.reach = reach;
+            p.bobRadius = ClockBobRadius / 32f;
+            p.arm = arm;
+            p.bob = bob;
+            p.bobFrames = bobFrames;
+            return p;
+        }
+
+        // pendulum_clockbob_96px.png (tools/make_pendulum.py): the rod's socket
+        // and the disc's centre, pixels from the frame's top, and the disc's radius.
+        const float ClockBobSocket = 2f, ClockBobCentre = 39f, ClockBobRadius = 29.5f;
+        public const float BeamGap = 0.3f;   // axis to the beam's bottom: the bracket's plate sits on the beam
+
+        public static float ClockAxisHeight(float reach = 6.5f, float clearance = 0.7f) =>
+            clearance + ClockBobRadius / 32f + reach;
+
+        // Riveted iron beam from x0 to x1 with its bottom `height` above the
+        // surface at x0, on a post down to the ground at each end (each post's
+        // left edge at x0 and x1 - 0.5).
+        public void PendulumBeam(float x0, float x1, float height)
+        {
+            const string dir = "Assets/Art/Obstacles/Pendulum/";
+            int y = Surface(Mathf.FloorToInt(x0));
+            var go = new GameObject(Numbered("PendulumBeam"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x0, y + height, 0f);
+            var beam = LabPart("Beam", go.transform, LabSprite(dir + "pendulum_beam_32px.png", Vector2.zero, true), 3, Vector2.zero);
+            beam.drawMode = SpriteDrawMode.Tiled;
+            beam.size = new Vector2(x1 - x0, 0.5f);
+            var post = LabSprite(dir + "pendulum_post_32px.png", Vector2.zero, true);
+            foreach (float px in new[] { 0f, x1 - x0 - 0.5f })
+            {
+                var sr = LabPart("Post", go.transform, post, 2, new Vector2(px, -height));
+                sr.drawMode = SpriteDrawMode.Tiled;
+                sr.size = new Vector2(0.5f, height);
+            }
+        }
+
         // Gear fall: a chute under a stone housing over x - 1..x + 1 (9 tiles up)
         // drops a 2x2 cog every `interval` lane seconds; it lands at x + 0.5,
         // rolls `roll` units per lane second for 2 lane seconds (negative: left)
