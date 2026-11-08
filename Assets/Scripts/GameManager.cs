@@ -10,11 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float maxWorldSpeed = 3f;
 
     [Header("Ramp Up (while the partner is moving)")]
-    [Tooltip("Seconds of continuous movement from idle to full speed.")]
-    [SerializeField] private float rampDuration = 0.3f;
-    [Tooltip("Ease-out power: 1 is a straight line, higher jumps in faster and settles into full speed.")]
-    [Range(1f, 5f)]
-    [SerializeField] private float rampSharpness = 2f;
+    [Tooltip("Seconds of continuous movement from idle to full speed. The ramp is an S-curve: a short step barely changes the lane, steady running builds it up.")]
+    [SerializeField] private float rampDuration = 1.5f;
 
     [Header("Wind Down (after the partner stops)")]
     [Tooltip("Seconds the lane keeps its speed after the partner stops, so short pauses don't stutter it.")]
@@ -115,36 +112,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Boost 0..1: eases out up to 1 while the partner moves, holds for
-    // holdTime once they stop, then winds down to 0 on a smoothstep. Each step
-    // reads the progress back off the current boost, so switching mid-curve
-    // carries on smoothly from where the boost is.
+    // Boost 0..1: climbs an S-curve while the partner moves (slow start, so a
+    // short step barely changes the lane), capped by how fast they move (an
+    // analog stick held halfway gives about half the boost); holds for
+    // holdTime once they stop, then winds down on a smoothstep. Each step reads
+    // the progress back off the current boost, so switching mid-curve carries
+    // on smoothly from where the boost is.
     private float Step(int lane, float dt) {
         float boost = laneBoost[lane];
-
-        if (laneInput[lane] > movingThreshold) {
+        float input = laneInput[lane];
+        float cap = input > movingThreshold ? Mathf.Clamp01((input - movingThreshold) / (1f - movingThreshold)) : 0f;
+        if (cap > 0f && boost < cap) {
             laneHold[lane] = holdTime;
-            float progress = InverseRamp(boost);
+            float progress = InverseSmoothStep(boost);
             progress = Mathf.Min(1f, progress + dt / Mathf.Max(0.0001f, rampDuration));
-            boost = Ramp(progress);
+            boost = Mathf.Min(cap, SmoothStep(progress));
+        } else if (cap > 0f && boost - cap < 0.0001f) {
+            laneHold[lane] = holdTime;
         } else if (laneHold[lane] > 0f) {
             laneHold[lane] -= dt;
-        } else if (boost > 0f) {
+        } else if (boost > cap) {
             float progress = InverseSmoothStep(1f - boost);
             progress = Mathf.Min(1f, progress + dt / Mathf.Max(0.0001f, windDownDuration));
-            boost = 1f - SmoothStep(progress);
+            boost = Mathf.Max(cap, 1f - SmoothStep(progress));
             if (boost < 0.0001f)
                 boost = 0f;
         }
-
         laneBoost[lane] = boost;
         return boost;
     }
-
-    // 1 - (1 - p)^k: 0 at p = 0, 1 at p = 1, steep at the start, flat at the end.
-    private float Ramp(float p) => 1f - Mathf.Pow(1f - p, rampSharpness);
-
-    private float InverseRamp(float v) => 1f - Mathf.Pow(1f - Mathf.Clamp01(v), 1f / rampSharpness);
 
     // 3p^2 - 2p^3: flat at both ends, so the wind-down starts gently and comes
     // to rest without a jolt.
