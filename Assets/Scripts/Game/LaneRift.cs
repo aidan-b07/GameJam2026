@@ -9,11 +9,16 @@ using UnityEngine;
 // speed, PlayerMovement.MeasuredSpeed): the distance the body really moved,
 // the same value that drives the partner's lane speed, so pushing into a wall
 // or walking against a belt counts as standing, and riding a belt, jumping
-// and falling count as moving. Below slowThreshold it grows exponentially: the growth rate is
-// proportional to how deep it already is (plus growthSeed), so a short pause
-// barely shows but a long one runs away; it creeps on smoothly, no lurches.
-// At or above the threshold it shrinks linearly, faster the faster the
-// player runs (shrinkRate at full speed).
+// and falling count as moving. The rift's rate blends over that speed:
+//   - at or below growBelow it grows exponentially: the growth rate is
+//     proportional to how deep it already is (plus growthSeed), so a short
+//     pause barely shows but a long one runs away;
+//   - from growBelow to holdFrom the growth fades out (smoothstep);
+//   - from holdFrom to shrinkFrom it holds still: the front keeps morphing
+//     and tendrils keep creeping out and back (holdTendrils), so it lives in
+//     place without coming down;
+//   - above shrinkFrom it retreats, faster the faster the player moves,
+//     from 0 up to shrinkRate at full speed.
 //
 // Those give the rift's target rate; its actual rate eases towards it
 // (critically damped, rateSmoothTime), so the rift has momentum: when the
@@ -46,9 +51,17 @@ public class LaneRift : MonoBehaviour
     // (a closed rift's teeth are as tall as its reach). LaneDivider draws them.
     public const float TeethAmplitude = 0.3125f;   // 10 art pixels
 
-    [Header("Growth (player slower than the threshold)")]
-    [Tooltip("Measured speed (0..1 of run speed, PlayerMovement.MeasuredSpeed) below which the rift grows.")]
-    [Range(0f, 1f)] public float slowThreshold = 0.35f;
+    [Header("Speed bands (measured speed, 0..1 of run speed)")]
+    [Tooltip("At or below this the rift grows at its full rate.")]
+    [Range(0f, 1f)] public float growBelow = 0.1f;
+    [Tooltip("Growth fades out between growBelow and this; from here to shrinkFrom the rift holds still.")]
+    [Range(0f, 1f)] public float holdFrom = 0.2f;
+    [Tooltip("Above this the rift retreats, reaching shrinkRate at full speed.")]
+    [Range(0f, 1f)] public float shrinkFrom = 0.35f;
+    [Tooltip("Tendril sprouting while the rift holds, as a fraction of the growing rate (keeps a held rift alive).")]
+    [Range(0f, 1f)] public float holdTendrils = 0.5f;
+
+    [Header("Growth (player slower than holdFrom)")]
     [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
     public float slowGrace = 0.5f;
     [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second.")]
@@ -75,7 +88,7 @@ public class LaneRift : MonoBehaviour
     public int maxTendrils = 40;
 
     [Header("Shrink (player at or above the threshold)")]
-    [Tooltip("Units per second the rift closes at full run speed; scales with the player's speed.")]
+    [Tooltip("Units per second the rift closes at full run speed; scales from 0 at shrinkFrom.")]
     public float shrinkRate = 3f;
 
     [Header("Momentum")]
@@ -184,11 +197,11 @@ public class LaneRift : MonoBehaviour
         return Mathf.Floor(extra / ColumnWidth) * ColumnWidth;
     }
 
-    void UpdateTendrils(int lane, bool growing, bool running, float viewX, float halfView, float dt)
+    void UpdateTendrils(int lane, float sprout, bool retreating, float viewX, float halfView, float dt)
     {
         var list = tendrils[lane];
         float d = depth[lane];
-        if (growing && list.Count < maxTendrils && rng.NextDouble() < (tendrilRate + tendrilsPerDepth * d) * dt)
+        if (sprout > 0f && list.Count < maxTendrils && rng.NextDouble() < sprout * (tendrilRate + tendrilsPerDepth * d) * dt)
             list.Add(new Tendril
             {
                 x = viewX + (float)(rng.NextDouble() * 2 - 1) * halfView,
@@ -201,10 +214,10 @@ public class LaneRift : MonoBehaviour
         for (int i = list.Count - 1; i >= 0; i--)
         {
             var t = list[i];
-            if (!growing) t.receding = true;
+            if (retreating) t.receding = true;
             if (t.receding)
             {
-                t.length -= (running || !growing ? tendrilRecedeRunning : tendrilRecede) * dt;
+                t.length -= (retreating ? tendrilRecedeRunning : tendrilRecede) * dt;
                 if (t.length <= 0f) list.RemoveAt(i);
             }
             else if (t.length < t.maxLength * 0.97f)
@@ -287,15 +300,16 @@ public class LaneRift : MonoBehaviour
                 slowFor[lane] = 0f;
                 target = -shrinkRate;
             }
-            else if (speed < slowThreshold)
+            else if (speed < holdFrom)
             {
                 slowFor[lane] += dt;
-                target = slowFor[lane] > slowGrace ? (depth[lane] + growthSeed) * growthRate : 0f;
+                float grow = 1f - Mathf.SmoothStep(0f, 1f, Mathf.InverseLerp(growBelow, holdFrom, speed));
+                target = slowFor[lane] > slowGrace ? grow * (depth[lane] + growthSeed) * growthRate : 0f;
             }
             else
             {
                 slowFor[lane] = 0f;
-                target = -shrinkRate * speed;
+                target = -shrinkRate * Mathf.InverseLerp(shrinkFrom, 1f, speed);
             }
             rate[lane] = Mathf.SmoothDamp(rate[lane], target, ref rateAccel[lane], rateSmoothTime, Mathf.Infinity, dt);
             depth[lane] += rate[lane] * dt;
@@ -305,8 +319,13 @@ public class LaneRift : MonoBehaviour
                 depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
                 if (depth[lane] <= 0f ? rate[lane] < 0f : rate[lane] > 0f) rate[lane] = rateAccel[lane] = 0f;
             }
-            bool growing = open && rate[lane] > 0f;
-            UpdateTendrils(lane, growing, open && rate[lane] < 0f, viewX, halfView, dt);
+            // Tendrils follow what the rift is doing: sprout fully while it
+            // comes down, at holdTendrils while it holds, and pull back while
+            // it retreats (a dead band so a rate easing through 0 holds).
+            const float still = 0.05f;
+            bool retreating = !open || rate[lane] < -still;
+            float sprout = retreating ? 0f : rate[lane] > still ? 1f : holdTendrils;
+            UpdateTendrils(lane, sprout, retreating, viewX, halfView, dt);
             if (!open) continue;
 
             if (cam == null) continue;
