@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // Main menu: Play, Select Level, Settings, Quit.
@@ -13,8 +14,9 @@ using UnityEngine.UI;
 // turning on each side; pressing pushes it down a pixel. Each change of
 // selection makes the side rift flare.
 //
-// Pressing a button does nothing yet beyond the feedback: it raises Activated
-// with the button's index (see Buttons) for the game to hook up.
+// Play and Select Level open the level select, Quit closes the game (stops
+// play mode in the editor), Settings has no screen yet and only logs. Every
+// press also raises Activated with the button.
 //
 // Plate material and title font are switchable here; the sprites for every
 // option are assigned by MainMenuBuilder, so this is a look you can change in
@@ -57,6 +59,10 @@ public class MainMenu : MonoBehaviour
     public Vector2 plateSize = new Vector2(168f, 32f);
     public float pixelsPerUnit = 32f;
     public float pressTime = 0.14f;
+    [Tooltip("Scene that Play and Select Level open (name in Build Settings).")]
+    public string levelSelectScene = "LevelSelect";
+    [Tooltip("Seconds between a press and its scene change or quit, so the press shows.")]
+    public float leaveDelay = 0.3f;
     [Tooltip("Seconds per cog frame.")]
     public float cogFrameTime = 0.09f;
     [Tooltip("Title bob, in art pixels, and its period in seconds.")]
@@ -113,9 +119,12 @@ public class MainMenu : MonoBehaviour
 
     void Update()
     {
-        ReadKeyboard();
-        ReadGamepad();
-        ReadMouse();
+        if (!leaving)
+        {
+            ReadKeyboard();
+            ReadGamepad();
+            ReadMouse();
+        }
         Animate();
     }
 
@@ -195,15 +204,39 @@ public class MainMenu : MonoBehaviour
 
     public void Press(int index)
     {
-        if (index < 0 || index >= plates.Length) return;
+        if (leaving || index < 0 || index >= plates.Length) return;
         if (index != selected) Select(index);
         pressed = index;
         pressedAt = Time.unscaledTime;
         if (sideRift != null) { sideRift.Flare(); sideRift.Flare(); }
         Sfx.PlayCentred("ui_confirm", 0.8f);
         var button = (Button)index;
-        Debug.Log($"[MainMenu] {button} pressed (no action hooked up yet).");
         Activated?.Invoke(button);
+        switch (button)
+        {
+            case Button.Play:
+            case Button.SelectLevel:
+            case Button.Quit:
+                leaving = true;                  // ignore input until we go
+                Invoke(button == Button.Quit ? nameof(QuitGame) : nameof(OpenLevelSelect), leaveDelay);
+                break;
+            default:
+                Debug.Log($"[MainMenu] {button} pressed (no screen for it yet).");
+                break;
+        }
+    }
+
+    bool leaving;
+
+    void OpenLevelSelect() => SceneManager.LoadScene(levelSelectScene);
+
+    void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     void Animate()

@@ -21,10 +21,10 @@ using UnityEngine.UI;
 public static class MainMenuBuilder
 {
     public const string ScenePath = "Assets/Scenes/MainMenu.unity";
-    const string MenuDir = "Assets/Art/UI/Menu/";
+    internal const string MenuDir = "Assets/Art/UI/Menu/";
     const string ScreenTexturePath = MenuDir + "MenuScreen.renderTexture";
-    const int ArtWidth = 640, ArtHeight = 360;
-    const float Ppu = 32f;
+    internal const int ArtWidth = 640, ArtHeight = 360;
+    internal const float Ppu = 32f;
     const float HalfWidth = ArtWidth / Ppu / 2f;    // 10 units
     const float HalfHeight = ArtHeight / Ppu / 2f;  // 5.625 units
     static readonly int[] PlateTops = { 140, 180, 220, 260 };
@@ -37,9 +37,21 @@ public static class MainMenuBuilder
     [MenuItem("Tick & Tock/Build Main Menu")]
     public static void Build()
     {
-        PrepareArt();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+        var stage = BuildStage();
+        Menu(stage.camera, stage.screen, stage.rift);
 
+        EditorSceneManager.SaveScene(scene, ScenePath);
+        LevelMap.AddToBuildSettings(ScenePath);
+        Debug.Log($"[MainMenuBuilder] Saved {ScenePath}");
+    }
+
+    // Everything behind a menu, shared by the main menu and the level select:
+    // the cameras and render texture, the scrolling backdrop with its day
+    // cycle and runners, the letterboxed screen and the side rift.
+    internal static (Camera camera, RawImage screen, SideRift rift) BuildStage()
+    {
+        PrepareArt();
         var screenTexture = ScreenTexture();
         var menuCamera = MenuCamera(screenTexture);
         ScreenCamera();
@@ -75,11 +87,7 @@ public static class MainMenuBuilder
 
         var screen = ScreenCanvas(screenTexture, out var glitchLayer);
         var rift = Rift(screen, glitchLayer);
-        Menu(menuCamera, screen, rift);
-
-        EditorSceneManager.SaveScene(scene, ScenePath);
-        LevelMap.AddToBuildSettings(ScenePath);
-        Debug.Log($"[MainMenuBuilder] Saved {ScenePath}");
+        return (menuCamera, screen, rift);
     }
 
     // ---- art --------------------------------------------------------------
@@ -106,10 +114,10 @@ public static class MainMenuBuilder
         return new Vector2(Mathf.Floor(w / 2f) / w, Mathf.Floor(h / 2f) / h);
     }
 
-    static Sprite MenuSprite(string name) => AssetDatabase.LoadAssetAtPath<Sprite>($"{MenuDir}{name}.png");
+    internal static Sprite MenuSprite(string name) => AssetDatabase.LoadAssetAtPath<Sprite>($"{MenuDir}{name}.png");
 
     // World position for a sprite whose top-left pixel sits at art pixel (x, y).
-    static Vector3 At(Sprite s, float x, float y)
+    internal static Vector3 At(Sprite s, float x, float y)
     {
         var size = s.rect.size;
         return new Vector3((x + s.pivot.x) / Ppu - HalfWidth, HalfHeight - (y + size.y - s.pivot.y) / Ppu, 0f);
