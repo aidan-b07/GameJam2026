@@ -23,13 +23,19 @@ public class LaneRift : MonoBehaviour
     [Tooltip("Reach (units) of each rift below its lane's view top while it is closed.")]
     public float restReach = 0.28125f;   // 9 art pixels, the old rift's half height
 
+    // Height (units) of the teeth along a rift's edge, centred on its reach
+    // (a closed rift's teeth are as tall as its reach). LaneDivider draws them.
+    public const float TeethAmplitude = 0.5f;   // 16 art pixels
+
     [Header("Growth (player slower than the threshold)")]
     [Tooltip("Normalised horizontal speed (0..1) below which the rift grows.")]
     [Range(0f, 1f)] public float slowThreshold = 0.35f;
+    [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
+    public float slowGrace = 0.5f;
     [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second.")]
     public float growthRate = 0.55f;
     [Tooltip("Depth (units) the exponential grows from: higher starts faster. " +
-             "From closed it reaches 1 unit in about 2 s and the player in about 5 s.")]
+             "From closed (after slowGrace) it reaches 1 unit in about 2 s and a standing player in about 5 s.")]
     public float growthSeed = 0.5f;
 
     [Header("Shrink (player at or above the threshold)")]
@@ -37,15 +43,23 @@ public class LaneRift : MonoBehaviour
     public float shrinkRate = 2.5f;
 
     [Header("Kill")]
-    [Tooltip("Units above the top of the player's collider (their head) at which the rift kills.")]
-    public float headMargin = 0.1f;
+    [Tooltip("Units above the top of the player's collider (their head) at which the rift kills; negative lets the teeth graze.")]
+    public float headMargin = 0f;
     [Tooltip("Depth (units) at which the rift stops growing, about the full lane height.")]
     public float maxDepth = 12f;
 
     float[] depth = new float[2];
+    float[] slowFor = new float[2];
 
     // Rift reach (units) below the top of the lane's view: rest plus growth.
     public float Reach(int lane) => restReach + Depth(lane);
+
+    // Reach (units) of the lowest tooth tips: where the rift kills.
+    public float TipReach(int lane)
+    {
+        float reach = Reach(lane);
+        return reach + Mathf.Min(reach, TeethAmplitude) / 2f;
+    }
 
     // Growth (units) beyond the closed rift.
     public float Depth(int lane) => depth != null && lane >= 0 && lane < depth.Length ? depth[lane] : 0f;
@@ -67,7 +81,7 @@ public class LaneRift : MonoBehaviour
 
     public void Close()
     {
-        for (int i = 0; i < depth.Length; i++) depth[i] = 0f;
+        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = 0f;
     }
 
     void Update()
@@ -84,14 +98,21 @@ public class LaneRift : MonoBehaviour
 
             float speed = flow.HorizontalSpeed(lane);
             if (speed < slowThreshold)
-                depth[lane] += (depth[lane] + growthSeed) * growthRate * dt;
+            {
+                slowFor[lane] += dt;
+                if (slowFor[lane] > slowGrace)
+                    depth[lane] += (depth[lane] + growthSeed) * growthRate * dt;
+            }
             else
+            {
+                slowFor[lane] = 0f;
                 depth[lane] -= shrinkRate * speed * dt;
+            }
             depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
 
             var cam = cams != null && lane < cams.Length ? cams[lane] : null;
             if (cam == null) continue;
-            float edge = cam.transform.position.y + cam.orthographicSize - Reach(lane);
+            float edge = cam.transform.position.y + cam.orthographicSize - TipReach(lane);
             if (flow.Top(lane) + headMargin >= edge)
             {
                 flow.KillAll();

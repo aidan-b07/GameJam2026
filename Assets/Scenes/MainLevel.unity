@@ -41398,7 +41398,6 @@ MonoBehaviour:
   topCamera: {fileID: 2046337918}
   bottomCamera: {fileID: 237863429}
   minHalfHeight: 9
-  teethAmplitude: 16
   fps: 12
   morphTime: 5
   previewDepth: 0
@@ -49768,8 +49767,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LaneRift
   restReach: 0.28125
   slowThreshold: 0.35
+  slowGrace: 0.5
   growthRate: 0.55
   growthSeed: 0.5
   shrinkRate: 2.5
-  headMargin: 0.1
+  headMargin: 0
   maxDepth: 12

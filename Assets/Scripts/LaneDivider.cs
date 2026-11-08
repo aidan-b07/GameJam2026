@@ -35,8 +35,6 @@ public class LaneDivider : MonoBehaviour
 
     [Tooltip("Reach in art pixels of a closed rift, and of the seam rift's crack up into Tick's ground.")]
     public float minHalfHeight = 9f;
-    [Tooltip("Height in art pixels of the teeth along a growing edge (a closed rift's teeth are as tall as its reach).")]
-    public float teethAmplitude = 16f;
     [Tooltip("Animation frames per second (real time), stepped like the sprites.")]
     public float fps = 12f;
     [Tooltip("Seconds for the edge teeth to morph into a new shape.")]
@@ -188,7 +186,7 @@ public class LaneDivider : MonoBehaviour
         float broad = Morph(col * Col / 120f, seconds / (morphTime * 2.5f), seed);
         float teeth = Morph(col * Col / 24f, seconds / morphTime, seed + 50);
         float shape = 0.65f * broad + 0.35f * teeth;
-        float amp = Mathf.Min(reach, teethAmplitude);
+        float amp = Mathf.Min(reach, LaneRift.TeethAmplitude * PixelsPerUnit);
         return Mathf.Round((reach + amp * (shape - 0.5f)) / 2f) * 2f;
     }
 
