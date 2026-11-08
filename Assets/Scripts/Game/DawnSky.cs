@@ -152,6 +152,7 @@ public class DawnSky : MonoBehaviour
         tintMulTex = NewTex(rw, rh, out tintMulPx, "DawnTintMul");
         tintTex = NewTex(rw, rh, out tintPx, "DawnTint");
         raysTex = NewTex(rw, rh, out raysPx, "DawnRays");
+        raysBack = new Color32[raysPx.Length];
         fxTex = NewTex(fw, fh, out fxPx, "DawnFx");
         fxAcc = new float[fw * fh * 3];
         warmTex = NewTex(1, rh, out var warmPx, "DawnWarm");
@@ -494,14 +495,36 @@ public class DawnSky : MonoBehaviour
                 DrawTint(sun, low);
             }
             DrawDisc(sun, t, low);
+            // The ray field is plain array maths: it runs on a worker thread
+            // and shows the frame after it was asked for (on WebGL, which has
+            // no threads, in place). The effects follow when it lands, since
+            // the motes read it.
+            if (raysTask != null && raysTask.IsCompleted)
+            {
+                RaysMs = raysTaskMs;
+                ShowRays();
+                raysTask = null;
+            }
             int raysFrame = Mathf.FloorToInt(t * raysFps);
-            if (raysFrame != lastRaysFrame)
+            if (raysFrame != lastRaysFrame && raysTask == null)
             {
                 lastRaysFrame = raysFrame;
                 float tr = raysFrame / raysFps;
                 var rs = SunPath(tr);
-                DrawRays(rs, tr, Low(rs), Seg(tr, 6.6f, 7.4f), SunVisible(rs));
-                DrawFx(rs, tr, Low(rs), Seg(tr, 6.6f, 7.4f), SunVisible(rs));
+                pendingRays = (rs, tr, Low(rs), Seg(tr, 6.6f, 7.4f), SunVisible(rs));
+                var job = pendingRays;
+                if (Application.platform == RuntimePlatform.WebGLPlayer)
+                {
+                    DrawRays(job.sun, job.t, job.low, job.on, job.vis, raysBack);
+                    ShowRays();
+                }
+                else
+                    raysTask = System.Threading.Tasks.Task.Run(() =>
+                    {
+                        var sw = Stopwatch.StartNew();
+                        DrawRays(job.sun, job.t, job.low, job.on, job.vis, raysBack);
+                        raysTaskMs = (float)sw.Elapsed.TotalMilliseconds;
+                    });
             }
         }
 
@@ -638,7 +661,25 @@ public class DawnSky : MonoBehaviour
         tintMulTex.Apply(false);
     }
 
-    void DrawRays(Vector2 sun, float t, float low, float on, float vis)
+    System.Threading.Tasks.Task raysTask;
+    float raysTaskMs;
+    Color32[] raysBack;
+    (Vector2 sun, float t, float low, float on, float vis) pendingRays;
+    // Milliseconds the last ray field took on its worker thread.
+    public float RaysMs { get; private set; }
+
+    void ShowRays()
+    {
+        (raysPx, raysBack) = (raysBack, raysPx);
+        raysTex.SetPixels32(raysPx);
+        raysTex.Apply(false);
+        var j = pendingRays;
+        DrawFx(j.sun, j.t, j.low, j.on, j.vis);
+    }
+
+    // Fills dst (rw x rh, bottom row first). Touches no Unity objects, so it
+    // can run off the main thread.
+    void DrawRays(Vector2 sun, float t, float low, float on, float vis, Color32[] dst)
     {
         float cx = sun.x / 4f, cy = sun.y / 4f, since = t - PeekTime;
         float grow = EOut(Seg(since, 0f, 2.2f));
@@ -710,10 +751,8 @@ public class DawnSky : MonoBehaviour
                 v *= on;
                 int lvl = Mathf.FloorToInt(v * 4f + Dither(x, y) * 0.9f);
                 int i = (rh - 1 - y) * rw + x;
-                raysPx[i] = lvl <= 0 ? default : RayPal[Mathf.Min(4, lvl)];
+                dst[i] = lvl <= 0 ? default : RayPal[Mathf.Min(4, lvl)];
             }
-        raysTex.SetPixels32(raysPx);
-        raysTex.Apply(false);
     }
 
     // --- additive effects at 2 px resolution ------------------------------------
@@ -826,6 +865,7 @@ public class DawnSky : MonoBehaviour
 
     void OnDestroy()
     {
+        raysTask?.Wait();
         foreach (var tex in new[] { glowTex, discTex, tintMulTex, tintTex, raysTex, fxTex, warmTex })
             if (tex != null) Destroy(tex);
         foreach (var m in new[] { screenMat, addMat, mulMat })
