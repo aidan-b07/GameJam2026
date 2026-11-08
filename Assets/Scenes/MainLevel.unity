@@ -229,7 +229,7 @@ SpriteRenderer:
   m_Size: {x: 0.96875, y: 0.96875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &9321621
@@ -2523,7 +2523,7 @@ SpriteRenderer:
   m_Size: {x: 196, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &153514542
@@ -4759,7 +4759,7 @@ SpriteRenderer:
   m_Size: {x: 15.625, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &258923336
@@ -18445,7 +18445,7 @@ SpriteRenderer:
   m_Size: {x: 196, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!114 &349378616
@@ -35129,7 +35129,7 @@ SpriteRenderer:
   m_Size: {x: 5.9375, y: 3.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &522214762
@@ -38629,7 +38629,7 @@ SpriteRenderer:
   m_Size: {x: 5.9375, y: 3.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &658936800
@@ -43848,7 +43848,7 @@ SpriteRenderer:
   m_Size: {x: 0.96875, y: 0.96875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &953616659
@@ -48783,7 +48783,7 @@ SpriteRenderer:
   m_Size: {x: 15.625, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &1121442643
@@ -50343,8 +50343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   idleWorldSpeed: 0.35
   maxWorldSpeed: 3
-  rampDuration: 0.3
-  rampSharpness: 2
+  rampDuration: 1.5
   holdTime: 0.25
   windDownDuration: 1.2
   movingThreshold: 0.1

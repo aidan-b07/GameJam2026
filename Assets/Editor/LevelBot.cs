@@ -136,22 +136,49 @@ public static class LevelBot
     // death when stopOnDeath, or once both plans are done.
     public static string Run(IEnumerable<In> tick, IEnumerable<In> tock, float maxSeconds, bool stopOnDeath = true)
     {
+        Start(tick, tock, stopOnDeath);
+        return Continue(maxSeconds);
+    }
+
+    // Resumable run, so no single MCP call steps the Editor for long: Start
+    // sets the plans up, each Continue steps at most maxSeconds (e.g. 12 s =
+    // 600 steps) and returns that slice's log. Finished is set once both plans
+    // end or (with stopOnDeath) a death stops the run.
+    static IEnumerator<In> a, b;
+    static bool aDone, bDone, wasDead, stopAtDeath;
+    static int cp;
+    static FloorButton[] buttons;
+    static bool[] pressed;
+    static float nextLog, start;
+    public static bool Finished { get; private set; }
+
+    public static void Start(IEnumerable<In> tick, IEnumerable<In> tock, bool stopOnDeath = true)
+    {
+        a = (tick ?? Enumerable.Empty<In>()).GetEnumerator();
+        b = (tock ?? Enumerable.Empty<In>()).GetEnumerator();
+        aDone = tick == null; bDone = tock == null;
+        stopAtDeath = stopOnDeath;
+        wasDead = GameFlow.Instance.Respawning;
+        cp = GameFlow.Instance.CurrentCheckpoint;
+        buttons = UnityEngine.Object.FindObjectsByType<FloorButton>();
+        pressed = buttons.Select(x => x.Pressed).ToArray();
+        start = T; nextLog = 0f;
+        Finished = false;
+    }
+
+    public static string Continue(float maxSeconds)
+    {
         log.Clear();
-        var a = (tick ?? Enumerable.Empty<In>()).GetEnumerator();
-        var b = (tock ?? Enumerable.Empty<In>()).GetEnumerator();
-        bool aDone = tick == null, bDone = tock == null;
-        bool wasDead = GameFlow.Instance.Respawning;
-        int cp = GameFlow.Instance.CurrentCheckpoint;
-        var buttons = UnityEngine.Object.FindObjectsByType<FloorButton>();
-        var pressed = buttons.Select(x => x.Pressed).ToArray();
-        float nextLog = 0f, start = T;
-        while (T - start < maxSeconds)
+        if (Finished) return "finished\n";
+        float sliceEnd = T + maxSeconds;
+        bool stopOnDeath = stopAtDeath;
+        while (T < sliceEnd)
         {
             var ia = new In();
             var ib = new In();
             if (!aDone) { if (a.MoveNext()) ia = a.Current; else { aDone = true; Mark("Tick plan done"); } }
             if (!bDone) { if (b.MoveNext()) ib = b.Current; else { bDone = true; Mark("Tock plan done"); } }
-            if (aDone && bDone) break;
+            if (aDone && bDone) { Finished = true; break; }
             Frame(ia, ib);
 
             bool dead = GameFlow.Instance.Respawning;
@@ -159,7 +186,7 @@ public static class LevelBot
             {
                 Deaths++;
                 Mark($"DEATH tick ({X(0):F2},{Feet(0):F2}) clear {Clear(0):F2}  tock ({X(1):F2},{Feet(1):F2}) clear {Clear(1):F2}");
-                if (stopOnDeath) break;
+                if (stopOnDeath) { Finished = true; break; }
             }
             wasDead = dead;
             if (GameFlow.Instance.CurrentCheckpoint != cp)
@@ -179,7 +206,7 @@ public static class LevelBot
                 log.AppendLine($"{T,6:F2} tick ({X(0),6:F2},{Feet(0),5:F2}) s{Speed(0):F2} r{Rift(0):F2} c{Clear(0):F2} | tock ({X(1),6:F2},{Feet(1),5:F2}) s{Speed(1):F2} r{Rift(1):F2} c{Clear(1):F2}");
             }
         }
-        log.AppendLine($"{T,6:F2} end tick ({X(0):F2},{Feet(0):F2}) tock ({X(1):F2},{Feet(1):F2}) deaths {Deaths}");
+        log.AppendLine($"{T,6:F2} {(Finished ? "end" : "slice")} tick ({X(0):F2},{Feet(0):F2}) tock ({X(1):F2},{Feet(1):F2}) deaths {Deaths}");
         return log.ToString();
     }
 
