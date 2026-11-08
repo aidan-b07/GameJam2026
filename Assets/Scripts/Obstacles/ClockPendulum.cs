@@ -10,8 +10,9 @@ using UnityEngine;
 // middle of its swing it is fast and throws them off the belt into a drop; at
 // the belt's outer tiles (nudgeBeyond from under the axis) a hit is only a
 // nudge, at any lane speed, so a player near the belt's end is never thrown
-// off it, and for nudgeGrace after a nudge the same pendulum cannot throw
-// them (a nudge towards the middle must not end in a throw); at the very ends it lifts over head height, so the last tile or so
+// off it. A nudged player stays nudge-only for this pendulum while it touches
+// them and for nudgeGrace after (its solid push can drag them through the
+// middle, which must not end in a throw); at the very ends it lifts over head height, so the last tile or so
 // of the belt is never touched. Moving away from a player it only blocks. Art
 // from tools/make_pendulum.py (pendulum_clockbob_96px: frames by speed and
 // direction, never mirrored); LevelMap.Lane.ClockPendulum builds it.
@@ -45,7 +46,7 @@ public class ClockPendulum : LaneObstacle
     public float nudgeSpeed = 2.5f;
     [Tooltip("Upward speed of a nudge (units/s).")]
     public float nudgeLift = 2f;
-    [Tooltip("Real seconds after a nudge in which this pendulum only nudges that player, wherever they are.")]
+    [Tooltip("Seconds after a nudge, and after each later touch, in which this pendulum only nudges that player, wherever they are.")]
     public float nudgeGrace = 0.6f;
 
     [Header("Art")]
@@ -87,6 +88,8 @@ public class ClockPendulum : LaneObstacle
             float dist = d.magnitude;
             if (dist >= bobRadius) continue;
             Vector2 n = dist > 1e-4f ? d / dist : new Vector2(velocity.x >= 0f ? 1f : -1f, 0f);
+            bool graced = nudged.TryGetValue(p, out float at) && Time.time - at < nudgeGrace;
+            if (graced) nudged[p] = Time.time;
 
             // Solid: push the body out of the disc, sideways or up but never
             // down (that would drive it into the ground, which CrushDetector
@@ -103,8 +106,7 @@ public class ClockPendulum : LaneObstacle
             if (into > minKnockSpeed && !p.Knocked)
             {
                 float speed = velocity.magnitude;
-                bool nudge = Mathf.Abs(box.center.x - transform.position.x) > nudgeBeyond
-                             || (nudged.TryGetValue(p, out float at) && Time.time - at < nudgeGrace);
+                bool nudge = graced || Mathf.Abs(box.center.x - transform.position.x) > nudgeBeyond;
                 if (nudge) nudged[p] = Time.time;
                 var knock = nudge
                     ? new Vector2(Mathf.Clamp(velocity.x * knockScale, -nudgeSpeed, nudgeSpeed), nudgeLift)
