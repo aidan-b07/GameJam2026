@@ -157,7 +157,12 @@ public class LaneHud : MonoBehaviour
                 hideFlags = HideFlags.HideAndDontSave,
             };
             s.px = new Color32[W * H];
-            if (lanes[i]?.dial != null) lanes[i].dial.texture = s.tex;
+            if (lanes[i]?.dial != null)
+            {
+                // Saved disabled: without its runtime texture a RawImage draws a white box.
+                lanes[i].dial.texture = s.tex;
+                lanes[i].dial.enabled = true;
+            }
             var v = lanes[i]?.grade;
             if (v != null)
             {

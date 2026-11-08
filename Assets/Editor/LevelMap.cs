@@ -1767,6 +1767,7 @@ public static class LevelMap
             warn.enabled = false;
             var dial = HudImage(gauge, "Dial", null, false,
                 Vector2.zero, Vector2.one, new Vector2(0.5f, 0.5f), Vector2.zero, Vector2.zero);
+            dial.enabled = false;   // LaneHud enables it with its runtime texture
 
             var cam = cameras[lane].GetComponent<Camera>();
             var data = cam.GetUniversalAdditionalCameraData();
