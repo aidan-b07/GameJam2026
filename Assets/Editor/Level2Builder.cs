@@ -6,10 +6,29 @@ using static LevelMap;
 // the other lane that need the opposite from the partner. Moving speeds up the
 // partner's lane: time gates and bridges need the partner moving, lifts run
 // faster with them moving, crushers are easier with them standing still.
+// The piston run (section 5) puts belts between crushers in both lanes at the
+// same spot, so neither player can stand still and wait for the other.
 public static class Level2Builder
 {
     public const string ScenePath = "Assets/Scenes/Level2_Foundry.unity";
-    const int Length = 176;
+    const int Length = 205;
+
+    // Piston run: four crushers side by side with a 3-tile belt in each gap.
+    // Belts run on lane time like the crushers, so the partner moving speeds
+    // up both. A player standing in a gap is carried into the next head.
+    const int RunStart = 138;               // first crusher's head x
+    const int RunPitch = 6;                 // head to head: 3 head + 3 belt
+    const float BeltSpeed = 0.75f;          // units per lane second at 1x
+
+    static void PistonRun(Lane l, float beltSpeed, float firstOffset, float offsetStep)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            int x = RunStart + i * RunPitch;
+            l.Crusher(x, firstOffset + i * offsetStep);
+            if (i < 3) l.Conveyor(x + 3, x + 5, beltSpeed);
+        }
+    }
 
     [MenuItem("Tick & Tock/Build Level 2 Map")]
     public static void Build() => LevelMap.Build(ScenePath, Length, Tick, Tock);
@@ -45,14 +64,20 @@ public static class Level2Builder
         l.Crusher(114);
         l.Crusher(120, 1.2f);
         l.TimeGate(130);
-        l.Checkpoint(134);
-        l.Lift(138, 4);
-        l.Fill(141, Length + 8, 4);
 
-        // 5. Finale: twin gates at the same spot, so both keep moving to get through.
-        l.Ledge(146, 149, 6);
-        l.TimeGate(154);
-        l.Door(164);
+        // 5. Piston run: belts run back into the last crusher, so Tick walks
+        //    against them between slams while Tock does the same below.
+        l.Checkpoint(134);
+        PistonRun(l, -BeltSpeed, 0f, 0.9f);
+
+        l.Checkpoint(163);
+        l.Lift(167, 4);
+        l.Fill(170, Length + 8, 4);
+
+        // 6. Finale: twin gates at the same spot, so both keep moving to get through.
+        l.Ledge(175, 178, 6);
+        l.TimeGate(183);
+        l.Door(193);
     }
 
     static void Tock(Lane l)
@@ -82,13 +107,20 @@ public static class Level2Builder
         l.TimeGate(116);
         l.Crusher(122);
         l.Crusher(128, 1.5f);
-        l.Checkpoint(134);
-        l.Lift(140, 4);
-        l.Fill(143, Length + 8, 4);
 
-        // 5. Finale: twin gates.
-        l.Ledge(148, 151, 6);
-        l.TimeGate(154);
-        l.Door(164);
+        // 5. Piston run: belts run forward into the next crusher, so Tock has to
+        //    walk back against them while waiting, and the slams come in the
+        //    other order to Tick's.
+        l.Checkpoint(134);
+        PistonRun(l, BeltSpeed, 2.7f, -0.9f);
+
+        l.Checkpoint(163);
+        l.Lift(169, 4);
+        l.Fill(172, Length + 8, 4);
+
+        // 6. Finale: twin gates.
+        l.Ledge(177, 180, 6);
+        l.TimeGate(183);
+        l.Door(193);
     }
 }
