@@ -134,13 +134,59 @@ public class GameFlow : MonoBehaviour
     [ContextMenu("Kill All")]
     public void KillAll()
     {
-        if (!Respawning && !Finished) StartCoroutine(DieAndRespawn());
+        if (!Respawning && !Finished) StartCoroutine(DieAndRespawn(null, false));
     }
 
-    private IEnumerator DieAndRespawn()
+    // Highest checkpoint index in any lane (0 when there is only the spawn).
+    public int HighestCheckpoint
+    {
+        get
+        {
+            int max = 0;
+            foreach (var key in checkpoints.Keys) max = Mathf.Max(max, key.index);
+            return max;
+        }
+    }
+
+    public bool HasCheckpoint(int index)
+    {
+        for (int lane = 0; lane < list.Count; lane++)
+            if (checkpoints.ContainsKey((index, lane))) return true;
+        return false;
+    }
+
+    // Judge shortcut (JudgeKeys): makes checkpoint index current, as if both
+    // players had reached it (its lamps light), and respawns both there with
+    // the death sequence (no death sound, ScreenLeash off meanwhile). False if
+    // no lane has that checkpoint or a respawn or the ending is running.
+    public bool WarpToCheckpoint(int index)
+    {
+        if (!HasCheckpoint(index)) return false;
+        return WarpTo(null, index);
+    }
+
+    // Judge shortcut: like WarpToCheckpoint, but puts each player's feet at
+    // feet[lane] instead (a null entry: that lane's checkpoint). A later death
+    // still respawns at checkpoint.
+    public bool WarpTo(Vector2?[] feet, int checkpoint)
+    {
+        if (Respawning || Finished || reached == null) return false;
+        checkpoint = Mathf.Max(0, checkpoint);
+        for (int lane = 0; lane < reached.Length; lane++) reached[lane] = checkpoint;
+        CurrentCheckpoint = checkpoint;
+        StartCoroutine(DieAndRespawn(feet, true));
+        return true;
+    }
+
+    private IEnumerator DieAndRespawn(Vector2?[] warpFeet, bool warp)
     {
         Respawning = true;
-        Sfx.PlayCentred("death");
+        // A warp may move the players far from the view: keep the leash off
+        // until they stand there again.
+        var leash = warp && cameraRig != null ? cameraRig.GetComponent<ScreenLeash>() : null;
+        bool leashWasOn = leash != null && leash.enabled;
+        if (leash != null) leash.enabled = false;
+        if (!warp) Sfx.PlayCentred("death");
         float death = 0f;
         foreach (var p in list)
         {
@@ -156,8 +202,21 @@ public class GameFlow : MonoBehaviour
 
         // The death animation ends empty, so the move back is not seen.
         var at = new Checkpoint[list.Count];
+        var feetAt = new Vector2?[list.Count];
         for (int lane = 0; lane < list.Count; lane++)
-            at[lane] = MoveToCheckpoint(list[lane], lane);
+        {
+            Vector2? target = warpFeet != null && lane < warpFeet.Length ? warpFeet[lane] : null;
+            if (target.HasValue && list[lane].rb != null)
+            {
+                Place(list[lane], target.Value);
+                feetAt[lane] = target.Value;
+            }
+            else
+            {
+                at[lane] = MoveToCheckpoint(list[lane], lane);
+                if (at[lane] != null) feetAt[lane] = at[lane].feet;
+            }
+        }
         LevelReset?.Invoke();
 
         float pan = cameraRig != null ? cameraRig.PanToPlayers(panSpeed, minPan, maxPan) : 0f;
@@ -169,9 +228,10 @@ public class GameFlow : MonoBehaviour
         {
             for (int lane = 0; lane < list.Count; lane++)
             {
-                if (list[lane].rb == null || at[lane] == null) continue;
-                lamps.TryGetValue(at[lane], out var lamp);
-                wisp.Play(lane, lamp, new Vector3(list[lane].rb.position.x, at[lane].feet.y, 0f));
+                if (list[lane].rb == null || !feetAt[lane].HasValue) continue;
+                CheckpointLamp lamp = null;
+                if (at[lane] != null) lamps.TryGetValue(at[lane], out lamp);
+                wisp.Play(lane, lamp, new Vector3(list[lane].rb.position.x, feetAt[lane].Value.y, 0f));
             }
             yield return new WaitForSeconds(wisp.Duration);
         }
@@ -193,6 +253,7 @@ public class GameFlow : MonoBehaviour
             if (p.crush != null) p.crush.Rearm();
         }
         Respawning = false;
+        if (leash != null) leash.enabled = leashWasOn;
     }
 
     private Checkpoint MoveToCheckpoint(Player p, int lane)
@@ -204,11 +265,17 @@ public class GameFlow : MonoBehaviour
             checkpoints.TryGetValue((i, lane), out c);
         if (c == null) return null;
 
-        Vector2 pos = c.feet - new Vector2(0f, FeetOffset(p));
+        Place(p, c.feet);
+        return c;
+    }
+
+    // Puts the player's feet on the given point, at rest.
+    private static void Place(Player p, Vector2 feet)
+    {
+        Vector2 pos = feet - new Vector2(0f, FeetOffset(p));
         p.rb.position = pos;
         p.rb.transform.position = new Vector3(pos.x, pos.y, p.rb.transform.position.z);
         p.rb.linearVelocity = Vector2.zero;
-        return c;
     }
 
     // Feet height relative to the body's position.
