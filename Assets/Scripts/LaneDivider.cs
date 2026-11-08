@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 // The Unraveling rifts, drawn on a screen-space overlay canvas (one canvas
 // unit is one art pixel). Two bands, one per lane, each hanging from the top
-// edge of its lane's view and reaching down by LaneRift.Reach(lane):
+// edge of its lane's view and reaching down by LaneRift.ReachAt(lane, x)
+// (uneven along the edge: swells, fingers and columns that crack down):
 // - rift, on the seam between Tick's lane (top) and Tock's (bottom), grows
 //   down into Tock's view; its top edge stays a thin crack in Tick's ground;
 // - topRift, along the top of the screen, grows down into Tick's view.
@@ -74,7 +75,9 @@ public class LaneDivider : MonoBehaviour
         public bool upperEdge;
         public Texture2D tex;
         public Color32[] pixels;
-        public int[] top, bottom;
+        public int[] top, bottom, lastBottom;
+        public int lastOrigin;
+        public bool hasLast;
         public readonly List<Chunk> chunks = new List<Chunk>();
         public float drawnReach = -1f;
         public int drawnCameraPx;
@@ -165,6 +168,15 @@ public class LaneDivider : MonoBehaviour
         return minHalfHeight + previewDepth * PixelsPerUnit;
     }
 
+    // Reach in art pixels of the edge column at world pixel wx.
+    float ReachAt(int lane, int wx)
+    {
+        float x = wx / PixelsPerUnit;
+        if (Application.isPlaying && LaneRift.Instance != null)
+            return LaneRift.Instance.ReachAt(lane, x) * PixelsPerUnit * scale;
+        return (minHalfHeight + LaneRift.Uneven(previewDepth, x, lane) * PixelsPerUnit) * scale;
+    }
+
     bool EnsureTexture(Band b, int width)
     {
         if (b.tex != null && b.tex.width == width) return false;
@@ -179,12 +191,14 @@ public class LaneDivider : MonoBehaviour
         b.pixels = new Color32[width * b.Height];
         b.top = new int[width];
         b.bottom = new int[width];
+        b.lastBottom = new int[width];
+        b.hasLast = false;
         b.image.texture = b.tex;
         return true;
     }
 
     // Edge extent (px from the anchor) of the world column containing world
-    // pixel wx: the mean reach plus teeth. The broad shape and the teeth each
+    // pixel wx: the column's reach plus teeth. The broad shape and the teeth each
     // cross-fade between fixed noise fields, so the edge reshapes in place
     // without sliding along the level.
     float Extent(int wx, float reach, float seconds, int seed)
@@ -221,7 +235,7 @@ public class LaneDivider : MonoBehaviour
             b.top[x] = b.upperEdge
                 ? Mathf.Clamp((int)Extent(origin + x + upperShift, minHalfHeight * scale, seconds, 1), 2, mid - 8)
                 : mid + 3;
-            b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, reach, seconds, b.seed), 2, Below - 8);
+            b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, ReachAt(b.lane, origin + x), seconds, b.seed), 2, Below - 8);
         }
 
         int band = heat > 0.5f ? 4 : 2;
@@ -300,6 +314,29 @@ public class LaneDivider : MonoBehaviour
                     life = 10 + rng.Next(10),
                 });
             }
+            // Crumbs drop from columns that just cracked further down.
+            if (b.hasLast && growth > 0f)
+            {
+                int shift = origin - b.lastOrigin, crumbs = 0;
+                int cols = (w - 2 * Margin) / Col, start = rng.Next(Mathf.Max(1, cols));
+                for (int i = 0; i < cols && crumbs < 6; i++)
+                {
+                    int x = Margin + (start + i) % cols * Col, last = x + shift;
+                    if (last < 0 || last >= w || b.bottom[x] - b.lastBottom[last] < 6) continue;
+                    if (rng.NextDouble() > 0.2) continue;
+                    crumbs++;
+                    b.chunks.Add(new Chunk
+                    {
+                        x = origin + x + rng.Next(Col), y = mid + b.bottom[x] + 1,
+                        vx = (float)(rng.NextDouble() - 0.5) * 0.3f,
+                        vy = 1f + (float)rng.NextDouble(),
+                        life = 6 + rng.Next(6),
+                    });
+                }
+            }
+            System.Array.Copy(b.bottom, b.lastBottom, w);
+            b.lastOrigin = origin;
+            b.hasLast = true;
             for (int n = b.chunks.Count - 1; n >= 0; n--)
             {
                 var c = b.chunks[n];
