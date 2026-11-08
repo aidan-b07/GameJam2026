@@ -6,13 +6,18 @@ using UnityEngine;
 // the partner's movement no longer changes it) and LaneRift.Calm retracts
 // both rifts, so the players can take in the scenery. Once either player
 // leaves (or a death starts) the lanes ease back to the partner-driven speed
-// and the rifts can grow again.
+// and the rifts can grow again. CalmHalo (added here at runtime) shows it.
 public class ScenicZone : MonoBehaviour
 {
     [Tooltip("World x range per lane (Tick, Tock): x = start, y = end. The player's root x must be inside.")]
     public Vector2[] ranges = { new Vector2(44f, 81f), new Vector2(38f, 81f) };
 
     public bool Active { get; private set; }
+
+    void Start()
+    {
+        if (GetComponent<CalmHalo>() == null) gameObject.AddComponent<CalmHalo>().zone = this;
+    }
 
     void Update()
     {

@@ -77,6 +77,9 @@ public class LaneHud : MonoBehaviour
     public float coolDesaturation = 12f;
     public Color warmFilter = new Color(1f, 0.96f, 0.88f);
     public Color coolFilter = new Color(0.95f, 0.97f, 1.03f);
+    [Tooltip("Saturation added at full calm (CalmHalo, the scenic zone).")]
+    public float calmSaturation = 6f;
+    public Color calmFilter = new Color(1f, 0.95f, 0.86f);
 
     [Header("Edge wind")]
     [Tooltip("Overall strength: more, longer, brighter streaks (doubled above 1.5) in wider bands. 1 = the first mockup.")]
@@ -161,6 +164,9 @@ public class LaneHud : MonoBehaviour
         for (int i = 0; i < state.Length; i++)
             if (lane < 0 || lane == i) state[i].hasHour = false;
     }
+
+    // 0..1, set by CalmHalo while the scenic zone is active: warms the grade.
+    public float Calm { get; set; }
 
     // Speed streaks, the grade and the rift warning; off leaves only the gauges.
     public bool EffectsEnabled
@@ -373,9 +379,11 @@ public class LaneHud : MonoBehaviour
 
         if (s.adjust != null)
         {
-            s.adjust.saturation.value = fast * warmSaturation - slow * coolDesaturation;
+            float calm = effects ? Calm : 0f;
+            s.adjust.saturation.value = fast * warmSaturation - slow * coolDesaturation + calm * calmSaturation;
             var c = Color.Lerp(Color.white, coolFilter, slow);
-            s.adjust.colorFilter.value = Color.Lerp(c, warmFilter, fast);
+            c = Color.Lerp(c, warmFilter, fast);
+            s.adjust.colorFilter.value = Color.Lerp(c, calmFilter, calm);
         }
     }
 
