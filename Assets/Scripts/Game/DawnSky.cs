@@ -386,24 +386,29 @@ public class DawnSky : MonoBehaviour
         int layer = 31;
         while (layer > 7 && !string.IsNullOrEmpty(LayerMask.LayerToName(layer))) layer--;
         var saved = new List<(SpriteRenderer sr, int layer, bool enabled, Color color)>();
-        foreach (var sr in stills)
-        {
-            saved.Add((sr, sr.gameObject.layer, sr.enabled, sr.color));
-            sr.gameObject.layer = layer;
-            sr.enabled = true;
-            sr.color = Color.white;
-        }
         int culling = cam.cullingMask;
-        cam.cullingMask = 1 << layer;
-        var cover = RenderAlpha(cam);
-        cam.cullingMask = culling;
-        foreach (var s in saved)
+        try
         {
-            s.sr.gameObject.layer = s.layer;
-            s.sr.enabled = s.enabled;
-            s.sr.color = s.color;
+            foreach (var sr in stills)
+            {
+                saved.Add((sr, sr.gameObject.layer, sr.enabled, sr.color));
+                sr.gameObject.layer = layer;
+                sr.enabled = true;
+                sr.color = Color.white;
+            }
+            cam.cullingMask = 1 << layer;
+            return RenderAlpha(cam);
         }
-        return cover;
+        finally
+        {
+            cam.cullingMask = culling;
+            foreach (var s in saved)
+            {
+                s.sr.gameObject.layer = s.layer;
+                s.sr.enabled = s.enabled;
+                s.sr.color = s.color;
+            }
+        }
     }
 
     // Coverage of the level in the lane camera's view, without the lane's
@@ -418,12 +423,17 @@ public class DawnSky : MonoBehaviour
             foreach (var r in root.GetComponentsInChildren<Renderer>())
                 if (r.enabled) { r.enabled = false; hidden.Add(r); }
         }
-        Hide(l.sky);
-        if (GameFlow.Instance != null)
-            foreach (var p in GameFlow.Instance.players) Hide(p);
-        var cover = RenderAlpha(l.cam);
-        foreach (var r in hidden) r.enabled = true;
-        return cover;
+        try
+        {
+            Hide(l.sky);
+            if (GameFlow.Instance != null)
+                foreach (var p in GameFlow.Instance.players) Hide(p);
+            return RenderAlpha(l.cam);
+        }
+        finally
+        {
+            foreach (var r in hidden) r.enabled = true;
+        }
     }
 
     // One render of the lane camera into a transparent target; returns the
@@ -433,34 +443,43 @@ public class DawnSky : MonoBehaviour
     float[] RenderAlpha(Camera cam)
     {
         int pw = viewW, ph = LH;
-        var rt = RenderTexture.GetTemporary(pw, ph, 24, RenderTextureFormat.ARGB32);
         var target = cam.targetTexture;
         var rect = cam.rect;
         var clear = cam.backgroundColor;
         var clearFlags = cam.clearFlags;
         var data = cam.GetUniversalAdditionalCameraData();
         bool post = data != null && data.renderPostProcessing;
-        if (data != null) data.renderPostProcessing = false;
-        cam.clearFlags = CameraClearFlags.SolidColor;
-        cam.backgroundColor = new Color(0f, 0f, 0f, 0f);
-        cam.rect = new Rect(0f, 0f, 1f, 1f);
-        cam.targetTexture = rt;
-        cam.Render();
-        cam.targetTexture = target;
-        cam.rect = rect;
-        cam.backgroundColor = clear;
-        cam.clearFlags = clearFlags;
-        if (data != null) data.renderPostProcessing = post;
-
         var prev = RenderTexture.active;
-        RenderTexture.active = rt;
-        var read = new Texture2D(pw, ph, TextureFormat.RGBA32, false);
-        read.ReadPixels(new Rect(0, 0, pw, ph), 0, 0);
-        read.Apply(false);
-        RenderTexture.active = prev;
-        RenderTexture.ReleaseTemporary(rt);
-        var px = read.GetPixels32();
-        Destroy(read);
+        RenderTexture rt = null;
+        Texture2D read = null;
+        Color32[] px;
+        try
+        {
+            rt = RenderTexture.GetTemporary(pw, ph, 24, RenderTextureFormat.ARGB32);
+            if (data != null) data.renderPostProcessing = false;
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = new Color(0f, 0f, 0f, 0f);
+            cam.rect = new Rect(0f, 0f, 1f, 1f);
+            cam.targetTexture = rt;
+            cam.Render();
+
+            RenderTexture.active = rt;
+            read = new Texture2D(pw, ph, TextureFormat.RGBA32, false);
+            read.ReadPixels(new Rect(0, 0, pw, ph), 0, 0);
+            read.Apply(false);
+            px = read.GetPixels32();
+        }
+        finally
+        {
+            cam.targetTexture = target;
+            cam.rect = rect;
+            cam.backgroundColor = clear;
+            cam.clearFlags = clearFlags;
+            if (data != null) data.renderPostProcessing = post;
+            RenderTexture.active = prev;
+            if (rt != null) RenderTexture.ReleaseTemporary(rt);
+            if (read != null) Destroy(read);
+        }
 
         var cover = new float[rw * rh];
         for (int qy = 0; qy < rh; qy++)
