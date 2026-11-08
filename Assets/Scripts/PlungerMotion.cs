@@ -104,6 +104,8 @@ public class PlungerMotion : MonoBehaviour
     private SpriteRenderer head;
     private Vector3 visualRest;
     private float rodWidth;
+    private BoxCollider2D rodCollider;
+    private float rodBase;
 
     private void Awake()
     {
@@ -127,7 +129,15 @@ public class PlungerMotion : MonoBehaviour
             visualRest = visual.localPosition;
             head = visual.GetComponent<SpriteRenderer>();
         }
-        if (rod != null) rodWidth = rod.size.x;
+        if (rod != null)
+        {
+            rodWidth = rod.size.x;
+            // The rod is solid: a second box on this body, from the head's top
+            // up to rodTop, so players can't walk or jump through it.
+            rodBase = rod.transform.position.y - transform.position.y;
+            rodCollider = gameObject.AddComponent<BoxCollider2D>();
+            UpdateRodCollider(rb.position.y);
+        }
         CreateMotes();
     }
 
@@ -137,7 +147,17 @@ public class PlungerMotion : MonoBehaviour
         phaseTime += dt;
         laneTime += dt;
         AdvancePhase();
-        rb.MovePosition(PositionForPhase());
+        var target = PositionForPhase();
+        rb.MovePosition(target);
+        UpdateRodCollider(target.y);
+    }
+
+    private void UpdateRodCollider(float bodyY)
+    {
+        if (rodCollider == null) return;
+        float height = Mathf.Max(0.01f, rodTop - (bodyY + rodBase));
+        rodCollider.size = new Vector2(rodWidth * rod.transform.lossyScale.x, height);
+        rodCollider.offset = new Vector2(rod.transform.position.x - transform.position.x, rodBase + height / 2f);
     }
 
     private void LateUpdate()
