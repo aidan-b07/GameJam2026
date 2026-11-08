@@ -2,55 +2,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// The Unraveling rift drawn across the screen between Tick's lane (top) and
-// Tock's (bottom). Lives on a screen-space overlay canvas, so it stays on the
-// seam between the two camera viewports. One canvas unit is one art pixel.
+// The Unraveling rifts, drawn on a screen-space overlay canvas (one canvas
+// unit is one art pixel). Two bands, one per lane, each hanging from the top
+// edge of its lane's view and reaching down by LaneRift.Reach(lane):
+// - rift, on the seam between Tick's lane (top) and Tock's (bottom), grows
+//   down into Tock's view; its top edge stays a thin crack in Tick's ground;
+// - topRift, along the top of the screen, grows down into Tick's view.
 //
-// The rift is pixel art drawn into a texture at a low frame rate: stepped
+// Each rift is pixel art drawn into a texture at a low frame rate: stepped
 // 4 px edge columns, a dark outline and lit rim, a checker-dither glow,
-// twinkling sparkles inside and 2x2 chunks that break off the rim. Its height
-// follows the difference between the two lanes' world speeds (GameManager):
-// wide when one player races and the other stands still, thin when they move
-// alike. Chunks fly outwards while it grows and get pulled back in while it
-// shrinks.
+// twinkling sparkles inside and 2x2 chunks that break off the rim. Chunks fly
+// outwards while a rift grows and get pulled back in while it shrinks.
 //
-// The edges belong to the level: the top edge's shape is fixed to Tick's lane
-// in world space and the bottom edge's to Tock's, so they scroll with the
-// tiles as the cameras move. Between animation frames the texture is slid by
-// the camera's pixel offset (it is drawn with a margin on both sides), so the
-// edges keep up with the level at full frame rate. The shape only morphs
-// slowly in place.
+// The edges belong to the level: each edge's shape is fixed to its lane's
+// world (topCamera for the edges in Tick's view, bottomCamera for the one in
+// Tock's), so they scroll with the tiles as the cameras move. Between
+// animation frames the texture is slid by the camera's pixel offset (it is
+// drawn with a margin on both sides), so the edges keep up with the level at
+// full frame rate. The teeth only morph slowly in place.
 [ExecuteAlways]
-[DefaultExecutionOrder(-30)]   // LateUpdate after CoopCamera (-50) moves the cameras
+[DefaultExecutionOrder(-30)]   // LateUpdate after CoopCamera (-50) and LaneRift (-40)
 public class LaneDivider : MonoBehaviour
 {
+    [Tooltip("Rift on the seam; grows down into Tock's lane (lane 1).")]
     public RawImage rift;
-    [Tooltip("Camera of the top lane (Tick); the top edge scrolls with it.")]
+    [Tooltip("Rift along the top of the screen; grows down into Tick's lane (lane 0). Optional.")]
+    public RawImage topRift;
+    [Tooltip("Camera of the top lane (Tick).")]
     public Transform topCamera;
-    [Tooltip("Camera of the bottom lane (Tock); the bottom edge scrolls with it.")]
+    [Tooltip("Camera of the bottom lane (Tock).")]
     public Transform bottomCamera;
 
-    [Tooltip("Half height of the rift in art pixels with no speed difference (the old static crack was 7, 3-11 px each side).")]
+    [Tooltip("Reach in art pixels of a closed rift, and of the seam rift's crack up into Tick's ground.")]
     public float minHalfHeight = 9f;
-    [Tooltip("Half height the rift approaches at a large speed difference.")]
-    public float maxHalfHeight = 28f;
-    [Tooltip("Speed difference (world speed units) that reaches about 63% of the way to the max.")]
-    public float gapScale = 1.5f;
     [Tooltip("Animation frames per second (real time), stepped like the sprites.")]
-    public float fps = 8f;
-    [Tooltip("Fraction of the way to the target height covered each animation frame.")]
-    [Range(0.01f, 1f)] public float ease = 0.06f;
+    public float fps = 12f;
     [Tooltip("Seconds for the edge teeth to morph into a new shape.")]
     public float morphTime = 5f;
-    [Tooltip("Speed difference used outside play mode (and when there is no GameManager), for previewing.")]
-    [Range(0f, 5f)] public float previewGap = 0f;
+    [Tooltip("Rift growth (units) shown outside play mode (and when there is no LaneRift), for previewing.")]
+    [Range(0f, 12f)] public float previewDepth = 0f;
 
-    public const int TextureHeight = 256;   // room for the max height plus drifting chunks
     const float PixelsPerUnit = 32f;         // art pixels per world unit (32 PPU, 1 canvas unit = 1 px)
     const int Margin = 64;                   // extra pixels drawn each side, for sliding between frames
     const int Col = 4;                       // edge column width in pixels
     const int SparklePeriod = 1024;          // sparkles repeat every this many world pixels
     const int Sparkles = 70;                 // per period
+    const int Below = 416;                   // texture rows below the anchor: a whole lane (360) plus teeth and chunks
+    const int SeamAbove = 48;                // rows above the seam: the crack into Tick's ground
+    const int TopAbove = 4;                  // rows above the screen top (never seen)
 
     static readonly Color32 Clear = new Color32(0, 0, 0, 0);
     static readonly Color32 Outline = Hex(0x22101e);
@@ -62,99 +61,133 @@ public class LaneDivider : MonoBehaviour
     static readonly Color32 Spark = Hex(0xf4e0ff);
     static readonly Color32 Gold = Hex(0xf2c46b);
 
-    // x is in top-lane world pixels.
+    // x is in world pixels of the band's lower edge.
     struct Chunk { public float x, y, vx, vy; public int age, life; }
 
-    Texture2D tex;
-    Color32[] pixels;
-    int[] top, bottom;
-    readonly List<Chunk> chunks = new List<Chunk>();
+    class Band
+    {
+        public RawImage image;
+        public int lane, above, seed;
+        public bool upperEdge;
+        public Texture2D tex;
+        public Color32[] pixels;
+        public int[] top, bottom;
+        public readonly List<Chunk> chunks = new List<Chunk>();
+        public float drawnReach = -1f;
+        public int drawnCameraPx;
+        public int Height => above + Below;
+    }
+
+    Band seam, screenTop;
     readonly System.Random rng = new System.Random(7);
-    float half, clock;
+    float clock;
     int frame;
-    bool started;
-    int drawnCameraPx;   // top camera position (world px) the texture was drawn for
 
     void OnDisable()
     {
-        if (tex != null) DestroyImmediate(tex);
-        tex = null;
+        Release(seam);
+        Release(screenTop);
+        seam = screenTop = null;
+    }
+
+    static void Release(Band b)
+    {
+        if (b?.tex != null) DestroyImmediate(b.tex);
     }
 
     void LateUpdate()
     {
-        if (rift == null) return;
-        float viewWidth = rift.rectTransform.rect.width;
-        int width = Mathf.Max(Col, Mathf.CeilToInt(viewWidth)) + 2 * Margin;
-        bool redraw = EnsureTexture(width);
-
-        float target = TargetHalfHeight();
-        if (!started) { half = target; started = true; }
-
-        int cameraPx = CameraPx(topCamera);
-        if (Mathf.Abs(cameraPx - drawnCameraPx) > Margin - 2) redraw = true;
+        if (seam == null || seam.image != rift)
+        {
+            Release(seam);
+            seam = rift == null ? null : new Band { image = rift, lane = 1, above = SeamAbove, seed = 3, upperEdge = true };
+        }
+        if (screenTop == null || screenTop.image != topRift)
+        {
+            Release(screenTop);
+            screenTop = topRift == null ? null : new Band { image = topRift, lane = 0, above = TopAbove, seed = 5 };
+        }
 
         clock += Application.isPlaying ? Time.unscaledDeltaTime : 0f;
         float step = 1f / Mathf.Max(1f, fps);
-        if (clock >= step || redraw || !Application.isPlaying)
+        bool tick = Application.isPlaying && clock >= step;
+        if (tick)
         {
-            bool tick = Application.isPlaying && clock >= step;
-            clock = Application.isPlaying ? clock % step : 0f;
-            float growth = 0f;
-            if (tick)
-            {
-                frame++;
-                float before = half;
-                half += (target - half) * ease;
-                growth = half - before;
-            }
-            else if (!Application.isPlaying) half = target;
-            Draw(cameraPx, viewWidth, growth, tick);
+            clock %= step;
+            frame++;
         }
 
-        float slide = cameraPx - drawnCameraPx;
-        rift.uvRect = new Rect((Margin + slide) / tex.width, 0f, viewWidth / tex.width, 1f);
+        if (seam != null) UpdateBand(seam, bottomCamera, topCamera, tick);
+        if (screenTop != null) UpdateBand(screenTop, topCamera, null, tick);
+    }
+
+    // lowerCamera: the lane whose world the growing edge belongs to;
+    // upperCamera: the lane above the anchor (the seam's crack), or null.
+    void UpdateBand(Band b, Transform lowerCamera, Transform upperCamera, bool tick)
+    {
+        var rt = b.image.rectTransform;
+        rt.sizeDelta = new Vector2(0f, b.Height);
+        rt.pivot = new Vector2(0.5f, Below / (float)b.Height);
+
+        float viewWidth = rt.rect.width;
+        int width = Mathf.Max(Col, Mathf.CeilToInt(viewWidth)) + 2 * Margin;
+        bool redraw = EnsureTexture(b, width);
+
+        int cameraPx = CameraPx(lowerCamera);
+        if (Mathf.Abs(cameraPx - b.drawnCameraPx) > Margin - 2) redraw = true;
+
+        if (tick || redraw || !Application.isPlaying)
+        {
+            float reach = Reach(b.lane);
+            float growth = tick && b.drawnReach >= 0f ? reach - b.drawnReach : 0f;
+            b.drawnReach = reach;
+            Draw(b, cameraPx, CameraPx(upperCamera) - cameraPx, viewWidth, growth, tick);
+        }
+
+        float slide = cameraPx - b.drawnCameraPx;
+        b.image.uvRect = new Rect((Margin + slide) / b.tex.width, 0f, viewWidth / b.tex.width, 1f);
     }
 
     static int CameraPx(Transform cam) => cam == null ? 0 : Mathf.RoundToInt(cam.position.x * PixelsPerUnit);
 
-    float TargetHalfHeight()
+    // Mean reach of the lane's rift below its anchor, in art pixels.
+    float Reach(int lane)
     {
-        float gap = previewGap;
-        if (Application.isPlaying && GameManager.INSTANCE != null)
-            gap = Mathf.Abs(GameManager.INSTANCE.GetWorldSpeed(0) - GameManager.INSTANCE.GetWorldSpeed(1));
-        float t = 1f - Mathf.Exp(-gap / Mathf.Max(0.01f, gapScale));
-        return minHalfHeight + (maxHalfHeight - minHalfHeight) * t;
+        if (Application.isPlaying && LaneRift.Instance != null)
+            return LaneRift.Instance.Reach(lane) * PixelsPerUnit;
+        return minHalfHeight + previewDepth * PixelsPerUnit;
     }
 
-    bool EnsureTexture(int width)
+    bool EnsureTexture(Band b, int width)
     {
-        if (tex != null && tex.width == width) return false;
-        if (tex != null) DestroyImmediate(tex);
-        tex = new Texture2D(width, TextureHeight, TextureFormat.RGBA32, false)
+        if (b.tex != null && b.tex.width == width) return false;
+        if (b.tex != null) DestroyImmediate(b.tex);
+        b.tex = new Texture2D(width, b.Height, TextureFormat.RGBA32, false)
         {
             filterMode = FilterMode.Point,
             wrapMode = TextureWrapMode.Clamp,
             hideFlags = HideFlags.DontSave,
             name = "Rift",
         };
-        pixels = new Color32[width * TextureHeight];
-        top = new int[width];
-        bottom = new int[width];
-        rift.texture = tex;
+        b.pixels = new Color32[width * b.Height];
+        b.top = new int[width];
+        b.bottom = new int[width];
+        b.image.texture = b.tex;
         return true;
     }
 
-    // Edge extent (px from the seam) of the world column containing world pixel wx.
-    // The broad shape and the teeth each cross-fade between fixed noise fields,
-    // so the edge reshapes in place without sliding along the level.
-    float Extent(int wx, float seconds, int seed)
+    // Edge extent (px from the anchor) of the world column containing world
+    // pixel wx: the mean reach plus teeth. The broad shape and the teeth each
+    // cross-fade between fixed noise fields, so the edge reshapes in place
+    // without sliding along the level.
+    float Extent(int wx, float reach, float seconds, int seed)
     {
         int col = Mathf.FloorToInt(wx / (float)Col);
         float broad = Morph(col * Col / 120f, seconds / (morphTime * 2.5f), seed);
         float teeth = Morph(col * Col / 24f, seconds / morphTime, seed + 50);
         float shape = 0.65f * broad + 0.35f * teeth;
-        return Mathf.Round(half * (0.5f + shape) / 2f) * 2f;
+        float amp = Mathf.Min(reach, LaneRift.TeethAmplitude * PixelsPerUnit);
+        return Mathf.Round((reach + amp * (shape - 0.5f)) / 2f) * 2f;
     }
 
     static float Morph(float x, float phase, int seed)
@@ -164,131 +197,135 @@ public class LaneDivider : MonoBehaviour
         return Mathf.Lerp(Noise(x, seed + k * 977), Noise(x, seed + (k + 1) * 977), s);
     }
 
-    void Draw(int cameraPx, float viewWidth, float growth, bool tick)
+    void Draw(Band b, int cameraPx, int upperShift, float viewWidth, float growth, bool tick)
     {
-        drawnCameraPx = cameraPx;
-        int w = tex.width, mid = TextureHeight / 2;
-        int bottomShift = CameraPx(bottomCamera) - cameraPx;
-        // World pixel (top lane) of texture column 0.
+        b.drawnCameraPx = cameraPx;
+        int w = b.tex.width, mid = b.above;
+        // World pixel (lower edge's lane) of texture column 0.
         int origin = cameraPx - Mathf.RoundToInt(viewWidth / 2f) - Margin;
         float seconds = frame / Mathf.Max(1f, fps);
-        float heat = Mathf.Clamp01((half - minHalfHeight) / Mathf.Max(0.01f, maxHalfHeight - minHalfHeight));
-        System.Array.Fill(pixels, Clear);
+        float reach = b.drawnReach;
+        float heat = Mathf.Clamp01((reach - minHalfHeight) / 64f);
+        System.Array.Fill(b.pixels, Clear);
 
         for (int x = 0; x < w; x++)
         {
-            top[x] = Mathf.Clamp((int)Extent(origin + x, seconds, 1), 2, mid - 8);
-            bottom[x] = Mathf.Clamp((int)Extent(origin + x + bottomShift, seconds, 3), 2, mid - 8);
+            // Without an upper edge the void runs off the top of the texture.
+            b.top[x] = b.upperEdge
+                ? Mathf.Clamp((int)Extent(origin + x + upperShift, minHalfHeight, seconds, 1), 2, mid - 8)
+                : mid + 3;
+            b.bottom[x] = Mathf.Clamp((int)Extent(origin + x, reach, seconds, b.seed), 2, Below - 8);
         }
 
         int band = heat > 0.5f ? 4 : 2;
         for (int x = 0; x < w; x++)
         {
-            int y0 = mid - top[x], y1 = mid + bottom[x];   // y grows downwards (screen order)
-            int wxTop = origin + x, wxBottom = wxTop + bottomShift;
+            int y0 = mid - b.top[x], y1 = mid + b.bottom[x];   // y grows downwards (screen order)
+            int wxBottom = origin + x, wxTop = wxBottom + upperShift;
 
             // Glow: checker dither in world pixels, wider when the rift is wide.
             for (int k = 1; k <= band; k++)
             {
                 Color32 c = k <= 2 ? Mid : Void;
-                if (((wxTop + k) & 1) == 0) Put(x, y0 - 1 - k, c);
-                if (((wxBottom + k) & 1) == 0) Put(x, y1 + k, c);
+                if (((wxTop + k) & 1) == 0) Put(b, x, y0 - 1 - k, c);
+                if (((wxBottom + k) & 1) == 0) Put(b, x, y1 + k, c);
             }
 
-            Put(x, y0 - 1, Outline);
-            Put(x, y1, Outline);
-            Put(x, y0, Highlight);                          // top light, like the tiles
-            Put(x, y0 + 1, Edge);
-            Fill(x, y1 - 2, 1, 2, Edge);
+            Put(b, x, y0 - 1, Outline);
+            Put(b, x, y1, Outline);
+            Put(b, x, y0, Highlight);                       // top light, like the tiles
+            Put(b, x, y0 + 1, Edge);
+            Fill(b, x, y1 - 2, 1, 2, Edge);
             int inner = Mathf.Max(0, y1 - 2 - (y0 + 2));
-            Fill(x, y0 + 2, 1, inner, Mid);                 // lit lip, then void, then deep core
-            if (inner > 4) Fill(x, y0 + 4, 1, inner - 4, Void);
-            if (inner > 10) Fill(x, y0 + 7, 1, inner - 10, Deep);
+            Fill(b, x, y0 + 2, 1, inner, Mid);              // lit lip, then void, then deep core
+            if (inner > 4) Fill(b, x, y0 + 4, 1, inner - 4, Void);
+            if (inner > 10) Fill(b, x, y0 + 7, 1, inner - 10, Deep);
 
             // Outline down the side of each step, so the edge reads as blocks.
             if (x > 0)
             {
-                int pt = top[x - 1], pb = bottom[x - 1];
-                if (pt != top[x]) Fill(x, mid - Mathf.Max(pt, top[x]) - 1, 1, Mathf.Abs(pt - top[x]) + 1, Outline);
-                if (pb != bottom[x]) Fill(x, mid + Mathf.Min(pb, bottom[x]), 1, Mathf.Abs(pb - bottom[x]) + 1, Outline);
+                int pt = b.top[x - 1], pb = b.bottom[x - 1];
+                if (pt != b.top[x]) Fill(b, x, mid - Mathf.Max(pt, b.top[x]) - 1, 1, Mathf.Abs(pt - b.top[x]) + 1, Outline);
+                if (pb != b.bottom[x]) Fill(b, x, mid + Mathf.Min(pb, b.bottom[x]), 1, Mathf.Abs(pb - b.bottom[x]) + 1, Outline);
             }
         }
 
-        // Sparkles: fixed in the top lane's world, slow drift, 4-step twinkle
+        // Sparkles: fixed in the lower lane's world, slow drift, 4-step twinkle
         // (dot, plus, dot, off).
         int firstPeriod = Mathf.FloorToInt(origin / (float)SparklePeriod);
         for (int p = firstPeriod; p * SparklePeriod < origin + w; p++)
             for (int n = 0; n < Sparkles; n++)
             {
-                int wx = p * SparklePeriod + (int)Mathf.Repeat(Hash(n * 3) * SparklePeriod + seconds * (2f + Hash(n) * 4f), SparklePeriod);
+                int wx = p * SparklePeriod + (int)Mathf.Repeat(Hash(n * 3 + b.seed) * SparklePeriod + seconds * (2f + Hash(n) * 4f), SparklePeriod);
                 int x = wx - origin;
                 if (x < 1 || x >= w - 1) continue;
-                int span = top[x] + bottom[x] - 8;
+                int span = Mathf.Min(b.top[x], mid) + b.bottom[x] - 8;
                 if (span <= 0) continue;
-                int y = Mathf.RoundToInt(mid - top[x] + 4 + Hash(n * 5) * span);
+                int y = Mathf.RoundToInt(mid - Mathf.Min(b.top[x], mid) + 4 + Hash(n * 5) * span);
                 int phase = (int)(seconds * 2f + Hash(n * 9) * 4f) % 4;
                 if (phase == 3) continue;
-                Put(x, y, n % 7 == 0 ? Gold : Spark);
+                Put(b, x, y, n % 7 == 0 ? Gold : Spark);
                 if (phase == 1 && span > 6)
                 {
-                    Put(x - 1, y, Highlight); Put(x + 1, y, Highlight);
-                    Put(x, y - 1, Highlight); Put(x, y + 1, Highlight);
+                    Put(b, x - 1, y, Highlight); Put(b, x + 1, y, Highlight);
+                    Put(b, x, y - 1, Highlight); Put(b, x, y + 1, Highlight);
                 }
             }
 
         // Chunks: peel off the rim; outwards while growing, inwards while shrinking.
         if (tick)
         {
-            float rate = 0.25f + Mathf.Min(2f, Mathf.Abs(growth) * 3f) * w / 1280f;
+            float rate = 0.25f + Mathf.Min(2f, Mathf.Abs(growth) * 0.5f) * w / 1280f;
             int count = (int)rate + (rng.NextDouble() < rate % 1f ? 1 : 0);
-            bool inward = growth < -0.05f;
+            bool inward = growth < -0.5f;
             for (int n = 0; n < count; n++)
             {
                 int x = Margin + rng.Next(Mathf.Max(1, w - 2 * Margin));
-                bool up = rng.NextDouble() < 0.5;
-                float y = up ? mid - top[x] - 3 : mid + bottom[x] + 1;
+                bool up = b.upperEdge && rng.NextDouble() < 0.3;
+                float y = up ? mid - b.top[x] - 3 : mid + b.bottom[x] + 1;
                 if (inward) y += up ? -10 : 10;
                 float dir = (up ? -1f : 1f) * (inward ? -1f : 1f);
-                chunks.Add(new Chunk
+                b.chunks.Add(new Chunk
                 {
                     x = origin + x, y = y,
                     vx = (float)(rng.NextDouble() - 0.5) * 0.4f,
-                    vy = dir * (0.5f + (float)rng.NextDouble() * 0.5f),
+                    vy = dir * (0.5f + (float)rng.NextDouble() * 0.5f) + (up ? 0f : growth),
                     life = 10 + rng.Next(10),
                 });
             }
-            for (int n = chunks.Count - 1; n >= 0; n--)
+            for (int n = b.chunks.Count - 1; n >= 0; n--)
             {
-                var c = chunks[n];
+                var c = b.chunks[n];
                 c.x += c.vx; c.y += c.vy; c.age++;
-                if (c.age >= c.life) { chunks.RemoveAt(n); continue; }
-                chunks[n] = c;
+                if (c.age >= c.life) { b.chunks.RemoveAt(n); continue; }
+                b.chunks[n] = c;
             }
         }
-        foreach (var c in chunks)
+        foreach (var c in b.chunks)
         {
             int cx = Mathf.RoundToInt(c.x) - origin, cy = Mathf.RoundToInt(c.y);
             Color32 col = c.age < c.life * 0.5f ? Edge : c.age < c.life * 0.8f ? Mid : Outline;
-            Fill(cx - 1, cy - 1, 4, 4, Outline);
-            Fill(cx, cy, 2, 2, col);
+            Fill(b, cx - 1, cy - 1, 4, 4, Outline);
+            Fill(b, cx, cy, 2, 2, col);
         }
 
-        tex.SetPixels32(pixels);
-        tex.Apply(false);
+        b.tex.SetPixels32(b.pixels);
+        b.tex.Apply(false);
     }
 
     // Screen-order y (0 = top row) into the bottom-up texture.
-    void Put(int x, int y, Color32 c)
+    static void Put(Band b, int x, int y, Color32 c)
     {
-        if (x < 0 || y < 0 || x >= tex.width || y >= TextureHeight) return;
-        pixels[(TextureHeight - 1 - y) * tex.width + x] = c;
+        int h = b.Height;
+        if (x < 0 || y < 0 || x >= b.tex.width || y >= h) return;
+        b.pixels[(h - 1 - y) * b.tex.width + x] = c;
     }
 
-    void Fill(int x, int y, int w, int h, Color32 c)
+    static void Fill(Band b, int x, int y, int w, int h, Color32 c)
     {
         for (int yy = y; yy < y + h; yy++)
             for (int xx = x; xx < x + w; xx++)
-                Put(xx, yy, c);
+                Put(b, xx, yy, c);
     }
 
     static float Hash(int i)

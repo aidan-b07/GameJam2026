@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Ledges up to this tall (units; 1 tile = 1) are stepped onto instead of blocking the player. Covers the few-pixel bumps between ground tiles.")]
     [SerializeField] private float maxStepHeight = 0.25f;
 
+    public float MoveSpeed => moveSpeed;
+
     private Rigidbody2D rb;
     private Collider2D body;
     private ContactFilter2D groundFilter;
