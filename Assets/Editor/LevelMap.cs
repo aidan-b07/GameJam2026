@@ -334,13 +334,17 @@ public static class LevelMap
         }
 
         // Spawn point, also checkpoint 0. The player sprite shows where it is, so
-        // the box is hidden.
+        // the box is hidden. A twin lamp stands just behind it (lit from the
+        // start, as checkpoint 0 is always current), so a respawn there starts
+        // from a lantern like at every other checkpoint (SpawnWisp).
         public void Spawn(int x)
         {
             var go = Marker($"Spawn_{name}", x, 0, 1, 1.5f, color);
             go.GetComponent<SpriteRenderer>().enabled = false;
             spawn = new Vector3(go.transform.position.x, root.transform.position.y + Surface(x), 0f);
             AddCheckpoint(go, 0, spawn.Value);
+            Lamp(go, x - 1f, Surface(x), 2);
+            Busy(x - 3, x);
         }
 
         // Lane index for GameFlow.players and Checkpoint.lane.
