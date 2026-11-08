@@ -20,11 +20,11 @@ using static LevelMap;
 //    both players are in it, both lanes run in real time and the rifts
 //    retract.
 // 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
-//    directions and a plain gap before the last crusher. The last crusher in
+//    directions, the gap before the last crusher too. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
-//    open both final gates. Whoever presses first waits in the plain gap,
-//    standing still, which slows the partner's crushers. A death lets the
-//    buttons go and shuts the gates.
+//    open both final gates. Whoever presses first waits on the belt before
+//    it, walking against it, which slows the partner's crushers. A death
+//    lets the buttons go and shuts the gates.
 // Crossing notes (bot-measured timings): DESIGN.md "Main level".
 public static class MainLevelBuilder
 {
@@ -103,8 +103,8 @@ public static class MainLevelBuilder
         l.Checkpoint(81);
 
         // 4. Gauntlet: crusher straight into a pit, a belt back toward it,
-        //    belts between crushers, a plain gap (104-106: the first to press
-        //    waits there), then the last crusher's button with a hole after it
+        //    belts between crushers (104-106 too: the first to press waits
+        //    there), then the last crusher's button with a hole after it
         //    and the gate on the far lip: both cross once both buttons are
         //    down and the gates are up.
         Crusher(l, 82);
@@ -112,6 +112,7 @@ public static class MainLevelBuilder
         Crusher(l, 95, 0.9f);
         l.Conveyor(98, 100, Belt);
         Crusher(l, 101, 1.8f);
+        l.Conveyor(104, 106, -Belt);
         Crusher(l, 107, 2.7f);
         tickFinal = l.Button(108, narrow: true);   // in the strike plate
         tickGate = l.ButtonGate(114);
@@ -168,6 +169,7 @@ public static class MainLevelBuilder
         Crusher(l, 96, 1.35f);
         l.Conveyor(99, 101, Belt);
         Crusher(l, 102, 2.25f);
+        l.Conveyor(105, 107, -Belt);
         Crusher(l, 108, 3.15f);
         var tockFinal = l.Button(109, narrow: true);
         var tockGate = l.ButtonGate(115);
