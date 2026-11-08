@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Clock pendulum over a belt (main level, pendulum belts section): a long rod
@@ -9,7 +10,8 @@ using UnityEngine;
 // middle of its swing it is fast and throws them off the belt into a drop; at
 // the belt's outer tiles (nudgeBeyond from under the axis) a hit is only a
 // nudge, at any lane speed, so a player near the belt's end is never thrown
-// off it; at the very ends it lifts over head height, so the last tile or so
+// off it, and for nudgeGrace after a nudge the same pendulum cannot throw
+// them (a nudge towards the middle must not end in a throw); at the very ends it lifts over head height, so the last tile or so
 // of the belt is never touched. Moving away from a player it only blocks. Art
 // from tools/make_pendulum.py (pendulum_clockbob_96px: frames by speed and
 // direction, never mirrored); LevelMap.Lane.ClockPendulum builds it.
@@ -38,11 +40,13 @@ public class ClockPendulum : LaneObstacle
     [Tooltip("A bob moving into a player slower than this (units/s) only pushes.")]
     public float minKnockSpeed = 1f;
     [Tooltip("A player whose body centre is further than this (units) from under the axis is only nudged, whatever the lane speed: the belt's ends.")]
-    public float nudgeBeyond = 2.5f;
+    public float nudgeBeyond = 1.5f;
     [Tooltip("Horizontal speed (units/s) of a nudge; with knockTime it moves a player under a tile, so it never throws them off the belt.")]
     public float nudgeSpeed = 2.5f;
     [Tooltip("Upward speed of a nudge (units/s).")]
     public float nudgeLift = 2f;
+    [Tooltip("Real seconds after a nudge in which this pendulum only nudges that player, wherever they are.")]
+    public float nudgeGrace = 0.6f;
 
     [Header("Art")]
     [Tooltip("Turns with the swing; the rod, hub and bob are its children.")]
@@ -54,6 +58,7 @@ public class ClockPendulum : LaneObstacle
     public float lightSmear = 9f, heavySmear = 20f;
 
     float lastAngle;
+    readonly Dictionary<PlayerMovement, float> nudged = new Dictionary<PlayerMovement, float>();
 
     // Angle (degrees, counterclockwise, 0 = straight down; positive swings
     // the bob right) at lane time t.
@@ -98,7 +103,9 @@ public class ClockPendulum : LaneObstacle
             if (into > minKnockSpeed && !p.Knocked)
             {
                 float speed = velocity.magnitude;
-                bool nudge = Mathf.Abs(box.center.x - transform.position.x) > nudgeBeyond;
+                bool nudge = Mathf.Abs(box.center.x - transform.position.x) > nudgeBeyond
+                             || (nudged.TryGetValue(p, out float at) && Time.time - at < nudgeGrace);
+                if (nudge) nudged[p] = Time.time;
                 var knock = nudge
                     ? new Vector2(Mathf.Clamp(velocity.x * knockScale, -nudgeSpeed, nudgeSpeed), nudgeLift)
                     : new Vector2(Mathf.Clamp(velocity.x * knockScale, -maxKnock, maxKnock),

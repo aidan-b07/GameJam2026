@@ -41683,7 +41683,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 1071980388}
@@ -45255,7 +45255,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 639258472}
@@ -58399,7 +58399,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 730134441}
@@ -61008,7 +61008,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 1537874210}
@@ -88842,7 +88842,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 555587246}
@@ -91785,7 +91785,7 @@ MonoBehaviour:
   maxLift: 8
   knockTime: 0.35
   minKnockSpeed: 1
-  nudgeBeyond: 2.5
+  nudgeBeyond: 1.5
   nudgeSpeed: 2.5
   nudgeLift: 2
   arm: {fileID: 1629426298}
