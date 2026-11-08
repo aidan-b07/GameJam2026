@@ -245,6 +245,9 @@ public class GameFlow : MonoBehaviour
             respawn = Mathf.Max(respawn, p.sprites.RespawnDuration);
         }
         yield return new WaitForSeconds(respawn);
+        // The pause menu may have opened in the frame this wait ended: hand
+        // control back only once it is closed.
+        while (PauseMenu.IsPaused) yield return null;
 
         foreach (var p in list)
         {
