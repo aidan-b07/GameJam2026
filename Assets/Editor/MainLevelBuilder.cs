@@ -31,11 +31,14 @@ public static class MainLevelBuilder
     public static void Build()
     {
         LevelMap.Build(ScenePath, Length, Tick, Tock);
-        // The main level is the game: first and only enabled scene in the build.
+        // The main level is the game: the only enabled level, right after the
+        // main menu (which stays first and enabled).
         var scenes = EditorBuildSettings.scenes.ToList();
-        foreach (var s in scenes) s.enabled = s.path == ScenePath;
-        EditorBuildSettings.scenes = scenes.Where(s => s.path == ScenePath)
-            .Concat(scenes.Where(s => s.path != ScenePath)).ToArray();
+        bool IsMenu(EditorBuildSettingsScene s) => s.path.EndsWith("/MainMenu.unity");
+        foreach (var s in scenes) s.enabled = s.path == ScenePath || IsMenu(s);
+        EditorBuildSettings.scenes = scenes.Where(IsMenu)
+            .Concat(scenes.Where(s => s.path == ScenePath))
+            .Concat(scenes.Where(s => s.path != ScenePath && !IsMenu(s))).ToArray();
     }
 
     static void Tick(Lane l)
