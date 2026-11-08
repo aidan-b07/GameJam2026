@@ -980,6 +980,51 @@ public static class LevelMap
             Busy(Mathf.FloorToInt(x) - 1, Mathf.CeilToInt(x) + 1);
         }
 
+        // Animated landmark from tools/make_landmarks.py centred on x
+        // (`landmark_<id>_32px.png`, a strip of frameWidth frames, bottom-centre
+        // pivot, sunk like Decor), played on lane time by DecorAnimation. A
+        // `landmark_<id>_glow_32px.png` strip with the same frames is added
+        // untinted and fades in at night (DecorGlow).
+        public void Landmark(string id, float x, int frameWidth, float fps = 12f, int order = -2)
+        {
+            string png = $"{DecorDir}landmark_{id}_32px.png";
+            string glowPng = $"{DecorDir}landmark_{id}_glow_32px.png";
+            PrepareStrip(png, frameWidth, new Vector2(0.5f, 0f));
+            var frames = StripFrames(png);
+            if (frames.Length == 0)
+            {
+                Debug.LogWarning($"[LevelMap] No landmark frames in {png}");
+                return;
+            }
+            int y = Surface(Mathf.FloorToInt(x));
+            var go = new GameObject($"Landmark_{id}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x, y - 3f / 32f, 0f);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = frames[0];
+            sr.sortingOrder = order;
+            tinted.Add(sr);
+            var anim = go.AddComponent<DecorAnimation>();
+            anim.body = sr;
+            anim.frames = frames;
+            anim.fps = fps;
+            anim.lane = LaneIndex;
+            if (AssetImporter.GetAtPath(glowPng) != null)
+            {
+                PrepareStrip(glowPng, frameWidth, new Vector2(0.5f, 0f));
+                var glowFrames = StripFrames(glowPng);
+                var g = new GameObject("Glow").AddComponent<SpriteRenderer>();
+                g.transform.SetParent(go.transform, false);
+                g.sprite = glowFrames.Length > 0 ? glowFrames[0] : null;
+                g.sortingOrder = order + 1;
+                anim.glow = g;
+                anim.glowFrames = glowFrames;
+                go.AddComponent<DecorGlow>().glow = g;
+            }
+            float half = frameWidth / 64f;
+            Busy(Mathf.FloorToInt(x - half), Mathf.CeilToInt(x + half));
+        }
+
         // Laser gate between a floor emitter and a ceiling emitter, drawn "on".
         public void LaserGate(int x)
         {

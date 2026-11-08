@@ -15,7 +15,8 @@ using static LevelMap;
 //    starts to winch, so the hold lasts seconds instead of a blink) and
 //    presses the button that opens the gate on the far lip of Tock's pit.
 //    Tock's belt runs toward that pit whenever Tick moves.
-// 3. Scenery: decor only.
+// 3. Scenery: decor only, with a landmark in each lane (Tick's fountain,
+//    Tock's orrery; animated on lane time).
 // 4. Gauntlet: a crusher, a pit, then belts between crushers in alternating
 //    directions and a plain gap before the last crusher. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
@@ -91,8 +92,7 @@ public static class MainLevelBuilder
         l.Decor("hedge", 46.5f);
         l.Decor("lamp", 49.5f);
         l.Decor("bench", 52f);
-        l.Decor("planter", 55f);
-        l.Decor("fountain", 60f);
+        l.Landmark("fountain", 59f, 256);   // Grand Clockwork Fountain, x 55-63
         l.Decor("planter", 65f);
         l.Decor("lamp", 67.5f);
         l.Decor("topiary", 70.5f);
@@ -152,7 +152,7 @@ public static class MainLevelBuilder
         l.Decor("lamp", 59.5f);
         l.Decor("gears", 63f);
         l.Decor("planter", 67f);
-        l.Decor("fountain", 72f);
+        l.Landmark("orrery", 72f, 192);     // Founders' Orrery, x 69-75
         l.Decor("hedge", 77.5f);
         l.Checkpoint(81);
 
