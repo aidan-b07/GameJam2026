@@ -1164,7 +1164,7 @@ public static class LevelMap
     // pivot (the object sits at the leaf's centre; BridgeMovement.hingeAnchor
     // puts the hinge on the pin at pixel (16, 16)) and needs a full-rect mesh
     // to be drawn sliced.
-    static void PrepareSprite(string path, bool fullRect, Vector2 pivot)
+    internal static void PrepareSprite(string path, bool fullRect, Vector2 pivot)
     {
         if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
         var settings = new TextureImporterSettings();
@@ -1187,7 +1187,7 @@ public static class LevelMap
 
     // Horizontal strip of equal frames, sliced one sprite per frame (<file>_<n>),
     // 32 PPU, point filter, every frame with the same pivot.
-    static void PrepareStrip(string path, int frameWidth, Vector2 pivot)
+    internal static void PrepareStrip(string path, int frameWidth, Vector2 pivot)
     {
         if (!(AssetImporter.GetAtPath(path) is TextureImporter ti)) return;
         // Source size: a strip wider than the max texture size imports scaled down.
@@ -1228,17 +1228,20 @@ public static class LevelMap
     }
 
     // Frames of a strip from PrepareStrip, in order.
-    static Sprite[] StripFrames(string path) =>
+    internal static Sprite[] StripFrames(string path) =>
         AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>()
             .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
-    // Keeps level scenes in Build Settings sorted by name (Level1_, Level2_, ...).
-    static void AddToBuildSettings(string scenePath)
+    // Keeps Build Settings in order: the main menu first (the scene the game
+    // starts in), then the levels sorted by name (Level1_, Level2_, ...), then the rest.
+    internal static void AddToBuildSettings(string scenePath)
     {
         var scenes = EditorBuildSettings.scenes.Where(s => s.path != scenePath).ToList();
         scenes.Add(new EditorBuildSettingsScene(scenePath, true));
-        var levels = scenes.Where(s => s.path.Contains("/Level")).OrderBy(s => s.path).ToList();
-        var others = scenes.Where(s => !s.path.Contains("/Level"));
-        EditorBuildSettings.scenes = levels.Concat(others).ToArray();
+        bool IsMenu(EditorBuildSettingsScene s) => s.path.EndsWith("/MainMenu.unity");
+        var menu = scenes.Where(IsMenu);
+        var levels = scenes.Where(s => !IsMenu(s) && s.path.Contains("/Level")).OrderBy(s => s.path).ToList();
+        var others = scenes.Where(s => !IsMenu(s) && !s.path.Contains("/Level"));
+        EditorBuildSettings.scenes = menu.Concat(levels).Concat(others).ToArray();
     }
 }
