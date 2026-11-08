@@ -125,6 +125,16 @@ public class LaneRift : MonoBehaviour
         return deepest;
     }
 
+    // Reach (units) of the shallowest drawn edge between world x0 and x1,
+    // teeth included: anything hung from here is covered by the rift.
+    public float ShallowestReach(int lane, float x0, float x1)
+    {
+        float least = float.MaxValue;
+        for (float x = x0; x <= x1; x += ColumnWidth) least = Mathf.Min(least, ReachAt(lane, x));
+        if (least == float.MaxValue) least = Reach(lane);
+        return Mathf.Max(0f, least - Mathf.Min(least, TeethAmplitude) / 2f);
+    }
+
     static float Tip(float reach) => reach + Mathf.Min(reach, TeethAmplitude) / 2f;
 
     const float ColumnWidth = 4f / 32f;   // edge columns are 4 art pixels wide
