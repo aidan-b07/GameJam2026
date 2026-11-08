@@ -53,7 +53,7 @@ public class LaneDivider : MonoBehaviour
     const int Sparkles = 70;                 // per period
     const int Below = 416;                   // texture rows below the anchor: a whole lane (360) plus teeth and chunks
     const int SeamAbove = 48;                // rows above the seam: the crack into Tick's ground
-    const int TopAbove = 4;                  // rows above the screen top (never seen)
+    const int TopAbove = 48;                 // rows above the screen top: solid void, so no sky shows over the rift
 
     static readonly Color32 Clear = new Color32(0, 0, 0, 0);
     static readonly Color32 Outline = Hex(0x22101e);
@@ -276,9 +276,12 @@ public class LaneDivider : MonoBehaviour
                 int wx = p * SparklePeriod + (int)Mathf.Repeat(Hash(n * 3 + b.seed) * SparklePeriod + seconds * (2f + Hash(n) * 4f), SparklePeriod);
                 int x = wx - origin;
                 if (x < 1 || x >= w - 1) continue;
-                int span = Mathf.Min(b.top[x], mid) + b.bottom[x] - 8;
+                // Above the screen top only the first 4 rows count, so the
+                // top rift's sparkles stay in view.
+                int up = b.upperEdge ? Mathf.Min(b.top[x], mid) : Mathf.Min(4, mid);
+                int span = up + b.bottom[x] - 8;
                 if (span <= 0) continue;
-                int y = Mathf.RoundToInt(mid - Mathf.Min(b.top[x], mid) + 4 + Hash(n * 5) * span);
+                int y = Mathf.RoundToInt(mid - up + 4 + Hash(n * 5) * span);
                 int phase = (int)(seconds * 2f + Hash(n * 9) * 4f) % 4;
                 if (phase == 3) continue;
                 Put(b, x, y, n % 7 == 0 ? Gold : Spark);
