@@ -52,6 +52,8 @@ public class PlayerSprites : MonoBehaviour
     [SerializeField] private float keyFps = 10f;
     [Tooltip("Horizontal speed above which the run cycle plays.")]
     [SerializeField] private float runThreshold = 0.1f;
+    [Tooltip("Seconds the speed must stay on the other side of runThreshold before idle and run swap, so a blip of speed (a scripted walk settling on its mark, a nudge, a snag) does not flicker between them.")]
+    [SerializeField] private float switchDelay = 0.06f;
 
     // Multiplier on keyFps: the lane's world speed while a GameManager exists, else 1.
     public float KeyRate { get; set; } = 1f;
@@ -70,6 +72,7 @@ public class PlayerSprites : MonoBehaviour
     private Frame[] current;
     private float stateTime;
     private float keyTime;
+    private float switchTime;
 
     private Look Active => character == Character.Tick ? tick : tock;
 
@@ -120,7 +123,7 @@ public class PlayerSprites : MonoBehaviour
             next = null;
             fps = 0f;
         }
-        else if (rb != null && Mathf.Abs(rb.linearVelocity.x) > runThreshold)
+        else if (Running())
         {
             next = Active.run;
             fps = runFps;
@@ -141,6 +144,18 @@ public class PlayerSprites : MonoBehaviour
         body.sprite = frame.sprite;
         key.enabled = true;
         key.transform.localPosition = new Vector3((frame.keyPixel.x - Cell / 2) / Ppu, (Cell - frame.keyPixel.y) / Ppu, 0f);
+    }
+
+    // Idle and run swap only once the speed has stayed on the other side of
+    // runThreshold for switchDelay; from the jump frame (landing, respawn) the
+    // speed decides at once.
+    private bool Running()
+    {
+        bool moving = rb != null && Mathf.Abs(rb.linearVelocity.x) > runThreshold;
+        bool wasRunning = current == Active.run;
+        if (current == null || moving == wasRunning) { switchTime = 0f; return moving; }
+        switchTime += Time.deltaTime;
+        return switchTime >= switchDelay ? moving : wasRunning;
     }
 
     // Plays the death animation once; it holds the last frame until Revive.
