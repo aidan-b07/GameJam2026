@@ -69,6 +69,13 @@ public static class LevelMap
     const string ConveyorDir = "Assets/Art/Obstacles/Conveyor/";
     static string ConveyorPng(string id) => $"{ConveyorDir}conveyor_flush_{id}_32px.png";
     static readonly string[] ConveyorParts = { "left", "mid", "right" };
+    // Latching floor button from tools/make_button.py: 64x32 (or narrow
+    // 32x32) frames, 14 of them, bottom-left pivot; body and untinted lamp.
+    const string ButtonDir = "Assets/Art/Obstacles/Button/";
+    static string ButtonPng(string id, bool narrow) => $"{ButtonDir}{id}_{(narrow ? 32 : 64)}px.png";
+    // Decor sprites from tools/make_decor.py, bottom-centre pivot.
+    const string DecorDir = "Assets/Art/Decor/";
+    static string DecorPng(string id) => $"{DecorDir}decor_{id}_32px.png";
     static IEnumerable<string> PlungerHands => Enumerable.Range(0, 12).Select(h => $"hand_{h:00}");
     // Trap door from tools/make_trapdoor.py: 192x128 frames (6x4 tiles, the
     // pit is tile columns 1-4), bottom-left pivot; body and untinted lamp overlay.
@@ -192,6 +199,15 @@ public static class LevelMap
         PrepareStrip(TrapDoorPng("trapdoor"), TrapDoorFrameWidth, Vector2.zero);
         PrepareStrip(TrapDoorPng("trapdoor_lamp"), TrapDoorFrameWidth, Vector2.zero);
         foreach (var id in ConveyorParts) PrepareStrip(ConveyorPng(id), 32, Vector2.zero);
+        foreach (var narrow in new[] { false, true })
+            foreach (var id in new[] { "button", "button_lamp" })
+                PrepareStrip(ButtonPng(id, narrow), narrow ? 32 : 64, Vector2.zero);
+        foreach (var path in AssetDatabase.FindAssets("t:Texture2D", new[] { DecorDir.TrimEnd('/') })
+                     .Select(AssetDatabase.GUIDToAssetPath))
+            PrepareSprite(path, false, new Vector2(0.5f, 0f));
+        foreach (var path in AssetDatabase.FindAssets("drawbridge_ t:Texture2D", new[] { "Assets/Art/Obstacles" })
+                     .Select(AssetDatabase.GUIDToAssetPath).Where(p => p.EndsWith("_32px.png")))
+            PrepareSprite(path, true, new Vector2(0.5f, 0.5f));
         TileCache.Clear();
         var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
 
@@ -220,6 +236,9 @@ public static class LevelMap
         AddToBuildSettings(scenePath);
         Debug.Log($"[LevelMap] Saved {scenePath}");
     }
+
+    // Gate opens once every one of these buttons is pressed (any lane).
+    public static void WireGate(ButtonGate gate, params FloorButton[] buttons) => gate.buttons = buttons;
 
     public class Lane
     {
@@ -377,7 +396,9 @@ public static class LevelMap
             // 1x1 in local units (sliced, no borders) and the scale stretches
             // it to the leaf: exactly 32 px per tile for a 7-tile pit.
             var sr = go.GetComponent<SpriteRenderer>();
-            var art = AssetDatabase.LoadAssetAtPath<Sprite>(DrawbridgeSprite);
+            // A leaf drawn for this length (make_drawbridge.py --length), else the 7-tile one stretched.
+            var art = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/Art/Obstacles/drawbridge_{length}_32px.png")
+                ?? AssetDatabase.LoadAssetAtPath<Sprite>(DrawbridgeSprite);
             if (art != null)
             {
                 sr.sprite = art;
@@ -824,6 +845,111 @@ public static class LevelMap
             door.FindProperty("rightLeaf").objectReferenceValue = Leaf("LeafRight", 155f, -1f);
             door.ApplyModifiedPropertiesWithoutUndo();
             return go;
+        }
+
+        // Latching floor button over x (narrow, one tile) or x..x+1, in the
+        // ground's top row like the flush conveyor: the ground tiles stay under
+        // it for the collider. Over a crusher's strike block it sits on the
+        // brass plate. Wire it to a ButtonGate with WireGate.
+        public FloorButton Button(int x, bool narrow = false)
+        {
+            int y = Surface(x);
+            int w = narrow ? 1 : 2;
+            Busy(x - 1, x + w);
+            counts["Button"] = counts.TryGetValue("Button", out var n) ? n + 1 : 1;
+            var go = new GameObject($"Button_{counts["Button"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x, y - 1, 0f);
+            var bodyFrames = StripFrames(ButtonPng("button", narrow));
+            var lampFrames = StripFrames(ButtonPng("button_lamp", narrow));
+            var body = go.AddComponent<SpriteRenderer>();
+            body.sprite = bodyFrames.FirstOrDefault();
+            body.sortingOrder = 2;   // over the ground and a strike flash
+            tinted.Add(body);
+            var lamp = new GameObject("Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(go.transform, false);
+            lamp.sprite = lampFrames.FirstOrDefault();
+            lamp.sortingOrder = 3;
+
+            var b = go.AddComponent<FloorButton>();
+            // The plate (make_button.py: x 12-51 of 64, x 6-25 of 32).
+            b.left = x + (narrow ? 6f : 12f) / 32f;
+            b.width = (narrow ? 20f : 40f) / 32f;
+            b.top = root.transform.position.y + y - 1f / 32f;
+            b.body = body;
+            b.lamp = lamp;
+            b.bodyFrames = bodyFrames;
+            b.lampFrames = lampFrames;
+            return b;
+        }
+
+        // Portcullis at x that FloorButtons open (main level): TimeGate's
+        // housing and art, ButtonGate's logic. Wire buttons with WireGate.
+        public ButtonGate ButtonGate(int x)
+        {
+            int y = Surface(x);
+            Fill(x - 1, x + 1, y + 10, y + 4);
+            Busy(x - 2, x + 2);
+
+            counts["ButtonGate"] = counts.TryGetValue("ButtonGate", out var n) ? n + 1 : 1;
+            var go = new GameObject($"ButtonGate_{counts["ButtonGate"]}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 0.5f, y + 2f, 0f);
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            go.AddComponent<BoxCollider2D>().size = new Vector2(0.875f, 4f);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("gate_portcullis"));
+            sr.sortingOrder = -1;   // behind the ground tiles: rises into the housing
+            tinted.Add(sr);
+
+            var lamp = new GameObject($"{go.name}_Lamp").AddComponent<SpriteRenderer>();
+            lamp.transform.SetParent(markers, false);
+            lamp.transform.localPosition = new Vector3(x - 0.5f, y + 4.5f, 0f);
+            lamp.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(GateLiftPng("gate_lamp"));
+            lamp.sortingOrder = 3;
+
+            var gate = go.AddComponent<global::ButtonGate>();
+            gate.lamp = lamp;
+            gate.buttons = new FloorButton[0];
+            return gate;
+        }
+
+        // Decor sprite from tools/make_decor.py standing on the ground at x
+        // (bottom-centre pivot, sunk by the ground tiles' 3 transparent rows).
+        // No collider. A `<name>_glow` overlay, if there is one, is added
+        // untinted so it shines at night.
+        public void Decor(string id, float x, int order = -2)
+        {
+            int y = Surface(Mathf.FloorToInt(x));
+            var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(DecorPng(id));
+            if (sprite == null)
+            {
+                Debug.LogWarning($"[LevelMap] No decor sprite {DecorPng(id)}");
+                return;
+            }
+            counts["Decor"] = counts.TryGetValue("Decor", out var n) ? n + 1 : 1;
+            var go = new GameObject($"Decor_{counts["Decor"]}_{id}");
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x, y - 3f / 32f, 0f);
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            sr.sortingOrder = order;
+            tinted.Add(sr);
+            var glow = AssetDatabase.LoadAssetAtPath<Sprite>(DecorPng(id + "_glow"));
+            if (glow != null)
+            {
+                var g = new GameObject("Glow").AddComponent<SpriteRenderer>();
+                g.transform.SetParent(go.transform, false);
+                g.sprite = glow;
+                g.sortingOrder = order + 1;
+                go.AddComponent<DecorGlow>().glow = g;
+            }
+            Busy(Mathf.FloorToInt(x) - 1, Mathf.CeilToInt(x) + 1);
         }
 
         // Laser gate between a floor emitter and a ceiling emitter, drawn "on".
