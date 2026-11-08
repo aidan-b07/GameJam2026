@@ -286,7 +286,7 @@ public class PauseMenu : MonoBehaviour
 
     // --- look ------------------------------------------------------------------
 
-    const int PanelW = 200, PanelH = 100;
+    const int PanelW = 200, PanelH = 108;
 
     void Build()
     {
@@ -318,8 +318,9 @@ public class PauseMenu : MonoBehaviour
             normal[i] = Text(panel.transform, Items[i], Items[i], Muted, Ink, scale, y);
             highlit[i] = Text(panel.transform, Items[i] + " (selected)", "> " + Items[i] + " <", Gold, Ink, scale, y);
         }
-        var hint = Text(panel.transform, "Hint", "ESC TO RESUME", Muted, Ink, scale * 0.5f, -38f);
-        hint.color = new Color(1f, 1f, 1f, 0.7f);
+        // Full font scale: at half scale the screen drops pixel rows and the hint reads as cut off.
+        var hint = Text(panel.transform, "Hint", "ESC TO RESUME", Muted, Ink, scale, -38f);
+        hint.color = new Color(1f, 1f, 1f, 0.6f);
         Select(0, false);
     }
 
