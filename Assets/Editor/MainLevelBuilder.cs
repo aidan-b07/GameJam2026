@@ -32,11 +32,14 @@ public static class MainLevelBuilder
     {
         LevelMap.Build(ScenePath, Length, Tick, Tock);
         // The main level is the game: the only enabled level, right after the
-        // main menu (which stays first and enabled).
+        // menus (level select first, the scene the game starts in, then the
+        // main menu; both stay enabled).
         var scenes = EditorBuildSettings.scenes.ToList();
-        bool IsMenu(EditorBuildSettingsScene s) => s.path.EndsWith("/MainMenu.unity");
+        string[] menus = { "/LevelSelect.unity", "/MainMenu.unity" };
+        int MenuRank(EditorBuildSettingsScene s) => System.Array.FindIndex(menus, m => s.path.EndsWith(m));
+        bool IsMenu(EditorBuildSettingsScene s) => MenuRank(s) >= 0;
         foreach (var s in scenes) s.enabled = s.path == ScenePath || IsMenu(s);
-        EditorBuildSettings.scenes = scenes.Where(IsMenu)
+        EditorBuildSettings.scenes = scenes.Where(IsMenu).OrderBy(MenuRank)
             .Concat(scenes.Where(s => s.path == ScenePath))
             .Concat(scenes.Where(s => s.path != ScenePath && !IsMenu(s))).ToArray();
     }
