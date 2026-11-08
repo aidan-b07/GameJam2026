@@ -12,7 +12,7 @@ public class Music : MonoBehaviour
 
     [Tooltip("Clip name in Resources/Audio/Music.")]
     public string track = "clockwork_rush";
-    [Range(0f, 1f)] public float volume = 0.35f;
+    [Range(0f, 1f)] public float volume = 0.5f;
     [Tooltip("Seconds to fade in when the music starts.")]
     public float fadeIn = 2f;
 

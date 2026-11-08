@@ -13,6 +13,12 @@ using UnityEngine.SceneManagement;
 //   than `silentBelowSpeed` fades out, silent when frozen.
 // The Unraveling rift hums as a 2D loop that grows with the lanes' speed gap.
 //
+// Mix: the effects sit under the music. `masterVolume` and the per-clip trims
+// (`Trim`) bring the loud ones (plunger slam, warn blink, ratchet) down, every
+// voice runs through a low-pass (`lowPassCutoff`) that takes the shrill top off
+// the synthesised clips, and at most `maxSameClip` copies of one clip play at
+// once, so a row of crushers firing together does not stack up.
+//
 // Clips are loaded by name from Resources/Audio/Sfx (made by tools/make_sfx.py
 // in the jam workspace). The object creates itself on scene load, so the level
 // builder does not need to place it, and gives every player a PlayerAudio.
@@ -28,26 +34,42 @@ public class Sfx : MonoBehaviour
 
     [Header("Lane pitch")]
     [Tooltip("Pitch added per unit of lane world speed above 1.")]
-    public float pitchPerSpeed = 0.12f;
-    public float minPitch = 0.5f;
-    public float maxPitch = 1.6f;
+    public float pitchPerSpeed = 0.06f;
+    public float minPitch = 0.7f;
+    public float maxPitch = 1.2f;
     [Tooltip("Lane speed below which a lane's sounds fade out, silent at 0 (a frozen lane).")]
     public float silentBelowSpeed = 0.25f;
 
     [Header("Rift hum")]
-    public float riftMinVolume = 0.12f;
-    public float riftMaxVolume = 0.5f;
+    public float riftMinVolume = 0.08f;
+    public float riftMaxVolume = 0.35f;
     [Tooltip("Speed gap between the lanes at which the hum is about 63 % of the way to its maximum.")]
     public float riftGapScale = 2f;
 
     [Header("Mix")]
-    [Range(0f, 1f)] public float masterVolume = 1f;
+    [Range(0f, 1f)] public float masterVolume = 0.5f;
+    [Tooltip("Low-pass cutoff on every effect (Hz); 22000 leaves them unfiltered.")]
+    public float lowPassCutoff = 4000f;
+    [Tooltip("Most copies of one clip that play at once; further ones are skipped.")]
+    public int maxSameClip = 2;
     [Tooltip("Voices for one-shot sounds; the oldest is reused when all are busy.")]
     public int voices = 24;
 
     // World y below which a position counts as Tock's lane (lanes at 0 and -40).
     const float LaneSplitY = -20f;
     const string ClipFolder = "Audio/Sfx/";
+
+    // Per-clip volume on top of the caller's: the obstacle sounds repeat all
+    // through a level, so they sit lowest.
+    static readonly Dictionary<string, float> Trim = new Dictionary<string, float>
+    {
+        { "plunger_slam", 0.55f },
+        { "plunger_warn", 0.4f },
+        { "ratchet_click", 0.45f },
+        { "bridge_slam", 0.7f },
+        { "ui_confirm", 0.7f },
+        { "checkpoint", 0.8f },
+    };
 
     class Voice
     {
@@ -92,13 +114,13 @@ public class Sfx : MonoBehaviour
 
         for (int i = 0; i < voices; i++)
         {
-            var src = gameObject.AddComponent<AudioSource>();
+            var src = NewSource("Voice_" + i);
             src.playOnAwake = false;
             src.spatialBlend = 0f;
             pool.Add(new Voice { source = src });
         }
 
-        rift = gameObject.AddComponent<AudioSource>();
+        rift = NewSource("Rift");
         rift.clip = Clip("rift_loop");
         rift.loop = true;
         rift.spatialBlend = 0f;
@@ -135,7 +157,7 @@ public class Sfx : MonoBehaviour
     public static SfxLoop Loop(string clip)
     {
         if (Instance == null) Create();
-        var src = Instance.gameObject.AddComponent<AudioSource>();
+        var src = Instance.NewSource("Loop_" + clip);
         src.clip = Instance.Clip(clip);
         src.loop = true;
         src.playOnAwake = false;
@@ -149,7 +171,7 @@ public class Sfx : MonoBehaviour
     {
         if (Instance == null || loop == null) return;
         Instance.loops.Remove(loop);
-        if (loop.source != null) Destroy(loop.source);
+        if (loop.source != null) Destroy(loop.source.gameObject);
     }
 
     public static int LaneOf(Vector3 position) => position.y < LaneSplitY ? 1 : 0;
@@ -160,6 +182,11 @@ public class Sfx : MonoBehaviour
     {
         AudioClip clip = Clip(name);
         if (clip == null) return;
+        int same = 0;
+        foreach (var candidate in pool)
+            if (candidate.source.isPlaying && candidate.source.clip == clip) same++;
+        if (same >= maxSameClip) return;
+        if (Trim.TryGetValue(name, out float trim)) volume *= trim;
 
         Voice v = null;
         foreach (var candidate in pool)
@@ -237,6 +264,19 @@ public class Sfx : MonoBehaviour
         var gm = GameManager.INSTANCE;
         if (lane < 0 || gm == null) return 1f;
         return Mathf.Clamp(1f + (gm.GetWorldSpeed(lane) - 1f) * pitchPerSpeed, minPitch, maxPitch);
+    }
+
+    // An AudioSource on its own child, so an AudioLowPassFilter there filters
+    // only it (a filter acts on the sources of its own GameObject).
+    AudioSource NewSource(string name)
+    {
+        var go = new GameObject(name);
+        go.transform.SetParent(transform, false);
+        var src = go.AddComponent<AudioSource>();
+        var lp = go.AddComponent<AudioLowPassFilter>();
+        lp.cutoffFrequency = lowPassCutoff;
+        lp.lowpassResonanceQ = 1f;
+        return src;
     }
 
     AudioClip Clip(string name)
