@@ -1201,6 +1201,345 @@ public static class LevelMap
             backgrounds.Add((go.transform, depth));
             return sr;
         }
+
+        #region Obstacle lab: pendulum, gear fall, tesla gate, steam vent, water wheel
+        // Builders for the obstacles shown in ObstacleLab.unity (ObstacleLabBuilder).
+        // Art from the tools/make_<name>.py generators in Assets/Art/Obstacles/<Name>/;
+        // each helper sets the import settings it needs (sprites at 32 PPU, point
+        // filter, strips sliced one sprite per frame). Tinted like the other
+        // obstacles through LaneSky; lamps, sparks, arcs and steam are not.
+
+        static Sprite[] LabStrip(string path, int frameWidth, Vector2 pivot, bool fullRect = false)
+        {
+            PrepareStrip(path, frameWidth, pivot);
+            if (fullRect && AssetImporter.GetAtPath(path) is TextureImporter ti)
+            {
+                var st = new TextureImporterSettings();
+                ti.ReadTextureSettings(st);
+                if (st.spriteMeshType != SpriteMeshType.FullRect)
+                {
+                    st.spriteMeshType = SpriteMeshType.FullRect;   // drawn tiled
+                    ti.SetTextureSettings(st);
+                    ti.SaveAndReimport();
+                }
+            }
+            return StripFrames(path);
+        }
+
+        static Sprite LabSprite(string path, Vector2 pivot, bool fullRect = false)
+        {
+            PrepareSprite(path, fullRect, pivot);
+            return AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        }
+
+        string Numbered(string type)
+        {
+            counts[type] = counts.TryGetValue(type, out var n) ? n + 1 : 1;
+            return $"{type}_{counts[type]}";
+        }
+
+        SpriteRenderer LabPart(string partName, Transform parent, Sprite sprite, int order, Vector2 at, bool tint = true)
+        {
+            var go = new GameObject(partName);
+            go.transform.SetParent(parent, false);
+            go.transform.localPosition = at;
+            var sr = go.AddComponent<SpriteRenderer>();
+            sr.sprite = sprite;
+            sr.sortingOrder = order;
+            if (tint) tinted.Add(sr);
+            return sr;
+        }
+
+        static Rigidbody2D Kinematic(GameObject go)
+        {
+            int layer = LayerMask.NameToLayer(GroundLayer);
+            if (layer >= 0) go.layer = layer;
+            var rb = go.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.gravityScale = 0f;
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+            return rb;
+        }
+
+        float LaneY => root.transform.position.y;
+
+        // Pendulum blade swinging under a stone housing over x (axis at x + 0.5,
+        // 9 tiles up): bracket, tiled rod `rodTiles` long, hub and bob. With the
+        // default 6-tile rod the blade's edge passes 0.6 above the ground, so a
+        // player can't duck under it; it swings `amplitude` degrees either side
+        // (about 5 tiles) in `period` lane seconds. Leave x - 6..x + 6 free.
+        public Pendulum Pendulum(int x, int rodTiles = 6, float amplitude = 44f, float period = 2.4f, float offset = 0f)
+        {
+            const string dir = "Assets/Art/Obstacles/Pendulum/";
+            int y = Surface(x);
+            int ceiling = y + 9;
+            Fill(x - 1, x + 1, ceiling + 2, ceiling);
+            Busy(x - 6, x + 6);
+
+            var go = new GameObject(Numbered("Pendulum"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 0.5f, ceiling - 22f / 32f, 0f);   // the swing axis
+            LabPart("Bracket", go.transform, LabSprite(dir + "pendulum_bracket_32px.png", new Vector2(0.5f, 10f / 32f)), 4, Vector2.zero);
+            var arm = new GameObject("Arm").transform;
+            arm.SetParent(go.transform, false);
+            var rod = LabPart("Rod", arm, LabSprite(dir + "pendulum_rod_32px.png", new Vector2(0.5f, 1f), true), 21, Vector2.zero);
+            rod.drawMode = SpriteDrawMode.Tiled;
+            rod.size = new Vector2(10f / 32f, rodTiles);
+            LabPart("Hub", arm, LabSprite(dir + "pendulum_hub_32px.png", new Vector2(0.5f, 0.5f)), 23, Vector2.zero);
+            var bobFrames = LabStrip(dir + "pendulum_bob_96px.png", 96, new Vector2(0.5f, 62f / 64f));
+            // In front of the players, so the blade reads as cutting through them.
+            var bob = LabPart("Bob", arm, bobFrames.FirstOrDefault(), 22, new Vector2(0f, -rodTiles));
+
+            var p = go.AddComponent<global::Pendulum>();
+            p.lane = LaneIndex;
+            p.cycleOffset = offset;
+            p.amplitude = amplitude;
+            p.period = period;
+            p.reach = rodTiles;
+            p.arm = arm;
+            p.bob = bob;
+            p.bobFrames = bobFrames;
+            return p;
+        }
+
+        // Gear fall: a chute under a stone housing over x - 1..x + 1 (9 tiles up)
+        // drops a 2x2 cog every `interval` lane seconds; it lands at x + 0.5,
+        // rolls `roll` units per lane second for 2 lane seconds (negative: left)
+        // and shatters. Leave the roll path free (4 tiles at the default).
+        public GearFall GearFall(int x, float roll = 2f, float interval = 3f, float offset = 0f)
+        {
+            const string dir = "Assets/Art/Obstacles/GearFall/";
+            int y = Surface(x);
+            int ceiling = y + 9;
+            Fill(x - 1, x + 1, ceiling + 2, ceiling);
+            float rollTime = 2f;
+            Busy(x - 2, x + 1 + Mathf.CeilToInt(Mathf.Max(0f, roll * rollTime) + 1f));
+            Busy(x - 1 + Mathf.FloorToInt(Mathf.Min(0f, roll * rollTime) - 1f), x + 2);
+
+            var go = new GameObject(Numbered("GearFall"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x + 0.5f, ceiling, 0f);
+            var chuteFrames = LabStrip(dir + "gearfall_chute_96px.png", 96, new Vector2(0.5f, 1f));
+            var lampFrames = LabStrip(dir + "gearfall_lamp_96px.png", 96, new Vector2(0.5f, 1f));
+            var gearFrames = LabStrip(dir + "gearfall_gear_64px.png", 64, new Vector2(0.5f, 0.5f));
+            var shatterFrames = LabStrip(dir + "gearfall_shatter_128px.png", 128, new Vector2(0.5f, 1f / 3f));
+            var chute = LabPart("Chute", go.transform, chuteFrames.FirstOrDefault(), 6, Vector2.zero);
+            var lamp = LabPart("Lamp", go.transform, lampFrames.FirstOrDefault(), 7, Vector2.zero, false);
+
+            var g = go.AddComponent<global::GearFall>();
+            g.lane = LaneIndex;
+            g.cycleOffset = offset;
+            g.interval = interval;
+            g.rollSpeed = roll;
+            g.rollTime = rollTime;
+            g.spawn = new Vector2(x + 0.5f, LaneY + ceiling - 12f / 32f);
+            g.landY = LaneY + y - 3f / 32f + 1f;   // bottom on the ground collider's top
+            float fall = Mathf.Sqrt(2f * (g.spawn.y - g.landY) / g.gravity);
+            int pool = Mathf.CeilToInt((fall + rollTime + 8f / 15f) / interval) + 1;
+            g.gears = new Rigidbody2D[pool];
+            for (int i = 0; i < pool; i++)
+            {
+                var sr = LabPart($"Gear_{i}", go.transform, gearFrames.FirstOrDefault(), 5, new Vector2(0f, -12f / 32f));
+                sr.enabled = false;
+                var rb = Kinematic(sr.gameObject);
+                sr.gameObject.AddComponent<CircleCollider2D>().radius = g.radius;
+                g.gears[i] = rb;
+            }
+            g.chute = chute;
+            g.chuteFrames = chuteFrames;
+            g.lamp = lamp;
+            g.lampFrames = lampFrames;
+            g.gearFrames = gearFrames;
+            g.shatterFrames = shatterFrames;
+            return g;
+        }
+
+        // Tesla gate: coil pylons on columns x0 and x1 (4 tiles tall, scenery:
+        // players walk in front of them) and an arc between their emitters 1.16
+        // above the ground. With `ceiling` > 0 a stone lintel between the pylons
+        // from that height stops players jumping over the arc (at 3 they can
+        // rise only 1.75), so the gate is passable only while it is off.
+        public TeslaGate TeslaGate(int x0, int x1, int ceiling = 3, float offset = 0f)
+        {
+            const string dir = "Assets/Art/Obstacles/TeslaGate/";
+            int y = Surface(x0);
+            if (ceiling > 0) Fill(x0 + 1, x1 - 1, y + ceiling + 2, y + ceiling);
+            Busy(x0 - 1, x1 + 1);
+
+            var go = new GameObject(Numbered("TeslaGate"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x0, y, 0f);
+            var pylon = LabSprite(dir + "teslagate_pylon_32px.png", new Vector2(0.5f, 0f));
+            var fxFrames = LabStrip(dir + "teslagate_fx_32px.png", 32, new Vector2(0.5f, 0f));
+            var lampFrames = LabStrip(dir + "teslagate_lamp_32px.png", 32, new Vector2(0.5f, 0f));
+            var arcFrames = LabStrip(dir + "teslagate_arc_32px.png", 32, new Vector2(0f, 0.5f));
+            var fx = new List<SpriteRenderer>();
+            var lamps = new List<SpriteRenderer>();
+            foreach (var (px, flip) in new[] { (x0, false), (x1, true) })
+            {
+                var at = new Vector2(px - x0 + 0.5f, -3f / 32f);   // on the walking surface
+                var body = LabPart(flip ? "PylonRight" : "PylonLeft", go.transform, pylon, 2, at);
+                body.flipX = flip;
+                var f = LabPart("Fx", body.transform, fxFrames.FirstOrDefault(), 3, Vector2.zero, false);
+                var l = LabPart("Lamp", body.transform, lampFrames.FirstOrDefault(), 3, Vector2.zero, false);
+                f.flipX = l.flipX = flip;
+                fx.Add(f);
+                lamps.Add(l);
+            }
+
+            // Arc: from the left pylon's emitter ball (pixel 29) to the right one's
+            // (pixel 2, mirrored 29), in whole-tile segments stretched to fit.
+            float left = 29.5f / 32f, right = x1 - x0 + 2.5f / 32f, arcY = -3f / 32f + 37f / 32f;
+            int n = Mathf.Max(1, Mathf.CeilToInt(right - left));
+            float w = (right - left) / n;
+            var segments = new SpriteRenderer[n];
+            for (int i = 0; i < n; i++)
+            {
+                var seg = LabPart($"Arc_{i}", go.transform, arcFrames.FirstOrDefault(), 21, new Vector2(left + i * w, arcY), false);
+                seg.transform.localScale = new Vector3(w, 1f, 1f);
+                seg.enabled = false;
+                segments[i] = seg;
+            }
+
+            var gate = go.AddComponent<global::TeslaGate>();
+            gate.lane = LaneIndex;
+            gate.cycleOffset = offset;
+            gate.arcLeft = x0 + left;
+            gate.arcRight = x0 + right;
+            gate.arcY = LaneY + y + arcY;
+            gate.fx = fx.ToArray();
+            gate.lamps = lamps.ToArray();
+            gate.fxFrames = fxFrames;
+            gate.lampFrames = lampFrames;
+            gate.arcSegments = segments;
+            gate.arcFrames = arcFrames;
+            return gate;
+        }
+
+        // Steam vent over x..x + 1, flush in the ground's top row (the ground
+        // tiles stay under it for the collider): blasts a 4-tile steam column
+        // that lifts players about 5.4 tiles, over a wall a jump can't clear.
+        public SteamVent SteamVent(int x, float offset = 0f)
+        {
+            const string dir = "Assets/Art/Obstacles/SteamVent/";
+            int y = Surface(x);
+            Busy(x - 1, x + 2);
+
+            var go = new GameObject(Numbered("SteamVent"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x, y - 1, 0f);
+            var grateFrames = LabStrip(dir + "steamvent_grate_64px.png", 64, Vector2.zero);
+            var steamFrames = LabStrip(dir + "steamvent_steam_64px.png", 64, new Vector2(0.5f, 0f));
+            var grate = LabPart("Grate", go.transform, grateFrames.FirstOrDefault(), 1, Vector2.zero);
+            var steam = LabPart("Steam", go.transform, steamFrames.FirstOrDefault(), 21, new Vector2(1f, 1f - 3f / 32f), false);
+            steam.enabled = false;
+
+            var v = go.AddComponent<global::SteamVent>();
+            v.lane = LaneIndex;
+            v.cycleOffset = offset;
+            v.columnX = x + 1f;
+            v.columnBottom = LaneY + y - 1f / 32f;   // the ground collider's top
+            v.grate = grate;
+            v.grateFrames = grateFrames;
+            v.steam = steam;
+            v.steamFrames = steamFrames;
+            return v;
+        }
+
+        // Water wheel with its axle over x, 4.5 tiles up (7 tiles across, the
+        // bottom bucket's floor 0.7 above the ground): a flume from the left
+        // under a stone housing (x - 7..x - 3, rows 8-9) pours into the bucket at
+        // the top left, a tailrace runs under the wheel (x - 4..x + 3). Put the
+        // ledge it serves on the right from x + 4, 7 tiles high: only a ride in
+        // a bucket (partner running) gets there.
+        public WaterWheel WaterWheel(int x, float offset = 0f)
+        {
+            const string dir = "Assets/Art/Obstacles/WaterWheel/";
+            int y = Surface(x);
+            Fill(x - 7, x - 3, y + 10, y + 8);
+            Busy(x - 8, x + 4);
+
+            var go = new GameObject(Numbered("WaterWheel"));
+            go.transform.SetParent(markers, false);
+            go.transform.localPosition = new Vector3(x, y + 4.5f, 0f);
+            var turn = LabStrip(dir + "waterwheel_turn_224px.png", 224, new Vector2(0.5f, 0.5f));
+            var bucketFrames = LabStrip(dir + "waterwheel_bucket_64px.png", 64, new Vector2(0.5f, 56f / 64f));
+            var waterFrames = LabStrip(dir + "waterwheel_bucket_water_64px.png", 64, new Vector2(0.5f, 56f / 64f));
+            var pourFrames = LabStrip(dir + "waterwheel_pour_32px.png", 32, new Vector2(0.5f, 1f), true);
+            var flumeFrames = LabStrip(dir + "waterwheel_flume_32px.png", 32, new Vector2(0f, 1f));
+            var tailFrames = LabStrip(dir + "waterwheel_tailrace_32px.png", 32, new Vector2(0f, 1f));
+            var splashFrames = LabStrip(dir + "waterwheel_splash_48px.png", 48, new Vector2(0.5f, 0f));
+            var trickleFrames = LabStrip(dir + "waterwheel_trickle_32px.png", 32, new Vector2(0.5f, 1f), true);
+
+            var w = go.AddComponent<global::WaterWheel>();
+            w.lane = LaneIndex;
+            w.cycleOffset = offset;
+            w.centre = new Vector2(x, LaneY + y + 4.5f);
+            w.wheel = LabPart("Wheel", go.transform, turn.FirstOrDefault(), 2, Vector2.zero);
+            w.wheelFrames = turn;
+
+            // Buckets on the pins (wheel angle 0: pin j at 45 j degrees).
+            w.buckets = new Rigidbody2D[8];
+            w.bucketWater = new SpriteRenderer[8];
+            for (int j = 0; j < 8; j++)
+            {
+                float a = 45f * j * Mathf.Deg2Rad;
+                var b = LabPart($"Bucket_{j}", go.transform, bucketFrames.ElementAtOrDefault(9), 4,
+                    new Vector2(Mathf.Cos(a), Mathf.Sin(a)) * w.pinRadius);
+                var rb = Kinematic(b.gameObject);
+                var box = b.gameObject.AddComponent<BoxCollider2D>();
+                box.size = new Vector2(1.25f, 0.25f);
+                box.offset = new Vector2(0f, -w.floorDrop - 0.125f);
+                box.usedByEffector = true;
+                b.gameObject.AddComponent<PlatformEffector2D>().useOneWay = true;
+                w.buckets[j] = rb;
+                var water = LabPart("Water", b.transform, waterFrames.ElementAtOrDefault(3), 5, Vector2.zero);
+                water.enabled = false;
+                w.bucketWater[j] = water;
+            }
+            w.bucketFrames = bucketFrames;
+            w.waterFrames = waterFrames;
+
+            // Flume: trough tiles from the left ending over the top-left bucket.
+            float mouthX = -Mathf.Cos(Mathf.PI / 4f) * w.pinRadius;    // local, from the axle
+            float flumeTop = 2.9f;                                     // local: 7.4 above the ground
+            var flume = new List<SpriteRenderer>();
+            for (int i = 0; i < 5; i++)
+                flume.Add(LabPart($"Flume_{i}", go.transform, flumeFrames.FirstOrDefault(), 4,
+                    new Vector2(mouthX + 0.25f - 5 + i, flumeTop)));
+            w.flume = flume.ToArray();
+            w.flumeFrames = flumeFrames;
+            w.mouth = w.centre + new Vector2(mouthX, flumeTop - 0.5f);
+
+            // Tailrace in the ground's top row under the wheel.
+            var tail = new List<SpriteRenderer>();
+            for (int i = -4; i <= 3; i++)
+                tail.Add(LabPart($"Tailrace_{i + 4}", go.transform, tailFrames.FirstOrDefault(), 1,
+                    new Vector2(i, -4.5f - 2f / 32f)));
+            w.tailrace = tail.ToArray();
+            w.tailraceFrames = tailFrames;
+            w.tailraceY = LaneY + y - 6f / 32f;
+
+            SpriteRenderer Stream(string streamName, Sprite[] frames, int order)
+            {
+                var sr = LabPart(streamName, go.transform, frames.FirstOrDefault(), order, w.mouth - w.centre);
+                sr.drawMode = SpriteDrawMode.Tiled;
+                sr.size = new Vector2(1f, 2f);
+                sr.enabled = false;
+                return sr;
+            }
+            w.pour = Stream("Pour", pourFrames, 3);
+            w.trickle = Stream("Trickle", trickleFrames, 3);
+            w.spill = Stream("Spill", trickleFrames, 3);
+            w.pourFrames = pourFrames;
+            w.trickleFrames = trickleFrames;
+            w.splashTop = LabPart("SplashTop", go.transform, splashFrames.FirstOrDefault(), 6, Vector2.zero);
+            w.splashBottom = LabPart("SplashBottom", go.transform, splashFrames.FirstOrDefault(), 6, Vector2.zero);
+            w.splashTop.enabled = w.splashBottom.enabled = false;
+            w.splashFrames = splashFrames;
+            return w;
+        }
+        #endregion
     }
 
     static int Hash(int x, int y) => ((x * 73856093) ^ (y * 19349663)) & 0x7fffffff;
