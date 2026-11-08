@@ -41,7 +41,7 @@ public class ClockPendulum : LaneObstacle
     [Tooltip("A bob moving into a player slower than this (units/s) only pushes.")]
     public float minKnockSpeed = 1f;
     [Tooltip("A player whose body centre is further than this (units) from under the axis is only nudged, whatever the lane speed: the belt's ends.")]
-    public float nudgeBeyond = 1.5f;
+    public float nudgeBeyond = 1f;
     [Tooltip("Horizontal speed (units/s) of a nudge; with knockTime it moves a player under a tile, so it never throws them off the belt.")]
     public float nudgeSpeed = 2.5f;
     [Tooltip("Upward speed of a nudge (units/s).")]
