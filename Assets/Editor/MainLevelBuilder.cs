@@ -78,10 +78,10 @@ public static class MainLevelBuilder
         l.Conveyor(139, 141, -Belt);
         l.Crusher(142, 2.7f);
         tickFinal = l.Button(143, narrow: true);   // in the strike plate
-        tickGate = l.ButtonGate(147);
+        tickGate = l.ButtonGate(148);
 
         // 5. Ending.
-        l.Checkpoint(151);
+        l.Checkpoint(152);
         l.Decor("lamp", 155.5f);
         l.Decor("clock", 165.5f);
         l.Door(159);
@@ -126,12 +126,12 @@ public static class MainLevelBuilder
         l.Conveyor(140, 142, -Belt);
         l.Crusher(143, 3.15f);
         var tockFinal = l.Button(144, narrow: true);
-        var tockGate = l.ButtonGate(148);
+        var tockGate = l.ButtonGate(149);
         WireGate(tockGate, tickFinal, tockFinal);
         WireGate(tickGate, tickFinal, tockFinal);
 
         // 5. Ending.
-        l.Checkpoint(152);
+        l.Checkpoint(153);
         l.Decor("lamp", 156.5f);
         l.Decor("clock", 165.5f);
         l.Door(159);
