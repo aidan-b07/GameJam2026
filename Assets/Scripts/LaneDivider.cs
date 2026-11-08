@@ -5,7 +5,7 @@ using UnityEngine.UI;
 // The Unraveling rifts, drawn on a screen-space overlay canvas (one canvas
 // unit is one art pixel). Two bands, one per lane, each hanging from the top
 // edge of its lane's view and reaching down by LaneRift.ReachAt(lane, x)
-// (uneven along the edge: swells, fingers and columns that crack down):
+// (a front that keeps changing shape, and tendrils that sprout and pull back):
 // - rift, on the seam between Tick's lane (top) and Tock's (bottom), grows
 //   down into Tock's view; its top edge stays a thin crack in Tick's ground;
 // - topRift, along the top of the screen, grows down into Tick's view.
@@ -174,7 +174,7 @@ public class LaneDivider : MonoBehaviour
         float x = wx / PixelsPerUnit;
         if (Application.isPlaying && LaneRift.Instance != null)
             return LaneRift.Instance.ReachAt(lane, x) * PixelsPerUnit * scale;
-        return (minHalfHeight + LaneRift.Uneven(previewDepth, x, lane) * PixelsPerUnit) * scale;
+        return (minHalfHeight + LaneRift.Front(previewDepth, x, 0f, lane) * PixelsPerUnit) * scale;
     }
 
     bool EnsureTexture(Band b, int width)

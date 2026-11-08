@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // The Unraveling rift as a hazard: one rift hangs from the top edge of each
@@ -12,17 +13,19 @@ using UnityEngine;
 // shrinks linearly, faster the faster the player runs (shrinkRate at full
 // speed).
 //
-// Depth is the mean growth; the edge does not move down as one line. Each
-// 4 px column of it (fixed in the lane's world) has its own lead: broad
-// swells, narrow fingers that run ahead, and columns that crack down in
-// LurchStep steps at their own moments (Uneven). ReachAt gives the edge at a
-// world x, and the kill uses the deepest column over the player's width.
+// Depth is the mean growth; the edge does not just stretch down. Its front
+// (Front) bulges and dips in shapes that keep morphing while the rift lives,
+// and tendrils sprout from it at random places (more the deeper it is): each
+// grows out to its own length, hangs there a moment, then pulls back while
+// new ones sprout elsewhere. Running pulls them all back fast. ReachAt gives
+// the edge (front plus tendrils, in 4 px columns fixed in the lane's world)
+// at a world x, and the kill uses the deepest column over the player's width.
 //
 // A player whose head reaches the rift's edge dies (GameFlow.KillAll); that
 // includes being flung up off the top of the view, since the camera no longer
 // follows players upwards. Both rifts close again on every respawn.
 //
-// LaneDivider draws the rifts from Reach(lane).
+// LaneDivider draws the rifts from ReachAt(lane, x).
 [DefaultExecutionOrder(-40)]   // after CoopCamera (-50), before LaneDivider (-30)
 public class LaneRift : MonoBehaviour
 {
@@ -33,7 +36,7 @@ public class LaneRift : MonoBehaviour
 
     // Height (units) of the teeth along a rift's edge, centred on its reach
     // (a closed rift's teeth are as tall as its reach). LaneDivider draws them.
-    public const float TeethAmplitude = 0.5f;   // 16 art pixels
+    public const float TeethAmplitude = 0.3125f;   // 10 art pixels
 
     [Header("Growth (player slower than the threshold)")]
     [Tooltip("Normalised horizontal speed (0..1) below which the rift grows.")]
@@ -43,15 +46,27 @@ public class LaneRift : MonoBehaviour
     [Tooltip("Exponential growth rate per second: depth grows by (depth + growthSeed) * this each second (on average, see surges).")]
     public float growthRate = 0.4f;
     [Tooltip("Depth (units) the exponential grows from: higher starts faster. " +
-             "From closed (after slowGrace) it reaches a standing player in about 6.3-7.5 s, depending on the edge above them.")]
+             "From closed (after slowGrace) it reaches a standing player in about 6.5-7.5 s, sooner under a tendril.")]
     public float growthSeed = 0.6f;
     [Tooltip("Seconds between growth surges; the rift creeps in between.")]
     public float surgePeriod = 1.3f;
     [Tooltip("Growth speed between surges, as a fraction of the average.")]
     [Range(0f, 1f)] public float surgeFloor = 0.35f;
 
-    // Units an edge column drops at once when it cracks further down.
-    public const float LurchStep = 0.25f;   // 8 art pixels
+
+    [Header("Tendrils")]
+    [Tooltip("Tendrils sprouting per second along a growing rift's view, plus tendrilsPerDepth per unit of depth.")]
+    public float tendrilRate = 2.5f;
+    public float tendrilsPerDepth = 0.6f;
+    [Tooltip("Tendril length (units) is tendrilLength plus up to tendrilLengthPerDepth per unit of depth, times a random 0-1 on top of the minimum.")]
+    public float tendrilLength = 0.5f;
+    public float tendrilLengthPerDepth = 0.2f;
+    [Tooltip("Units per second a tendril grows out at first (slowing as it nears its length).")]
+    public Vector2 tendrilSpeed = new Vector2(1f, 2.4f);
+    [Tooltip("Units per second a tendril pulls back while the rift grows, and while its player runs.")]
+    public float tendrilRecede = 0.9f;
+    public float tendrilRecedeRunning = 3f;
+    public int maxTendrils = 40;
 
     [Header("Shrink (player at or above the threshold)")]
     [Tooltip("Units per second the rift closes at full run speed; scales with the player's speed.")]
@@ -67,6 +82,16 @@ public class LaneRift : MonoBehaviour
     float[] depth = new float[2];
     float[] slowFor = new float[2];
     float[] growFor = new float[2];
+    float[] frontClock = new float[2];
+
+    class Tendril
+    {
+        public float x, halfWidth, length, maxLength, speed, hold, lean;
+        public bool receding;
+    }
+
+    readonly List<Tendril>[] tendrils = { new List<Tendril>(), new List<Tendril>() };
+    readonly System.Random rng = new System.Random(23);
     bool[] safe = new bool[2];
 
     // A safe lane's rift closes and cannot kill (a player waiting at the
@@ -81,7 +106,11 @@ public class LaneRift : MonoBehaviour
     public float Reach(int lane) => restReach + Depth(lane);
 
     // Rift reach (units) of the edge column above world x.
-    public float ReachAt(int lane, float worldX) => restReach + Uneven(Depth(lane), worldX, lane);
+    public float ReachAt(int lane, float worldX)
+    {
+        float clock = lane >= 0 && lane < frontClock.Length ? frontClock[lane] : 0f;
+        return restReach + Front(Depth(lane), worldX, clock, lane) + TendrilAt(lane, worldX);
+    }
 
     // Reach (units) of the lowest tooth tips over the lane's player: where
     // the rift kills. Mean reach when there is no player.
@@ -103,23 +132,71 @@ public class LaneRift : MonoBehaviour
 
     const float ColumnWidth = 4f / 32f;   // edge columns are 4 art pixels wide
 
-    // Growth (units) of the edge column above world x when the mean growth is
-    // depth: depth times the column's lead (0.62-1.72: broad swells,
-    // rough bumps and fingers that hang down), cracked down in LurchSteps at a phase of its own, so
-    // neighbouring columns drop at different moments. Never above depth's
-    // edge when depth is 0. Lane picks the pattern.
-    public static float Uneven(float depth, float worldX, int lane)
+    // Growth (units) of the front in the edge column above world x: depth
+    // times a lead of 0.55-1.35 from bulges (about 2.5 units wide) and bumps
+    // (0.7), both morphing into new shapes as clock runs, so the front
+    // changes shape instead of stretching. Snapped to 4 px; 0 at depth 0.
+    // Lane picks the pattern.
+    public static float Front(float depth, float worldX, float clock, int lane)
     {
         if (depth <= 0f) return 0f;
         int col = Mathf.FloorToInt(worldX / ColumnWidth);
         float cx = col * ColumnWidth;
         int seed = 11 + lane * 37;
-        float broad = Noise(cx / 3f, seed);
-        float rough = Noise(cx / 0.5f, seed + 3);
-        float finger = Mathf.Max(0f, Noise(cx / 0.9f, seed + 1) - 0.5f) / 0.5f;
-        float lead = 0.62f + 0.4f * broad + 0.2f * rough + 0.5f * finger * Mathf.Sqrt(finger);
-        float phase = 0.6f * Noise(cx / 1.1f, seed + 2) + 0.4f * Hash(col * 13 + seed);
-        return Mathf.Max(0f, Mathf.Floor(depth * lead / LurchStep + phase) * LurchStep);
+        float lead = 0.55f + 0.6f * Morph(cx / 2.5f, clock / 1.8f, seed) + 0.2f * Morph(cx / 0.7f, clock / 0.8f, seed + 3);
+        return Mathf.Max(0f, Mathf.Floor(depth * lead / ColumnWidth + 0.5f) * ColumnWidth);
+    }
+
+    // How far (units) tendrils hang below the front in the column above world x.
+    float TendrilAt(int lane, float worldX)
+    {
+        if (lane < 0 || lane >= tendrils.Length) return 0f;
+        float x = (Mathf.Floor(worldX / ColumnWidth) + 0.5f) * ColumnWidth, extra = 0f;
+        foreach (var t in tendrils[lane])
+        {
+            // Tapered spike; its tip leans off centre as it grows.
+            float u = (x - t.x) / t.halfWidth - t.lean * t.length / Mathf.Max(0.01f, t.maxLength);
+            if (u <= -1f || u >= 1f) continue;
+            extra = Mathf.Max(extra, t.length * Mathf.Pow(1f - Mathf.Abs(u), 0.8f));
+        }
+        return Mathf.Floor(extra / ColumnWidth) * ColumnWidth;
+    }
+
+    void UpdateTendrils(int lane, bool growing, bool running, float viewX, float halfView, float dt)
+    {
+        var list = tendrils[lane];
+        float d = depth[lane];
+        if (growing && list.Count < maxTendrils && rng.NextDouble() < (tendrilRate + tendrilsPerDepth * d) * dt)
+            list.Add(new Tendril
+            {
+                x = viewX + (float)(rng.NextDouble() * 2 - 1) * halfView,
+                halfWidth = 0.15f + (float)rng.NextDouble() * 0.4f,
+                maxLength = tendrilLength + (float)rng.NextDouble() * (0.9f + tendrilLengthPerDepth * d),
+                speed = Mathf.Lerp(tendrilSpeed.x, tendrilSpeed.y, (float)rng.NextDouble()),
+                hold = 0.3f + (float)rng.NextDouble(),
+                lean = (float)rng.NextDouble() * 0.6f - 0.3f,
+            });
+        for (int i = list.Count - 1; i >= 0; i--)
+        {
+            var t = list[i];
+            if (!growing) t.receding = true;
+            if (t.receding)
+            {
+                t.length -= (running || !growing ? tendrilRecedeRunning : tendrilRecede) * dt;
+                if (t.length <= 0f) list.RemoveAt(i);
+            }
+            else if (t.length < t.maxLength * 0.97f)
+                t.length += t.speed * Mathf.Max(0.25f, 1f - t.length / t.maxLength) * dt;
+            else if ((t.hold -= dt) <= 0f)
+                t.receding = true;
+        }
+    }
+
+    static float Morph(float x, float phase, int seed)
+    {
+        int k = Mathf.FloorToInt(phase);
+        float f = phase - k, s = f * f * (3f - 2f * f);
+        return Mathf.Lerp(Noise(x, seed + k * 977), Noise(x, seed + (k + 1) * 977), s);
     }
 
     public static float Hash(int i)
@@ -167,7 +244,8 @@ public class LaneRift : MonoBehaviour
 
     public void Close()
     {
-        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = growFor[i] = 0f;
+        for (int i = 0; i < depth.Length; i++) depth[i] = slowFor[i] = growFor[i] = frontClock[i] = 0f;
+        foreach (var list in tendrils) list.Clear();
         for (int i = 0; i < safe.Length; i++) safe[i] = false;
     }
 
@@ -183,18 +261,26 @@ public class LaneRift : MonoBehaviour
             var player = flow.players[lane];
             if (player == null || !player.gameObject.activeInHierarchy) continue;
 
+            var cam = cams != null && lane < cams.Length ? cams[lane] : null;
+            float viewX = cam != null ? cam.transform.position.x : player.transform.position.x;
+            float halfView = cam != null ? cam.orthographicSize * cam.aspect + 1f : 21f;
+            frontClock[lane] += dt;
+
             float speed = flow.HorizontalSpeed(lane);
             if (Suspended || safe[lane])
             {
                 slowFor[lane] = growFor[lane] = 0f;
                 depth[lane] = Mathf.Max(0f, depth[lane] - shrinkRate * dt);
+                UpdateTendrils(lane, false, false, viewX, halfView, dt);
                 continue;
             }
+            bool growing = false;
             if (speed < slowThreshold)
             {
                 slowFor[lane] += dt;
                 if (slowFor[lane] > slowGrace)
                 {
+                    growing = true;
                     growFor[lane] += dt;
                     depth[lane] += (depth[lane] + growthSeed) * growthRate * Surge(growFor[lane]) * dt;
                 }
@@ -205,8 +291,8 @@ public class LaneRift : MonoBehaviour
                 depth[lane] -= shrinkRate * speed * dt;
             }
             depth[lane] = Mathf.Clamp(depth[lane], 0f, maxDepth);
+            UpdateTendrils(lane, growing, speed >= slowThreshold, viewX, halfView, dt);
 
-            var cam = cams != null && lane < cams.Length ? cams[lane] : null;
             if (cam == null) continue;
             float edge = cam.transform.position.y + cam.orthographicSize - TipReach(lane);
             if (flow.Top(lane) + headMargin >= edge)
