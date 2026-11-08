@@ -361,11 +361,6 @@ MonoBehaviour:
   forwardBias: 3
   smoothTime: 0.25
   maxSpeed: 40
-  riseAbove: 1.75
-  headroom: 1.5
-  footroom: 1
-  smoothTimeY: 0.15
-  maxSpeedY: 60
   edgeMargin: 2
   elasticWidth: 1.25
   levelLeft: -2
@@ -20132,12 +20127,15 @@ MonoBehaviour:
   - mouth: {x: 31, y: 237}
     interval: 0.32
     size: 1
+    moving: 0
   - mouth: {x: 253.5, y: 222}
     interval: 0.4
     size: 0.8
+    moving: 0
   - mouth: {x: 67.5, y: 142}
     interval: 0.5
     size: 0.8
+    moving: 0
   lane: 1
   tempo: 0.55
   fps: 30
@@ -20145,6 +20143,8 @@ MonoBehaviour:
   rise: 72
   warmUp: 8
   seed: 2
+  cropLeft: 0
+  cropRight: 0
   day:
     soot: {r: 0.37254903, g: 0.34117648, b: 0.38431373, a: 1}
     hi: {r: 0.9254902, g: 0.9098039, b: 0.9019608, a: 1}
@@ -20217,7 +20217,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 5.28125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &631473690
@@ -20463,6 +20463,7 @@ MonoBehaviour:
   dayHands: {r: 0.5254902, g: 0.6627451, b: 0.8156863, a: 1}
   duskHands: {r: 0.61960787, g: 0.3764706, b: 0.61960787, a: 1}
   nightHands: {r: 0.30588236, g: 0.25882354, b: 0.47843137, a: 1}
+  crop: 0
 --- !u!212 &684354169
 SpriteRenderer:
   serializedVersion: 3
@@ -20520,7 +20521,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &685559889
@@ -21772,12 +21773,15 @@ MonoBehaviour:
   - mouth: {x: 31, y: 237}
     interval: 0.32
     size: 1
+    moving: 0
   - mouth: {x: 253.5, y: 222}
     interval: 0.4
     size: 0.8
+    moving: 0
   - mouth: {x: 67.5, y: 142}
     interval: 0.5
     size: 0.8
+    moving: 0
   lane: 0
   tempo: 0.55
   fps: 30
@@ -21785,6 +21789,8 @@ MonoBehaviour:
   rise: 72
   warmUp: 8
   seed: 1
+  cropLeft: 0
+  cropRight: 0
   day:
     soot: {r: 0.37254903, g: 0.34117648, b: 0.38431373, a: 1}
     hi: {r: 0.9254902, g: 0.9098039, b: 0.9019608, a: 1}
@@ -21857,7 +21863,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 5.28125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &799854846
@@ -22789,6 +22795,7 @@ MonoBehaviour:
     clocks: {fileID: 1106826285}
     smoke: {fileID: 0}
     life: {fileID: 0}
+    sections: {fileID: 0}
   - day: {fileID: 1753557103}
     dusk: {fileID: 1565281625}
     night: {fileID: 1984028009}
@@ -22796,6 +22803,7 @@ MonoBehaviour:
     clocks: {fileID: 1461512487}
     smoke: {fileID: 793684809}
     life: {fileID: 2092426325}
+    sections: {fileID: 0}
   tilemaps:
   - {fileID: 1775913360}
   - {fileID: 709819390}
@@ -23160,6 +23168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidLayerLife
   background: {fileID: 503250275}
+  tiled: 1
+  pictureSize: {x: 0, y: 0}
   cameraTransform: {fileID: 416975779}
   lane: 1
   seed: 2
@@ -23227,6 +23237,7 @@ MonoBehaviour:
     width: 9
     height: 26
   pennant: {x: 448, y: 112}
+  pennants: []
   windows:
   - x: 443
     y: 147
@@ -24191,6 +24202,7 @@ MonoBehaviour:
   dayHands: {r: 0.5254902, g: 0.6627451, b: 0.8156863, a: 1}
   duskHands: {r: 0.61960787, g: 0.3764706, b: 0.61960787, a: 1}
   nightHands: {r: 0.30588236, g: 0.25882354, b: 0.47843137, a: 1}
+  crop: 0
 --- !u!212 &1106826286
 SpriteRenderer:
   serializedVersion: 3
@@ -24248,7 +24260,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &1110806523
@@ -24393,15 +24405,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaneDivider
   rift: {fileID: 1179654508}
+  topRift: {fileID: 0}
   topCamera: {fileID: 1716768917}
   bottomCamera: {fileID: 416975779}
   minHalfHeight: 9
-  maxHalfHeight: 28
-  gapScale: 1.5
   fps: 8
-  ease: 0.06
   morphTime: 5
-  previewGap: 0
+  previewDepth: 0
 --- !u!114 &1143525814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27314,6 +27324,7 @@ MonoBehaviour:
   dayHands: {r: 0.49411765, g: 0.26666668, b: 0.28235295, a: 1}
   duskHands: {r: 0.4509804, g: 0.21176471, b: 0.3529412, a: 1}
   nightHands: {r: 0.43137255, g: 0.29411766, b: 0.29411766, a: 1}
+  crop: 0
 --- !u!212 &1461512488
 SpriteRenderer:
   serializedVersion: 3
@@ -27371,7 +27382,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &1467801242
@@ -47790,8 +47801,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   idleWorldSpeed: 0.35
   maxWorldSpeed: 3
-  rampDuration: 0.3
-  rampSharpness: 2
+  rampDuration: 1.5
   holdTime: 0.25
   windDownDuration: 1.2
   movingThreshold: 0.1
@@ -48474,6 +48484,7 @@ MonoBehaviour:
   dayHands: {r: 0.49411765, g: 0.26666668, b: 0.28235295, a: 1}
   duskHands: {r: 0.4509804, g: 0.21176471, b: 0.3529412, a: 1}
   nightHands: {r: 0.43137255, g: 0.29411766, b: 0.29411766, a: 1}
+  crop: 0
 --- !u!212 &1881919558
 SpriteRenderer:
   serializedVersion: 3
@@ -48531,7 +48542,7 @@ SpriteRenderer:
   m_Size: {x: 260, y: 11.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
 --- !u!1 &1906138876
@@ -49975,6 +49986,7 @@ MonoBehaviour:
   fallTime: 0.75
   restPause: 2
   openPause: 2
+  spanPause: 0
   groundRestitution: 0.3
   wallRestitution: 0.35
   damping: 0.12
@@ -50659,6 +50671,7 @@ MonoBehaviour:
     clocks: {fileID: 684354168}
     smoke: {fileID: 0}
     life: {fileID: 0}
+    sections: {fileID: 0}
   - day: {fileID: 503250275}
     dusk: {fileID: 1181055935}
     night: {fileID: 1041062551}
@@ -50666,6 +50679,7 @@ MonoBehaviour:
     clocks: {fileID: 1881919557}
     smoke: {fileID: 606529451}
     life: {fileID: 985022646}
+    sections: {fileID: 0}
   tilemaps:
   - {fileID: 569375154}
   - {fileID: 685559890}
@@ -50843,6 +50857,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidLayerLife
   background: {fileID: 1753557103}
+  tiled: 1
+  pictureSize: {x: 0, y: 0}
   cameraTransform: {fileID: 1716768917}
   lane: 0
   seed: 1
@@ -50910,6 +50926,7 @@ MonoBehaviour:
     width: 9
     height: 26
   pennant: {x: 448, y: 112}
+  pennants: []
   windows:
   - x: 443
     y: 147
