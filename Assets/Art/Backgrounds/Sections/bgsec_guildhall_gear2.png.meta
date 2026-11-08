@@ -1,0 +1,1224 @@
+fileFormatVersion: 2
+guid: b51ba1792d8a54da7bb2a9c6075ec784
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4764597610869354966
+    second: bgsec_guildhall_gear2_0
+  - first:
+      213: -2162225263027128722
+    second: bgsec_guildhall_gear2_1
+  - first:
+      213: -8695036795122083967
+    second: bgsec_guildhall_gear2_2
+  - first:
+      213: 2853828169246902749
+    second: bgsec_guildhall_gear2_3
+  - first:
+      213: -8316526921157987420
+    second: bgsec_guildhall_gear2_4
+  - first:
+      213: 3392052827337656859
+    second: bgsec_guildhall_gear2_5
+  - first:
+      213: -5613865350214961672
+    second: bgsec_guildhall_gear2_6
+  - first:
+      213: 1081741172172417090
+    second: bgsec_guildhall_gear2_7
+  - first:
+      213: -3204253420000520491
+    second: bgsec_guildhall_gear2_8
+  - first:
+      213: 7974872296081131028
+    second: bgsec_guildhall_gear2_9
+  - first:
+      213: 5502762543420821043
+    second: bgsec_guildhall_gear2_10
+  - first:
+      213: 344983974715363567
+    second: bgsec_guildhall_gear2_11
+  - first:
+      213: 7954701796172135866
+    second: bgsec_guildhall_gear2_12
+  - first:
+      213: 8358948560690081158
+    second: bgsec_guildhall_gear2_13
+  - first:
+      213: 5300634290077380898
+    second: bgsec_guildhall_gear2_14
+  - first:
+      213: 2850049017883876527
+    second: bgsec_guildhall_gear2_15
+  - first:
+      213: -5723575317843625817
+    second: bgsec_guildhall_gear2_16
+  - first:
+      213: 5323708736889013726
+    second: bgsec_guildhall_gear2_17
+  - first:
+      213: -1792615220765093653
+    second: bgsec_guildhall_gear2_18
+  - first:
+      213: 8914395338785661738
+    second: bgsec_guildhall_gear2_19
+  - first:
+      213: 1714144994115990518
+    second: bgsec_guildhall_gear2_20
+  - first:
+      213: 8081200878610788634
+    second: bgsec_guildhall_gear2_21
+  - first:
+      213: 7814431848711590978
+    second: bgsec_guildhall_gear2_22
+  - first:
+      213: 2286261250652184688
+    second: bgsec_guildhall_gear2_23
+  - first:
+      213: 926040045882122014
+    second: bgsec_guildhall_gear2_24
+  - first:
+      213: -6080386264305550701
+    second: bgsec_guildhall_gear2_25
+  - first:
+      213: -3496743760537235019
+    second: bgsec_guildhall_gear2_26
+  - first:
+      213: -6714699513045566881
+    second: bgsec_guildhall_gear2_27
+  - first:
+      213: 5132462674284920283
+    second: bgsec_guildhall_gear2_28
+  - first:
+      213: -8996328624815639052
+    second: bgsec_guildhall_gear2_29
+  - first:
+      213: 53060760188869552
+    second: bgsec_guildhall_gear2_30
+  - first:
+      213: 5092925488400856024
+    second: bgsec_guildhall_gear2_31
+  - first:
+      213: 5777834902489270011
+    second: bgsec_guildhall_gear2_32
+  - first:
+      213: -7857917751723489728
+    second: bgsec_guildhall_gear2_33
+  - first:
+      213: 1847500492625274621
+    second: bgsec_guildhall_gear2_34
+  - first:
+      213: 7088123201290855384
+    second: bgsec_guildhall_gear2_35
+  - first:
+      213: 7510382764461826620
+    second: bgsec_guildhall_gear2_36
+  - first:
+      213: -7650064302015054328
+    second: bgsec_guildhall_gear2_37
+  - first:
+      213: 7475943795907603021
+    second: bgsec_guildhall_gear2_38
+  - first:
+      213: -6441172868757713554
+    second: bgsec_guildhall_gear2_39
+  - first:
+      213: 1760336384213990566
+    second: bgsec_guildhall_gear2_40
+  - first:
+      213: -6254125508817853884
+    second: bgsec_guildhall_gear2_41
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad89b20b7f19480f8c20ea5848b3d5f
+      internalID: 4764597610869354966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1265331349e464c748d3f1063485bdf2
+      internalID: -2162225263027128722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_2
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3b982e3228b64112b1c4dbbf98a9e55
+      internalID: -8695036795122083967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb4519065e98c4f6398e102fb6314133
+      internalID: 2853828169246902749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_4
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f2f09de144084c578feac5883dc1cd7
+      internalID: -8316526921157987420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_5
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7d2bebd053ac4ae0959b14f2f6a055c
+      internalID: 3392052827337656859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_6
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d4af113072104a398d16a3b375c48dd
+      internalID: -5613865350214961672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_7
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04a2de4dd308946e081cb18ebed503fb
+      internalID: 1081741172172417090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_8
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65a8f0288dcd4a0b9d626283142db66
+      internalID: -3204253420000520491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_9
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 640edf22e43594b209951664072c9d2f
+      internalID: 7974872296081131028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_10
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07d1fc681fad74be8a462af0931eb99e
+      internalID: 5502762543420821043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_11
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8b66ff203b6240cf9456cd16017f804
+      internalID: 344983974715363567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_12
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 115a57502cf144a97bb7ff5519a1adb0
+      internalID: 7954701796172135866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_13
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad71fe63830c3412ebff85eab4342357
+      internalID: 8358948560690081158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_14
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c1f1f1a42e414d35a7caad87e477680
+      internalID: 5300634290077380898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_15
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cfa3f5eda2b244c792b4d1d14687e92
+      internalID: 2850049017883876527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_16
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41fb3afe75d264c47829bcfbec27d70f
+      internalID: -5723575317843625817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_17
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a2a30e5ab0c249e0817a7b1ea263fa9
+      internalID: 5323708736889013726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_18
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0863a0aaa3e5e49788274db74dfa99ad
+      internalID: -1792615220765093653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_19
+      rect:
+        serializedVersion: 2
+        x: 437
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 058c992cba8964ec4949e74ea54c044a
+      internalID: 8914395338785661738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_20
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1ac6a43b1cf24ad0871062f0792f75a
+      internalID: 1714144994115990518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_21
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db8286129efde43ba9aaab8c6cc7c0ce
+      internalID: 8081200878610788634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_22
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b172725fa0194482b20d3a686f532cc
+      internalID: 7814431848711590978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_23
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcb07c31586d2441684dccda2358ee07
+      internalID: 2286261250652184688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_24
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8c5c99a55f245f9afc030e8ad4a4c6
+      internalID: 926040045882122014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_25
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba1b7e501bcbd479091acf4609600373
+      internalID: -6080386264305550701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_26
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 034b7c742bc5b4173b078146a5e0626b
+      internalID: -3496743760537235019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_27
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e28b444b291d4663b5d8ebd656535c0
+      internalID: -6714699513045566881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_28
+      rect:
+        serializedVersion: 2
+        x: 644
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4bb68f27ab0864cbbaa0e6c75cb75f28
+      internalID: 5132462674284920283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_29
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 097a378811c9942bbb7f39e73a9e3b4b
+      internalID: -8996328624815639052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_30
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e8e0980669ad4650bae0bb746d3d091
+      internalID: 53060760188869552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_31
+      rect:
+        serializedVersion: 2
+        x: 713
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51a0d4dc2eec944d783cb99957d02e98
+      internalID: 5092925488400856024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_32
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce5d4771d94174c3d95d6c95dac118db
+      internalID: 5777834902489270011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_33
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f19bc6b18eb47e38f5f05a78294a11
+      internalID: -7857917751723489728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_34
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3007edc35d504a989f989e0cc342e9c
+      internalID: 1847500492625274621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_35
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6698c98620d434413804ab813101f0b8
+      internalID: 7088123201290855384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_36
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82755c8855c78458984a446301778b50
+      internalID: 7510382764461826620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_37
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a95883962e1dc4014b2031d211595cea
+      internalID: -7650064302015054328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_38
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9e0adc05b7744b7d85ee1772c96a72e
+      internalID: 7475943795907603021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_39
+      rect:
+        serializedVersion: 2
+        x: 897
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd0fa9174d5de4c22b27c98236e2927d
+      internalID: -6441172868757713554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_40
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ecb01343036a4a08bfa0276e3ca3463
+      internalID: 1760336384213990566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_gear2_41
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 0
+        width: 23
+        height: 23
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5fe4998ae0ad45b1baf7c83e58a9d69
+      internalID: -6254125508817853884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 4a7d06a65e3e8467fab3103d0e956b7e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bgsec_guildhall_gear2_0: 4764597610869354966
+      bgsec_guildhall_gear2_1: -2162225263027128722
+      bgsec_guildhall_gear2_10: 5502762543420821043
+      bgsec_guildhall_gear2_11: 344983974715363567
+      bgsec_guildhall_gear2_12: 7954701796172135866
+      bgsec_guildhall_gear2_13: 8358948560690081158
+      bgsec_guildhall_gear2_14: 5300634290077380898
+      bgsec_guildhall_gear2_15: 2850049017883876527
+      bgsec_guildhall_gear2_16: -5723575317843625817
+      bgsec_guildhall_gear2_17: 5323708736889013726
+      bgsec_guildhall_gear2_18: -1792615220765093653
+      bgsec_guildhall_gear2_19: 8914395338785661738
+      bgsec_guildhall_gear2_2: -8695036795122083967
+      bgsec_guildhall_gear2_20: 1714144994115990518
+      bgsec_guildhall_gear2_21: 8081200878610788634
+      bgsec_guildhall_gear2_22: 7814431848711590978
+      bgsec_guildhall_gear2_23: 2286261250652184688
+      bgsec_guildhall_gear2_24: 926040045882122014
+      bgsec_guildhall_gear2_25: -6080386264305550701
+      bgsec_guildhall_gear2_26: -3496743760537235019
+      bgsec_guildhall_gear2_27: -6714699513045566881
+      bgsec_guildhall_gear2_28: 5132462674284920283
+      bgsec_guildhall_gear2_29: -8996328624815639052
+      bgsec_guildhall_gear2_3: 2853828169246902749
+      bgsec_guildhall_gear2_30: 53060760188869552
+      bgsec_guildhall_gear2_31: 5092925488400856024
+      bgsec_guildhall_gear2_32: 5777834902489270011
+      bgsec_guildhall_gear2_33: -7857917751723489728
+      bgsec_guildhall_gear2_34: 1847500492625274621
+      bgsec_guildhall_gear2_35: 7088123201290855384
+      bgsec_guildhall_gear2_36: 7510382764461826620
+      bgsec_guildhall_gear2_37: -7650064302015054328
+      bgsec_guildhall_gear2_38: 7475943795907603021
+      bgsec_guildhall_gear2_39: -6441172868757713554
+      bgsec_guildhall_gear2_4: -8316526921157987420
+      bgsec_guildhall_gear2_40: 1760336384213990566
+      bgsec_guildhall_gear2_41: -6254125508817853884
+      bgsec_guildhall_gear2_5: 3392052827337656859
+      bgsec_guildhall_gear2_6: -5613865350214961672
+      bgsec_guildhall_gear2_7: 1081741172172417090
+      bgsec_guildhall_gear2_8: -3204253420000520491
+      bgsec_guildhall_gear2_9: 7974872296081131028
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

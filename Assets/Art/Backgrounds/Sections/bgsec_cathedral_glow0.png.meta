@@ -1,0 +1,4383 @@
+fileFormatVersion: 2
+guid: a712d0916794949dd8efdda3aa0c8037
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3993918200751361031
+    second: bgsec_cathedral_glow0_0
+  - first:
+      213: -4746095921308481807
+    second: bgsec_cathedral_glow0_1
+  - first:
+      213: -4286569789210724144
+    second: bgsec_cathedral_glow0_2
+  - first:
+      213: 6897569545673821410
+    second: bgsec_cathedral_glow0_3
+  - first:
+      213: 1550281920877432476
+    second: bgsec_cathedral_glow0_4
+  - first:
+      213: -5399870059398998779
+    second: bgsec_cathedral_glow0_5
+  - first:
+      213: 3460436803941275737
+    second: bgsec_cathedral_glow0_6
+  - first:
+      213: -2312394134407573541
+    second: bgsec_cathedral_glow0_7
+  - first:
+      213: 7302623652247003975
+    second: bgsec_cathedral_glow0_8
+  - first:
+      213: 6645955493023392491
+    second: bgsec_cathedral_glow0_9
+  - first:
+      213: 6400059251614293190
+    second: bgsec_cathedral_glow0_10
+  - first:
+      213: 5525162163813825410
+    second: bgsec_cathedral_glow0_11
+  - first:
+      213: 9141541175700236542
+    second: bgsec_cathedral_glow0_12
+  - first:
+      213: -681113632365034945
+    second: bgsec_cathedral_glow0_13
+  - first:
+      213: -8196573534515597646
+    second: bgsec_cathedral_glow0_14
+  - first:
+      213: 4550949394658149175
+    second: bgsec_cathedral_glow0_15
+  - first:
+      213: -3845561721943658795
+    second: bgsec_cathedral_glow0_16
+  - first:
+      213: -6833621545225867044
+    second: bgsec_cathedral_glow0_17
+  - first:
+      213: 2534715961673235660
+    second: bgsec_cathedral_glow0_18
+  - first:
+      213: 8315830863297511985
+    second: bgsec_cathedral_glow0_19
+  - first:
+      213: -2927251234309459302
+    second: bgsec_cathedral_glow0_20
+  - first:
+      213: 5876721592195158074
+    second: bgsec_cathedral_glow0_21
+  - first:
+      213: -4215628487991296428
+    second: bgsec_cathedral_glow0_22
+  - first:
+      213: 1193050416029047979
+    second: bgsec_cathedral_glow0_23
+  - first:
+      213: 5148846737286056494
+    second: bgsec_cathedral_glow0_24
+  - first:
+      213: -1698753389740155171
+    second: bgsec_cathedral_glow0_25
+  - first:
+      213: 6127065657917104861
+    second: bgsec_cathedral_glow0_26
+  - first:
+      213: 49820935355339258
+    second: bgsec_cathedral_glow0_27
+  - first:
+      213: -4257578056384266625
+    second: bgsec_cathedral_glow0_28
+  - first:
+      213: -7352141771648658791
+    second: bgsec_cathedral_glow0_29
+  - first:
+      213: 3448325771082513360
+    second: bgsec_cathedral_glow0_30
+  - first:
+      213: -8167639753362720240
+    second: bgsec_cathedral_glow0_31
+  - first:
+      213: -943116088751641559
+    second: bgsec_cathedral_glow0_32
+  - first:
+      213: -8588001617567100137
+    second: bgsec_cathedral_glow0_33
+  - first:
+      213: 1856929665508334485
+    second: bgsec_cathedral_glow0_34
+  - first:
+      213: 1199987301820046938
+    second: bgsec_cathedral_glow0_35
+  - first:
+      213: -937375228579974622
+    second: bgsec_cathedral_glow0_36
+  - first:
+      213: 5710148382362484072
+    second: bgsec_cathedral_glow0_37
+  - first:
+      213: -4880099455414089613
+    second: bgsec_cathedral_glow0_38
+  - first:
+      213: 5382630931894322205
+    second: bgsec_cathedral_glow0_39
+  - first:
+      213: -3790699659879417056
+    second: bgsec_cathedral_glow0_40
+  - first:
+      213: 8790594111718008607
+    second: bgsec_cathedral_glow0_41
+  - first:
+      213: -6180798939783513248
+    second: bgsec_cathedral_glow0_42
+  - first:
+      213: 8319415441077190784
+    second: bgsec_cathedral_glow0_43
+  - first:
+      213: 6568199435896180427
+    second: bgsec_cathedral_glow0_44
+  - first:
+      213: -8636339980778925733
+    second: bgsec_cathedral_glow0_45
+  - first:
+      213: -5599941307411065432
+    second: bgsec_cathedral_glow0_46
+  - first:
+      213: 4058245771728441739
+    second: bgsec_cathedral_glow0_47
+  - first:
+      213: -7610417064712859864
+    second: bgsec_cathedral_glow0_48
+  - first:
+      213: -2752506685360675557
+    second: bgsec_cathedral_glow0_49
+  - first:
+      213: -6434390301023234825
+    second: bgsec_cathedral_glow0_50
+  - first:
+      213: 189463561887581268
+    second: bgsec_cathedral_glow0_51
+  - first:
+      213: 2279999253346998106
+    second: bgsec_cathedral_glow0_52
+  - first:
+      213: -2831087675238194013
+    second: bgsec_cathedral_glow0_53
+  - first:
+      213: 6374336013891568099
+    second: bgsec_cathedral_glow0_54
+  - first:
+      213: -69640151235107826
+    second: bgsec_cathedral_glow0_55
+  - first:
+      213: 7504295723396673310
+    second: bgsec_cathedral_glow0_56
+  - first:
+      213: 1413130439897019995
+    second: bgsec_cathedral_glow0_57
+  - first:
+      213: 9056173798877924540
+    second: bgsec_cathedral_glow0_58
+  - first:
+      213: 7223612999113717013
+    second: bgsec_cathedral_glow0_59
+  - first:
+      213: 5285228115538995325
+    second: bgsec_cathedral_glow0_60
+  - first:
+      213: -9148529452506959435
+    second: bgsec_cathedral_glow0_61
+  - first:
+      213: -3802232740751509209
+    second: bgsec_cathedral_glow0_62
+  - first:
+      213: 5502001556409130381
+    second: bgsec_cathedral_glow0_63
+  - first:
+      213: 3398833230792443163
+    second: bgsec_cathedral_glow0_64
+  - first:
+      213: -1079869724541073521
+    second: bgsec_cathedral_glow0_65
+  - first:
+      213: -8846832207304863112
+    second: bgsec_cathedral_glow0_66
+  - first:
+      213: 6232340675100446884
+    second: bgsec_cathedral_glow0_67
+  - first:
+      213: 5804918898975848618
+    second: bgsec_cathedral_glow0_68
+  - first:
+      213: -3257699215293287273
+    second: bgsec_cathedral_glow0_69
+  - first:
+      213: -4134604813627688129
+    second: bgsec_cathedral_glow0_70
+  - first:
+      213: 2529642654647276995
+    second: bgsec_cathedral_glow0_71
+  - first:
+      213: 789155789333355416
+    second: bgsec_cathedral_glow0_72
+  - first:
+      213: -4782795853752428415
+    second: bgsec_cathedral_glow0_73
+  - first:
+      213: 7117600106082135121
+    second: bgsec_cathedral_glow0_74
+  - first:
+      213: 7019865748551315995
+    second: bgsec_cathedral_glow0_75
+  - first:
+      213: -7291765124876450627
+    second: bgsec_cathedral_glow0_76
+  - first:
+      213: 8750312664605152073
+    second: bgsec_cathedral_glow0_77
+  - first:
+      213: 2338725742366376955
+    second: bgsec_cathedral_glow0_78
+  - first:
+      213: 5785338193704682420
+    second: bgsec_cathedral_glow0_79
+  - first:
+      213: 3522601481604622145
+    second: bgsec_cathedral_glow0_80
+  - first:
+      213: -3585400896542668608
+    second: bgsec_cathedral_glow0_81
+  - first:
+      213: -8480487414106873859
+    second: bgsec_cathedral_glow0_82
+  - first:
+      213: 1098946843804755662
+    second: bgsec_cathedral_glow0_83
+  - first:
+      213: 442891513625937288
+    second: bgsec_cathedral_glow0_84
+  - first:
+      213: -2210621586775342058
+    second: bgsec_cathedral_glow0_85
+  - first:
+      213: -9160624425586082929
+    second: bgsec_cathedral_glow0_86
+  - first:
+      213: 178960977597447428
+    second: bgsec_cathedral_glow0_87
+  - first:
+      213: -8414308613883144898
+    second: bgsec_cathedral_glow0_88
+  - first:
+      213: -1134809635483625763
+    second: bgsec_cathedral_glow0_89
+  - first:
+      213: 5449509037849341135
+    second: bgsec_cathedral_glow0_90
+  - first:
+      213: 577942140644140527
+    second: bgsec_cathedral_glow0_91
+  - first:
+      213: 3869086618443355414
+    second: bgsec_cathedral_glow0_92
+  - first:
+      213: 2823378068596661180
+    second: bgsec_cathedral_glow0_93
+  - first:
+      213: 5387315648764201767
+    second: bgsec_cathedral_glow0_94
+  - first:
+      213: 5231770390008314551
+    second: bgsec_cathedral_glow0_95
+  - first:
+      213: -4035702343832661512
+    second: bgsec_cathedral_glow0_96
+  - first:
+      213: -7901458828312342244
+    second: bgsec_cathedral_glow0_97
+  - first:
+      213: 7175273515946876871
+    second: bgsec_cathedral_glow0_98
+  - first:
+      213: -3958839362144148455
+    second: bgsec_cathedral_glow0_99
+  - first:
+      213: 5406241665739439860
+    second: bgsec_cathedral_glow0_100
+  - first:
+      213: 640991947473220108
+    second: bgsec_cathedral_glow0_101
+  - first:
+      213: 6379509965070027235
+    second: bgsec_cathedral_glow0_102
+  - first:
+      213: -5253961414377551985
+    second: bgsec_cathedral_glow0_103
+  - first:
+      213: -8704304997884880863
+    second: bgsec_cathedral_glow0_104
+  - first:
+      213: -7350003255874951067
+    second: bgsec_cathedral_glow0_105
+  - first:
+      213: 2737025514605582584
+    second: bgsec_cathedral_glow0_106
+  - first:
+      213: 8976879584003333217
+    second: bgsec_cathedral_glow0_107
+  - first:
+      213: -7636069414616775855
+    second: bgsec_cathedral_glow0_108
+  - first:
+      213: 124321868271499846
+    second: bgsec_cathedral_glow0_109
+  - first:
+      213: -1198862937757085888
+    second: bgsec_cathedral_glow0_110
+  - first:
+      213: -8575240599604776859
+    second: bgsec_cathedral_glow0_111
+  - first:
+      213: -5886967689756809144
+    second: bgsec_cathedral_glow0_112
+  - first:
+      213: -1498220957298922268
+    second: bgsec_cathedral_glow0_113
+  - first:
+      213: 7879064919372563741
+    second: bgsec_cathedral_glow0_114
+  - first:
+      213: 7029157294549827267
+    second: bgsec_cathedral_glow0_115
+  - first:
+      213: 838445783485679546
+    second: bgsec_cathedral_glow0_116
+  - first:
+      213: -41172185761449723
+    second: bgsec_cathedral_glow0_117
+  - first:
+      213: 5389723167459918096
+    second: bgsec_cathedral_glow0_118
+  - first:
+      213: 8167452197875186125
+    second: bgsec_cathedral_glow0_119
+  - first:
+      213: -6351942000414549392
+    second: bgsec_cathedral_glow0_120
+  - first:
+      213: -5741928356051627740
+    second: bgsec_cathedral_glow0_121
+  - first:
+      213: -13426137417584702
+    second: bgsec_cathedral_glow0_122
+  - first:
+      213: -741476084366642885
+    second: bgsec_cathedral_glow0_123
+  - first:
+      213: -1679727732378353034
+    second: bgsec_cathedral_glow0_124
+  - first:
+      213: 4974766618214310033
+    second: bgsec_cathedral_glow0_125
+  - first:
+      213: -4346597161724926346
+    second: bgsec_cathedral_glow0_126
+  - first:
+      213: -9015643880711510299
+    second: bgsec_cathedral_glow0_127
+  - first:
+      213: 8002451994517392207
+    second: bgsec_cathedral_glow0_128
+  - first:
+      213: -6228646725053985049
+    second: bgsec_cathedral_glow0_129
+  - first:
+      213: -4384107606291634651
+    second: bgsec_cathedral_glow0_130
+  - first:
+      213: 7467324260294784116
+    second: bgsec_cathedral_glow0_131
+  - first:
+      213: 6137596330785145622
+    second: bgsec_cathedral_glow0_132
+  - first:
+      213: -6395475645661901986
+    second: bgsec_cathedral_glow0_133
+  - first:
+      213: 6793764404758654603
+    second: bgsec_cathedral_glow0_134
+  - first:
+      213: 2445884302411564338
+    second: bgsec_cathedral_glow0_135
+  - first:
+      213: -5604203465876446232
+    second: bgsec_cathedral_glow0_136
+  - first:
+      213: -8697502783231165930
+    second: bgsec_cathedral_glow0_137
+  - first:
+      213: -3886326309465777586
+    second: bgsec_cathedral_glow0_138
+  - first:
+      213: 1832132376079920567
+    second: bgsec_cathedral_glow0_139
+  - first:
+      213: -3037019176022787478
+    second: bgsec_cathedral_glow0_140
+  - first:
+      213: 2168153099712932635
+    second: bgsec_cathedral_glow0_141
+  - first:
+      213: 6981213062302947142
+    second: bgsec_cathedral_glow0_142
+  - first:
+      213: 5676262305987279843
+    second: bgsec_cathedral_glow0_143
+  - first:
+      213: 7714674748248224166
+    second: bgsec_cathedral_glow0_144
+  - first:
+      213: -1878165215682384889
+    second: bgsec_cathedral_glow0_145
+  - first:
+      213: 7752031307500916527
+    second: bgsec_cathedral_glow0_146
+  - first:
+      213: 9147583496115027235
+    second: bgsec_cathedral_glow0_147
+  - first:
+      213: 6791587212592691211
+    second: bgsec_cathedral_glow0_148
+  - first:
+      213: 59879822709389841
+    second: bgsec_cathedral_glow0_149
+  - first:
+      213: -2541619563013632583
+    second: bgsec_cathedral_glow0_150
+  - first:
+      213: -8174160619057861708
+    second: bgsec_cathedral_glow0_151
+  - first:
+      213: -6869136205367727426
+    second: bgsec_cathedral_glow0_152
+  - first:
+      213: -8705523804550902223
+    second: bgsec_cathedral_glow0_153
+  - first:
+      213: -5075403153410008570
+    second: bgsec_cathedral_glow0_154
+  - first:
+      213: -351034386598365624
+    second: bgsec_cathedral_glow0_155
+  - first:
+      213: 1940491288823943357
+    second: bgsec_cathedral_glow0_156
+  - first:
+      213: 1951459606273498422
+    second: bgsec_cathedral_glow0_157
+  - first:
+      213: 3924654006188403879
+    second: bgsec_cathedral_glow0_158
+  - first:
+      213: -3966848411054384024
+    second: bgsec_cathedral_glow0_159
+  - first:
+      213: -2308127791292171802
+    second: bgsec_cathedral_glow0_160
+  - first:
+      213: -724048994072299813
+    second: bgsec_cathedral_glow0_161
+  - first:
+      213: -4387508306450352959
+    second: bgsec_cathedral_glow0_162
+  - first:
+      213: -5526423196377287224
+    second: bgsec_cathedral_glow0_163
+  - first:
+      213: -5427581212120412964
+    second: bgsec_cathedral_glow0_164
+  - first:
+      213: 6160519668771934912
+    second: bgsec_cathedral_glow0_165
+  - first:
+      213: -4723744289748049321
+    second: bgsec_cathedral_glow0_166
+  - first:
+      213: 3038501897839115892
+    second: bgsec_cathedral_glow0_167
+  - first:
+      213: -8885767373660669536
+    second: bgsec_cathedral_glow0_168
+  - first:
+      213: -4678147527917494143
+    second: bgsec_cathedral_glow0_169
+  - first:
+      213: -7941462378714877375
+    second: bgsec_cathedral_glow0_170
+  - first:
+      213: 5144957698494211611
+    second: bgsec_cathedral_glow0_171
+  - first:
+      213: -743686741545456662
+    second: bgsec_cathedral_glow0_172
+  - first:
+      213: -2986609487966456006
+    second: bgsec_cathedral_glow0_173
+  - first:
+      213: 1580773673903766224
+    second: bgsec_cathedral_glow0_174
+  - first:
+      213: -6616536921794516663
+    second: bgsec_cathedral_glow0_175
+  - first:
+      213: 4814590078663538659
+    second: bgsec_cathedral_glow0_176
+  - first:
+      213: -5612884227235819941
+    second: bgsec_cathedral_glow0_177
+  - first:
+      213: -7805418050486939789
+    second: bgsec_cathedral_glow0_178
+  - first:
+      213: 8104823081376993562
+    second: bgsec_cathedral_glow0_179
+  - first:
+      213: -1339772062438009506
+    second: bgsec_cathedral_glow0_180
+  - first:
+      213: 4781530855554354804
+    second: bgsec_cathedral_glow0_181
+  - first:
+      213: 2075287851659332690
+    second: bgsec_cathedral_glow0_182
+  - first:
+      213: -7279201791757540370
+    second: bgsec_cathedral_glow0_183
+  - first:
+      213: 8243383724033663196
+    second: bgsec_cathedral_glow0_184
+  - first:
+      213: 8501159624627508148
+    second: bgsec_cathedral_glow0_185
+  - first:
+      213: -894161547778532598
+    second: bgsec_cathedral_glow0_186
+  - first:
+      213: 5171014870316322974
+    second: bgsec_cathedral_glow0_187
+  - first:
+      213: 2430758416822473012
+    second: bgsec_cathedral_glow0_188
+  - first:
+      213: -7566616370539163935
+    second: bgsec_cathedral_glow0_189
+  - first:
+      213: -7561248690648548626
+    second: bgsec_cathedral_glow0_190
+  - first:
+      213: -6391641150793412526
+    second: bgsec_cathedral_glow0_191
+  - first:
+      213: -4754126487656680179
+    second: bgsec_cathedral_glow0_192
+  - first:
+      213: 8618853890879849129
+    second: bgsec_cathedral_glow0_193
+  - first:
+      213: -7985096207894566447
+    second: bgsec_cathedral_glow0_194
+  - first:
+      213: -713246680344503485
+    second: bgsec_cathedral_glow0_195
+  - first:
+      213: -7044384192001288888
+    second: bgsec_cathedral_glow0_196
+  - first:
+      213: 8503395685568518365
+    second: bgsec_cathedral_glow0_197
+  - first:
+      213: 2217634210824325906
+    second: bgsec_cathedral_glow0_198
+  - first:
+      213: 6696866438915947915
+    second: bgsec_cathedral_glow0_199
+  - first:
+      213: -948943597972297317
+    second: bgsec_cathedral_glow0_200
+  - first:
+      213: -8281832407615080116
+    second: bgsec_cathedral_glow0_201
+  - first:
+      213: 4978762736994406047
+    second: bgsec_cathedral_glow0_202
+  - first:
+      213: 8258606345916420688
+    second: bgsec_cathedral_glow0_203
+  - first:
+      213: 2883885504826505343
+    second: bgsec_cathedral_glow0_204
+  - first:
+      213: 6540135072403191566
+    second: bgsec_cathedral_glow0_205
+  - first:
+      213: -5232245241514036077
+    second: bgsec_cathedral_glow0_206
+  - first:
+      213: 2281950851841179650
+    second: bgsec_cathedral_glow0_207
+  - first:
+      213: 6454368472772326237
+    second: bgsec_cathedral_glow0_208
+  - first:
+      213: 7627296131763453669
+    second: bgsec_cathedral_glow0_209
+  - first:
+      213: 2367680313891488426
+    second: bgsec_cathedral_glow0_210
+  - first:
+      213: 7201300699140403001
+    second: bgsec_cathedral_glow0_211
+  - first:
+      213: 3194800465283143000
+    second: bgsec_cathedral_glow0_212
+  - first:
+      213: 6474044579748278010
+    second: bgsec_cathedral_glow0_213
+  - first:
+      213: 6142043739655567210
+    second: bgsec_cathedral_glow0_214
+  - first:
+      213: -5119246909358296087
+    second: bgsec_cathedral_glow0_215
+  - first:
+      213: 8196409024026269669
+    second: bgsec_cathedral_glow0_216
+  - first:
+      213: -7262500908237299851
+    second: bgsec_cathedral_glow0_217
+  - first:
+      213: -8088250348297638229
+    second: bgsec_cathedral_glow0_218
+  - first:
+      213: 2727549643840795307
+    second: bgsec_cathedral_glow0_219
+  - first:
+      213: 2511820912430748828
+    second: bgsec_cathedral_glow0_220
+  - first:
+      213: 7009252434598288181
+    second: bgsec_cathedral_glow0_221
+  - first:
+      213: 4738601432219881852
+    second: bgsec_cathedral_glow0_222
+  - first:
+      213: 8862861167062080891
+    second: bgsec_cathedral_glow0_223
+  - first:
+      213: 6150674558102325558
+    second: bgsec_cathedral_glow0_224
+  - first:
+      213: -5693882133577096350
+    second: bgsec_cathedral_glow0_225
+  - first:
+      213: 8280259119313062686
+    second: bgsec_cathedral_glow0_226
+  - first:
+      213: -1949950761337068163
+    second: bgsec_cathedral_glow0_227
+  - first:
+      213: 6383672597660192455
+    second: bgsec_cathedral_glow0_228
+  - first:
+      213: -692507024327723132
+    second: bgsec_cathedral_glow0_229
+  - first:
+      213: -7853204432279733433
+    second: bgsec_cathedral_glow0_230
+  - first:
+      213: -2321246701664100251
+    second: bgsec_cathedral_glow0_231
+  - first:
+      213: 8901559745832558682
+    second: bgsec_cathedral_glow0_232
+  - first:
+      213: -459201991219038458
+    second: bgsec_cathedral_glow0_233
+  - first:
+      213: 6737525711242988434
+    second: bgsec_cathedral_glow0_234
+  - first:
+      213: -2380445279076646975
+    second: bgsec_cathedral_glow0_235
+  - first:
+      213: 9133196793768484491
+    second: bgsec_cathedral_glow0_236
+  - first:
+      213: 5894710111830091993
+    second: bgsec_cathedral_glow0_237
+  - first:
+      213: -1026773517015432570
+    second: bgsec_cathedral_glow0_238
+  - first:
+      213: 7033079801564079255
+    second: bgsec_cathedral_glow0_239
+  - first:
+      213: -651430584751078947
+    second: bgsec_cathedral_glow0_240
+  - first:
+      213: 6929410548135341095
+    second: bgsec_cathedral_glow0_241
+  - first:
+      213: -7870491934004915185
+    second: bgsec_cathedral_glow0_242
+  - first:
+      213: 9039976644849084113
+    second: bgsec_cathedral_glow0_243
+  - first:
+      213: 5033203238597190970
+    second: bgsec_cathedral_glow0_244
+  - first:
+      213: 8983451342696723377
+    second: bgsec_cathedral_glow0_245
+  - first:
+      213: -8044770360009301172
+    second: bgsec_cathedral_glow0_246
+  - first:
+      213: 7898886186903067159
+    second: bgsec_cathedral_glow0_247
+  - first:
+      213: 7074868508620801428
+    second: bgsec_cathedral_glow0_248
+  - first:
+      213: -6141753062770797936
+    second: bgsec_cathedral_glow0_249
+  - first:
+      213: 4733704994287514959
+    second: bgsec_cathedral_glow0_250
+  - first:
+      213: -6220453431670997146
+    second: bgsec_cathedral_glow0_251
+  - first:
+      213: 5125716578317044840
+    second: bgsec_cathedral_glow0_252
+  - first:
+      213: -3339691168151419853
+    second: bgsec_cathedral_glow0_253
+  - first:
+      213: 6601061747129579122
+    second: bgsec_cathedral_glow0_254
+  - first:
+      213: -8443805339621573265
+    second: bgsec_cathedral_glow0_255
+  - first:
+      213: 5588535775148674850
+    second: bgsec_cathedral_glow0_256
+  - first:
+      213: -448574520800270390
+    second: bgsec_cathedral_glow0_257
+  - first:
+      213: 8712671251674371405
+    second: bgsec_cathedral_glow0_258
+  - first:
+      213: -3504173650791319445
+    second: bgsec_cathedral_glow0_259
+  - first:
+      213: 7165461184718297656
+    second: bgsec_cathedral_glow0_260
+  - first:
+      213: 5281362759391189427
+    second: bgsec_cathedral_glow0_261
+  - first:
+      213: 6918334696026585751
+    second: bgsec_cathedral_glow0_262
+  - first:
+      213: -1935421173957697561
+    second: bgsec_cathedral_glow0_263
+  - first:
+      213: 7487809913092644515
+    second: bgsec_cathedral_glow0_264
+  - first:
+      213: 2518809235766253573
+    second: bgsec_cathedral_glow0_265
+  - first:
+      213: 1831446951839211572
+    second: bgsec_cathedral_glow0_266
+  - first:
+      213: 6015539022639542571
+    second: bgsec_cathedral_glow0_267
+  - first:
+      213: -6502004824416621225
+    second: bgsec_cathedral_glow0_268
+  - first:
+      213: -8681451966974025335
+    second: bgsec_cathedral_glow0_269
+  - first:
+      213: -4889022266647902020
+    second: bgsec_cathedral_glow0_270
+  - first:
+      213: -7467956959067735696
+    second: bgsec_cathedral_glow0_271
+  - first:
+      213: 9048328539196460771
+    second: bgsec_cathedral_glow0_272
+  - first:
+      213: -5847738682213534396
+    second: bgsec_cathedral_glow0_273
+  - first:
+      213: 2704179658205171880
+    second: bgsec_cathedral_glow0_274
+  - first:
+      213: -2923144197444856024
+    second: bgsec_cathedral_glow0_275
+  - first:
+      213: -546426238143469891
+    second: bgsec_cathedral_glow0_276
+  - first:
+      213: -4141318536662244297
+    second: bgsec_cathedral_glow0_277
+  - first:
+      213: -5694190516975599718
+    second: bgsec_cathedral_glow0_278
+  - first:
+      213: -3778545624826281378
+    second: bgsec_cathedral_glow0_279
+  - first:
+      213: 5458329053855589124
+    second: bgsec_cathedral_glow0_280
+  - first:
+      213: -4055594969367892482
+    second: bgsec_cathedral_glow0_281
+  - first:
+      213: -1839639361695332181
+    second: bgsec_cathedral_glow0_282
+  - first:
+      213: -6012936742278879741
+    second: bgsec_cathedral_glow0_283
+  - first:
+      213: 9119514452245952670
+    second: bgsec_cathedral_glow0_284
+  - first:
+      213: -6267015517702256398
+    second: bgsec_cathedral_glow0_285
+  - first:
+      213: -7512975433200339198
+    second: bgsec_cathedral_glow0_286
+  - first:
+      213: 6511654377059560876
+    second: bgsec_cathedral_glow0_287
+  - first:
+      213: 7122478016271751800
+    second: bgsec_cathedral_glow0_288
+  - first:
+      213: -9137694460200647746
+    second: bgsec_cathedral_glow0_289
+  - first:
+      213: -121443776914457689
+    second: bgsec_cathedral_glow0_290
+  - first:
+      213: -3927722139293242649
+    second: bgsec_cathedral_glow0_291
+  - first:
+      213: -8413604611831270132
+    second: bgsec_cathedral_glow0_292
+  - first:
+      213: 5497559762909499788
+    second: bgsec_cathedral_glow0_293
+  - first:
+      213: 2105164157795230027
+    second: bgsec_cathedral_glow0_294
+  - first:
+      213: -2417276929734178363
+    second: bgsec_cathedral_glow0_295
+  - first:
+      213: 6826896208302444090
+    second: bgsec_cathedral_glow0_296
+  - first:
+      213: -4121404705755409874
+    second: bgsec_cathedral_glow0_297
+  - first:
+      213: -1539013379706922287
+    second: bgsec_cathedral_glow0_298
+  - first:
+      213: 2208690290068931790
+    second: bgsec_cathedral_glow0_299
+  - first:
+      213: -3906200990593353884
+    second: bgsec_cathedral_glow0_300
+  - first:
+      213: 3916771482555593680
+    second: bgsec_cathedral_glow0_301
+  - first:
+      213: -8010945239074565410
+    second: bgsec_cathedral_glow0_302
+  - first:
+      213: 70745398975959488
+    second: bgsec_cathedral_glow0_303
+  - first:
+      213: -2190961162743753454
+    second: bgsec_cathedral_glow0_304
+  - first:
+      213: 5026059643782099439
+    second: bgsec_cathedral_glow0_305
+  - first:
+      213: 1432611754911309460
+    second: bgsec_cathedral_glow0_306
+  - first:
+      213: -7693230386126689269
+    second: bgsec_cathedral_glow0_307
+  - first:
+      213: -5136060166209952208
+    second: bgsec_cathedral_glow0_308
+  - first:
+      213: -447189530350569534
+    second: bgsec_cathedral_glow0_309
+  - first:
+      213: -4542291570081459890
+    second: bgsec_cathedral_glow0_310
+  - first:
+      213: 6568962451375587547
+    second: bgsec_cathedral_glow0_311
+  - first:
+      213: 9140798520500030155
+    second: bgsec_cathedral_glow0_312
+  - first:
+      213: -4063422200900760742
+    second: bgsec_cathedral_glow0_313
+  - first:
+      213: -5856842838138433843
+    second: bgsec_cathedral_glow0_314
+  - first:
+      213: 3877607616393982645
+    second: bgsec_cathedral_glow0_315
+  - first:
+      213: 3790807386948794664
+    second: bgsec_cathedral_glow0_316
+  - first:
+      213: -2329152582926737717
+    second: bgsec_cathedral_glow0_317
+  - first:
+      213: -4838767553916431605
+    second: bgsec_cathedral_glow0_318
+  - first:
+      213: 2693615266393327903
+    second: bgsec_cathedral_glow0_319
+  - first:
+      213: 4265299569070878798
+    second: bgsec_cathedral_glow0_320
+  - first:
+      213: -8941220892249643901
+    second: bgsec_cathedral_glow0_321
+  - first:
+      213: -1960429157634808063
+    second: bgsec_cathedral_glow0_322
+  - first:
+      213: -1097794795707075662
+    second: bgsec_cathedral_glow0_323
+  - first:
+      213: -8371257688409481843
+    second: bgsec_cathedral_glow0_324
+  - first:
+      213: 4632610705411955355
+    second: bgsec_cathedral_glow0_325
+  - first:
+      213: 4615011572892522054
+    second: bgsec_cathedral_glow0_326
+  - first:
+      213: 800210742195164423
+    second: bgsec_cathedral_glow0_327
+  - first:
+      213: -4667573361580655579
+    second: bgsec_cathedral_glow0_328
+  - first:
+      213: 5407828381348228573
+    second: bgsec_cathedral_glow0_329
+  - first:
+      213: -5814902448431316768
+    second: bgsec_cathedral_glow0_330
+  - first:
+      213: -8101542551566134615
+    second: bgsec_cathedral_glow0_331
+  - first:
+      213: 1322455531875129790
+    second: bgsec_cathedral_glow0_332
+  - first:
+      213: 1382580361060771335
+    second: bgsec_cathedral_glow0_333
+  - first:
+      213: 7669659964260790812
+    second: bgsec_cathedral_glow0_334
+  - first:
+      213: 8668014391685918877
+    second: bgsec_cathedral_glow0_335
+  - first:
+      213: 2350316519052420244
+    second: bgsec_cathedral_glow0_336
+  - first:
+      213: -6741579107918401095
+    second: bgsec_cathedral_glow0_337
+  - first:
+      213: 3317069842891278630
+    second: bgsec_cathedral_glow0_338
+  - first:
+      213: -1795757894227959253
+    second: bgsec_cathedral_glow0_339
+  - first:
+      213: -5386815565145920973
+    second: bgsec_cathedral_glow0_340
+  - first:
+      213: -5703803975625462826
+    second: bgsec_cathedral_glow0_341
+  - first:
+      213: 6899514113558254337
+    second: bgsec_cathedral_glow0_342
+  - first:
+      213: -4645622133072971911
+    second: bgsec_cathedral_glow0_343
+  - first:
+      213: -3258025999138551845
+    second: bgsec_cathedral_glow0_344
+  - first:
+      213: -5481987308425393603
+    second: bgsec_cathedral_glow0_345
+  - first:
+      213: -4625189024290887354
+    second: bgsec_cathedral_glow0_346
+  - first:
+      213: -454134441356276483
+    second: bgsec_cathedral_glow0_347
+  - first:
+      213: -2450409408571248757
+    second: bgsec_cathedral_glow0_348
+  - first:
+      213: -7316056993826466337
+    second: bgsec_cathedral_glow0_349
+  - first:
+      213: -661845884965963909
+    second: bgsec_cathedral_glow0_350
+  - first:
+      213: -4941177886527082697
+    second: bgsec_cathedral_glow0_351
+  - first:
+      213: 6580519354747502597
+    second: bgsec_cathedral_glow0_352
+  - first:
+      213: 1154035534968750549
+    second: bgsec_cathedral_glow0_353
+  - first:
+      213: -2370000351349523697
+    second: bgsec_cathedral_glow0_354
+  - first:
+      213: -7378442399462041859
+    second: bgsec_cathedral_glow0_355
+  - first:
+      213: 9136791214266136934
+    second: bgsec_cathedral_glow0_356
+  - first:
+      213: 8055310960230633102
+    second: bgsec_cathedral_glow0_357
+  - first:
+      213: 867727286265788982
+    second: bgsec_cathedral_glow0_358
+  - first:
+      213: 7492006059679348501
+    second: bgsec_cathedral_glow0_359
+  - first:
+      213: 4367304327731040943
+    second: bgsec_cathedral_glow0_360
+  - first:
+      213: -2377820821563183430
+    second: bgsec_cathedral_glow0_361
+  - first:
+      213: -8694684910781816312
+    second: bgsec_cathedral_glow0_362
+  - first:
+      213: -1797627123128952107
+    second: bgsec_cathedral_glow0_363
+  - first:
+      213: -4745519033075224575
+    second: bgsec_cathedral_glow0_364
+  - first:
+      213: 245279360146961613
+    second: bgsec_cathedral_glow0_365
+  - first:
+      213: -5347025803860344957
+    second: bgsec_cathedral_glow0_366
+  - first:
+      213: -3508720769585285569
+    second: bgsec_cathedral_glow0_367
+  - first:
+      213: 2193881081058133880
+    second: bgsec_cathedral_glow0_368
+  - first:
+      213: -7501217185913664025
+    second: bgsec_cathedral_glow0_369
+  - first:
+      213: 4620394258815619010
+    second: bgsec_cathedral_glow0_370
+  - first:
+      213: 4141898127569681043
+    second: bgsec_cathedral_glow0_371
+  - first:
+      213: 6518970653375714042
+    second: bgsec_cathedral_glow0_372
+  - first:
+      213: -3566838523633175307
+    second: bgsec_cathedral_glow0_373
+  - first:
+      213: 7562906219426032617
+    second: bgsec_cathedral_glow0_374
+  - first:
+      213: 9111950993386531826
+    second: bgsec_cathedral_glow0_375
+  - first:
+      213: 3902936340718627511
+    second: bgsec_cathedral_glow0_376
+  - first:
+      213: 5306746360950894080
+    second: bgsec_cathedral_glow0_377
+  - first:
+      213: -6228177471805480974
+    second: bgsec_cathedral_glow0_378
+  - first:
+      213: -2287515231009357169
+    second: bgsec_cathedral_glow0_379
+  - first:
+      213: 458336462768537976
+    second: bgsec_cathedral_glow0_380
+  - first:
+      213: -4130691706394400960
+    second: bgsec_cathedral_glow0_381
+  - first:
+      213: 6729107502591977707
+    second: bgsec_cathedral_glow0_382
+  - first:
+      213: 56828792858045598
+    second: bgsec_cathedral_glow0_383
+  - first:
+      213: 7002578414505562541
+    second: bgsec_cathedral_glow0_384
+  - first:
+      213: -1081202312037370426
+    second: bgsec_cathedral_glow0_385
+  - first:
+      213: -6700538462401919770
+    second: bgsec_cathedral_glow0_386
+  - first:
+      213: -3912558530652531674
+    second: bgsec_cathedral_glow0_387
+  - first:
+      213: -2980492825583282709
+    second: bgsec_cathedral_glow0_388
+  - first:
+      213: 8659173267242572609
+    second: bgsec_cathedral_glow0_389
+  - first:
+      213: -2976326232612505747
+    second: bgsec_cathedral_glow0_390
+  - first:
+      213: -4936600094949128643
+    second: bgsec_cathedral_glow0_391
+  - first:
+      213: -2491875928191307931
+    second: bgsec_cathedral_glow0_392
+  - first:
+      213: -7742072423018800916
+    second: bgsec_cathedral_glow0_393
+  - first:
+      213: 1761422771205270854
+    second: bgsec_cathedral_glow0_394
+  - first:
+      213: 8586508266378863488
+    second: bgsec_cathedral_glow0_395
+  - first:
+      213: 896169748888454702
+    second: bgsec_cathedral_glow0_396
+  - first:
+      213: 6475071021334263380
+    second: bgsec_cathedral_glow0_397
+  - first:
+      213: -7925949577351534125
+    second: bgsec_cathedral_glow0_398
+  - first:
+      213: 1976504228550536743
+    second: bgsec_cathedral_glow0_399
+  - first:
+      213: -5884972844805484346
+    second: bgsec_cathedral_glow0_400
+  - first:
+      213: -9219169262591135232
+    second: bgsec_cathedral_glow0_401
+  - first:
+      213: 6360809201373311961
+    second: bgsec_cathedral_glow0_402
+  - first:
+      213: -3483491137575307085
+    second: bgsec_cathedral_glow0_403
+  - first:
+      213: -5205649768055298840
+    second: bgsec_cathedral_glow0_404
+  - first:
+      213: -5687881882884216246
+    second: bgsec_cathedral_glow0_405
+  - first:
+      213: 526524317001307789
+    second: bgsec_cathedral_glow0_406
+  - first:
+      213: 896967454889715813
+    second: bgsec_cathedral_glow0_407
+  - first:
+      213: 4795794008076444881
+    second: bgsec_cathedral_glow0_408
+  - first:
+      213: 3961199011143532347
+    second: bgsec_cathedral_glow0_409
+  - first:
+      213: -5396953504258369457
+    second: bgsec_cathedral_glow0_410
+  - first:
+      213: 660869383898270953
+    second: bgsec_cathedral_glow0_411
+  - first:
+      213: -7731465263836218699
+    second: bgsec_cathedral_glow0_412
+  - first:
+      213: 727771930988991794
+    second: bgsec_cathedral_glow0_413
+  - first:
+      213: -6053217918786105182
+    second: bgsec_cathedral_glow0_414
+  - first:
+      213: 931418817887422953
+    second: bgsec_cathedral_glow0_415
+  - first:
+      213: -260350344058258355
+    second: bgsec_cathedral_glow0_416
+  - first:
+      213: -1066516598643221311
+    second: bgsec_cathedral_glow0_417
+  - first:
+      213: 5380599151723425110
+    second: bgsec_cathedral_glow0_418
+  - first:
+      213: -5163364082377724584
+    second: bgsec_cathedral_glow0_419
+  - first:
+      213: -2971929883573523941
+    second: bgsec_cathedral_glow0_420
+  - first:
+      213: 5497311002446082236
+    second: bgsec_cathedral_glow0_421
+  - first:
+      213: 2093540742051256963
+    second: bgsec_cathedral_glow0_422
+  - first:
+      213: -9172399198390868220
+    second: bgsec_cathedral_glow0_423
+  - first:
+      213: 7943046772009227042
+    second: bgsec_cathedral_glow0_424
+  - first:
+      213: -5360701831612657483
+    second: bgsec_cathedral_glow0_425
+  - first:
+      213: 2236895626153940738
+    second: bgsec_cathedral_glow0_426
+  - first:
+      213: -4253185931650339627
+    second: bgsec_cathedral_glow0_427
+  - first:
+      213: -2229929027145679787
+    second: bgsec_cathedral_glow0_428
+  - first:
+      213: 2890617097059859722
+    second: bgsec_cathedral_glow0_429
+  - first:
+      213: -2435977055218278454
+    second: bgsec_cathedral_glow0_430
+  - first:
+      213: -8220233846634525532
+    second: bgsec_cathedral_glow0_431
+  - first:
+      213: 6057780468755934435
+    second: bgsec_cathedral_glow0_432
+  - first:
+      213: 2536614954787137566
+    second: bgsec_cathedral_glow0_433
+  - first:
+      213: -5427610459196774849
+    second: bgsec_cathedral_glow0_434
+  - first:
+      213: -694061199356644349
+    second: bgsec_cathedral_glow0_435
+  - first:
+      213: -1217884399768760329
+    second: bgsec_cathedral_glow0_436
+  - first:
+      213: -4335440425395061861
+    second: bgsec_cathedral_glow0_437
+  - first:
+      213: -8286905117398083592
+    second: bgsec_cathedral_glow0_438
+  - first:
+      213: 5565206458027287963
+    second: bgsec_cathedral_glow0_439
+  - first:
+      213: 1605770117691389379
+    second: bgsec_cathedral_glow0_440
+  - first:
+      213: -6748467314051112188
+    second: bgsec_cathedral_glow0_441
+  - first:
+      213: 3757751138799517455
+    second: bgsec_cathedral_glow0_442
+  - first:
+      213: 5974868541311882552
+    second: bgsec_cathedral_glow0_443
+  - first:
+      213: -2892546666482744910
+    second: bgsec_cathedral_glow0_444
+  - first:
+      213: 633761635324931372
+    second: bgsec_cathedral_glow0_445
+  - first:
+      213: -5250608572184640223
+    second: bgsec_cathedral_glow0_446
+  - first:
+      213: -3892216479634513176
+    second: bgsec_cathedral_glow0_447
+  - first:
+      213: -8017464401233154089
+    second: bgsec_cathedral_glow0_448
+  - first:
+      213: -3447452473678349207
+    second: bgsec_cathedral_glow0_449
+  - first:
+      213: -4754403398485376843
+    second: bgsec_cathedral_glow0_450
+  - first:
+      213: -5979949812239621439
+    second: bgsec_cathedral_glow0_451
+  - first:
+      213: -604122036647490340
+    second: bgsec_cathedral_glow0_452
+  - first:
+      213: -9164905717323559230
+    second: bgsec_cathedral_glow0_453
+  - first:
+      213: 7949628717815019744
+    second: bgsec_cathedral_glow0_454
+  - first:
+      213: -7549366483430232803
+    second: bgsec_cathedral_glow0_455
+  - first:
+      213: -1623001161346396323
+    second: bgsec_cathedral_glow0_456
+  - first:
+      213: -7535728271622749384
+    second: bgsec_cathedral_glow0_457
+  - first:
+      213: 1667237920310147834
+    second: bgsec_cathedral_glow0_458
+  - first:
+      213: 4509487057916023044
+    second: bgsec_cathedral_glow0_459
+  - first:
+      213: 1720741024469784059
+    second: bgsec_cathedral_glow0_460
+  - first:
+      213: 6938342122449324133
+    second: bgsec_cathedral_glow0_461
+  - first:
+      213: -3625963654722122922
+    second: bgsec_cathedral_glow0_462
+  - first:
+      213: -9141276893509858672
+    second: bgsec_cathedral_glow0_463
+  - first:
+      213: 6258505374364137686
+    second: bgsec_cathedral_glow0_464
+  - first:
+      213: 1364115998339984964
+    second: bgsec_cathedral_glow0_465
+  - first:
+      213: 3582108907011052171
+    second: bgsec_cathedral_glow0_466
+  - first:
+      213: 1241517383934080168
+    second: bgsec_cathedral_glow0_467
+  - first:
+      213: 1245757346698617981
+    second: bgsec_cathedral_glow0_468
+  - first:
+      213: -3680323347810931095
+    second: bgsec_cathedral_glow0_469
+  - first:
+      213: -2970099071051193265
+    second: bgsec_cathedral_glow0_470
+  - first:
+      213: -4277927818865412831
+    second: bgsec_cathedral_glow0_471
+  - first:
+      213: 4373155292971985505
+    second: bgsec_cathedral_glow0_472
+  - first:
+      213: 3707415381983039769
+    second: bgsec_cathedral_glow0_473
+  - first:
+      213: 2712342052537870596
+    second: bgsec_cathedral_glow0_474
+  - first:
+      213: -2354759364124056224
+    second: bgsec_cathedral_glow0_475
+  - first:
+      213: -4910484242019701775
+    second: bgsec_cathedral_glow0_476
+  - first:
+      213: 8504982514903118111
+    second: bgsec_cathedral_glow0_477
+  - first:
+      213: -6602822122805413749
+    second: bgsec_cathedral_glow0_478
+  - first:
+      213: -2106271547457907232
+    second: bgsec_cathedral_glow0_479
+  - first:
+      213: -975854254285144628
+    second: bgsec_cathedral_glow0_480
+  - first:
+      213: 9109493714320328495
+    second: bgsec_cathedral_glow0_481
+  - first:
+      213: 1693356780788928012
+    second: bgsec_cathedral_glow0_482
+  - first:
+      213: -3776424811443936178
+    second: bgsec_cathedral_glow0_483
+  - first:
+      213: 5648112456291057060
+    second: bgsec_cathedral_glow0_484
+  - first:
+      213: -8515853969114264887
+    second: bgsec_cathedral_glow0_485
+  - first:
+      213: 1972075139695303040
+    second: bgsec_cathedral_glow0_486
+  - first:
+      213: 9151182621005499518
+    second: bgsec_cathedral_glow0_487
+  - first:
+      213: -1262982676045789808
+    second: bgsec_cathedral_glow0_488
+  - first:
+      213: 8969157070187270989
+    second: bgsec_cathedral_glow0_489
+  - first:
+      213: 795350321325976444
+    second: bgsec_cathedral_glow0_490
+  - first:
+      213: 6936935511087528750
+    second: bgsec_cathedral_glow0_491
+  - first:
+      213: 1480938020631733150
+    second: bgsec_cathedral_glow0_492
+  - first:
+      213: 4656276344034349670
+    second: bgsec_cathedral_glow0_493
+  - first:
+      213: -5872709127656847270
+    second: bgsec_cathedral_glow0_494
+  - first:
+      213: 3839527043137800780
+    second: bgsec_cathedral_glow0_495
+  - first:
+      213: 6342480481310969404
+    second: bgsec_cathedral_glow0_496
+  - first:
+      213: -9029437138184356662
+    second: bgsec_cathedral_glow0_497
+  - first:
+      213: 1222794390144045680
+    second: bgsec_cathedral_glow0_498
+  - first:
+      213: 4129776512700619417
+    second: bgsec_cathedral_glow0_499
+  - first:
+      213: 5616115103124897734
+    second: bgsec_cathedral_glow0_500
+  - first:
+      213: -8703229015029234768
+    second: bgsec_cathedral_glow0_501
+  - first:
+      213: -5439953428562932100
+    second: bgsec_cathedral_glow0_502
+  - first:
+      213: -5833155714978734133
+    second: bgsec_cathedral_glow0_503
+  - first:
+      213: 2110609765479313860
+    second: bgsec_cathedral_glow0_504
+  - first:
+      213: -708821223215314885
+    second: bgsec_cathedral_glow0_505
+  - first:
+      213: -8188098051570942176
+    second: bgsec_cathedral_glow0_506
+  - first:
+      213: -5392201783012421568
+    second: bgsec_cathedral_glow0_507
+  - first:
+      213: 2133395877027666840
+    second: bgsec_cathedral_glow0_508
+  - first:
+      213: 8179214993272191311
+    second: bgsec_cathedral_glow0_509
+  - first:
+      213: 8640344901551626133
+    second: bgsec_cathedral_glow0_510
+  - first:
+      213: -8262603006682129985
+    second: bgsec_cathedral_glow0_511
+  - first:
+      213: -3667981813821317550
+    second: bgsec_cathedral_glow0_512
+  - first:
+      213: -7538673787772292298
+    second: bgsec_cathedral_glow0_513
+  - first:
+      213: -5997820857164391862
+    second: bgsec_cathedral_glow0_514
+  - first:
+      213: 6452568503959332677
+    second: bgsec_cathedral_glow0_515
+  - first:
+      213: 6912042453020727001
+    second: bgsec_cathedral_glow0_516
+  - first:
+      213: -8379861979749983056
+    second: bgsec_cathedral_glow0_517
+  - first:
+      213: 3620904313193793271
+    second: bgsec_cathedral_glow0_518
+  - first:
+      213: 8898392812340954639
+    second: bgsec_cathedral_glow0_519
+  - first:
+      213: 915899405004433124
+    second: bgsec_cathedral_glow0_520
+  - first:
+      213: -2285743465418711143
+    second: bgsec_cathedral_glow0_521
+  - first:
+      213: -5372901548919099610
+    second: bgsec_cathedral_glow0_522
+  - first:
+      213: 7686109277118852967
+    second: bgsec_cathedral_glow0_523
+  - first:
+      213: -5656419496706376676
+    second: bgsec_cathedral_glow0_524
+  - first:
+      213: -3664070502034622153
+    second: bgsec_cathedral_glow0_525
+  - first:
+      213: -3374510972874458201
+    second: bgsec_cathedral_glow0_526
+  - first:
+      213: 5398673470845580167
+    second: bgsec_cathedral_glow0_527
+  - first:
+      213: 1089544704777227017
+    second: bgsec_cathedral_glow0_528
+  - first:
+      213: 5833514418129147827
+    second: bgsec_cathedral_glow0_529
+  - first:
+      213: 8769531932148184968
+    second: bgsec_cathedral_glow0_530
+  - first:
+      213: -7252735163086230522
+    second: bgsec_cathedral_glow0_531
+  - first:
+      213: 5341466641767519430
+    second: bgsec_cathedral_glow0_532
+  - first:
+      213: -995029041895216932
+    second: bgsec_cathedral_glow0_533
+  - first:
+      213: -121238434359345883
+    second: bgsec_cathedral_glow0_534
+  - first:
+      213: -4410556001506918075
+    second: bgsec_cathedral_glow0_535
+  - first:
+      213: 9217515274838772918
+    second: bgsec_cathedral_glow0_536
+  - first:
+      213: 774146906431155656
+    second: bgsec_cathedral_glow0_537
+  - first:
+      213: -6224161277613730612
+    second: bgsec_cathedral_glow0_538
+  - first:
+      213: -1953571084848189243
+    second: bgsec_cathedral_glow0_539
+  - first:
+      213: -6560681343215215539
+    second: bgsec_cathedral_glow0_540
+  - first:
+      213: -5534519814795397434
+    second: bgsec_cathedral_glow0_541
+  - first:
+      213: -4602291190751672856
+    second: bgsec_cathedral_glow0_542
+  - first:
+      213: 3429963021466838072
+    second: bgsec_cathedral_glow0_543
+  - first:
+      213: -1011774183816741723
+    second: bgsec_cathedral_glow0_544
+  - first:
+      213: -6740591043368566259
+    second: bgsec_cathedral_glow0_545
+  - first:
+      213: -3699234034235234598
+    second: bgsec_cathedral_glow0_546
+  - first:
+      213: 4906901069777356392
+    second: bgsec_cathedral_glow0_547
+  - first:
+      213: 4399873600071610647
+    second: bgsec_cathedral_glow0_548
+  - first:
+      213: 9109882509928195164
+    second: bgsec_cathedral_glow0_549
+  - first:
+      213: 7537267548665221419
+    second: bgsec_cathedral_glow0_550
+  - first:
+      213: 162070480262318713
+    second: bgsec_cathedral_glow0_551
+  - first:
+      213: 8906319199465168978
+    second: bgsec_cathedral_glow0_552
+  - first:
+      213: -3921465521455241731
+    second: bgsec_cathedral_glow0_553
+  - first:
+      213: 4930026171659705377
+    second: bgsec_cathedral_glow0_554
+  - first:
+      213: -6924255367048372448
+    second: bgsec_cathedral_glow0_555
+  - first:
+      213: -6956821613464812645
+    second: bgsec_cathedral_glow0_556
+  - first:
+      213: 8490291707105673103
+    second: bgsec_cathedral_glow0_557
+  - first:
+      213: 7348463124649613886
+    second: bgsec_cathedral_glow0_558
+  - first:
+      213: -6453142899355827620
+    second: bgsec_cathedral_glow0_559
+  - first:
+      213: 3816919586120975111
+    second: bgsec_cathedral_glow0_560
+  - first:
+      213: -7696043439085471013
+    second: bgsec_cathedral_glow0_561
+  - first:
+      213: 4293592386918609476
+    second: bgsec_cathedral_glow0_562
+  - first:
+      213: 7294177810639235259
+    second: bgsec_cathedral_glow0_563
+  - first:
+      213: 2060848194758201939
+    second: bgsec_cathedral_glow0_564
+  - first:
+      213: -3115668561514202364
+    second: bgsec_cathedral_glow0_565
+  - first:
+      213: 3158191743935945378
+    second: bgsec_cathedral_glow0_566
+  - first:
+      213: 8240246050403379271
+    second: bgsec_cathedral_glow0_567
+  - first:
+      213: -2153239100161005911
+    second: bgsec_cathedral_glow0_568
+  - first:
+      213: -9163837910884903012
+    second: bgsec_cathedral_glow0_569
+  - first:
+      213: 5730464528261540399
+    second: bgsec_cathedral_glow0_570
+  - first:
+      213: -749234735447397490
+    second: bgsec_cathedral_glow0_571
+  - first:
+      213: -5348289825983530226
+    second: bgsec_cathedral_glow0_572
+  - first:
+      213: 7751048828315112308
+    second: bgsec_cathedral_glow0_573
+  - first:
+      213: 6740389045694196950
+    second: bgsec_cathedral_glow0_574
+  - first:
+      213: -1218094136419524865
+    second: bgsec_cathedral_glow0_575
+  - first:
+      213: 2379433989060029253
+    second: bgsec_cathedral_glow0_576
+  - first:
+      213: -3168737666118354507
+    second: bgsec_cathedral_glow0_577
+  - first:
+      213: -289193766771058613
+    second: bgsec_cathedral_glow0_578
+  - first:
+      213: -4626685103862021899
+    second: bgsec_cathedral_glow0_579
+  - first:
+      213: -296247548441678449
+    second: bgsec_cathedral_glow0_580
+  - first:
+      213: -4377011464898841213
+    second: bgsec_cathedral_glow0_581
+  - first:
+      213: -4979088989722800333
+    second: bgsec_cathedral_glow0_582
+  - first:
+      213: 7409621023941693715
+    second: bgsec_cathedral_glow0_583
+  - first:
+      213: 2321290522664487787
+    second: bgsec_cathedral_glow0_584
+  - first:
+      213: -2273262591914941228
+    second: bgsec_cathedral_glow0_585
+  - first:
+      213: -1979345926377725758
+    second: bgsec_cathedral_glow0_586
+  - first:
+      213: -8939810881057473051
+    second: bgsec_cathedral_glow0_587
+  - first:
+      213: -2811021697863401914
+    second: bgsec_cathedral_glow0_588
+  - first:
+      213: -4172378784096957289
+    second: bgsec_cathedral_glow0_589
+  - first:
+      213: -9060711411855188651
+    second: bgsec_cathedral_glow0_590
+  - first:
+      213: -2084485513939130890
+    second: bgsec_cathedral_glow0_591
+  - first:
+      213: 742467752240809592
+    second: bgsec_cathedral_glow0_592
+  - first:
+      213: 6667319583228315160
+    second: bgsec_cathedral_glow0_593
+  - first:
+      213: -3412051633033670081
+    second: bgsec_cathedral_glow0_594
+  - first:
+      213: 5162412996553270725
+    second: bgsec_cathedral_glow0_595
+  - first:
+      213: 5073746637174217637
+    second: bgsec_cathedral_glow0_596
+  - first:
+      213: -3339151470607762150
+    second: bgsec_cathedral_glow0_597
+  - first:
+      213: 8065076512215978714
+    second: bgsec_cathedral_glow0_598
+  - first:
+      213: -4943427018935031444
+    second: bgsec_cathedral_glow0_599
+  - first:
+      213: -8890365800284710350
+    second: bgsec_cathedral_glow0_600
+  - first:
+      213: -2682437808504565318
+    second: bgsec_cathedral_glow0_601
+  - first:
+      213: 5838758435134490157
+    second: bgsec_cathedral_glow0_602
+  - first:
+      213: -2562567049193912415
+    second: bgsec_cathedral_glow0_603
+  - first:
+      213: 4966260011315948299
+    second: bgsec_cathedral_glow0_604
+  - first:
+      213: -6040654900706314516
+    second: bgsec_cathedral_glow0_605
+  - first:
+      213: 6791350545484945782
+    second: bgsec_cathedral_glow0_606
+  - first:
+      213: -2065249883919876075
+    second: bgsec_cathedral_glow0_607
+  - first:
+      213: 5348546315346760234
+    second: bgsec_cathedral_glow0_608
+  - first:
+      213: -2202588226207446415
+    second: bgsec_cathedral_glow0_609
+  - first:
+      213: -2091324920000532592
+    second: bgsec_cathedral_glow0_610
+  - first:
+      213: 5807912954948632758
+    second: bgsec_cathedral_glow0_611
+  - first:
+      213: 2721251660340839392
+    second: bgsec_cathedral_glow0_612
+  - first:
+      213: -3647632238444963704
+    second: bgsec_cathedral_glow0_613
+  - first:
+      213: -2680979993559907264
+    second: bgsec_cathedral_glow0_614
+  - first:
+      213: -8220312889881082735
+    second: bgsec_cathedral_glow0_615
+  - first:
+      213: 6988485393908558454
+    second: bgsec_cathedral_glow0_616
+  - first:
+      213: 5204751306064616170
+    second: bgsec_cathedral_glow0_617
+  - first:
+      213: -5311903961741409520
+    second: bgsec_cathedral_glow0_618
+  - first:
+      213: -7459483730151415220
+    second: bgsec_cathedral_glow0_619
+  - first:
+      213: 8536422339924719834
+    second: bgsec_cathedral_glow0_620
+  - first:
+      213: 5073180876067682480
+    second: bgsec_cathedral_glow0_621
+  - first:
+      213: -582541365997377996
+    second: bgsec_cathedral_glow0_622
+  - first:
+      213: -1396231677398490326
+    second: bgsec_cathedral_glow0_623
+  - first:
+      213: -4970653403907003805
+    second: bgsec_cathedral_glow0_624
+  - first:
+      213: -1944702288021724024
+    second: bgsec_cathedral_glow0_625
+  - first:
+      213: 4899055465231338618
+    second: bgsec_cathedral_glow0_626
+  - first:
+      213: 6210049172277261309
+    second: bgsec_cathedral_glow0_627
+  - first:
+      213: 2812123966883082434
+    second: bgsec_cathedral_glow0_628
+  - first:
+      213: -8763304206335069774
+    second: bgsec_cathedral_glow0_629
+  - first:
+      213: -7896365589900028594
+    second: bgsec_cathedral_glow0_630
+  - first:
+      213: 5651114500960256803
+    second: bgsec_cathedral_glow0_631
+  - first:
+      213: 3860006673286136731
+    second: bgsec_cathedral_glow0_632
+  - first:
+      213: 9023417563274335912
+    second: bgsec_cathedral_glow0_633
+  - first:
+      213: -9130651985650266240
+    second: bgsec_cathedral_glow0_634
+  - first:
+      213: -5775107067602612629
+    second: bgsec_cathedral_glow0_635
+  - first:
+      213: -6161921553849258034
+    second: bgsec_cathedral_glow0_636
+  - first:
+      213: -6777404520559428726
+    second: bgsec_cathedral_glow0_637
+  - first:
+      213: -276982987434123808
+    second: bgsec_cathedral_glow0_638
+  - first:
+      213: -2504736965748171746
+    second: bgsec_cathedral_glow0_639
+  - first:
+      213: -2793325359208848722
+    second: bgsec_cathedral_glow0_640
+  - first:
+      213: 3476165363386385194
+    second: bgsec_cathedral_glow0_641
+  - first:
+      213: 1731675730401692634
+    second: bgsec_cathedral_glow0_642
+  - first:
+      213: 2752695992882949825
+    second: bgsec_cathedral_glow0_643
+  - first:
+      213: 8444918457681996478
+    second: bgsec_cathedral_glow0_644
+  - first:
+      213: -6388985748721260673
+    second: bgsec_cathedral_glow0_645
+  - first:
+      213: -7872089178158734345
+    second: bgsec_cathedral_glow0_646
+  - first:
+      213: -8084373633654137706
+    second: bgsec_cathedral_glow0_647
+  - first:
+      213: -4233733256825919687
+    second: bgsec_cathedral_glow0_648
+  - first:
+      213: -2838614551136506122
+    second: bgsec_cathedral_glow0_649
+  - first:
+      213: -7329663670050407775
+    second: bgsec_cathedral_glow0_650
+  - first:
+      213: -4123578731891390617
+    second: bgsec_cathedral_glow0_651
+  - first:
+      213: -7026499125151176764
+    second: bgsec_cathedral_glow0_652
+  - first:
+      213: -6566173510173234956
+    second: bgsec_cathedral_glow0_653
+  - first:
+      213: 2358800120734349009
+    second: bgsec_cathedral_glow0_654
+  - first:
+      213: -3348014794941887587
+    second: bgsec_cathedral_glow0_655
+  - first:
+      213: -8089478334938605044
+    second: bgsec_cathedral_glow0_656
+  - first:
+      213: -8005184989743545326
+    second: bgsec_cathedral_glow0_657
+  - first:
+      213: 6142458362330555506
+    second: bgsec_cathedral_glow0_658
+  - first:
+      213: 2968583461648081077
+    second: bgsec_cathedral_glow0_659
+  - first:
+      213: 8904312952266263139
+    second: bgsec_cathedral_glow0_660
+  - first:
+      213: -717431339556652431
+    second: bgsec_cathedral_glow0_661
+  - first:
+      213: -5906106081909292831
+    second: bgsec_cathedral_glow0_662
+  - first:
+      213: -4331755110126043677
+    second: bgsec_cathedral_glow0_663
+  - first:
+      213: -6995875116880371112
+    second: bgsec_cathedral_glow0_664
+  - first:
+      213: -637893310867172179
+    second: bgsec_cathedral_glow0_665
+  - first:
+      213: -1864927895763272622
+    second: bgsec_cathedral_glow0_666
+  - first:
+      213: 9212092658505932987
+    second: bgsec_cathedral_glow0_667
+  - first:
+      213: -2116507342709681011
+    second: bgsec_cathedral_glow0_668
+  - first:
+      213: 1657989518466909463
+    second: bgsec_cathedral_glow0_669
+  - first:
+      213: -4117353813335744828
+    second: bgsec_cathedral_glow0_670
+  - first:
+      213: 8022265498406665660
+    second: bgsec_cathedral_glow0_671
+  - first:
+      213: -885507820772269295
+    second: bgsec_cathedral_glow0_672
+  - first:
+      213: -8175491215708578892
+    second: bgsec_cathedral_glow0_673
+  - first:
+      213: -5890306541026262900
+    second: bgsec_cathedral_glow0_674
+  - first:
+      213: -2147993766936189616
+    second: bgsec_cathedral_glow0_675
+  - first:
+      213: -1342590643597476738
+    second: bgsec_cathedral_glow0_676
+  - first:
+      213: 9112508548944572078
+    second: bgsec_cathedral_glow0_677
+  - first:
+      213: 729211128723833143
+    second: bgsec_cathedral_glow0_678
+  - first:
+      213: 6294831059897978161
+    second: bgsec_cathedral_glow0_679
+  - first:
+      213: -1975841488203666602
+    second: bgsec_cathedral_glow0_680
+  - first:
+      213: -3332897602515050546
+    second: bgsec_cathedral_glow0_681
+  - first:
+      213: 4299029429548180160
+    second: bgsec_cathedral_glow0_682
+  - first:
+      213: -3417801883527491526
+    second: bgsec_cathedral_glow0_683
+  - first:
+      213: -1466861248890718237
+    second: bgsec_cathedral_glow0_684
+  - first:
+      213: -8012411708636220017
+    second: bgsec_cathedral_glow0_685
+  - first:
+      213: -5387473503756094903
+    second: bgsec_cathedral_glow0_686
+  - first:
+      213: -8542089618468618131
+    second: bgsec_cathedral_glow0_687
+  - first:
+      213: -6414211929911845641
+    second: bgsec_cathedral_glow0_688
+  - first:
+      213: -6630010416378884232
+    second: bgsec_cathedral_glow0_689
+  - first:
+      213: 1205437643983320843
+    second: bgsec_cathedral_glow0_690
+  - first:
+      213: 3025193765471418047
+    second: bgsec_cathedral_glow0_691
+  - first:
+      213: 5973222352095444138
+    second: bgsec_cathedral_glow0_692
+  - first:
+      213: -4074449713218350684
+    second: bgsec_cathedral_glow0_693
+  - first:
+      213: 877231616137321811
+    second: bgsec_cathedral_glow0_694
+  - first:
+      213: 5575501831639086965
+    second: bgsec_cathedral_glow0_695
+  - first:
+      213: -3532156927949930164
+    second: bgsec_cathedral_glow0_696
+  - first:
+      213: -9005845788276776978
+    second: bgsec_cathedral_glow0_697
+  - first:
+      213: 4350845038969298410
+    second: bgsec_cathedral_glow0_698
+  - first:
+      213: -4593978878598905205
+    second: bgsec_cathedral_glow0_699
+  - first:
+      213: -1367697998064496507
+    second: bgsec_cathedral_glow0_700
+  - first:
+      213: -4071903889773630197
+    second: bgsec_cathedral_glow0_701
+  - first:
+      213: 3306126856906911753
+    second: bgsec_cathedral_glow0_702
+  - first:
+      213: -5535585035023385959
+    second: bgsec_cathedral_glow0_703
+  - first:
+      213: -2112966527410907047
+    second: bgsec_cathedral_glow0_704
+  - first:
+      213: -47227460843111738
+    second: bgsec_cathedral_glow0_705
+  - first:
+      213: 7316762663894259482
+    second: bgsec_cathedral_glow0_706
+  - first:
+      213: -3805797624695784301
+    second: bgsec_cathedral_glow0_707
+  - first:
+      213: -1617538642397466487
+    second: bgsec_cathedral_glow0_708
+  - first:
+      213: -7590715070402526743
+    second: bgsec_cathedral_glow0_709
+  - first:
+      213: -992853831401236232
+    second: bgsec_cathedral_glow0_710
+  - first:
+      213: -3349868357129671632
+    second: bgsec_cathedral_glow0_711
+  - first:
+      213: 7954377350357883394
+    second: bgsec_cathedral_glow0_712
+  - first:
+      213: -5560109381273630747
+    second: bgsec_cathedral_glow0_713
+  - first:
+      213: -7296991355926039808
+    second: bgsec_cathedral_glow0_714
+  - first:
+      213: 1364075364552661386
+    second: bgsec_cathedral_glow0_715
+  - first:
+      213: 6936447267335807003
+    second: bgsec_cathedral_glow0_716
+  - first:
+      213: 8582091641791278282
+    second: bgsec_cathedral_glow0_717
+  - first:
+      213: 3258154595230943262
+    second: bgsec_cathedral_glow0_718
+  - first:
+      213: -1079398742495444661
+    second: bgsec_cathedral_glow0_719
+  - first:
+      213: 8594777492588995798
+    second: bgsec_cathedral_glow0_720
+  - first:
+      213: 2267720316527851622
+    second: bgsec_cathedral_glow0_721
+  - first:
+      213: 5619036718841234532
+    second: bgsec_cathedral_glow0_722
+  - first:
+      213: -1490068401272676301
+    second: bgsec_cathedral_glow0_723
+  - first:
+      213: 4629796878651962457
+    second: bgsec_cathedral_glow0_724
+  - first:
+      213: -364911358511813045
+    second: bgsec_cathedral_glow0_725
+  - first:
+      213: -5047744411472524271
+    second: bgsec_cathedral_glow0_726
+  - first:
+      213: 6614500342374750333
+    second: bgsec_cathedral_glow0_727
+  - first:
+      213: 2443434780698925269
+    second: bgsec_cathedral_glow0_728
+  - first:
+      213: -8272573132221077208
+    second: bgsec_cathedral_glow0_729
+  - first:
+      213: -6077107578444018207
+    second: bgsec_cathedral_glow0_730
+  - first:
+      213: -671550404757486322
+    second: bgsec_cathedral_glow0_731
+  - first:
+      213: -8217193037377801907
+    second: bgsec_cathedral_glow0_732
+  - first:
+      213: -5142121711145927859
+    second: bgsec_cathedral_glow0_733
+  - first:
+      213: -8275370452733549932
+    second: bgsec_cathedral_glow0_734
+  - first:
+      213: -3801543847064577580
+    second: bgsec_cathedral_glow0_735
+  - first:
+      213: 6459993952283204067
+    second: bgsec_cathedral_glow0_736
+  - first:
+      213: -9220714202592405843
+    second: bgsec_cathedral_glow0_737
+  - first:
+      213: 7586108218309508836
+    second: bgsec_cathedral_glow0_738
+  - first:
+      213: -7482156325396036668
+    second: bgsec_cathedral_glow0_739
+  - first:
+      213: -5437539331690534149
+    second: bgsec_cathedral_glow0_740
+  - first:
+      213: -4810032095431432244
+    second: bgsec_cathedral_glow0_741
+  - first:
+      213: -8406906941218476832
+    second: bgsec_cathedral_glow0_742
+  - first:
+      213: 4692886800192876047
+    second: bgsec_cathedral_glow0_743
+  - first:
+      213: 924672263009483895
+    second: bgsec_cathedral_glow0_744
+  - first:
+      213: -2894281966990930878
+    second: bgsec_cathedral_glow0_745
+  - first:
+      213: 5208878226405817264
+    second: bgsec_cathedral_glow0_746
+  - first:
+      213: -5230775019060764868
+    second: bgsec_cathedral_glow0_747
+  - first:
+      213: 5816453008122319483
+    second: bgsec_cathedral_glow0_748
+  - first:
+      213: -82143795837279401
+    second: bgsec_cathedral_glow0_749
+  - first:
+      213: -8448301655821680113
+    second: bgsec_cathedral_glow0_750
+  - first:
+      213: -5678085906520921012
+    second: bgsec_cathedral_glow0_751
+  - first:
+      213: -4730853136488079881
+    second: bgsec_cathedral_glow0_752
+  - first:
+      213: -297304042719573518
+    second: bgsec_cathedral_glow0_753
+  - first:
+      213: 5314936976730219141
+    second: bgsec_cathedral_glow0_754
+  - first:
+      213: 3128206948942625101
+    second: bgsec_cathedral_glow0_755
+  - first:
+      213: -4149776611725098923
+    second: bgsec_cathedral_glow0_756
+  - first:
+      213: -4819526118940546986
+    second: bgsec_cathedral_glow0_757
+  - first:
+      213: -4437570362035706814
+    second: bgsec_cathedral_glow0_758
+  - first:
+      213: 1864542398860086386
+    second: bgsec_cathedral_glow0_759
+  - first:
+      213: 1353655575311189463
+    second: bgsec_cathedral_glow0_760
+  - first:
+      213: 1423173729564082141
+    second: bgsec_cathedral_glow0_761
+  - first:
+      213: -5859328249699487508
+    second: bgsec_cathedral_glow0_762
+  - first:
+      213: -3126063533826626743
+    second: bgsec_cathedral_glow0_763
+  - first:
+      213: -4826603926305488084
+    second: bgsec_cathedral_glow0_764
+  - first:
+      213: 8963501660637731842
+    second: bgsec_cathedral_glow0_765
+  - first:
+      213: 5915680963608907875
+    second: bgsec_cathedral_glow0_766
+  - first:
+      213: 4308522308693394226
+    second: bgsec_cathedral_glow0_767
+  - first:
+      213: -1922642381571919525
+    second: bgsec_cathedral_glow0_768
+  - first:
+      213: -2278047862661478033
+    second: bgsec_cathedral_glow0_769
+  - first:
+      213: 6274793523921746423
+    second: bgsec_cathedral_glow0_770
+  - first:
+      213: 6132144395228599635
+    second: bgsec_cathedral_glow0_771
+  - first:
+      213: -3054428847365843317
+    second: bgsec_cathedral_glow0_772
+  - first:
+      213: 2170704688091815376
+    second: bgsec_cathedral_glow0_773
+  - first:
+      213: 721986105784107049
+    second: bgsec_cathedral_glow0_774
+  - first:
+      213: -6772088074335329653
+    second: bgsec_cathedral_glow0_775
+  - first:
+      213: -43600507520615965
+    second: bgsec_cathedral_glow0_776
+  - first:
+      213: -4092695075289851167
+    second: bgsec_cathedral_glow0_777
+  - first:
+      213: -2831774126739406088
+    second: bgsec_cathedral_glow0_778
+  - first:
+      213: 6604738343298196149
+    second: bgsec_cathedral_glow0_779
+  - first:
+      213: 4144214930243100688
+    second: bgsec_cathedral_glow0_780
+  - first:
+      213: 4879055627132746561
+    second: bgsec_cathedral_glow0_781
+  - first:
+      213: 6722518864100345610
+    second: bgsec_cathedral_glow0_782
+  - first:
+      213: 8560375571324054743
+    second: bgsec_cathedral_glow0_783
+  - first:
+      213: -6960227003508383430
+    second: bgsec_cathedral_glow0_784
+  - first:
+      213: -199490628277313881
+    second: bgsec_cathedral_glow0_785
+  - first:
+      213: 6692779603321707153
+    second: bgsec_cathedral_glow0_786
+  - first:
+      213: 7693671611304392183
+    second: bgsec_cathedral_glow0_787
+  - first:
+      213: 7491211001037466642
+    second: bgsec_cathedral_glow0_788
+  - first:
+      213: -7368972547002552588
+    second: bgsec_cathedral_glow0_789
+  - first:
+      213: -3798504073616212729
+    second: bgsec_cathedral_glow0_790
+  - first:
+      213: 3212160678835110562
+    second: bgsec_cathedral_glow0_791
+  - first:
+      213: 3067931748214267510
+    second: bgsec_cathedral_glow0_792
+  - first:
+      213: -5642723297917589776
+    second: bgsec_cathedral_glow0_793
+  - first:
+      213: 4452343503415212726
+    second: bgsec_cathedral_glow0_794
+  - first:
+      213: -1268228593025093544
+    second: bgsec_cathedral_glow0_795
+  - first:
+      213: 800252369977547079
+    second: bgsec_cathedral_glow0_796
+  - first:
+      213: -5850763398193010397
+    second: bgsec_cathedral_glow0_797
+  - first:
+      213: 8258299027448964232
+    second: bgsec_cathedral_glow0_798
+  - first:
+      213: -3950923594684271184
+    second: bgsec_cathedral_glow0_799
+  - first:
+      213: -8957365699094061435
+    second: bgsec_cathedral_glow0_800
+  - first:
+      213: -5694113469440585146
+    second: bgsec_cathedral_glow0_801
+  - first:
+      213: 2066631247860158105
+    second: bgsec_cathedral_glow0_802
+  - first:
+      213: -287267659681194758
+    second: bgsec_cathedral_glow0_803
+  - first:
+      213: 2270891895462834132
+    second: bgsec_cathedral_glow0_804
+  - first:
+      213: 6655815123628630909
+    second: bgsec_cathedral_glow0_805
+  - first:
+      213: -2059792344686599462
+    second: bgsec_cathedral_glow0_806
+  - first:
+      213: -8406809670131675608
+    second: bgsec_cathedral_glow0_807
+  - first:
+      213: -553867501796717678
+    second: bgsec_cathedral_glow0_808
+  - first:
+      213: -3331841525217290063
+    second: bgsec_cathedral_glow0_809
+  - first:
+      213: -2584401233584136290
+    second: bgsec_cathedral_glow0_810
+  - first:
+      213: 2911097180298984983
+    second: bgsec_cathedral_glow0_811
+  - first:
+      213: -3384675349769073499
+    second: bgsec_cathedral_glow0_812
+  - first:
+      213: 7599744418726024698
+    second: bgsec_cathedral_glow0_813
+  - first:
+      213: -4080076134147147272
+    second: bgsec_cathedral_glow0_814
+  - first:
+      213: 3009282693788014909
+    second: bgsec_cathedral_glow0_815
+  - first:
+      213: 1539680741202576404
+    second: bgsec_cathedral_glow0_816
+  - first:
+      213: 1631402162947250367
+    second: bgsec_cathedral_glow0_817
+  - first:
+      213: -2706160280072077253
+    second: bgsec_cathedral_glow0_818
+  - first:
+      213: 1493795352882883359
+    second: bgsec_cathedral_glow0_819
+  - first:
+      213: -7045753508811782065
+    second: bgsec_cathedral_glow0_820
+  - first:
+      213: -246878598478327117
+    second: bgsec_cathedral_glow0_821
+  - first:
+      213: -8705748779056543914
+    second: bgsec_cathedral_glow0_822
+  - first:
+      213: -3380732790864884190
+    second: bgsec_cathedral_glow0_823
+  - first:
+      213: -8421207866674852032
+    second: bgsec_cathedral_glow0_824
+  - first:
+      213: 2917278183721183645
+    second: bgsec_cathedral_glow0_825
+  - first:
+      213: -7530157631709067016
+    second: bgsec_cathedral_glow0_826
+  - first:
+      213: 8330169943630313101
+    second: bgsec_cathedral_glow0_827
+  - first:
+      213: -7807382737234771540
+    second: bgsec_cathedral_glow0_828
+  - first:
+      213: -4597317326149768733
+    second: bgsec_cathedral_glow0_829
+  - first:
+      213: -7307122589092815626
+    second: bgsec_cathedral_glow0_830
+  - first:
+      213: -8895383313417157271
+    second: bgsec_cathedral_glow0_831
+  - first:
+      213: 1810975414632360904
+    second: bgsec_cathedral_glow0_832
+  - first:
+      213: -7087649426348943631
+    second: bgsec_cathedral_glow0_833
+  - first:
+      213: -6241103563951529312
+    second: bgsec_cathedral_glow0_834
+  - first:
+      213: -2850633516587731695
+    second: bgsec_cathedral_glow0_835
+  - first:
+      213: 2326871522163499457
+    second: bgsec_cathedral_glow0_836
+  - first:
+      213: -4385141653769642512
+    second: bgsec_cathedral_glow0_837
+  - first:
+      213: 5497984318600268403
+    second: bgsec_cathedral_glow0_838
+  - first:
+      213: 6013434854021661402
+    second: bgsec_cathedral_glow0_839
+  - first:
+      213: -7780267991258697771
+    second: bgsec_cathedral_glow0_840
+  - first:
+      213: -9087196757065808200
+    second: bgsec_cathedral_glow0_841
+  - first:
+      213: -2061938124249987409
+    second: bgsec_cathedral_glow0_842
+  - first:
+      213: 834688998830916724
+    second: bgsec_cathedral_glow0_843
+  - first:
+      213: 2475366577861036516
+    second: bgsec_cathedral_glow0_844
+  - first:
+      213: -781948139920884507
+    second: bgsec_cathedral_glow0_845
+  - first:
+      213: 8059675898451626531
+    second: bgsec_cathedral_glow0_846
+  - first:
+      213: 3952068029973628605
+    second: bgsec_cathedral_glow0_847
+  - first:
+      213: -6725892796179182198
+    second: bgsec_cathedral_glow0_848
+  - first:
+      213: -7209781742140301894
+    second: bgsec_cathedral_glow0_849
+  - first:
+      213: -5090061959145524607
+    second: bgsec_cathedral_glow0_850
+  - first:
+      213: 4361740405608385137
+    second: bgsec_cathedral_glow0_851
+  - first:
+      213: 6981576415928361714
+    second: bgsec_cathedral_glow0_852
+  - first:
+      213: -2361531984807161403
+    second: bgsec_cathedral_glow0_853
+  - first:
+      213: -7833655280806936449
+    second: bgsec_cathedral_glow0_854
+  - first:
+      213: 6255604525534268009
+    second: bgsec_cathedral_glow0_855
+  - first:
+      213: 8782893531698707817
+    second: bgsec_cathedral_glow0_856
+  - first:
+      213: 4969429714002900603
+    second: bgsec_cathedral_glow0_857
+  - first:
+      213: -8615302168029805280
+    second: bgsec_cathedral_glow0_858
+  - first:
+      213: -2803576562563741311
+    second: bgsec_cathedral_glow0_859
+  - first:
+      213: -5732820714963272496
+    second: bgsec_cathedral_glow0_860
+  - first:
+      213: 8482797478944364681
+    second: bgsec_cathedral_glow0_861
+  - first:
+      213: 9168202526775628264
+    second: bgsec_cathedral_glow0_862
+  - first:
+      213: -3295935493309551468
+    second: bgsec_cathedral_glow0_863
+  - first:
+      213: -2110936446654973729
+    second: bgsec_cathedral_glow0_864
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efe11d6565155478c9d31ad7e49ff47a
+      internalID: 3993918200751361031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_1
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3017148768b04ec7a0af757d533a816
+      internalID: -4746095921308481807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_2
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0c2be22b68504e489ca8466df0ce28f
+      internalID: -4286569789210724144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_3
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eba639a1d090242a8a70b71f5d4e5ba5
+      internalID: 6897569545673821410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d902845fee026404fabcfebce26f617d
+      internalID: 1550281920877432476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_5
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac07325b8ed504d7382c0af10ec1efee
+      internalID: -5399870059398998779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_6
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 368c96bb6df73415e87d1dce8a4feaa8
+      internalID: 3460436803941275737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_7
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06c7f6cab75e742ee882bacbba67ac84
+      internalID: -2312394134407573541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_8
+      rect:
+        serializedVersion: 2
+        x: 344
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c22013eb911c44cf5a309240e0e249a1
+      internalID: 7302623652247003975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_9
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a425a963cd2e347f8ae89f6fc24e1882
+      internalID: 6645955493023392491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_10
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a5b986aed4146aa905e12e6c715860
+      internalID: 6400059251614293190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_11
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165e9455778934663a08b217bb77aded
+      internalID: 5525162163813825410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_12
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 386c54b45dcf4463cbcdead9db86f192
+      internalID: 9141541175700236542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_13
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 965ccf069c0ab43798437d2be80b3f53
+      internalID: -681113632365034945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_14
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74644a00df62e4b50acf4e7ab89e0fab
+      internalID: -8196573534515597646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_15
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6647b27d40964e39a287f3b210aa488
+      internalID: 4550949394658149175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_16
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3817bd8f0384a3bbd399e25a7be00d
+      internalID: -3845561721943658795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_17
+      rect:
+        serializedVersion: 2
+        x: 731
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75b92bbff31574669a0d542f6f38722d
+      internalID: -6833621545225867044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_18
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1785904011cb14dfea9c67f25797deca
+      internalID: 2534715961673235660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_19
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7359de4fda5814e2b88768217055fd92
+      internalID: 8315830863297511985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_20
+      rect:
+        serializedVersion: 2
+        x: 860
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16511449d0b784938a3c61b9f8020acd
+      internalID: -2927251234309459302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_21
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69eceb88835774907a51b6e642afbffd
+      internalID: 5876721592195158074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_22
+      rect:
+        serializedVersion: 2
+        x: 946
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dccd3df616754b0fa609e91fe8ec72d
+      internalID: -4215628487991296428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_23
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281fcd2052b6b4ac3bb4c166867a66d4
+      internalID: 1193050416029047979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_24
+      rect:
+        serializedVersion: 2
+        x: 1032
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2eedb0bac0f74e678c929c2a3e6ac0c
+      internalID: 5148846737286056494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_25
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d63eb76efe3674dd3aad6e5983d1819c
+      internalID: -1698753389740155171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_26
+      rect:
+        serializedVersion: 2
+        x: 1118
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b6d05774dbb458ca8ca9e846f97960
+      internalID: 6127065657917104861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_27
+      rect:
+        serializedVersion: 2
+        x: 1161
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 992816f4eaa8844068cae853a3b03d5b
+      internalID: 49820935355339258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_28
+      rect:
+        serializedVersion: 2
+        x: 1204
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3959029c5854ae7909eaca09f0e11a
+      internalID: -4257578056384266625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_29
+      rect:
+        serializedVersion: 2
+        x: 1247
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a43f9f7c7100845eeb058731da84030b
+      internalID: -7352141771648658791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_30
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea4467dd5402441049e59247f388790a
+      internalID: 3448325771082513360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_31
+      rect:
+        serializedVersion: 2
+        x: 1333
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3a5ea4c4f6534ee6878e70f6422fd6a
+      internalID: -8167639753362720240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_32
+      rect:
+        serializedVersion: 2
+        x: 1376
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58422a9b71f33417d992ba882929d52e
+      internalID: -943116088751641559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_33
+      rect:
+        serializedVersion: 2
+        x: 1419
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e7187ace9ad432d8f6dde22a3208f7
+      internalID: -8588001617567100137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_34
+      rect:
+        serializedVersion: 2
+        x: 1462
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79350171334e145aebc22b41b198407c
+      internalID: 1856929665508334485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_35
+      rect:
+        serializedVersion: 2
+        x: 1505
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecd209959941e4164a51936f9b49f74a
+      internalID: 1199987301820046938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_36
+      rect:
+        serializedVersion: 2
+        x: 1548
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4429352d9ecd4743b52cda4c931e042
+      internalID: -937375228579974622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_37
+      rect:
+        serializedVersion: 2
+        x: 1591
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c202a030bd3444b63b93511fd80deece
+      internalID: 5710148382362484072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_38
+      rect:
+        serializedVersion: 2
+        x: 1634
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78971bd080a864ba4bd1708669861581
+      internalID: -4880099455414089613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_39
+      rect:
+        serializedVersion: 2
+        x: 1677
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dfff2f17acc74c199999d1cceebb23d
+      internalID: 5382630931894322205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_40
+      rect:
+        serializedVersion: 2
+        x: 1720
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ac2d2a3cefd548f681d8340c1a65aa2
+      internalID: -3790699659879417056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_41
+      rect:
+        serializedVersion: 2
+        x: 1763
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d29540c9c7e734f0aac959913a39a971
+      internalID: 8790594111718008607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_42
+      rect:
+        serializedVersion: 2
+        x: 1806
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a2ebf17c1f1542e1a0727514881d111
+      internalID: -6180798939783513248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_43
+      rect:
+        serializedVersion: 2
+        x: 1849
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a543be4063b854a48ae6a75dac16bc17
+      internalID: 8319415441077190784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_44
+      rect:
+        serializedVersion: 2
+        x: 1892
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe46e656500414678b282d827d118630
+      internalID: 6568199435896180427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_45
+      rect:
+        serializedVersion: 2
+        x: 1935
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96dcf87976c474009853117e47a0a8c9
+      internalID: -8636339980778925733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_46
+      rect:
+        serializedVersion: 2
+        x: 1978
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57502f0cc667f4c22bf38f7b634b7484
+      internalID: -5599941307411065432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_47
+      rect:
+        serializedVersion: 2
+        x: 2021
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de23480575d454a3bb523decd5b1e1fa
+      internalID: 4058245771728441739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_48
+      rect:
+        serializedVersion: 2
+        x: 2064
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a7b33f49f4694f888fcbaec4e660d6e
+      internalID: -7610417064712859864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_49
+      rect:
+        serializedVersion: 2
+        x: 2107
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf170b1b684b4ea0bd279d337a9c508
+      internalID: -2752506685360675557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_50
+      rect:
+        serializedVersion: 2
+        x: 2150
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 024c10a45d15b4b3eb0054e352ab2a27
+      internalID: -6434390301023234825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_51
+      rect:
+        serializedVersion: 2
+        x: 2193
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0561123a73b6473c8f6328d8f94757f
+      internalID: 189463561887581268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_52
+      rect:
+        serializedVersion: 2
+        x: 2236
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b7b6b91d41bb4d7cb91668ac1b112ce
+      internalID: 2279999253346998106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_53
+      rect:
+        serializedVersion: 2
+        x: 2279
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49e22731b63ef46f080d9d1edc9f1aa3
+      internalID: -2831087675238194013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_54
+      rect:
+        serializedVersion: 2
+        x: 2322
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 066604c6cad1b4d47b51b63cb1b9e5d0
+      internalID: 6374336013891568099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_55
+      rect:
+        serializedVersion: 2
+        x: 2365
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80e421d32e0f641029cf77adb285df8f
+      internalID: -69640151235107826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_56
+      rect:
+        serializedVersion: 2
+        x: 2408
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2850f37079724a00886b0451195c4d5
+      internalID: 7504295723396673310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_57
+      rect:
+        serializedVersion: 2
+        x: 2451
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba800a615267941c995ef1ac1f5fbddc
+      internalID: 1413130439897019995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_58
+      rect:
+        serializedVersion: 2
+        x: 2494
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b48773aa4d334fcfa776c4d4df5267a
+      internalID: 9056173798877924540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_59
+      rect:
+        serializedVersion: 2
+        x: 2537
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246bbb8b7e1b843aaaede441671a5a0f
+      internalID: 7223612999113717013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_60
+      rect:
+        serializedVersion: 2
+        x: 2580
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6caeb5952a244f2e906e061589b8203
+      internalID: 5285228115538995325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_61
+      rect:
+        serializedVersion: 2
+        x: 2623
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fb0af548a80e456da867dae8f64dfab
+      internalID: -9148529452506959435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_62
+      rect:
+        serializedVersion: 2
+        x: 2666
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d36eb134420a4ad69f32e373c3aab91
+      internalID: -3802232740751509209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_63
+      rect:
+        serializedVersion: 2
+        x: 2709
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80fddcedb10cd4982b5b8b3dd03f0429
+      internalID: 5502001556409130381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_64
+      rect:
+        serializedVersion: 2
+        x: 2752
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 766f2b02a44374c8187f2a62a47b9fd1
+      internalID: 3398833230792443163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_65
+      rect:
+        serializedVersion: 2
+        x: 2795
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5159693402f614d90b3aae00c9f84526
+      internalID: -1079869724541073521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_66
+      rect:
+        serializedVersion: 2
+        x: 2838
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98735d0f500bf405b8017703d5d8ebd1
+      internalID: -8846832207304863112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_67
+      rect:
+        serializedVersion: 2
+        x: 2881
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8277ade53a1d417b896a4356cc8cc82
+      internalID: 6232340675100446884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_68
+      rect:
+        serializedVersion: 2
+        x: 2924
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8b48b844cc0e457485c88f5986922b3
+      internalID: 5804918898975848618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_69
+      rect:
+        serializedVersion: 2
+        x: 2967
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efc320a9d6a1c4ba19c11f524956db0f
+      internalID: -3257699215293287273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_70
+      rect:
+        serializedVersion: 2
+        x: 3010
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fac09b8a037bf484a8a8a5ecfae5cea2
+      internalID: -4134604813627688129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_cathedral_glow0_71
+      rect:
+        serializedVersion: 2
+        x: 3053
+        y: 0
+        width: 43
+        height: 47
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9974b83d60efb44cdb19d7ea2ad2ca43
+      internalID: 2529642654647276995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 827cffa0802cb4b0589a2591583a72d6
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bgsec_cathedral_glow0_0: 3993918200751361031
+      bgsec_cathedral_glow0_1: -4746095921308481807
+      bgsec_cathedral_glow0_10: 6400059251614293190
+      bgsec_cathedral_glow0_11: 5525162163813825410
+      bgsec_cathedral_glow0_12: 9141541175700236542
+      bgsec_cathedral_glow0_13: -681113632365034945
+      bgsec_cathedral_glow0_14: -8196573534515597646
+      bgsec_cathedral_glow0_15: 4550949394658149175
+      bgsec_cathedral_glow0_16: -3845561721943658795
+      bgsec_cathedral_glow0_17: -6833621545225867044
+      bgsec_cathedral_glow0_18: 2534715961673235660
+      bgsec_cathedral_glow0_19: 8315830863297511985
+      bgsec_cathedral_glow0_2: -4286569789210724144
+      bgsec_cathedral_glow0_20: -2927251234309459302
+      bgsec_cathedral_glow0_21: 5876721592195158074
+      bgsec_cathedral_glow0_22: -4215628487991296428
+      bgsec_cathedral_glow0_23: 1193050416029047979
+      bgsec_cathedral_glow0_24: 5148846737286056494
+      bgsec_cathedral_glow0_25: -1698753389740155171
+      bgsec_cathedral_glow0_26: 6127065657917104861
+      bgsec_cathedral_glow0_27: 49820935355339258
+      bgsec_cathedral_glow0_28: -4257578056384266625
+      bgsec_cathedral_glow0_29: -7352141771648658791
+      bgsec_cathedral_glow0_3: 6897569545673821410
+      bgsec_cathedral_glow0_30: 3448325771082513360
+      bgsec_cathedral_glow0_31: -8167639753362720240
+      bgsec_cathedral_glow0_32: -943116088751641559
+      bgsec_cathedral_glow0_33: -8588001617567100137
+      bgsec_cathedral_glow0_34: 1856929665508334485
+      bgsec_cathedral_glow0_35: 1199987301820046938
+      bgsec_cathedral_glow0_36: -937375228579974622
+      bgsec_cathedral_glow0_37: 5710148382362484072
+      bgsec_cathedral_glow0_38: -4880099455414089613
+      bgsec_cathedral_glow0_39: 5382630931894322205
+      bgsec_cathedral_glow0_4: 1550281920877432476
+      bgsec_cathedral_glow0_40: -3790699659879417056
+      bgsec_cathedral_glow0_41: 8790594111718008607
+      bgsec_cathedral_glow0_42: -6180798939783513248
+      bgsec_cathedral_glow0_43: 8319415441077190784
+      bgsec_cathedral_glow0_44: 6568199435896180427
+      bgsec_cathedral_glow0_45: -8636339980778925733
+      bgsec_cathedral_glow0_46: -5599941307411065432
+      bgsec_cathedral_glow0_47: 4058245771728441739
+      bgsec_cathedral_glow0_48: -7610417064712859864
+      bgsec_cathedral_glow0_49: -2752506685360675557
+      bgsec_cathedral_glow0_5: -5399870059398998779
+      bgsec_cathedral_glow0_50: -6434390301023234825
+      bgsec_cathedral_glow0_51: 189463561887581268
+      bgsec_cathedral_glow0_52: 2279999253346998106
+      bgsec_cathedral_glow0_53: -2831087675238194013
+      bgsec_cathedral_glow0_54: 6374336013891568099
+      bgsec_cathedral_glow0_55: -69640151235107826
+      bgsec_cathedral_glow0_56: 7504295723396673310
+      bgsec_cathedral_glow0_57: 1413130439897019995
+      bgsec_cathedral_glow0_58: 9056173798877924540
+      bgsec_cathedral_glow0_59: 7223612999113717013
+      bgsec_cathedral_glow0_6: 3460436803941275737
+      bgsec_cathedral_glow0_60: 5285228115538995325
+      bgsec_cathedral_glow0_61: -9148529452506959435
+      bgsec_cathedral_glow0_62: -3802232740751509209
+      bgsec_cathedral_glow0_63: 5502001556409130381
+      bgsec_cathedral_glow0_64: 3398833230792443163
+      bgsec_cathedral_glow0_65: -1079869724541073521
+      bgsec_cathedral_glow0_66: -8846832207304863112
+      bgsec_cathedral_glow0_67: 6232340675100446884
+      bgsec_cathedral_glow0_68: 5804918898975848618
+      bgsec_cathedral_glow0_69: -3257699215293287273
+      bgsec_cathedral_glow0_7: -2312394134407573541
+      bgsec_cathedral_glow0_70: -4134604813627688129
+      bgsec_cathedral_glow0_71: 2529642654647276995
+      bgsec_cathedral_glow0_8: 7302623652247003975
+      bgsec_cathedral_glow0_9: 6645955493023392491
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

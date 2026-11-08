@@ -1,0 +1,2004 @@
+fileFormatVersion: 2
+guid: 2352eeb7a9a544c9db1785e3128fed9b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6334970168268767719
+    second: bgsec_guildhall_pendulum0_0
+  - first:
+      213: -6886382634820627787
+    second: bgsec_guildhall_pendulum0_1
+  - first:
+      213: -1294572120578907150
+    second: bgsec_guildhall_pendulum0_2
+  - first:
+      213: -8890605480350572062
+    second: bgsec_guildhall_pendulum0_3
+  - first:
+      213: 4905974889046018546
+    second: bgsec_guildhall_pendulum0_4
+  - first:
+      213: -34700948089671504
+    second: bgsec_guildhall_pendulum0_5
+  - first:
+      213: 7995436068661021932
+    second: bgsec_guildhall_pendulum0_6
+  - first:
+      213: 1785896039378252844
+    second: bgsec_guildhall_pendulum0_7
+  - first:
+      213: 3785940489024422376
+    second: bgsec_guildhall_pendulum0_8
+  - first:
+      213: 4715759079269694837
+    second: bgsec_guildhall_pendulum0_9
+  - first:
+      213: -9046400123874540437
+    second: bgsec_guildhall_pendulum0_10
+  - first:
+      213: 2005903906276018620
+    second: bgsec_guildhall_pendulum0_11
+  - first:
+      213: -5536745882104894952
+    second: bgsec_guildhall_pendulum0_12
+  - first:
+      213: -3482155324525809821
+    second: bgsec_guildhall_pendulum0_13
+  - first:
+      213: 7476313221968414529
+    second: bgsec_guildhall_pendulum0_14
+  - first:
+      213: 6458146075703448598
+    second: bgsec_guildhall_pendulum0_15
+  - first:
+      213: 2157386884200080813
+    second: bgsec_guildhall_pendulum0_16
+  - first:
+      213: -2296837959615218597
+    second: bgsec_guildhall_pendulum0_17
+  - first:
+      213: 1725035342499613014
+    second: bgsec_guildhall_pendulum0_18
+  - first:
+      213: -6833337194549028460
+    second: bgsec_guildhall_pendulum0_19
+  - first:
+      213: -2885966810519807907
+    second: bgsec_guildhall_pendulum0_20
+  - first:
+      213: 8263436173059067683
+    second: bgsec_guildhall_pendulum0_21
+  - first:
+      213: -8501406151870773344
+    second: bgsec_guildhall_pendulum0_22
+  - first:
+      213: -5452318728956321217
+    second: bgsec_guildhall_pendulum0_23
+  - first:
+      213: 8657513774632601532
+    second: bgsec_guildhall_pendulum0_24
+  - first:
+      213: 3401836577507419067
+    second: bgsec_guildhall_pendulum0_25
+  - first:
+      213: -5500134259019234208
+    second: bgsec_guildhall_pendulum0_26
+  - first:
+      213: -2664348254826632009
+    second: bgsec_guildhall_pendulum0_27
+  - first:
+      213: 4549443507077122495
+    second: bgsec_guildhall_pendulum0_28
+  - first:
+      213: 5295931904299780523
+    second: bgsec_guildhall_pendulum0_29
+  - first:
+      213: 7141202949712609608
+    second: bgsec_guildhall_pendulum0_30
+  - first:
+      213: -3339845540884377226
+    second: bgsec_guildhall_pendulum0_31
+  - first:
+      213: -7015908871375521356
+    second: bgsec_guildhall_pendulum0_32
+  - first:
+      213: 4590603394818539451
+    second: bgsec_guildhall_pendulum0_33
+  - first:
+      213: 5346020360959040771
+    second: bgsec_guildhall_pendulum0_34
+  - first:
+      213: -5141305773026390994
+    second: bgsec_guildhall_pendulum0_35
+  - first:
+      213: 5273509277359521437
+    second: bgsec_guildhall_pendulum0_36
+  - first:
+      213: -312302565587037026
+    second: bgsec_guildhall_pendulum0_37
+  - first:
+      213: -576181476864694540
+    second: bgsec_guildhall_pendulum0_38
+  - first:
+      213: -4902476578319663255
+    second: bgsec_guildhall_pendulum0_39
+  - first:
+      213: -6573648642981338559
+    second: bgsec_guildhall_pendulum0_40
+  - first:
+      213: 2125027750298752629
+    second: bgsec_guildhall_pendulum0_41
+  - first:
+      213: -6856909168643447434
+    second: bgsec_guildhall_pendulum0_42
+  - first:
+      213: -1614457204455525966
+    second: bgsec_guildhall_pendulum0_43
+  - first:
+      213: 3833902831414508344
+    second: bgsec_guildhall_pendulum0_44
+  - first:
+      213: -839688698578045538
+    second: bgsec_guildhall_pendulum0_45
+  - first:
+      213: 8461239870060321040
+    second: bgsec_guildhall_pendulum0_46
+  - first:
+      213: -2423811352151928413
+    second: bgsec_guildhall_pendulum0_47
+  - first:
+      213: 8302948271774674339
+    second: bgsec_guildhall_pendulum0_48
+  - first:
+      213: 8925336065758622612
+    second: bgsec_guildhall_pendulum0_49
+  - first:
+      213: -6294342947964510977
+    second: bgsec_guildhall_pendulum0_50
+  - first:
+      213: 4655253467292578778
+    second: bgsec_guildhall_pendulum0_51
+  - first:
+      213: -1030670246812442724
+    second: bgsec_guildhall_pendulum0_52
+  - first:
+      213: 9024153987949580708
+    second: bgsec_guildhall_pendulum0_53
+  - first:
+      213: 5746427262742417623
+    second: bgsec_guildhall_pendulum0_54
+  - first:
+      213: -3071061493939435596
+    second: bgsec_guildhall_pendulum0_55
+  - first:
+      213: 5982212947698198866
+    second: bgsec_guildhall_pendulum0_56
+  - first:
+      213: -7502050841011688145
+    second: bgsec_guildhall_pendulum0_57
+  - first:
+      213: 2076045311762349825
+    second: bgsec_guildhall_pendulum0_58
+  - first:
+      213: -6955036185929852270
+    second: bgsec_guildhall_pendulum0_59
+  - first:
+      213: -7138945894456783529
+    second: bgsec_guildhall_pendulum0_60
+  - first:
+      213: 498743006475585775
+    second: bgsec_guildhall_pendulum0_61
+  - first:
+      213: -3138153420968046895
+    second: bgsec_guildhall_pendulum0_62
+  - first:
+      213: -4466894693193621153
+    second: bgsec_guildhall_pendulum0_63
+  - first:
+      213: 1243390364431380903
+    second: bgsec_guildhall_pendulum0_64
+  - first:
+      213: 5863735935287431081
+    second: bgsec_guildhall_pendulum0_65
+  - first:
+      213: 4949672603707935754
+    second: bgsec_guildhall_pendulum0_66
+  - first:
+      213: 6734571354515211545
+    second: bgsec_guildhall_pendulum0_67
+  - first:
+      213: -3489821033725685691
+    second: bgsec_guildhall_pendulum0_68
+  - first:
+      213: 6977618010571575802
+    second: bgsec_guildhall_pendulum0_69
+  - first:
+      213: -5450230068899061238
+    second: bgsec_guildhall_pendulum0_70
+  - first:
+      213: 2369587831163938331
+    second: bgsec_guildhall_pendulum0_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c449f05497b52421fa220ca5972c08cc
+      internalID: 6334970168268767719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54106e0166ad14a098ccf1f0206a3e67
+      internalID: -6886382634820627787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdccdd78c7ebd4d768d830bda4bfa9e8
+      internalID: -1294572120578907150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_3
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d7bc1d5bddd14061ab4d87c074dd5a4
+      internalID: -8890605480350572062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_4
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e150454ecc1ea4807b1f0397cb48d467
+      internalID: 4905974889046018546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1b2684cba29643f9a26413f9a9be0b5
+      internalID: -34700948089671504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_6
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed30b4d2d128f4a3a80f496e286048f2
+      internalID: 7995436068661021932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_7
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e7f813ad35fb451fb23eff294488698
+      internalID: 1785896039378252844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_8
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66dfc1cd05c7d44a9ae6747b327ad0fe
+      internalID: 3785940489024422376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_9
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdcbb3ba73bd9456cb303fddd8711106
+      internalID: 4715759079269694837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_10
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9cbf5f6900947079f86b9be7df0259
+      internalID: -9046400123874540437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_11
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 343a25f88a2f84cc68169e1303d74eb8
+      internalID: 2005903906276018620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_12
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 480aff8556da243dca7e8e0e1115b131
+      internalID: -5536745882104894952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_13
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b01fa9ebba44bd1b51f394e42ffbeb
+      internalID: -3482155324525809821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_14
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e9ca6e84c7842a5877da45fe4f60b4
+      internalID: 7476313221968414529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_15
+      rect:
+        serializedVersion: 2
+        x: 600
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0ce688212d044e9390ec00cd55b9e12
+      internalID: 6458146075703448598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_16
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1dad308a208044ed9b25bd6f58787da
+      internalID: 2157386884200080813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_17
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 923df2728de80420e85f5be87c07a314
+      internalID: -2296837959615218597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_18
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 229361177f4604316bb0112f41504ba3
+      internalID: 1725035342499613014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_19
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db03ab355776549efbc0584a4645f34f
+      internalID: -6833337194549028460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_20
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d07e81ace6e4a4e7780c5e67e946ddae
+      internalID: -2885966810519807907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_21
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a8647fe814be4d54b526678e308023f
+      internalID: 8263436173059067683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_22
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbe5bc76db49e4796a99972571d05d00
+      internalID: -8501406151870773344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_23
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e685e4ce5ccf4fb8b1be8724eeca9a7
+      internalID: -5452318728956321217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_24
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6990f61a9d8f9405580f60890a548257
+      internalID: 8657513774632601532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_25
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5512a018f1db94adb8e171ebed72490c
+      internalID: 3401836577507419067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_26
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc4a0f6bff7474cf3a60d07bb7e1f05f
+      internalID: -5500134259019234208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_27
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ada2d710dd274bd8a3b95749cc6537f
+      internalID: -2664348254826632009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_28
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 092b5a526c851471ca1d64057707d5cf
+      internalID: 4549443507077122495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_29
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3449ca13c336446a084cb3714787787a
+      internalID: 5295931904299780523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_30
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26de59f23468c4c80b1f1833c9916ed5
+      internalID: 7141202949712609608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_31
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e668ed74605e14c8181af3129d5e6de5
+      internalID: -3339845540884377226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_32
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2366713115f7741c280618c7d8e8d288
+      internalID: -7015908871375521356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_33
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3708b9f5ce62f4284ac5e45c61a13c4e
+      internalID: 4590603394818539451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_34
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60116d499db1147e38d7be40f114a4ca
+      internalID: 5346020360959040771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_35
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74c7209f426d34b2bba611d454e393f2
+      internalID: -5141305773026390994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_36
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac347bf3f086f4d17b2b9cafafb6f208
+      internalID: 5273509277359521437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_37
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57cd37daccf114e79b8ea5d34c439b9a
+      internalID: -312302565587037026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_38
+      rect:
+        serializedVersion: 2
+        x: 1520
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e91c16b383654803b8bf79c3bc88815
+      internalID: -576181476864694540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_39
+      rect:
+        serializedVersion: 2
+        x: 1560
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15fb899f8b3424ac1b94a038f6fa6011
+      internalID: -4902476578319663255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_40
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7002f95e87b0840b7917c2906f6be171
+      internalID: -6573648642981338559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_41
+      rect:
+        serializedVersion: 2
+        x: 1640
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4e4c65597cf047f89a8ea9b495327d2
+      internalID: 2125027750298752629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_42
+      rect:
+        serializedVersion: 2
+        x: 1680
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07bb1b04cbb7744f6bafeab7844b4be5
+      internalID: -6856909168643447434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_43
+      rect:
+        serializedVersion: 2
+        x: 1720
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6f03ff95ac9541e9bf2c68140fb4733
+      internalID: -1614457204455525966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_44
+      rect:
+        serializedVersion: 2
+        x: 1760
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43191a5ecf0ae48f7a4e2051d9fb7026
+      internalID: 3833902831414508344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_45
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1783bc1cb3754f53a4f62f1a028e753
+      internalID: -839688698578045538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_46
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8bcc9aea6975424bb5f81c37075b143
+      internalID: 8461239870060321040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_47
+      rect:
+        serializedVersion: 2
+        x: 1880
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 693d5fdfc571d4791a838a65d5d7966f
+      internalID: -2423811352151928413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_48
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb038967a5258442c86a6683a44089a2
+      internalID: 8302948271774674339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_49
+      rect:
+        serializedVersion: 2
+        x: 1960
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78c066e9764f249e5bee608d7da75e73
+      internalID: 8925336065758622612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_50
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4755bcc8574a3434cacb8a18f7064150
+      internalID: -6294342947964510977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_51
+      rect:
+        serializedVersion: 2
+        x: 2040
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbef122c631cb4f5785d17b7a7b3db28
+      internalID: 4655253467292578778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_52
+      rect:
+        serializedVersion: 2
+        x: 2080
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fb307401d614bf28af9e5f3ed927fd
+      internalID: -1030670246812442724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_53
+      rect:
+        serializedVersion: 2
+        x: 2120
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc4828b0112414abc9cba6bc6de5bf9c
+      internalID: 9024153987949580708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_54
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a3f640671f184a0dba8770b018713f2
+      internalID: 5746427262742417623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_55
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8239db18ed494014b498b8ac1242701
+      internalID: -3071061493939435596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_56
+      rect:
+        serializedVersion: 2
+        x: 2240
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f9761780d45d44b6abd145c663207d6
+      internalID: 5982212947698198866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_57
+      rect:
+        serializedVersion: 2
+        x: 2280
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69e53b3750bb84bb19f651cccf8fb19e
+      internalID: -7502050841011688145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_58
+      rect:
+        serializedVersion: 2
+        x: 2320
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01357f315e29d46f3aafb015350d5f46
+      internalID: 2076045311762349825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_59
+      rect:
+        serializedVersion: 2
+        x: 2360
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fcd9f0e288acd4c729831eea4e83198e
+      internalID: -6955036185929852270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_60
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6a933c270cdd441eb13224c7f1e9406
+      internalID: -7138945894456783529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_61
+      rect:
+        serializedVersion: 2
+        x: 2440
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fd115197704f41a6a4770909a1ed9c3
+      internalID: 498743006475585775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_62
+      rect:
+        serializedVersion: 2
+        x: 2480
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b71a7b060d934c8ab3f3a7fd0abf33e
+      internalID: -3138153420968046895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_63
+      rect:
+        serializedVersion: 2
+        x: 2520
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 186fc258ccdc5419eb939bae989c1925
+      internalID: -4466894693193621153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_64
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec95088e285ea4636a9d1e72472b3288
+      internalID: 1243390364431380903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_65
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bbcc0623bd4542b5914ed21c30098e4
+      internalID: 5863735935287431081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_66
+      rect:
+        serializedVersion: 2
+        x: 2640
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6120e13e04aa4bac888e4e4fbb11e3e
+      internalID: 4949672603707935754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_67
+      rect:
+        serializedVersion: 2
+        x: 2680
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd13fa0d9dc954e829498c48b52ac523
+      internalID: 6734571354515211545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_68
+      rect:
+        serializedVersion: 2
+        x: 2720
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25f69442d970c468e8182dd5e6114d77
+      internalID: -3489821033725685691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_69
+      rect:
+        serializedVersion: 2
+        x: 2760
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d94faa72b48c4738a284fb04c79dac3
+      internalID: 6977618010571575802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_70
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f1e4b550779d447fa1e6d45af997ae8
+      internalID: -5450230068899061238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_guildhall_pendulum0_71
+      rect:
+        serializedVersion: 2
+        x: 2840
+        y: 0
+        width: 40
+        height: 80
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc6454e690dee42e0b229af23cb69f36
+      internalID: 2369587831163938331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 8d0ab6d9041334640b2d4e8a5759c590
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bgsec_guildhall_pendulum0_0: 6334970168268767719
+      bgsec_guildhall_pendulum0_1: -6886382634820627787
+      bgsec_guildhall_pendulum0_10: -9046400123874540437
+      bgsec_guildhall_pendulum0_11: 2005903906276018620
+      bgsec_guildhall_pendulum0_12: -5536745882104894952
+      bgsec_guildhall_pendulum0_13: -3482155324525809821
+      bgsec_guildhall_pendulum0_14: 7476313221968414529
+      bgsec_guildhall_pendulum0_15: 6458146075703448598
+      bgsec_guildhall_pendulum0_16: 2157386884200080813
+      bgsec_guildhall_pendulum0_17: -2296837959615218597
+      bgsec_guildhall_pendulum0_18: 1725035342499613014
+      bgsec_guildhall_pendulum0_19: -6833337194549028460
+      bgsec_guildhall_pendulum0_2: -1294572120578907150
+      bgsec_guildhall_pendulum0_20: -2885966810519807907
+      bgsec_guildhall_pendulum0_21: 8263436173059067683
+      bgsec_guildhall_pendulum0_22: -8501406151870773344
+      bgsec_guildhall_pendulum0_23: -5452318728956321217
+      bgsec_guildhall_pendulum0_24: 8657513774632601532
+      bgsec_guildhall_pendulum0_25: 3401836577507419067
+      bgsec_guildhall_pendulum0_26: -5500134259019234208
+      bgsec_guildhall_pendulum0_27: -2664348254826632009
+      bgsec_guildhall_pendulum0_28: 4549443507077122495
+      bgsec_guildhall_pendulum0_29: 5295931904299780523
+      bgsec_guildhall_pendulum0_3: -8890605480350572062
+      bgsec_guildhall_pendulum0_30: 7141202949712609608
+      bgsec_guildhall_pendulum0_31: -3339845540884377226
+      bgsec_guildhall_pendulum0_32: -7015908871375521356
+      bgsec_guildhall_pendulum0_33: 4590603394818539451
+      bgsec_guildhall_pendulum0_34: 5346020360959040771
+      bgsec_guildhall_pendulum0_35: -5141305773026390994
+      bgsec_guildhall_pendulum0_36: 5273509277359521437
+      bgsec_guildhall_pendulum0_37: -312302565587037026
+      bgsec_guildhall_pendulum0_38: -576181476864694540
+      bgsec_guildhall_pendulum0_39: -4902476578319663255
+      bgsec_guildhall_pendulum0_4: 4905974889046018546
+      bgsec_guildhall_pendulum0_40: -6573648642981338559
+      bgsec_guildhall_pendulum0_41: 2125027750298752629
+      bgsec_guildhall_pendulum0_42: -6856909168643447434
+      bgsec_guildhall_pendulum0_43: -1614457204455525966
+      bgsec_guildhall_pendulum0_44: 3833902831414508344
+      bgsec_guildhall_pendulum0_45: -839688698578045538
+      bgsec_guildhall_pendulum0_46: 8461239870060321040
+      bgsec_guildhall_pendulum0_47: -2423811352151928413
+      bgsec_guildhall_pendulum0_48: 8302948271774674339
+      bgsec_guildhall_pendulum0_49: 8925336065758622612
+      bgsec_guildhall_pendulum0_5: -34700948089671504
+      bgsec_guildhall_pendulum0_50: -6294342947964510977
+      bgsec_guildhall_pendulum0_51: 4655253467292578778
+      bgsec_guildhall_pendulum0_52: -1030670246812442724
+      bgsec_guildhall_pendulum0_53: 9024153987949580708
+      bgsec_guildhall_pendulum0_54: 5746427262742417623
+      bgsec_guildhall_pendulum0_55: -3071061493939435596
+      bgsec_guildhall_pendulum0_56: 5982212947698198866
+      bgsec_guildhall_pendulum0_57: -7502050841011688145
+      bgsec_guildhall_pendulum0_58: 2076045311762349825
+      bgsec_guildhall_pendulum0_59: -6955036185929852270
+      bgsec_guildhall_pendulum0_6: 7995436068661021932
+      bgsec_guildhall_pendulum0_60: -7138945894456783529
+      bgsec_guildhall_pendulum0_61: 498743006475585775
+      bgsec_guildhall_pendulum0_62: -3138153420968046895
+      bgsec_guildhall_pendulum0_63: -4466894693193621153
+      bgsec_guildhall_pendulum0_64: 1243390364431380903
+      bgsec_guildhall_pendulum0_65: 5863735935287431081
+      bgsec_guildhall_pendulum0_66: 4949672603707935754
+      bgsec_guildhall_pendulum0_67: 6734571354515211545
+      bgsec_guildhall_pendulum0_68: -3489821033725685691
+      bgsec_guildhall_pendulum0_69: 6977618010571575802
+      bgsec_guildhall_pendulum0_7: 1785896039378252844
+      bgsec_guildhall_pendulum0_70: -5450230068899061238
+      bgsec_guildhall_pendulum0_71: 2369587831163938331
+      bgsec_guildhall_pendulum0_8: 3785940489024422376
+      bgsec_guildhall_pendulum0_9: 4715759079269694837
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

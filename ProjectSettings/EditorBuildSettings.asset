@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainLevel.unity
     guid: 7fc103b6235a8482b909045aeddeedb7
   - enabled: 0
+    path: Assets/Scenes/ObstacleLab.unity
+    guid: cc29a2eaa97194fec8f651c67a7b6b16
+  - enabled: 0
     path: Assets/Scenes/Level1_Clockworks.unity
     guid: 006cc3a7481f3434ca7f4396e0b7a6f5
   - enabled: 0

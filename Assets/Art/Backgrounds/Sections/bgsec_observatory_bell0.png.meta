@@ -1,0 +1,2004 @@
+fileFormatVersion: 2
+guid: a1bc8d9f838104a35b37d758f44d56b3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 400095208636063599
+    second: bgsec_observatory_bell0_0
+  - first:
+      213: 8869651160817654306
+    second: bgsec_observatory_bell0_1
+  - first:
+      213: 7618988730595143954
+    second: bgsec_observatory_bell0_2
+  - first:
+      213: -7680914244658052932
+    second: bgsec_observatory_bell0_3
+  - first:
+      213: 5846477173091871000
+    second: bgsec_observatory_bell0_4
+  - first:
+      213: -8223656459091197247
+    second: bgsec_observatory_bell0_5
+  - first:
+      213: -1785877135140805126
+    second: bgsec_observatory_bell0_6
+  - first:
+      213: -3151596259383782871
+    second: bgsec_observatory_bell0_7
+  - first:
+      213: -738479193108816790
+    second: bgsec_observatory_bell0_8
+  - first:
+      213: -3851003459872898004
+    second: bgsec_observatory_bell0_9
+  - first:
+      213: 7530210678797033241
+    second: bgsec_observatory_bell0_10
+  - first:
+      213: 2169096169467914048
+    second: bgsec_observatory_bell0_11
+  - first:
+      213: 2854304250074428627
+    second: bgsec_observatory_bell0_12
+  - first:
+      213: 3342529345216702316
+    second: bgsec_observatory_bell0_13
+  - first:
+      213: -9029005086930986470
+    second: bgsec_observatory_bell0_14
+  - first:
+      213: 4824511470830160422
+    second: bgsec_observatory_bell0_15
+  - first:
+      213: 5030166843235611899
+    second: bgsec_observatory_bell0_16
+  - first:
+      213: -4039722746444434741
+    second: bgsec_observatory_bell0_17
+  - first:
+      213: -660591892320518157
+    second: bgsec_observatory_bell0_18
+  - first:
+      213: -1843832187417560067
+    second: bgsec_observatory_bell0_19
+  - first:
+      213: -8358454511410696447
+    second: bgsec_observatory_bell0_20
+  - first:
+      213: 1007364977445441524
+    second: bgsec_observatory_bell0_21
+  - first:
+      213: -5296021509259334348
+    second: bgsec_observatory_bell0_22
+  - first:
+      213: -4263112607976073259
+    second: bgsec_observatory_bell0_23
+  - first:
+      213: -5128154086171475315
+    second: bgsec_observatory_bell0_24
+  - first:
+      213: -8079201154225708112
+    second: bgsec_observatory_bell0_25
+  - first:
+      213: -7132145417097526487
+    second: bgsec_observatory_bell0_26
+  - first:
+      213: 8511294751004394215
+    second: bgsec_observatory_bell0_27
+  - first:
+      213: -2641178188481350512
+    second: bgsec_observatory_bell0_28
+  - first:
+      213: 2857679008832058530
+    second: bgsec_observatory_bell0_29
+  - first:
+      213: -491546504329571721
+    second: bgsec_observatory_bell0_30
+  - first:
+      213: 962579564875451704
+    second: bgsec_observatory_bell0_31
+  - first:
+      213: 4059957062731103399
+    second: bgsec_observatory_bell0_32
+  - first:
+      213: -4754728744319947640
+    second: bgsec_observatory_bell0_33
+  - first:
+      213: 7917218877579712722
+    second: bgsec_observatory_bell0_34
+  - first:
+      213: -8500810006514464058
+    second: bgsec_observatory_bell0_35
+  - first:
+      213: -1991456245763531499
+    second: bgsec_observatory_bell0_36
+  - first:
+      213: -1260870186683747574
+    second: bgsec_observatory_bell0_37
+  - first:
+      213: -120689980619828496
+    second: bgsec_observatory_bell0_38
+  - first:
+      213: -4221386251736439220
+    second: bgsec_observatory_bell0_39
+  - first:
+      213: 2474494307466059516
+    second: bgsec_observatory_bell0_40
+  - first:
+      213: -156727488628700457
+    second: bgsec_observatory_bell0_41
+  - first:
+      213: -5900268937736072039
+    second: bgsec_observatory_bell0_42
+  - first:
+      213: 1580597549543149222
+    second: bgsec_observatory_bell0_43
+  - first:
+      213: 7402096788622778247
+    second: bgsec_observatory_bell0_44
+  - first:
+      213: 4968829899865451468
+    second: bgsec_observatory_bell0_45
+  - first:
+      213: -7947930776002973544
+    second: bgsec_observatory_bell0_46
+  - first:
+      213: -6132891615991135792
+    second: bgsec_observatory_bell0_47
+  - first:
+      213: -7446228692668561070
+    second: bgsec_observatory_bell0_48
+  - first:
+      213: 6151792536111516334
+    second: bgsec_observatory_bell0_49
+  - first:
+      213: 6394199297372306439
+    second: bgsec_observatory_bell0_50
+  - first:
+      213: 7716134921450583473
+    second: bgsec_observatory_bell0_51
+  - first:
+      213: 8783522282894677784
+    second: bgsec_observatory_bell0_52
+  - first:
+      213: 369598171753497929
+    second: bgsec_observatory_bell0_53
+  - first:
+      213: -1917341297717915780
+    second: bgsec_observatory_bell0_54
+  - first:
+      213: -7592298087979072344
+    second: bgsec_observatory_bell0_55
+  - first:
+      213: 4001018174014720970
+    second: bgsec_observatory_bell0_56
+  - first:
+      213: 7718279537712021999
+    second: bgsec_observatory_bell0_57
+  - first:
+      213: 2535570806173587657
+    second: bgsec_observatory_bell0_58
+  - first:
+      213: 9159691663871716644
+    second: bgsec_observatory_bell0_59
+  - first:
+      213: -4583060675296593772
+    second: bgsec_observatory_bell0_60
+  - first:
+      213: 7430763848067116189
+    second: bgsec_observatory_bell0_61
+  - first:
+      213: 5136171210362537734
+    second: bgsec_observatory_bell0_62
+  - first:
+      213: -690575001675478522
+    second: bgsec_observatory_bell0_63
+  - first:
+      213: -8748241037640828668
+    second: bgsec_observatory_bell0_64
+  - first:
+      213: -3492675228534604009
+    second: bgsec_observatory_bell0_65
+  - first:
+      213: -5157727052748591486
+    second: bgsec_observatory_bell0_66
+  - first:
+      213: 5299706836702528409
+    second: bgsec_observatory_bell0_67
+  - first:
+      213: 5770288011000672516
+    second: bgsec_observatory_bell0_68
+  - first:
+      213: -5616702807492709999
+    second: bgsec_observatory_bell0_69
+  - first:
+      213: -6076697267923545245
+    second: bgsec_observatory_bell0_70
+  - first:
+      213: 263283626184457307
+    second: bgsec_observatory_bell0_71
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 021a5bf9b1ecd45ba96221e731385615
+      internalID: 400095208636063599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_1
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c5b0655f84c74ccc9e0bb696f593040
+      internalID: 8869651160817654306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4d0f373e55d843d2a7dee0ce1ef8131
+      internalID: 7618988730595143954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_3
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98b45705df7e0428aa8eb67a56931173
+      internalID: -7680914244658052932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_4
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a55443c21cfc427f81ccab64517bd31
+      internalID: 5846477173091871000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_5
+      rect:
+        serializedVersion: 2
+        x: 105
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39fb960d85f3140c6859c79192e5c9b3
+      internalID: -8223656459091197247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_6
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5baaee60596ef4957b5c8157318772a3
+      internalID: -1785877135140805126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_7
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77f4cfcd2af7640b098404980a3288f3
+      internalID: -3151596259383782871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_8
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12044c4ddbb7c4d44ae0867b171cefad
+      internalID: -738479193108816790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_9
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8c22f319d4cb4a94856bb77ddb3d70b
+      internalID: -3851003459872898004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_10
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f99cc5b1921e47af95d1e8296ca7712
+      internalID: 7530210678797033241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_11
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d3ae15ab4f774926bba680034a3e416
+      internalID: 2169096169467914048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_12
+      rect:
+        serializedVersion: 2
+        x: 252
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e648f8ad3455d45d68278a61301911b9
+      internalID: 2854304250074428627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_13
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f154bfca6cb7948d5864ad7e7ff8d10e
+      internalID: 3342529345216702316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_14
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24017f8081e4a441ebb9b7c3be2ad286
+      internalID: -9029005086930986470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_15
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e6573517574e43bb84cbd6f6f24aee1
+      internalID: 4824511470830160422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_16
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84bcf07df0a6d4d16b29e6a7225facb6
+      internalID: 5030166843235611899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_17
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a8c3182cf4e84241a439efe012f8d1d
+      internalID: -4039722746444434741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_18
+      rect:
+        serializedVersion: 2
+        x: 378
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f10235825a3745c884d8808ace5b314
+      internalID: -660591892320518157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_19
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 870563dc6158a41488d41bdcf22c9ede
+      internalID: -1843832187417560067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_20
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01666fa1524034df7bad1d6a8a763d0f
+      internalID: -8358454511410696447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_21
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 720d2adb3ff974188a2120389205c928
+      internalID: 1007364977445441524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_22
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37caec3a17910426fb9c7a2c1faa7d51
+      internalID: -5296021509259334348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_23
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd01a8d44f9954580bec6ad69ab670df
+      internalID: -4263112607976073259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_24
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 265df391308fc4a0ba0b75aa8f65489f
+      internalID: -5128154086171475315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_25
+      rect:
+        serializedVersion: 2
+        x: 525
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07412058868a04305a812507c434a071
+      internalID: -8079201154225708112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_26
+      rect:
+        serializedVersion: 2
+        x: 546
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee23398e7bbf94e97af0cfb1603aadd0
+      internalID: -7132145417097526487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_27
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 575071c552f3847279df4865a05b8483
+      internalID: 8511294751004394215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_28
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88c312fb8137a4c6c8898ca2cde82da5
+      internalID: -2641178188481350512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_29
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30f589f757c4d43dcaca1a1ce853d242
+      internalID: 2857679008832058530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_30
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2a1d3def54464b199e3533b8d5f122d
+      internalID: -491546504329571721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_31
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 095f85016637a4aad81289bc7d6bcee5
+      internalID: 962579564875451704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_32
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cefa2cb4aa71e4403bfa84bb1d4e9157
+      internalID: 4059957062731103399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_33
+      rect:
+        serializedVersion: 2
+        x: 693
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a12a681f09ae74e04850d96c0bf3808b
+      internalID: -4754728744319947640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_34
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44a10f542d55e405ebec50e8f74a768b
+      internalID: 7917218877579712722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_35
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a442a3f86e73c4ed1be10c774fa84797
+      internalID: -8500810006514464058
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_36
+      rect:
+        serializedVersion: 2
+        x: 756
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0f1748c9b1944d66a7884a5101c1363
+      internalID: -1991456245763531499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_37
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caa42de61519e4ff7b9dae9e26ce7509
+      internalID: -1260870186683747574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_38
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77ddf9daa8d1545268274bdb6819d708
+      internalID: -120689980619828496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_39
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 420da5cabd43548dfbb6a25613efc560
+      internalID: -4221386251736439220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_40
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6742f47a47b794dbc9bb9031150a3b32
+      internalID: 2474494307466059516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_41
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6048cb7b4bff4578b3dc595c7b654c7
+      internalID: -156727488628700457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_42
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7810a3151476e4081b62a8682e20ce8b
+      internalID: -5900268937736072039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_43
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af6943e8fe2e3437984e86c068771dc8
+      internalID: 1580597549543149222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_44
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0954d12bbbd74934936fb35acec77cd
+      internalID: 7402096788622778247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_45
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 418b50d9278004fa6bd974f28e80cccc
+      internalID: 4968829899865451468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_46
+      rect:
+        serializedVersion: 2
+        x: 966
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4c246ff3b9c94a728af3d30cc86ee8e
+      internalID: -7947930776002973544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_47
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57dd075a6f4db4063a8747cb3352b051
+      internalID: -6132891615991135792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_48
+      rect:
+        serializedVersion: 2
+        x: 1008
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf67ef6069e5743ffbc623eb92f8b893
+      internalID: -7446228692668561070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_49
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a7841638efe94b30b17ecb73335b61d
+      internalID: 6151792536111516334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_50
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 492453b28f01140f0a9cd0b0c814064e
+      internalID: 6394199297372306439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_51
+      rect:
+        serializedVersion: 2
+        x: 1071
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f526ecfd99def49acb2f7bdfb1387e60
+      internalID: 7716134921450583473
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_52
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b64853c3c6cd44528a08c7e3cdd03871
+      internalID: 8783522282894677784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_53
+      rect:
+        serializedVersion: 2
+        x: 1113
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20292fd93f1ff45168a0efcbf8f0a807
+      internalID: 369598171753497929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_54
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ff695dab9d0442b1a66356f80125cb8
+      internalID: -1917341297717915780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_55
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75895ad1bb02d40f186a9c19e6ab21fa
+      internalID: -7592298087979072344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_56
+      rect:
+        serializedVersion: 2
+        x: 1176
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af392a702045b476885ab2c90b4d59fd
+      internalID: 4001018174014720970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_57
+      rect:
+        serializedVersion: 2
+        x: 1197
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f542d8036e5084bf6906ac2b3a384c55
+      internalID: 7718279537712021999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_58
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a9666722413e4a48b4669f202eace61
+      internalID: 2535570806173587657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_59
+      rect:
+        serializedVersion: 2
+        x: 1239
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0090b67b2820494eae4f3cce8afcf2f
+      internalID: 9159691663871716644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_60
+      rect:
+        serializedVersion: 2
+        x: 1260
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba0ecd64f38e947788c004a6fe7ac38b
+      internalID: -4583060675296593772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_61
+      rect:
+        serializedVersion: 2
+        x: 1281
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7370040beb1134359ae75c6c0c848ca5
+      internalID: 7430763848067116189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_62
+      rect:
+        serializedVersion: 2
+        x: 1302
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 123b862a312044a12b97aa81a227aa89
+      internalID: 5136171210362537734
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_63
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ada075032bf143ecbe46bfc17d77621
+      internalID: -690575001675478522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_64
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32750dbecc9cd4475934ee8c15203021
+      internalID: -8748241037640828668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_65
+      rect:
+        serializedVersion: 2
+        x: 1365
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2c627dd61bfb4d4f8bf34b71049725a
+      internalID: -3492675228534604009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_66
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05158b9f3bce744698ffc95c6dcf0291
+      internalID: -5157727052748591486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_67
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 537c92c13582047af8fa5d4d083874cb
+      internalID: 5299706836702528409
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_68
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8ac105be9ce47dd81a1730fc2fe623
+      internalID: 5770288011000672516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_69
+      rect:
+        serializedVersion: 2
+        x: 1449
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1be8aee57e064498498df613a1560588
+      internalID: -5616702807492709999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_70
+      rect:
+        serializedVersion: 2
+        x: 1470
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83c29baf2adf14d0e8a21aaa2df17607
+      internalID: -6076697267923545245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bgsec_observatory_bell0_71
+      rect:
+        serializedVersion: 2
+        x: 1491
+        y: 0
+        width: 21
+        height: 17
+      alignment: 9
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 253be22cc80aa4291b3f8930958f0eda
+      internalID: 263283626184457307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3c3a845eb8a8d4b939fa99f4992ecda4
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bgsec_observatory_bell0_0: 400095208636063599
+      bgsec_observatory_bell0_1: 8869651160817654306
+      bgsec_observatory_bell0_10: 7530210678797033241
+      bgsec_observatory_bell0_11: 2169096169467914048
+      bgsec_observatory_bell0_12: 2854304250074428627
+      bgsec_observatory_bell0_13: 3342529345216702316
+      bgsec_observatory_bell0_14: -9029005086930986470
+      bgsec_observatory_bell0_15: 4824511470830160422
+      bgsec_observatory_bell0_16: 5030166843235611899
+      bgsec_observatory_bell0_17: -4039722746444434741
+      bgsec_observatory_bell0_18: -660591892320518157
+      bgsec_observatory_bell0_19: -1843832187417560067
+      bgsec_observatory_bell0_2: 7618988730595143954
+      bgsec_observatory_bell0_20: -8358454511410696447
+      bgsec_observatory_bell0_21: 1007364977445441524
+      bgsec_observatory_bell0_22: -5296021509259334348
+      bgsec_observatory_bell0_23: -4263112607976073259
+      bgsec_observatory_bell0_24: -5128154086171475315
+      bgsec_observatory_bell0_25: -8079201154225708112
+      bgsec_observatory_bell0_26: -7132145417097526487
+      bgsec_observatory_bell0_27: 8511294751004394215
+      bgsec_observatory_bell0_28: -2641178188481350512
+      bgsec_observatory_bell0_29: 2857679008832058530
+      bgsec_observatory_bell0_3: -7680914244658052932
+      bgsec_observatory_bell0_30: -491546504329571721
+      bgsec_observatory_bell0_31: 962579564875451704
+      bgsec_observatory_bell0_32: 4059957062731103399
+      bgsec_observatory_bell0_33: -4754728744319947640
+      bgsec_observatory_bell0_34: 7917218877579712722
+      bgsec_observatory_bell0_35: -8500810006514464058
+      bgsec_observatory_bell0_36: -1991456245763531499
+      bgsec_observatory_bell0_37: -1260870186683747574
+      bgsec_observatory_bell0_38: -120689980619828496
+      bgsec_observatory_bell0_39: -4221386251736439220
+      bgsec_observatory_bell0_4: 5846477173091871000
+      bgsec_observatory_bell0_40: 2474494307466059516
+      bgsec_observatory_bell0_41: -156727488628700457
+      bgsec_observatory_bell0_42: -5900268937736072039
+      bgsec_observatory_bell0_43: 1580597549543149222
+      bgsec_observatory_bell0_44: 7402096788622778247
+      bgsec_observatory_bell0_45: 4968829899865451468
+      bgsec_observatory_bell0_46: -7947930776002973544
+      bgsec_observatory_bell0_47: -6132891615991135792
+      bgsec_observatory_bell0_48: -7446228692668561070
+      bgsec_observatory_bell0_49: 6151792536111516334
+      bgsec_observatory_bell0_5: -8223656459091197247
+      bgsec_observatory_bell0_50: 6394199297372306439
+      bgsec_observatory_bell0_51: 7716134921450583473
+      bgsec_observatory_bell0_52: 8783522282894677784
+      bgsec_observatory_bell0_53: 369598171753497929
+      bgsec_observatory_bell0_54: -1917341297717915780
+      bgsec_observatory_bell0_55: -7592298087979072344
+      bgsec_observatory_bell0_56: 4001018174014720970
+      bgsec_observatory_bell0_57: 7718279537712021999
+      bgsec_observatory_bell0_58: 2535570806173587657
+      bgsec_observatory_bell0_59: 9159691663871716644
+      bgsec_observatory_bell0_6: -1785877135140805126
+      bgsec_observatory_bell0_60: -4583060675296593772
+      bgsec_observatory_bell0_61: 7430763848067116189
+      bgsec_observatory_bell0_62: 5136171210362537734
+      bgsec_observatory_bell0_63: -690575001675478522
+      bgsec_observatory_bell0_64: -8748241037640828668
+      bgsec_observatory_bell0_65: -3492675228534604009
+      bgsec_observatory_bell0_66: -5157727052748591486
+      bgsec_observatory_bell0_67: 5299706836702528409
+      bgsec_observatory_bell0_68: 5770288011000672516
+      bgsec_observatory_bell0_69: -5616702807492709999
+      bgsec_observatory_bell0_7: -3151596259383782871
+      bgsec_observatory_bell0_70: -6076697267923545245
+      bgsec_observatory_bell0_71: 263283626184457307
+      bgsec_observatory_bell0_8: -738479193108816790
+      bgsec_observatory_bell0_9: -3851003459872898004
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
