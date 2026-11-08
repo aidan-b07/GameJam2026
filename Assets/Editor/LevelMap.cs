@@ -1684,7 +1684,7 @@ public static class LevelMap
         var ending = go.AddComponent<DawnEnding>();
         var sky = go.AddComponent<DawnSky>();
         sky.cameras = rig.cameras;
-        sky.midLayer = tick.Sky.layers[1].day;
+        sky.skies = new[] { tick.Sky, tock.Sky };
         ending.sky = sky;
         ending.doors = new[] { tick.ClockDoor, tock.ClockDoor };
         ending.cameraRig = rig;
