@@ -483,7 +483,10 @@ public static class LevelMap
 
         // Respawn point, numbered in order after the spawn (checkpoint 0). Reached
         // when a player walks through its column (a trigger 12 units tall).
-        public void Checkpoint(int x)
+        // lampDepth sinks the lamp below the surface, e.g. 1 to stand it on the
+        // floor of the drawbridge's slot against its back wall (the leaf covers
+        // it when it lands); players still come back on the surface.
+        public void Checkpoint(int x, int lampDepth = 0)
         {
             var go = Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
             go.GetComponent<SpriteRenderer>().enabled = false;   // the lamp shows where it is
@@ -493,17 +496,17 @@ public static class LevelMap
             trigger.offset = new Vector2(0f, 11.5f);
             var feet = new Vector2(go.transform.position.x, root.transform.position.y + Surface(x));
             AddCheckpoint(go, ++checkpoints, feet);
-            Lamp(go, x);
+            Lamp(go, x, Surface(x) - lampDepth);
         }
 
         // Twin lamp on a checkpoint: post standing on the ground (sunk by the
         // ground tiles' 3 transparent top rows), a lantern overlay per player.
         // The post is tinted with the lane's light; the lit lanterns are not.
-        void Lamp(GameObject checkpoint, int x)
+        void Lamp(GameObject checkpoint, int x, int y)
         {
             var lamp = new GameObject($"{checkpoint.name}_Lamp");
             lamp.transform.SetParent(markers, false);
-            lamp.transform.localPosition = new Vector3(checkpoint.transform.localPosition.x, Surface(x) - 3f / 32f, 0f);
+            lamp.transform.localPosition = new Vector3(checkpoint.transform.localPosition.x, y - 3f / 32f, 0f);
             SpriteRenderer Part(string partName, Sprite sprite, int order)
             {
                 var part = new GameObject(partName);

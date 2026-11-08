@@ -21,7 +21,7 @@ using static LevelMap;
 public static class MainLevelBuilder
 {
     public const string ScenePath = "Assets/Scenes/MainLevel.unity";
-    const int Length = 172;
+    const int Length = 136;
     const float Belt = 0.75f;   // units per lane second
 
     static FloorButton gateButton, tickFinal;
@@ -40,100 +40,106 @@ public static class MainLevelBuilder
 
     static void Tick(Lane l)
     {
-        l.Floor((-8, 29), (34, 51), (61, 120), (126, Length + 8));
+        l.Floor((-8, 16), (21, 29), (39, 85), (91, 109), (114, Length + 8));
         l.Spawn(3);
 
-        // 1. Step up and down, then the trap door Tock has just passed.
-        l.Fill(14, 16, 1);
-        l.Fill(17, 21, 2);
-        l.TrapDoor(30);
+        // 1. Step up to a ledge higher than a jump (no way back), dropping
+        //    straight onto the trap door.
+        l.Fill(8, 10, 2);
+        l.Fill(11, 15, 4);
+        l.TrapDoor(17);
 
-        // 2. Drawbridge over a 9-wide pit (too wide to jump). The leaf lands
-        //    in the slot at 44-51: the death zone. Tock standing still freezes
-        //    it across the pit; the button beyond opens Tock's gate.
-        l.Checkpoint(37);
-        l.Drawbridge(52, 61);
-        l.Busy(42, 61);
-        gateButton = l.Button(65);
+        // 2. Off the trap door straight into the drawbridge's slot (22-29),
+        //    where the leaf lands: no safe spot between them. The checkpoint
+        //    lamp stands in the slot against its back wall. The 9-wide pit is
+        //    too wide to jump; Tock standing still freezes the leaf across it.
+        //    The button beyond opens Tock's gate.
+        l.Drawbridge(30, 39);
+        l.Checkpoint(25, lampDepth: 1);
+        gateButton = l.Button(41);
 
         // 3. Scenery.
-        l.Decor("hedge", 71.5f);
-        l.Decor("lamp", 75.5f);
-        l.Decor("bench", 78f);
-        l.Decor("planter", 82f);
-        l.Decor("fountain", 88f);
-        l.Decor("planter", 94f);
-        l.Decor("lamp", 97.5f);
-        l.Decor("topiary", 100.5f);
-        l.Decor("hedge", 104.5f);
-        l.Decor("gears", 109f);
-        l.Checkpoint(113);
+        l.Decor("hedge", 46.5f);
+        l.Decor("lamp", 49.5f);
+        l.Decor("bench", 52f);
+        l.Decor("planter", 55f);
+        l.Decor("fountain", 60f);
+        l.Decor("planter", 65f);
+        l.Decor("lamp", 67.5f);
+        l.Decor("topiary", 70.5f);
+        l.Decor("hedge", 74.5f);
+        l.Decor("gears", 78f);
+        l.Checkpoint(81);
 
-        // 4. Gauntlet: crusher, pit, then belts between crushers.
-        l.Crusher(116);
-        l.Conveyor(126, 129, -Belt);              // pushes back toward the pit
-        l.Crusher(130, 0.9f);
-        l.Conveyor(133, 135, Belt);
-        l.Crusher(136, 1.8f);
-        l.Conveyor(139, 141, -Belt);
-        l.Crusher(142, 2.7f);
-        tickFinal = l.Button(143, narrow: true);   // in the strike plate
-        tickGate = l.ButtonGate(148);
+        // 4. Gauntlet: crusher straight into a pit, a belt back toward it,
+        //    belts between crushers, then the last crusher's button with a hole
+        //    after it and the gate on the far lip: both wait under their
+        //    crushers until both buttons are down and the gates are up.
+        l.Crusher(82);
+        l.Conveyor(91, 94, -Belt);
+        l.Crusher(95, 0.9f);
+        l.Conveyor(98, 100, Belt);
+        l.Crusher(101, 1.8f);
+        l.Conveyor(104, 106, -Belt);
+        l.Crusher(107, 2.7f);
+        tickFinal = l.Button(108, narrow: true);   // in the strike plate
+        tickGate = l.ButtonGate(114);
 
         // 5. Ending.
-        l.Checkpoint(152);
-        l.Decor("lamp", 155.5f);
-        l.Decor("clock", 165.5f);
-        l.Door(159);
+        l.Checkpoint(118);
+        l.Decor("lamp", 121.5f);
+        l.Door(124);
+        l.Decor("clock", 130.5f);
     }
 
     static void Tock(Lane l)
     {
-        l.Floor((-8, 13), (18, 51), (56, 121), (127, Length + 8));
+        l.Floor((-8, 7), (12, 30), (35, 86), (92, 110), (115, Length + 8));
         l.Spawn(3);
 
-        // 1. Trap door first, then the step up and down.
-        l.TrapDoor(14);
-        l.Fill(28, 30, 1);
-        l.Fill(31, 35, 2);
+        // 1. Trap door, then a ledge higher than a jump that drops straight
+        //    onto the belt. The checkpoint is on the ledge, the last safe spot.
+        l.TrapDoor(8);
+        l.Fill(15, 17, 2);
+        l.Fill(18, 22, 4);
+        l.Checkpoint(20);
 
         // 2. Belt toward a pit with a shut gate on its far lip: jumping into
         //    the bars drops Tock into the pit. Tick's button opens it.
-        l.Checkpoint(40);
-        l.Conveyor(44, 51, Belt);
-        var gate = l.ButtonGate(56);
+        l.Conveyor(23, 30, Belt);
+        var gate = l.ButtonGate(35);
         WireGate(gate, gateButton);
 
         // 3. Scenery.
-        l.Decor("planter", 62f);
-        l.Decor("lamp", 66.5f);
-        l.Decor("topiary", 70.5f);
-        l.Decor("hedge", 75.5f);
-        l.Decor("bench", 80f);
-        l.Decor("lamp", 84.5f);
-        l.Decor("gears", 89f);
-        l.Decor("planter", 94f);
-        l.Decor("fountain", 100f);
-        l.Decor("hedge", 106.5f);
-        l.Checkpoint(113);
+        l.Decor("planter", 41f);
+        l.Decor("lamp", 44.5f);
+        l.Decor("topiary", 47.5f);
+        l.Decor("hedge", 51.5f);
+        l.Decor("bench", 56f);
+        l.Decor("lamp", 59.5f);
+        l.Decor("gears", 63f);
+        l.Decor("planter", 67f);
+        l.Decor("fountain", 72f);
+        l.Decor("hedge", 77.5f);
+        l.Checkpoint(81);
 
         // 4. Gauntlet, offset from Tick's.
-        l.Crusher(117, 0.45f);
-        l.Conveyor(127, 130, -Belt);
-        l.Crusher(131, 1.35f);
-        l.Conveyor(134, 136, Belt);
-        l.Crusher(137, 2.25f);
-        l.Conveyor(140, 142, -Belt);
-        l.Crusher(143, 3.15f);
-        var tockFinal = l.Button(144, narrow: true);
-        var tockGate = l.ButtonGate(149);
+        l.Crusher(83, 0.45f);
+        l.Conveyor(92, 95, -Belt);
+        l.Crusher(96, 1.35f);
+        l.Conveyor(99, 101, Belt);
+        l.Crusher(102, 2.25f);
+        l.Conveyor(105, 107, -Belt);
+        l.Crusher(108, 3.15f);
+        var tockFinal = l.Button(109, narrow: true);
+        var tockGate = l.ButtonGate(115);
         WireGate(tockGate, tickFinal, tockFinal);
         WireGate(tickGate, tickFinal, tockFinal);
 
         // 5. Ending.
-        l.Checkpoint(153);
-        l.Decor("lamp", 156.5f);
-        l.Decor("clock", 165.5f);
-        l.Door(159);
+        l.Checkpoint(119);
+        l.Decor("lamp", 121.5f);
+        l.Door(124);
+        l.Decor("clock", 130.5f);
     }
 }
