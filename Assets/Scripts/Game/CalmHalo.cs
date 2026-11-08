@@ -48,11 +48,13 @@ public class CalmHalo : MonoBehaviour
         public float[] diag;    // noise coordinate, x / 90 + y / 70
         public int w, h;
         public float spawn;
+        public float pending;   // seconds since this lane was last drawn
         public readonly List<Mote> motes = new List<Mote>();
     }
 
     Lane[] lanes;
     float blend, clock, sinceDraw;
+    int next;   // the lane drawn next: lanes take turns, so a frame redraws at most one
     float[] noise = new float[0];
     readonly System.Random rng = new System.Random(5);
 
@@ -116,17 +118,16 @@ public class CalmHalo : MonoBehaviour
 
         clock += dt;
         sinceDraw += dt;
-        if (sinceDraw < 1f / Mathf.Max(1f, fps)) return;
-        float step = sinceDraw;
+        foreach (var l in lanes) l.pending += dt;
+        if (sinceDraw < 0.5f / Mathf.Max(1f, fps)) return;
         sinceDraw = 0f;
-        for (int i = 0; i < lanes.Length; i++)
-        {
-            var l = lanes[i];
-            if (!Ensure(l)) continue;
-            StepMotes(l, step);
-            Draw(l);
-            l.image.enabled = true;
-        }
+        var lane = lanes[next];
+        next = (next + 1) % lanes.Length;
+        if (!Ensure(lane)) return;
+        StepMotes(lane, lane.pending);
+        lane.pending = 0f;
+        Draw(lane);
+        lane.image.enabled = true;
     }
 
     // (Re)makes the lane's texture at its rect size in art pixels.
