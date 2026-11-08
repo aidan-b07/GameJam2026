@@ -309,12 +309,13 @@ public class GameFlow : MonoBehaviour
         return new Vector2(centre - half, centre + half);
     }
 
-    // The lane's player's horizontal speed as a fraction (0..1) of their run speed.
-    public float HorizontalSpeed(int lane)
+    // How fast the lane's player really moves, as a fraction (0..1) of their
+    // run speed: PlayerMovement's measured speed, the same value that drives
+    // the partner's lane speed.
+    public float MeasuredSpeed(int lane)
     {
         var p = list[lane];
-        if (p.rb == null || p.movement == null) return 0f;
-        return Mathf.Clamp01(Mathf.Abs(p.rb.linearVelocity.x) / Mathf.Max(0.01f, p.movement.MoveSpeed));
+        return p.movement != null ? p.movement.MeasuredSpeed : 0f;
     }
 
     private static void SetFrozen(Player p, bool frozen)

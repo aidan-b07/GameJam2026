@@ -5,8 +5,11 @@ using UnityEngine;
 // lane's view (Tick's from the top of the screen, Tock's from the seam between
 // the lanes) and grows down towards that lane's player while they dawdle.
 //
-// Each lane's rift follows its own player's horizontal speed (0..1 of their
-// run speed). Below slowThreshold it grows exponentially: the growth rate is
+// Each lane's rift follows its own player's measured speed (0..1 of their run
+// speed, PlayerMovement.MeasuredSpeed): the distance the body really moved,
+// the same value that drives the partner's lane speed, so pushing into a wall
+// or walking against a belt counts as standing, and riding a belt, jumping
+// and falling count as moving. Below slowThreshold it grows exponentially: the growth rate is
 // proportional to how deep it already is (plus growthSeed), so a short pause
 // barely shows but a long one runs away; it creeps on smoothly, no lurches.
 // At or above the threshold it shrinks linearly, faster the faster the
@@ -39,7 +42,7 @@ public class LaneRift : MonoBehaviour
     public const float TeethAmplitude = 0.3125f;   // 10 art pixels
 
     [Header("Growth (player slower than the threshold)")]
-    [Tooltip("Normalised horizontal speed (0..1) below which the rift grows.")]
+    [Tooltip("Measured speed (0..1 of run speed, PlayerMovement.MeasuredSpeed) below which the rift grows.")]
     [Range(0f, 1f)] public float slowThreshold = 0.35f;
     [Tooltip("Seconds a player may be slow before their rift starts to grow, so a short wait (or a jump straight up) is safe.")]
     public float slowGrace = 0.5f;
@@ -264,7 +267,7 @@ public class LaneRift : MonoBehaviour
             float halfView = cam != null ? cam.orthographicSize * cam.aspect + 1f : 21f;
             frontClock[lane] += dt;
 
-            float speed = flow.HorizontalSpeed(lane);
+            float speed = flow.MeasuredSpeed(lane);
             if (Suspended || safe[lane])
             {
                 slowFor[lane] = 0f;

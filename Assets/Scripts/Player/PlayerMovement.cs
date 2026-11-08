@@ -41,6 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed => moveSpeed;
 
+    // How fast the body really moved last physics step, as a fraction (0..1)
+    // of run speed: the value that drives the partner's lane speed. LaneRift
+    // reads it too, so the rift and the lane speed agree on "moving".
+    public float MeasuredSpeed { get; private set; }
+
     private Rigidbody2D rb;
     private Collider2D body;
     private ContactFilter2D groundFilter;
@@ -105,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
     // respawn.
     private void OnDisable()
     {
+        MeasuredSpeed = 0f;
         if (GameManager.INSTANCE != null)
             GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, 0f);
     }
@@ -243,9 +249,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateWorldSpeedModifiers()
     {
-        if (GameManager.INSTANCE == null)
-            return;
-
         // The partner's lane follows how fast this player really moves: the
         // distance the body covered since the last physics step, whatever
         // moved it. Pushing into a wall reads 0, a conveyor carrying the
@@ -257,8 +260,9 @@ public class PlayerMovement : MonoBehaviour
         if (distance > teleportDistance)
             distance = 0f;
 
-        float amount = Mathf.Clamp01(distance / Time.fixedDeltaTime / moveSpeed);
-        GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, amount);
+        MeasuredSpeed = Mathf.Clamp01(distance / Time.fixedDeltaTime / moveSpeed);
+        if (GameManager.INSTANCE != null)
+            GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, MeasuredSpeed);
     }
     
     private void OnDrawGizmosSelected()
