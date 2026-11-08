@@ -5,8 +5,10 @@ using UnityEngine;
 
 // Test helpers for the dawn ending (DawnEnding), called over MCP in play mode:
 // Setup puts both players just before their clock doors and pauses the
-// Editor with a fixed step; Step advances it; Capture renders both lanes and
-// the screen-space overlays (rift, seam, letterbox, titles) into one PNG.
+// Editor with a fixed step; Arrive moves them over their triggers; Step and
+// RunTo advance it; Capture renders both lanes and the screen-space overlays
+// (rift, seam, letterbox, titles) into one PNG. Arrive soon after Setup:
+// standing players grow their rifts and die after about 5.5 s.
 public static class EndingPreview
 {
     public static float MaxMs, SumMs;
@@ -58,6 +60,21 @@ public static class EndingPreview
             }
         }
         return Status();
+    }
+
+    // Steps until the ending's clock reaches t, at most maxSteps frames. Never
+    // loop on the ending's clock without a cap: if it does not start (a death
+    // moved the players away from the doors) an unbounded loop of Steps keeps
+    // the Editor's main thread forever and only a force quit gets it back.
+    public static bool RunTo(float t, int maxSteps = 1500)
+    {
+        var ending = Object.FindAnyObjectByType<DawnEnding>();
+        for (int i = 0; i < maxSteps; i++)
+        {
+            if (ending == null || !ending.Running || ending.T >= t) break;
+            Step(1);
+        }
+        return ending != null && ending.Running && ending.T >= t;
     }
 
     public static string Status()
