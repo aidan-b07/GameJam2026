@@ -24,11 +24,11 @@ using static LevelMap;
 //    as hard as it moves, which is the partner's speed: one crosses while the
 //    other slows their lane. The last tile or so of each belt is never hit.
 // 5. Gauntlet: a crusher, a pit, then belts between crushers in alternating
-//    directions and a plain gap before the last crusher. The last crusher in
+//    directions, the gap before the last crusher too. The last crusher in
 //    each lane has a button in its strike plate; both buttons (any order)
-//    open both final gates. Whoever presses first waits in the plain gap,
-//    standing still, which slows the partner's crushers. A death lets the
-//    buttons go and shuts the gates.
+//    open both final gates. Whoever presses first waits on the belt before
+//    it, walking against it, which slows the partner's crushers. A death
+//    lets the buttons go and shuts the gates.
 // Crossing notes (bot-measured timings): DESIGN.md "Main level".
 public static class MainLevelBuilder
 {
@@ -140,15 +140,16 @@ public static class MainLevelBuilder
         PendulumBelts(l, new[] { 1f, -1f, 1f }, new[] { 0f, 0.5f, 0.25f });
 
         // 5. Gauntlet: crusher straight into a pit, a belt back toward it,
-        //    belts between crushers, a plain gap (104-106 + P: the first to
-        //    press waits there), then the last crusher's button with a hole
-        //    after it and the gate on the far lip: both cross once both buttons
-        //    are down and the gates are up.
+        //    belts between crushers (104-106 + P too: the first to press waits
+        //    there), then the last crusher's button with a hole after it and
+        //    the gate on the far lip: both cross once both buttons are down
+        //    and the gates are up.
         Crusher(l, 82 + P);
         l.Conveyor(91 + P, 94 + P, -Belt);
         Crusher(l, 95 + P, 0.9f);
         l.Conveyor(98 + P, 100 + P, Belt);
         Crusher(l, 101 + P, 1.8f);
+        l.Conveyor(104 + P, 106 + P, -Belt);
         Crusher(l, 107 + P, 2.7f);
         tickFinal = l.Button(108 + P, narrow: true);   // in the strike plate
         tickGate = l.ButtonGate(114 + P);
@@ -208,6 +209,7 @@ public static class MainLevelBuilder
         Crusher(l, 96 + P, 1.35f);
         l.Conveyor(99 + P, 101 + P, Belt);
         Crusher(l, 102 + P, 2.25f);
+        l.Conveyor(105 + P, 107 + P, -Belt);
         Crusher(l, 108 + P, 3.15f);
         var tockFinal = l.Button(109 + P, narrow: true);
         var tockGate = l.ButtonGate(115 + P);
