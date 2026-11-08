@@ -40,7 +40,9 @@ public class SpawnWisp : MonoBehaviour
     public float Duration => flareTime + flightTime + circleTime;
 
     const float Ppu = 32f;
-    static readonly Dictionary<string, Sprite[]> sheets = new Dictionary<string, Sprite[]>();
+    // Frames cut from the sheets, owned by this component and destroyed with
+    // it (the textures belong to Resources and are not destroyed).
+    readonly Dictionary<string, Sprite[]> sheets = new Dictionary<string, Sprite[]>();
 
     class Mote
     {
@@ -74,16 +76,17 @@ public class SpawnWisp : MonoBehaviour
         float t = 0f;
 
         // 1. The lantern flares and the flame swells into a ball of light.
-        if (lamp != null && flare != null)
+        // Timing and the douse do not depend on the flare art having loaded.
+        if (lamp != null)
         {
             Sfx.Play("checkpoint", from, 0.3f, false, 1.5f);
-            var fl = Take($"WispFlare_{name}", frontOrder);
-            fl.transform.position = Snap(from);
+            var fl = flare != null ? Take($"WispFlare_{name}", frontOrder) : null;
+            if (fl != null) fl.transform.position = Snap(from);
             float emit = 0f;
             while (t < flareTime)
             {
                 float u = t / flareTime;
-                fl.sprite = flare[Mathf.Min(flare.Length - 1, (int)(u * flare.Length))];
+                if (fl != null) fl.sprite = flare[Mathf.Min(flare.Length - 1, (int)(u * flare.Length))];
                 if (u > 0.6f)
                 {
                     orb.enabled = true;
@@ -98,7 +101,7 @@ public class SpawnWisp : MonoBehaviour
                 t += Time.deltaTime;
                 yield return null;
             }
-            Give(fl);
+            if (fl != null) Give(fl);
             lamp.Douse(lane);
             t -= flareTime;
         }
@@ -253,8 +256,16 @@ public class SpawnWisp : MonoBehaviour
         return v * v * v * a + 3f * v * v * u * b + 3f * v * u * u * c + u * u * u * d;
     }
 
+    private void OnDestroy()
+    {
+        foreach (var frames in sheets.Values)
+            foreach (var f in frames)
+                if (f != null) Destroy(f);
+        sheets.Clear();
+    }
+
     // Frames of a one-row sheet of square frames from Resources/Art/Wisp.
-    static Sprite[] Sheet(string file, int size)
+    Sprite[] Sheet(string file, int size)
     {
         if (sheets.TryGetValue(file, out var cached) && cached != null && cached.Length > 0 && cached[0] != null)
             return cached;
