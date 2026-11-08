@@ -57,9 +57,11 @@ public class Conveyor : MonoBehaviour
         }
     }
 
-    // Feet on the surface and the body's centre over the belt.
+    // Feet on the surface and any part of the body over the belt, so a rider
+    // is carried all the way off the end (into a hole there) instead of
+    // stopping half over the edge once the body's centre leaves the belt.
     private bool OnBelt(Bounds b, float vy) =>
-        vy <= 0.5f && b.center.x >= left && b.center.x <= left + width
+        vy <= 0.5f && b.max.x > left && b.min.x < left + width
         && Mathf.Abs(b.min.y - top) <= footTolerance;
 
     private void Update()

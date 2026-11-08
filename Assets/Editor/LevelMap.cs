@@ -485,8 +485,10 @@ public static class LevelMap
         // when a player walks through its column (a trigger 12 units tall).
         // lampDepth sinks the lamp below the surface, e.g. 1 to stand it on the
         // floor of the drawbridge's slot against its back wall (the leaf covers
-        // it when it lands); players still come back on the surface.
-        public void Checkpoint(int x, int lampDepth = 0)
+        // it when it lands); players still come back on the surface. lampX moves
+        // the lamp sideways (tiles from the column's left edge) and lampBehind
+        // draws it behind obstacles and the ground, e.g. behind a trap door's lamp.
+        public void Checkpoint(int x, int lampDepth = 0, float? lampX = null, bool lampBehind = false)
         {
             var go = Marker("Checkpoint", x, Surface(x), 0.5f, 0.5f, new Color(1f, 0.4f, 0.7f));
             go.GetComponent<SpriteRenderer>().enabled = false;   // the lamp shows where it is
@@ -496,17 +498,17 @@ public static class LevelMap
             trigger.offset = new Vector2(0f, 11.5f);
             var feet = new Vector2(go.transform.position.x, root.transform.position.y + Surface(x));
             AddCheckpoint(go, ++checkpoints, feet);
-            Lamp(go, x, Surface(x) - lampDepth);
+            Lamp(go, lampX.HasValue ? x + lampX.Value : go.transform.localPosition.x, Surface(x) - lampDepth, lampBehind ? -3 : 2);
         }
 
         // Twin lamp on a checkpoint: post standing on the ground (sunk by the
         // ground tiles' 3 transparent top rows), a lantern overlay per player.
         // The post is tinted with the lane's light; the lit lanterns are not.
-        void Lamp(GameObject checkpoint, int x, int y)
+        void Lamp(GameObject checkpoint, float x, int y, int order)
         {
             var lamp = new GameObject($"{checkpoint.name}_Lamp");
             lamp.transform.SetParent(markers, false);
-            lamp.transform.localPosition = new Vector3(checkpoint.transform.localPosition.x, y - 3f / 32f, 0f);
+            lamp.transform.localPosition = new Vector3(x, y - 3f / 32f, 0f);
             SpriteRenderer Part(string partName, Sprite sprite, int order)
             {
                 var part = new GameObject(partName);
@@ -516,12 +518,12 @@ public static class LevelMap
                 sr.sortingOrder = order;
                 return sr;
             }
-            tinted.Add(Part("Post", AssetDatabase.LoadAssetAtPath<Sprite>(CheckpointPng("post")), 2));
+            tinted.Add(Part("Post", AssetDatabase.LoadAssetAtPath<Sprite>(CheckpointPng("post")), order));
             var tickFrames = StripFrames(CheckpointPng("tick"));
             var tockFrames = StripFrames(CheckpointPng("tock"));
             var c = lamp.AddComponent<CheckpointLamp>();
             c.checkpoint = checkpoint.GetComponent<Checkpoint>();
-            c.heads = new[] { Part("Tick", tickFrames[0], 3), Part("Tock", tockFrames[0], 3) };
+            c.heads = new[] { Part("Tick", tickFrames[0], order + 1), Part("Tock", tockFrames[0], order + 1) };
             c.tickFrames = tickFrames;
             c.tockFrames = tockFrames;
         }
