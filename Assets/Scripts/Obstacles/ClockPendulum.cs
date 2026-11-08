@@ -83,8 +83,13 @@ public class ClockPendulum : LaneObstacle
             if (dist >= bobRadius) continue;
             Vector2 n = dist > 1e-4f ? d / dist : new Vector2(velocity.x >= 0f ? 1f : -1f, 0f);
 
-            // Solid: push the body out of the disc. Landing on top stops the fall.
-            rb.position += n * (bobRadius - dist);
+            // Solid: push the body out of the disc, sideways or up but never
+            // down (that would drive it into the ground, which CrushDetector
+            // counts as a crush). Landing on top stops the fall.
+            Vector2 push = n.y < 0f
+                ? new Vector2(Mathf.Abs(n.x) > 0.05f ? Mathf.Sign(n.x) : (velocity.x >= 0f ? 1f : -1f), 0f)
+                : n;
+            rb.position += push * (bobRadius - dist);
             if (n.y > 0.6f && rb.linearVelocity.y < 0f)
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
 
