@@ -2190,7 +2190,7 @@ public static class LevelMap
     // one is the scene the game starts in), then the enabled scenes, then the
     // disabled ones; within each, levels sorted by name (Level1_, Level2_, ...)
     // before the rest.
-    static readonly string[] MenuScenes = { "/LevelSelect.unity", "/MainMenu.unity" };
+    static readonly string[] MenuScenes = { "/MainMenu.unity", "/LevelSelect.unity" };
 
     internal static void AddToBuildSettings(string scenePath)
     {
