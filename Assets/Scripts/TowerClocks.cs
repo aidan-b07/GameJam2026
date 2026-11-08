@@ -32,7 +32,31 @@ public class TowerClocks : MonoBehaviour
     int drawn = -1;
     int ox, oy;   // picture pixel of the texture's bottom-left
 
-    void OnEnable() => Init();
+    void OnEnable() => RequestInit();
+
+    // OnEnable can run while Unity is loading the scene or validating, when
+    // setting a renderer's sprite logs "SendMessage cannot be called during
+    // Awake, CheckConsistency, or OnValidate". In edit mode the texture is
+    // made on the next editor tick instead; in play mode at once.
+    void RequestInit()
+    {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+        {
+            UnityEditor.EditorApplication.delayCall -= DeferredInit;
+            UnityEditor.EditorApplication.delayCall += DeferredInit;
+            return;
+        }
+#endif
+        Init();
+    }
+
+#if UNITY_EDITOR
+    void DeferredInit()
+    {
+        if (this != null && isActiveAndEnabled) Init();
+    }
+#endif
 
     void Init()
     {
@@ -90,7 +114,7 @@ public class TowerClocks : MonoBehaviour
     public void Show(float hour, LaneSky.Look from, LaneSky.Look to, float t)
     {
         this.hour = Mathf.Repeat(hour, 24f);
-        if (isActiveAndEnabled && tex == null) Init();
+        if (isActiveAndEnabled && tex == null) RequestInit();
         if (sr != null) sr.color = Color.Lerp(Hands(from), Hands(to), t);
         Draw();
     }

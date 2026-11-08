@@ -60,14 +60,81 @@ public static class MidSectionsBuilder
         return seq;
     }
 
+    // Everything the build needs, loaded and checked before any object is made.
+    class Art
+    {
+        public FileData file;
+        public Dictionary<string, SectionData> byName;
+        public Sprite white;
+        public readonly Dictionary<string, Sprite> stills = new Dictionary<string, Sprite>();
+        public readonly Dictionary<string, Sprite[]> sheets = new Dictionary<string, Sprite[]>();
+    }
+
+    static string StillPath(string name, string suffix) => $"{Dir}bgsec_{name}{suffix}.png";
+    static string SheetPath(string name, string id) => $"{Dir}bgsec_{name}_{id}.png";
+    static readonly string[] LookSuffixes = { "_day", "", "_night" };
+
+    // Reads bg_sections.json and prepares and loads every still and sheet it
+    // names. Returns null with the first problem found.
+    static Art Load(out string error)
+    {
+        error = null;
+        var art = new Art();
+        string json = Dir + "bg_sections.json";
+        if (!File.Exists(json)) { error = $"{json} is missing"; return null; }
+        try { art.file = JsonUtility.FromJson<FileData>(File.ReadAllText(json)); }
+        catch (System.Exception e) { error = $"{json} does not parse: {e.Message}"; return null; }
+        if (art.file?.sections == null || art.file.sections.Length == 0) { error = $"{json} lists no sections"; return null; }
+        art.white = AssetDatabase.LoadAssetAtPath<Sprite>(WhitePixel);
+        if (art.white == null) { error = $"{WhitePixel} is missing"; return null; }
+        art.byName = new Dictionary<string, SectionData>();
+        foreach (var d in art.file.sections)
+        {
+            if (d == null || string.IsNullOrEmpty(d.name) || d.width <= 0 || d.height != MidSections.Height)
+            { error = $"{json}: a section without a name or with a bad size"; return null; }
+            if (art.byName.ContainsKey(d.name)) { error = $"{json}: section {d.name} twice"; return null; }
+            art.byName[d.name] = d;
+            foreach (var suffix in LookSuffixes)
+            {
+                string path = StillPath(d.name, suffix);
+                if (!File.Exists(path)) { error = $"{path} is missing"; return null; }
+                LevelMap.PrepareSprite(path, true, Vector2.zero);
+                var sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+                if (sprite == null || (int)sprite.rect.width != d.width || (int)sprite.rect.height != d.height)
+                { error = $"{path} is not a {d.width}x{d.height} sprite"; return null; }
+                art.stills[path] = sprite;
+            }
+            foreach (var pd in d.parts ?? new PartData[0])
+            {
+                if (pd == null || string.IsNullOrEmpty(pd.id) || pd.w <= 0 || pd.h <= 0 || pd.frames <= 0)
+                { error = $"{json}: section {d.name} has a part without an id, size or frames"; return null; }
+                string path = SheetPath(d.name, pd.id);
+                if (!File.Exists(path)) { error = $"{path} is missing"; return null; }
+                LevelMap.PrepareStrip(path, pd.w, Vector2.zero);
+                var frames = LevelMap.StripFrames(path);
+                if (frames.Length != pd.frames * 3 || frames.Any(f => f == null))
+                { error = $"{path}: {frames.Length} frames, expected {pd.frames * 3}"; return null; }
+                art.sheets[path] = frames;
+            }
+        }
+        return art;
+    }
+
     // Mid layer root (bottom edge at `bottom`, local x 0 = world x 0 at load)
-    // with sections from x0 to at least x1 (local units).
-    public static (Transform root, MidSections sections, MidLayerLife life) Build(
+    // with sections from x0 to at least x1 (local units). Returns null after
+    // logging one error when the section art or data is missing or broken;
+    // the caller then uses the single mid picture.
+    public static (Transform root, MidSections sections, MidLayerLife life)? Build(
         Transform parent, int lane, float bottom, float x0, float x1, int seed, float groundY, int order)
     {
-        var file = JsonUtility.FromJson<FileData>(File.ReadAllText(Dir + "bg_sections.json"));
-        var byName = file.sections.ToDictionary(s => s.name);
-        var white = AssetDatabase.LoadAssetAtPath<Sprite>(WhitePixel);
+        var art = Load(out string error);
+        if (art == null)
+        {
+            Debug.LogError($"[MidSections] {error}; using the single mid picture instead. Rerun tools/make_bg_parts.py and copy its output to {Dir}.");
+            return null;
+        }
+        var file = art.file;
+        var byName = art.byName;
 
         var root = new GameObject("Background_Mid");
         root.transform.SetParent(parent, false);
@@ -91,7 +158,7 @@ public static class MidSectionsBuilder
         {
             if (x >= x1) break;
             var d = byName[name];
-            built.Add(Section(root.transform, d, built.Count, x, lane, order, rng, white));
+            built.Add(Section(root.transform, d, built.Count, x, lane, order, rng, art));
             foreach (var p in d.perches ?? new Pt[0]) pigeons.Add(new Vector2(px + p.x, p.y));
             foreach (var p in d.pennants ?? new Pt[0]) pennants.Add(new Vector2(px + p.x, p.y));
             foreach (var w in d.windows ?? new Box[0]) windows.Add(new RectInt(px + w.x, w.y, w.w, w.h));
@@ -140,18 +207,17 @@ public static class MidSectionsBuilder
     }
 
     static MidSections.Section Section(Transform parent, SectionData d, int index, float x, int lane, int order,
-        System.Random rng, Sprite white)
+        System.Random rng, Art art)
     {
+        var white = art.white;
         var go = new GameObject($"Section_{index}_{d.name}");
         go.transform.SetParent(parent, false);
         go.transform.localPosition = new Vector3(x, 0f, 0f);
         var s = new MidSections.Section { name = d.name, root = go.transform, width = d.width };
         SpriteRenderer Still(string suffix, string label)
         {
-            string path = $"{Dir}bgsec_{d.name}{suffix}.png";
-            LevelMap.PrepareSprite(path, true, Vector2.zero);
             var sr = Renderer(go.transform, $"Still_{label}", order, 0f);
-            sr.sprite = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+            sr.sprite = art.stills[StillPath(d.name, suffix)];
             return sr;
         }
         s.day = Still("_day", "Day");
@@ -170,11 +236,7 @@ public static class MidSectionsBuilder
         for (int j = 0; j < data.Length; j++)
         {
             var pd = data[j];
-            string path = $"{Dir}bgsec_{d.name}_{pd.id}.png";
-            LevelMap.PrepareStrip(path, pd.w, Vector2.zero);
-            var frames = LevelMap.StripFrames(path);
-            if (frames.Length != pd.frames * 3)
-                Debug.LogError($"[MidSections] {path}: {frames.Length} frames, expected {pd.frames * 3}");
+            var frames = art.sheets[SheetPath(d.name, pd.id)];
             var holder = new GameObject($"Part_{pd.id}").transform;
             holder.SetParent(go.transform, false);
             float z = -0.002f * (j + 1);

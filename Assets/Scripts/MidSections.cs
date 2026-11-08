@@ -77,8 +77,13 @@ public class MidSections : MonoBehaviour
     float blend;
     bool shown;   // not saved: the first Show after loading sets every renderer
 
+    static readonly LaneSky.Look[] Looks = { LaneSky.Look.Day, LaneSky.Look.Dusk, LaneSky.Look.Night };
+
+    // Called by LaneSky every frame: the stills are only rewritten when the
+    // look blend changes; parts follow in LateUpdate.
     public void Show(float hour, LaneSky.Look from, LaneSky.Look to, float t)
     {
+        if (from == to) t = 0f;   // a held look: LaneSky's t means nothing then
         bool changed = !shown || from != this.from || to != this.to || !Mathf.Approximately(t, blend);
         shown = true;
         this.from = from;
@@ -90,20 +95,28 @@ public class MidSections : MonoBehaviour
             if (s.clocks != null) s.clocks.Show(hour, from, to, t);
             if (s.smoke != null) s.smoke.Show(from, to, t);
             if (!changed) continue;
-            foreach (var look in new[] { LaneSky.Look.Day, LaneSky.Look.Dusk, LaneSky.Look.Night })
+            foreach (var look in Looks)
             {
                 var sr = look == LaneSky.Look.Day ? s.day : look == LaneSky.Look.Dusk ? s.dusk : s.night;
                 if (sr == null) continue;
                 bool isFrom = look == from, isTo = look == to && to != from;
-                sr.enabled = isFrom || (isTo && t > 0f);
-                sr.sortingOrder = stillOrder + (isTo ? 1 : 0);
-                sr.color = new Color(1f, 1f, 1f, isTo ? t : 1f);
+                bool on = isFrom || (isTo && t > 0f);
+                if (sr.enabled != on) sr.enabled = on;
+                if (!on) continue;
+                int order = stillOrder + (isTo ? 1 : 0);
+                if (sr.sortingOrder != order) sr.sortingOrder = order;
+                var c = new Color(1f, 1f, 1f, isTo ? t : 1f);
+                if (sr.color != c) sr.color = c;
             }
         }
-        if (changed) UpdateParts(true);
     }
 
-    void LateUpdate() => UpdateParts(false);
+    // Once per frame, only the sections in or next to the camera's view (all
+    // of them when there is no camera, e.g. in edit mode).
+    void LateUpdate() => UpdateParts();
+
+    // Puts every part in place now (tests and renders outside play mode).
+    public void Refresh() => UpdateParts();
 
     float LaneTime()
     {
@@ -111,7 +124,7 @@ public class MidSections : MonoBehaviour
         return lane >= 0 && GameManager.INSTANCE != null ? GameManager.INSTANCE.GetLaneTime(lane) : Time.time;
     }
 
-    void UpdateParts(bool all)
+    void UpdateParts()
     {
         if (sections == null) return;
         float t = LaneTime();
@@ -121,7 +134,7 @@ public class MidSections : MonoBehaviour
             if (s.parts == null || s.root == null) continue;
             float left = s.root.localPosition.x, w = s.width / PixelsPerUnit;
             // Only sections in (or next to) the lane camera's view.
-            if (!all && !float.IsNaN(camLocal) && (camLocal < left - 24f || camLocal > left + w + 24f)) continue;
+            if (!float.IsNaN(camLocal) && (camLocal < left - 24f || camLocal > left + w + 24f)) continue;
             foreach (var p in s.parts) UpdatePart(s, p, t);
         }
     }
