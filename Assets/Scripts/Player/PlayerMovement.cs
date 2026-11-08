@@ -15,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 8f;
+    [Tooltip("Units/s^2 gained towards run speed while a direction is held (8 / 60: full speed in about 0.13 s).")]
+    [SerializeField] private float acceleration = 60f;
+    [Tooltip("Units/s^2 lost when the direction is let go or reversed.")]
+    [SerializeField] private float deceleration = 80f;
 
     [Header("Jumping")]
     [SerializeField] private float jumpForce = 14f;
@@ -51,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     private ContactFilter2D groundFilter;
     private readonly RaycastHit2D[] castHits = new RaycastHit2D[4];
     private float horizontalInput;
+    private float runVelocity;
     private bool jumpPressed;
     private bool jumpReleased;
     private float coyoteTimer;
@@ -102,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         hasLastPosition = false;
+        runVelocity = 0f;
     }
 
     // GameFlow switches movement off while the players are dead (and the pause
@@ -122,14 +128,20 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0f)
             TryStepUp(Mathf.Sign(horizontalInput), Mathf.Abs(horizontalInput) * moveSpeed * Time.fixedDeltaTime);
 
-        float vx = horizontalInput * moveSpeed;
+        // Ease towards the input's speed instead of jumping to it, so a key
+        // press starts with a short run-up and letting go slides to a stop.
+        float target = horizontalInput * moveSpeed;
+        bool speedingUp = target != 0f && (runVelocity == 0f || Mathf.Sign(target) == Mathf.Sign(runVelocity))
+            && Mathf.Abs(target) > Mathf.Abs(runVelocity);
+        runVelocity = Mathf.MoveTowards(runVelocity, target, (speedingUp ? acceleration : deceleration) * Time.fixedDeltaTime);
+        float vx = runVelocity;
 
         // In the air, pushing into a wall pins the player there by friction.
         // Stop pushing so they fall. The same friction brakes a jump that
         // starts pressed against a wall (the ground check still reports
         // grounded for the first steps), so it counts while rising too.
         if (vx != 0f && (!IsGrounded() || rb.linearVelocity.y > 0.1f) && TouchingWall(Mathf.Sign(vx)))
-            vx = 0f;
+            vx = runVelocity = 0f;
 
         rb.linearVelocity = new Vector2(vx, rb.linearVelocity.y);
     }
