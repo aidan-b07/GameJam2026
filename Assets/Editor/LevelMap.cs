@@ -1408,16 +1408,21 @@ public static class LevelMap
         AssetDatabase.LoadAllAssetsAtPath(path).OfType<Sprite>()
             .OrderBy(s => int.Parse(s.name.Substring(s.name.LastIndexOf('_') + 1))).ToArray();
 
-    // Keeps Build Settings in order: the main menu first (the scene the game
-    // starts in), then the levels sorted by name (Level1_, Level2_, ...), then the rest.
+    // Menus in the order of MenuScenes come first in Build Settings (the first
+    // one is the scene the game starts in), then the enabled scenes, then the
+    // disabled ones; within each, levels sorted by name (Level1_, Level2_, ...)
+    // before the rest.
+    static readonly string[] MenuScenes = { "/LevelSelect.unity", "/MainMenu.unity" };
+
     internal static void AddToBuildSettings(string scenePath)
     {
         var scenes = EditorBuildSettings.scenes.Where(s => s.path != scenePath).ToList();
         scenes.Add(new EditorBuildSettingsScene(scenePath, true));
-        bool IsMenu(EditorBuildSettingsScene s) => s.path.EndsWith("/MainMenu.unity");
-        var menu = scenes.Where(IsMenu);
-        var levels = scenes.Where(s => !IsMenu(s) && s.path.Contains("/Level")).OrderBy(s => s.path).ToList();
-        var others = scenes.Where(s => !IsMenu(s) && !s.path.Contains("/Level"));
-        EditorBuildSettings.scenes = menu.Concat(levels).Concat(others).ToArray();
+        int MenuRank(EditorBuildSettingsScene s) => Array.FindIndex(MenuScenes, m => s.path.EndsWith(m));
+        var menus = scenes.Where(s => MenuRank(s) >= 0).OrderBy(MenuRank);
+        var levels = scenes.Where(s => MenuRank(s) < 0 && s.path.Contains("/Level")).OrderBy(s => s.path);
+        var others = scenes.Where(s => MenuRank(s) < 0 && !s.path.Contains("/Level"));
+        var rest = levels.Concat(others).ToList();
+        EditorBuildSettings.scenes = menus.Concat(rest.Where(s => s.enabled)).Concat(rest.Where(s => !s.enabled)).ToArray();
     }
 }
