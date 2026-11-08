@@ -62,7 +62,7 @@ public class LaneHud : MonoBehaviour
     public float warnFromDepth = 0.05f;
     [Tooltip("Strongest vignette alpha.")]
     [Range(0f, 1f)] public float vignetteAlpha = 0.7f;
-    [Tooltip("Vignette height in art pixels at full warning.")]
+    [Tooltip("Vignette height in art pixels at full warning, below the rift's edge.")]
     public float vignetteHeight = 150f;
 
     [Header("Feel")]
@@ -75,9 +75,9 @@ public class LaneHud : MonoBehaviour
     [Tooltip("Saturation added at full speed (URP ColorAdjustments, -100..100).")]
     public float warmSaturation = 14f;
     [Tooltip("Saturation removed at idle speed.")]
-    public float coolDesaturation = 20f;
+    public float coolDesaturation = 12f;
     public Color warmFilter = new Color(1f, 0.96f, 0.88f);
-    public Color coolFilter = new Color(0.92f, 0.96f, 1.04f);
+    public Color coolFilter = new Color(0.95f, 0.97f, 1.03f);
 
     // Art layout from tools/make_hud.py (pixels, y down from the top).
     const int W = 136, H = 56;
@@ -282,9 +282,9 @@ public class LaneHud : MonoBehaviour
                 {
                     float top = cam.transform.position.y + cam.orthographicSize;
                     float gap = top - rift.TipReach(lane) - flow.Top(lane);
-                    closeness = Mathf.Clamp01(1f - gap / (cam.orthographicSize * 1.6f));
+                    closeness = Mathf.Clamp01(1f - gap / (cam.orthographicSize * 1.2f));
                 }
-                target = Mathf.Lerp(0.3f, 1f, closeness);
+                target = Mathf.Lerp(0.35f, 1f, closeness);
             }
         }
         else if (rift != null)
@@ -303,7 +303,10 @@ public class LaneHud : MonoBehaviour
         {
             view.vignette.enabled = s.warn > 0.01f;
             view.vignette.color = new Color(1f, 1f, 1f, s.warn * vignetteAlpha * Mathf.Lerp(0.75f, 1f, pulse));
+            // Hangs from the rift's edge, so the shade leads it down towards the player.
             var rt = view.vignette.rectTransform;
+            float reachPx = rift != null ? rift.Reach(lane) * 32f : 0f;
+            rt.anchoredPosition = new Vector2(0f, -Mathf.Round(reachPx));
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, Mathf.Round(vignetteHeight * Mathf.Lerp(0.6f, 1f, s.warn)));
         }
     }
