@@ -99,6 +99,16 @@ public class PlayerMovement : MonoBehaviour
         hasLastPosition = false;
     }
 
+    // GameFlow switches movement off while the players are dead (and the pause
+    // menu while paused). Report standing still, so the partner's lane starts
+    // winding down at the death instead of keeping the last speed until the
+    // respawn.
+    private void OnDisable()
+    {
+        if (GameManager.INSTANCE != null)
+            GameManager.INSTANCE.UpdateWorldSpeed(playerIndex, 0f);
+    }
+
     private void FixedUpdate()
     {
         UpdateWorldSpeedModifiers();
