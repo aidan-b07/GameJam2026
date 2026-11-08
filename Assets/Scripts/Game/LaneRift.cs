@@ -306,6 +306,7 @@ public class LaneRift : MonoBehaviour
             for (int lane = 0; lane < depth.Length; lane++)
             {
                 retractFrom[lane] = depth[lane];
+                rate[lane] = rateAccel[lane] = 0f;   // no momentum carried past the respawn
                 foreach (var t in tendrils[lane]) { t.retractFrom = t.length; t.receding = true; }
             }
         }
