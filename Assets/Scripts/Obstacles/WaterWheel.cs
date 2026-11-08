@@ -69,6 +69,9 @@ public class WaterWheel : LaneObstacle
 
     bool[] full, rider;
     Rigidbody2D[] riderOf;
+    Collider2D[] bucketCols;
+    Vector2[] bucketVelocity;
+    readonly System.Collections.Generic.List<ContactPoint2D> contacts = new System.Collections.Generic.List<ContactPoint2D>();
     float[] tip, swing;
     SpriteRenderer[] bucketArt;
     SfxLoop sound;
@@ -83,7 +86,13 @@ public class WaterWheel : LaneObstacle
         tip = new float[n];
         swing = new float[n];
         bucketArt = new SpriteRenderer[n];
-        for (int j = 0; j < n; j++) bucketArt[j] = buckets[j].GetComponent<SpriteRenderer>();
+        bucketCols = new Collider2D[n];
+        bucketVelocity = new Vector2[n];
+        for (int j = 0; j < n; j++)
+        {
+            bucketArt[j] = buckets[j].GetComponent<SpriteRenderer>();
+            bucketCols[j] = buckets[j].GetComponent<Collider2D>();
+        }
     }
 
     void Start()
@@ -93,6 +102,20 @@ public class WaterWheel : LaneObstacle
     }
 
     void OnDestroy() => Sfx.Release(sound);
+
+    // True when the body has a live contact with the bucket floor on its top
+    // face (vertical normal; the feet test above already puts the body on top).
+    // Passing up through the one-way floor gives no contact: the effector
+    // disables it.
+    bool StandsOn(Rigidbody2D rb, Collider2D floor)
+    {
+        if (floor == null) return false;
+        int n = rb.GetContacts(contacts);
+        for (int i = 0; i < n; i++)
+            if ((contacts[i].collider == floor || contacts[i].otherCollider == floor) && Mathf.Abs(contacts[i].normal.y) > 0.5f)
+                return true;
+        return false;
+    }
 
     float PinAngle(int j) => Angle + 45f * j;
 
@@ -114,8 +137,14 @@ public class WaterWheel : LaneObstacle
             foreach (var p in Players)
             {
                 if (!Live(p, out var rb, out var box)) continue;
-                if (box.min.y > floor - 0.15f && box.min.y < floor + 0.25f
-                    && Mathf.Abs(box.center.x - pin.x) < 0.75f && rb.linearVelocity.y <= 4f)
+                // A rider stands on the bucket's floor: feet at the floor, not
+                // rising relative to the bucket, and touching its collider from
+                // above (a player jumping up through the one-way floor has no
+                // contact with it).
+                if (box.min.y > floor - 0.06f && box.min.y < floor + 0.12f
+                    && Mathf.Abs(box.center.x - pin.x) < 0.75f
+                    && rb.linearVelocity.y - bucketVelocity[j].y <= 0.5f
+                    && StandsOn(rb, bucketCols[j]))
                 {
                     rider[j] = anyRider = true;
                     riderOf[j] = rb;
@@ -146,6 +175,7 @@ public class WaterWheel : LaneObstacle
             float phi = PinAngle(j);
             Vector2 pin = Pin(phi);
             Vector2 delta = pin - buckets[j].position;
+            bucketVelocity[j] = delta / Mathf.Max(dt, 0.0001f);
             buckets[j].MovePosition(pin);
             if (riderOf[j] != null) riderOf[j].position += delta;
 
