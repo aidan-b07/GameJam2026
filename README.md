@@ -15,6 +15,8 @@
 [![Platform](https://img.shields.io/badge/platform-PC%20(Standalone)-0078D6?logo=windows&logoColor=white)](#building)
 [![Gamepad](https://img.shields.io/badge/gamepad-Xbox%20%7C%20PlayStation-107C10?logo=xbox&logoColor=white)](#controls)
 [![Game Jam](https://img.shields.io/badge/CSS%20Game%20Jam-2026-B8860B)](#the-game-jam)
+[![Theme](https://img.shields.io/badge/theme-Time-6A4C93)](#the-game-jam)
+[![Made in](https://img.shields.io/badge/made%20in-24%20hours-C0392B)](#the-game-jam)
 [![Art](https://img.shields.io/badge/art-pixel%20art-9B59B6)](#visuals--feel)
 <!-- TODO: add a license badge once a LICENSE file exists. -->
 
@@ -183,27 +185,32 @@ tools/menu/         Python scripts that generate menu and level-select art
 
 ## The game jam
 
-**Tick & Tock** was made for the **CSS Game Jam 2026**. Development in this repository ran from **7 November 2026** onwards.
+**Tick & Tock** was made in 24 hours for the **CSS Game Jam 2026**.
 
-<!-- TODO: fill in the jam details -->
-- **Theme:** TODO
-- **Dates / duration:** TODO
-- **How we interpreted the theme:** TODO — e.g. how "each player controls the other's time" answers it.
-- **Submission:** TODO (link)
+| | |
+|---|---|
+| **Theme** | **Time** |
+| **Jam window** | 7 November 2026, 12:00 → 8 November 2026, 12:00 (24 hours) |
+| **Submission** | TODO (link) |
+
+**How we used the theme.** Time is the game's main mechanic, not just its setting:
+- Each player controls how fast time runs for their **partner**. You can't speed up or slow down your own lane, only theirs.
+- Every lane has its own clock and sky, so the two players are often at different times of day.
+- Every obstacle runs on its lane's time, so the same pendulum or piston can be slow and easy for one player and fast and deadly for the other.
+- Standing still to slow your partner's time lets the Unraveling eat into yours.
+- The ending is the moment both clocks finally agree: they spin forward together to 06:00, the **Dawn of a New Day**.
 
 ## Team & credits
 
-<!-- TODO: names as you want them shown, and each person's role (code, art, level design, audio...). Names below are taken from the git history. -->
-| Who | Role |
-|---|---|
-| **Aidan** | TODO |
-| **Samuel** | TODO (obstacle design incl. the water wheel and piston run) |
-| **Ilai** | TODO |
-| TODO (Unity Version Control contributor) | TODO (Level 1 "The Clockworks" art import and layout) |
+Made by a small team with no fixed roles: everyone worked on whatever needed doing.
 
-**Third-party assets** — TODO: credit the "Asset Mega-Pack" imported in the first changesets (name, author, license, link), and the pixel fonts used for the title art (Jersey, Tiny, Workbench, Pixelify — confirm their names and licenses).
+<!-- TODO: names as they appear in the git history. Add surnames or handles if you want them shown, and the name of the Unity Version Control contributor. -->
+- **Aidan**
+- **Samuel**
+- **Ilai**
+- TODO (Unity Version Control contributor)
 
-**Music** — TODO: credit the composer / tool.
+**Everything in the game was made by the team during the jam:** code, pixel art, levels, sound effects and music. No third-party assets were used.
 
 ## License
 
