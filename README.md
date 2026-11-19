@@ -25,6 +25,10 @@
 
 ---
 
+<p align="center">
+  <img src="docs/screenshots/day-night-lanes.webp" alt="Tick in a daytime lane on top, Tock in a night lane below" width="100%">
+</p>
+
 ## The premise
 
 Tick and Tock are two little clockwork keepers, each racing through their own lane of a clockwork city. The screen is split in two: **Tick runs the top lane, Tock the bottom one**, and each lane has its own clock, its own sky and its own flow of time.
@@ -43,15 +47,17 @@ Meanwhile, **the Unraveling** — a rift hanging from the top of each lane — c
 
 ## Screenshots
 
-> **TODO (screenshots):** capture these in the Game view (Play mode, 16:9, ideally 1920×1080) and save them in [`docs/screenshots/`](docs/screenshots/) with the file names below. Until then these links are placeholders.
-
 | | |
 |---|---|
-| ![Main menu — TODO capture](docs/screenshots/main-menu.png) <br> *Main menu* | ![Split screen gameplay — TODO capture](docs/screenshots/split-screen.png) <br> *Tick (top) and Tock (bottom), one lane fast, one slow* |
-| ![Pendulum belts — TODO capture](docs/screenshots/pendulums.png) <br> *Clock pendulums over the belts* | ![The Unraveling rift — TODO capture](docs/screenshots/rift.png) <br> *The Unraveling closing in on a dawdling player* |
-| ![Day and night lanes — TODO capture](docs/screenshots/day-night.png) <br> *Two lanes, two times of day* | ![Dawn of a New Day ending — TODO capture](docs/screenshots/dawn-ending.png) <br> *Dawn of a New Day* |
+| ![Main menu](docs/screenshots/main-menu.png) <br> *The main menu* | ![The Unraveling rift swallowing the top lane](docs/screenshots/rift.webp) <br> *The Unraveling pours down on a player who stands still too long* |
+| ![Clock pendulums over the belts](docs/screenshots/pendulum-belts.webp) <br> *Clock pendulums over the conveyor belts* | ![The same pendulums at two different lane speeds](docs/screenshots/pendulums-fast-slow.webp) <br> *Same obstacles, two speeds of time* |
+| ![The piston run](docs/screenshots/piston-run.webp) <br> *The piston run: rams slam up behind the runner* | ![Clock presses](docs/screenshots/clock-presses.webp) <br> *Clock presses over the gaps* |
+| ![Clock presses with the rift closing in](docs/screenshots/clock-presses-rift.webp) <br> *Wait too long for your partner and the rift closes in* | ![The clock doors at the end of the level](docs/screenshots/clock-doors.webp) <br> *The clock doors at the end of each lane* |
+| ![Both clock doors open at night](docs/screenshots/doors-open.webp) <br> *Both doors open and the clocks spin towards dawn* | ![Sunrise over both lanes](docs/screenshots/dawn.webp) <br> *Dawn of a New Day: the rifts close into a gold seam* |
 
-<!-- TODO: a short GIF of a lane speeding up as the partner runs would sell the mechanic best: docs/screenshots/gameplay.gif -->
+<p align="center">
+  <img src="docs/screenshots/the-end.webp" alt="The ending title card: Tick &amp; Tock, The End" width="80%">
+</p>
 
 ## Features
 
@@ -70,6 +76,7 @@ Meanwhile, **the Unraveling** — a rift hanging from the top of each lane — c
 |---|---|
 | **Pendulum blade** | A crescent blade swinging across the path — one swing every ~7 s at 0.35×, a blur at 3×. |
 | **Clock pendulums over belts** | A heavy brass bob that shoves players off a conveyor into a drop — hard mid-swing, a gentle nudge near the belt's ends. |
+| **Clock presses** | Plunger crushers that wait raised, slam down and ratchet back up. |
 | **Gear fall** | A chute drops brass cogs; in a slow lane they hang and roll slowly enough to use as stepping stones. |
 | **Piston run** | A corridor of flush floor rams that slam up one after another, chasing the runner — only outrunnable while your partner stands still. |
 | **Water-wheel bucket lift** | Only turns while the partner runs; ride a bucket up to a ledge. Simulated with momentum, so a rider's weight turns it back. |
