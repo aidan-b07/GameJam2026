@@ -11,16 +11,16 @@
 [![URP 2D](https://img.shields.io/badge/URP-2D%20Renderer%2017.6-222C37?logo=unity&logoColor=white)](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/index.html)
 [![Input System](https://img.shields.io/badge/Input%20System-1.20.1-4B8BBE?logo=unity&logoColor=white)](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/manual/index.html)
 [![Players](https://img.shields.io/badge/players-2%20local%20co--op-E8A33D)](#controls)
-[![Platform](https://img.shields.io/badge/platform-Web%20(WebGL)-E34F26?logo=webassembly&logoColor=white)](#building)
+[![Platform](https://img.shields.io/badge/platform-Windows-0078D6?logo=windows&logoColor=white)](#building)
 [![Gamepad](https://img.shields.io/badge/gamepad-Xbox%20%7C%20PlayStation-107C10?logo=xbox&logoColor=white)](#controls)
 [![Game Jam](https://img.shields.io/badge/CSS%20Game%20Jam-2026-B8860B)](#the-game-jam)
 [![Theme](https://img.shields.io/badge/theme-Time-6A4C93)](#the-game-jam)
 [![Made in](https://img.shields.io/badge/made%20in-24%20hours-C0392B)](#the-game-jam)
 [![Art](https://img.shields.io/badge/art-pixel%20art-9B59B6)](#visuals--feel)
-<!-- TODO: add a license badge once a LICENSE file exists. -->
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey)](LICENSE)
 
-<!-- TODO: put the URL of the hosted web build in the link below. -->
-### [▶ Play in your browser](#)
+<!-- TODO: once a web build is hosted, add: ### [▶ Play in your browser](https://your-url) -->
+**A browser version is coming soon.**
 
 </div>
 
@@ -148,10 +148,10 @@ git clone https://github.com/aidan-b07/GameJam2026.git
 3. Plug in one or two gamepads, or share the keyboard.
 
 ### Building
-1. **File → Build Profiles**, pick **Web** (or a Windows / macOS / Linux standalone build to play offline).
+1. **File → Build Profiles**, pick **Windows** (the platform the game is tested on).
 2. The scenes in the build are `LevelSelect`, `MainMenu` and `MainLevel`.
    <!-- TODO: LevelSelect is currently scene 0 in the build list, so a build starts there. Move MainMenu to the top if the build should open on the title screen. -->
-3. **Build** (or **Build and Run**). For the web build, upload the output folder to any web server and open its `index.html`.
+3. **Build** (or **Build and Run**).
 
 ### Editor tools
 The **`Tick & Tock`** menu in the Unity menu bar rebuilds content from code:
@@ -209,4 +209,6 @@ Made by a small team with no fixed roles: everyone worked on whatever needed doi
 
 ## License
 
-TODO — no license file yet. Add a `LICENSE` (and update the badge at the top) before publishing.
+© 2026 Aidan, Samuel and Ilai. Licensed under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE).
+
+You're welcome to play, study, modify and share the game, its code and its art, as long as you **credit us** and **don't use it commercially**. That means no selling it, putting it behind a paywall, or using it in paid products.
