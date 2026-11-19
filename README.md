@@ -11,8 +11,7 @@
 [![URP 2D](https://img.shields.io/badge/URP-2D%20Renderer%2017.6-222C37?logo=unity&logoColor=white)](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@17.0/manual/index.html)
 [![Input System](https://img.shields.io/badge/Input%20System-1.20.1-4B8BBE?logo=unity&logoColor=white)](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.20/manual/index.html)
 [![Players](https://img.shields.io/badge/players-2%20local%20co--op-E8A33D)](#controls)
-<!-- TODO: confirm which platforms you ship builds for, then update this badge. -->
-[![Platform](https://img.shields.io/badge/platform-PC%20(Standalone)-0078D6?logo=windows&logoColor=white)](#building)
+[![Platform](https://img.shields.io/badge/platform-Web%20(WebGL)-E34F26?logo=webassembly&logoColor=white)](#building)
 [![Gamepad](https://img.shields.io/badge/gamepad-Xbox%20%7C%20PlayStation-107C10?logo=xbox&logoColor=white)](#controls)
 [![Game Jam](https://img.shields.io/badge/CSS%20Game%20Jam-2026-B8860B)](#the-game-jam)
 [![Theme](https://img.shields.io/badge/theme-Time-6A4C93)](#the-game-jam)
@@ -20,8 +19,8 @@
 [![Art](https://img.shields.io/badge/art-pixel%20art-9B59B6)](#visuals--feel)
 <!-- TODO: add a license badge once a LICENSE file exists. -->
 
-<!-- TODO: replace with your itch.io / jam submission links -->
-**[▶ Play on itch.io](#) (TODO)** · **[Jam submission page](#) (TODO)**
+<!-- TODO: put the URL of the hosted web build in the link below. -->
+### [▶ Play in your browser](#)
 
 </div>
 
@@ -90,7 +89,6 @@ Meanwhile, **the Unraveling** — a rift hanging from the top of each lane — c
 ### Visuals & feel
 - **Hand-made pixel art**, point-filtered, rendered with the **URP 2D Renderer**; menus are drawn in world space into a 640×360 render texture and scaled up crisply.
 - **Day / dusk / night per lane** (`LaneSky`) — each lane's backgrounds crossfade with its own clock while the sun and moon arc overhead and the tilemaps are tinted to match.
-- **Day/night ambient light shaders** (`Ambient.shader` + `LaneAmbience`) — three pixel-snapped, dithered layers per lane camera: skyline mist, a time-of-day colour grade with sun warmth, moon lift and vignette, and a light pass with god rays, sun bloom, moon halo, ground fog, dust motes and fireflies. <!-- TODO: this lives on branch claude/ambient-shaders-day-night-25a6c7 — merge it before submitting, or remove this line. -->
 - **Parallax city** with animated sky life, chimney smoke, clouds and glowing decor.
 - **Readable HUD** — a brass gauge per lane with the partner's face, a springy speed dial and a small clock; a pulsing glow and a dithered shade warn when the rift is close. Fast lanes get "edge wind" and a warm grade, slow lanes a cool one.
 - **Split-screen-aware audio** — every sound is panned and faded by its position on screen and **pitched by its lane's speed**, so a fast lane literally sounds faster. One looping music track carries across scenes.
@@ -150,10 +148,10 @@ git clone https://github.com/aidan-b07/GameJam2026.git
 3. Plug in one or two gamepads, or share the keyboard.
 
 ### Building
-1. **File → Build Profiles**, pick your platform (Windows / macOS / Linux standalone).
+1. **File → Build Profiles**, pick **Web** (or a Windows / macOS / Linux standalone build to play offline).
 2. The scenes in the build are `LevelSelect`, `MainMenu` and `MainLevel`.
    <!-- TODO: LevelSelect is currently scene 0 in the build list, so a build starts there. Move MainMenu to the top if the build should open on the title screen. -->
-3. **Build** (or **Build and Run**).
+3. **Build** (or **Build and Run**). For the web build, upload the output folder to any web server and open its `index.html`.
 
 ### Editor tools
 The **`Tick & Tock`** menu in the Unity menu bar rebuilds content from code:
@@ -191,7 +189,6 @@ tools/menu/         Python scripts that generate menu and level-select art
 |---|---|
 | **Theme** | **Time** |
 | **Jam window** | 7 November 2026, 12:00 → 8 November 2026, 12:00 (24 hours) |
-| **Submission** | TODO (link) |
 
 **How we used the theme.** Time is the game's main mechanic, not just its setting:
 - Each player controls how fast time runs for their **partner**. You can't speed up or slow down your own lane, only theirs.
@@ -204,11 +201,9 @@ tools/menu/         Python scripts that generate menu and level-select art
 
 Made by a small team with no fixed roles: everyone worked on whatever needed doing.
 
-<!-- TODO: names as they appear in the git history. Add surnames or handles if you want them shown, and the name of the Unity Version Control contributor. -->
 - **Aidan**
 - **Samuel**
 - **Ilai**
-- TODO (Unity Version Control contributor)
 
 **Everything in the game was made by the team during the jam:** code, pixel art, levels, sound effects and music. No third-party assets were used.
 
