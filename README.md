@@ -4,6 +4,8 @@
 
 # Tick & Tock
 
+[![Winner: Trackr Innovation Award, CSS Game Jam 2026](https://img.shields.io/badge/🏆%20Winner-Trackr%20Innovation%20Award-FFD700?style=for-the-badge)](#the-game-jam)
+
 **A two-player, split-screen co-op platformer where each of you controls the other's time.**
 
 [![Unity](https://img.shields.io/badge/Unity-6000.6.8f1-000000?logo=unity&logoColor=white)](https://unity.com/releases/editor/archive)
@@ -181,7 +183,7 @@ tools/menu/         Python scripts that generate menu and level-select art
 
 ## The game jam
 
-**Tick & Tock** was made in 24 hours for the **CSS Game Jam 2026**.
+**Tick & Tock** was made in 24 hours for the **CSS Game Jam 2026**, where it won the **🏆 Trackr Innovation Award**.
 
 | | |
 |---|---|
