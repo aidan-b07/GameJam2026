@@ -199,14 +199,14 @@ tools/menu/         Python scripts that generate menu and level-select art
 
 Made by a small team with no fixed roles: everyone worked on whatever needed doing.
 
-- **Aidan**
-- **Samuel**
-- **Ilai**
+- **Aidan Booth**
+- **Samuel Waring**
+- **Ilai Levin**
 
 **Everything in the game was made by the team during the jam:** code, pixel art, levels, sound effects and music. No third-party assets were used.
 
 ## License
 
-© 2026 Aidan, Samuel and Ilai. Licensed under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE).
+© 2026 Aidan Booth, Samuel Waring and Ilai Levin. Licensed under [Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/). See [LICENSE](LICENSE).
 
 You're welcome to play, study, modify and share the game, its code and its art, as long as you **credit us** and **don't use it commercially**. That means no selling it, putting it behind a paywall, or using it in paid products.
