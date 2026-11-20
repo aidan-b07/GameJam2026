@@ -40,7 +40,7 @@ The twist: **you don't control your own time — your partner does.**
 - While your partner **keeps running**, your lane ramps up (on an S-curve) to a frantic **3×**.
 - When they stop, your lane keeps its speed for a moment, then winds back down.
 
-Every obstacle in a lane runs on that lane's time. A pendulum blade that crawls when your partner waits becomes a blur when they sprint. A water wheel only turns when the water gushes, and the water only gushes when your partner runs. So the two of you constantly negotiate: *"Wait — stand still so I can get past the blade. Okay, now run, I need the wheel!"*
+Every obstacle in a lane runs on that lane's time. A pendulum that drifts lazily over the belt when your partner waits will knock you into the drop when they sprint. A corridor of pistons that slams shut behind you can only be outrun while your partner stands still. So the two of you constantly negotiate: *"Wait — stand still so I can get through the pistons. Okay, now run!"*
 
 Meanwhile, **the Unraveling** — a rift hanging from the top of each lane — creeps down towards any player who dawdles, and grows faster the longer they stand still. Standing still helps your partner, but costs you. Neither of you can wait forever.
 
@@ -75,16 +75,14 @@ Meanwhile, **the Unraveling** — a rift hanging from the top of each lane — c
 ### The obstacle kit (all running on lane time)
 | Obstacle | What it does |
 |---|---|
-| **Pendulum blade** | A crescent blade swinging across the path — one swing every ~7 s at 0.35×, a blur at 3×. |
 | **Clock pendulums over belts** | A heavy brass bob that shoves players off a conveyor into a drop — hard mid-swing, a gentle nudge near the belt's ends. |
 | **Clock presses** | Plunger crushers that wait raised, slam down and ratchet back up. |
-| **Gear fall** | A chute drops brass cogs; in a slow lane they hang and roll slowly enough to use as stepping stones. |
 | **Piston run** | A corridor of flush floor rams that slam up one after another, chasing the runner — only outrunnable while your partner stands still. |
-| **Water-wheel bucket lift** | Only turns while the partner runs; ride a bucket up to a ledge. Simulated with momentum, so a rider's weight turns it back. |
-| **Steam vent** | Blasts players up and over walls too high to jump. |
-| **Tesla gate** | Arcs across the gap; a slow lane stretches the safe window to seconds. |
 | **Drawbridge & trap doors** | A heavy winched drawbridge that swings open over a pit and back down into it; trap doors that warn, then drop out from under you. |
-| **Conveyors, lifts & gates** | Belts that won't let you wait, chain lifts, portcullises and sliding bridges winched by lane speed, and floor-button gates that need both players. |
+| **Conveyor belts** | Belts that keep carrying you, so you can't simply wait on them. |
+| **Button gates** | Portcullises that only open once floor buttons are pressed, in either lane. |
+
+More obstacles were built and tested in the `ObstacleLab` scene but didn't make it into the jam level: a pendulum blade, a gear fall, a water-wheel bucket lift, a steam vent, a Tesla gate, chain lifts and speed-winched time gates.
 
 ### Visuals & feel
 - **Hand-made pixel art**, point-filtered, rendered with the **URP 2D Renderer**; menus are drawn in world space into a 640×360 render texture and scaled up crisply.
@@ -175,7 +173,7 @@ Assets/
 │   │                    scenic zone, clock doors, Dawn ending, judge keys
 │   ├── Hazards/         Crush detection
 │   ├── Menu/            Main menu, level select
-│   ├── Obstacles/       Pendulums, gear fall, floor rams, steam vent, Tesla gate, water wheel
+│   ├── Obstacles/       Pendulums, floor rams (+ the ObstacleLab prototypes)
 │   └── Player/          Movement and sprites
 └── Settings/       URP assets and renderers
 tools/menu/         Python scripts that generate menu and level-select art
